@@ -2,7 +2,7 @@ generic-service:
   nameOverride: hmpps-find-and-refer-an-intervention-service
   productId: "HMPPS545" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
 
-  replicaCount: 4
+  replicaCount: 2
 
   image:
     repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service

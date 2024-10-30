@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@PreAuthorize("hasRole('ROLE_PROBATION') or hasRole('ROLE_CRS_PROVIDER') or hasRole('ROLE_INTERVENTIONS_API_READ_ALL')")
+@PreAuthorize("hasRole('ROLE_INTERVENTIONS_API_READ_ALL')")
 class HelloController() {
   @GetMapping("/hello")
   fun getHello(): String {
