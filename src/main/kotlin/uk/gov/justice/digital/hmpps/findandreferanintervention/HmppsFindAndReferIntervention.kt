@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.templatepackagename
+package uk.gov.justice.digital.hmpps.findandreferanintervention
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.templatepackagename.config
+package uk.gov.justice.digital.hmpps.findandreferanintervention.config
 
 import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.OpenAPI
