@@ -5,14 +5,14 @@ generic-service:
   replicaCount: 2
 
   ingress:
-    host: template-kotlin-dev.hmpps.service.justice.gov.uk
+    host: hmpps-find-and-refer-an-intervention-service-dev.hmpps.service.justice.gov.uk
 
   env:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"
     HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
     # Template kotlin calls out to itself to provide an example of a service call
     # TODO: This should be replaced by a call to a different service, or removed
-    EXAMPLE_API_URL: "https://template-kotlin-dev.hmpps.service.justice.gov.uk"
+    # EXAMPLE_API_URL: "https://template-kotlin-dev.hmpps.service.justice.gov.uk"
 
 # CloudPlatform AlertManager receiver to route prometheus alerts to slack
 # See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts

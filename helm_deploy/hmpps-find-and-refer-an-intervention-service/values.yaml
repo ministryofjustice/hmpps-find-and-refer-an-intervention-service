@@ -1,18 +1,18 @@
 generic-service:
-  nameOverride: hmpps-template-kotlin
-  productId: "UNASSIGNED" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
+  nameOverride: hmpps-find-and-refer-an-intervention-service
+  productId: "HMPPS545" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
 
   replicaCount: 4
 
   image:
-    repository: quay.io/hmpps/hmpps-template-kotlin
+    repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service
     tag: app_version # override at deployment time
     port: 8080
 
   ingress:
     enabled: true
     host: app-hostname.local # override per environment
-    tlsSecretName: hmpps-template-kotlin-cert
+    tlsSecretName: hmpps-find-and-refer-an-intervention-service-cert
 
   # Environment variables to load into the deployment
   env:
@@ -27,11 +27,10 @@ generic-service:
   #     [name of environment variable as seen by app]: [key of kubernetes secret to load]
 
   namespace_secrets:
-    hmpps-template-kotlin:
+    hmpps-find-and-refer-an-intervention-service:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
-      # Example client registration secrets
-      EXAMPLE_API_CLIENT_ID: "TEMPLATE_KOTLIN_API_CLIENT_ID"
-      EXAMPLE_API_CLIENT_SECRET: "TEMPLATE_KOTLIN_API_CLIENT_SECRET"
+      CLIENT_CREDS_CLIENT_ID: 'CLIENT_CREDS_CLIENT_ID'
+      CLIENT_CREDS_CLIENT_SECRET: 'CLIENT_CREDS_CLIENT_SECRET'
 
   allowlist:
     groups:
