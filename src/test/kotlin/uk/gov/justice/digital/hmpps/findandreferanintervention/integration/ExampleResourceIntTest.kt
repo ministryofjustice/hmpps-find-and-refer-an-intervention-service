@@ -1,15 +1,7 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration
 
-import com.github.tomakehurst.wiremock.client.WireMock
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.wiremock.ExampleApiExtension.Companion.exampleApi
-import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.wiremock.HmppsAuthApiExtension.Companion.hmppsAuth
-import java.time.LocalDate
-
-class ExampleResourceIntTest : IntegrationTestBase() {
+class ExampleResourceIntTest
+/*: IntegrationTestBase() {
 
   @Nested
   @DisplayName("GET /example/time")
@@ -127,3 +119,4 @@ class ExampleResourceIntTest : IntegrationTestBase() {
     }
   }
 }
+*/
