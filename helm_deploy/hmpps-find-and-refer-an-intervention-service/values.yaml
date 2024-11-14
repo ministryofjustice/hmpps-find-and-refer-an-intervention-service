@@ -11,7 +11,7 @@ generic-service:
 
   ingress:
     enabled: true
-    host: app-hostname.local # override per environment
+    host: find-and-refer-an-intervention-service-dev.hmpps.service.justice.gov.uk # override per environment
     tlsSecretName: hmpps-find-and-refer-an-intervention-service-cert
 
   # Environment variables to load into the deployment
