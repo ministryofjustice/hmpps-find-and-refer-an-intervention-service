@@ -5,7 +5,7 @@ generic-service:
   replicaCount: 2
 
   ingress:
-    host: template-kotlin-preprod.hmpps.service.justice.gov.uk
+    host: hmpps-find-and-refer-an-intervention-service-preprod.hmpps.service.justice.gov.uk
 
   env:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"
