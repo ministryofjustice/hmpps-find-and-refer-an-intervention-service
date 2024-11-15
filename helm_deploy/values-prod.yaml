@@ -3,7 +3,7 @@
 
 generic-service:
   ingress:
-    host: template-kotlin.hmpps.service.justice.gov.uk
+    host: hmpps-find-and-refer-an-intervention-service-prod.hmpps.service.justice.gov.uk
 
   env:
     HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
