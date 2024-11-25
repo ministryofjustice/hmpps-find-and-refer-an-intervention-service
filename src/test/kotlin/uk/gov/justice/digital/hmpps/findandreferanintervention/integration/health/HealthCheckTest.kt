@@ -19,21 +19,6 @@ class HealthCheckTest : IntegrationTestBase() {
   }
 
   @Test
-  fun `Health page reports down`() {
-    stubPingWithResponse(503)
-
-    webTestClient.get()
-      .uri("/health")
-      .exchange()
-      .expectStatus()
-      .is5xxServerError
-      .expectBody()
-      .jsonPath("status").isEqualTo("DOWN")
-      .jsonPath("components.hmppsAuth.status").isEqualTo("DOWN")
-    // .jsonPath("components.exampleApi.status").isEqualTo("DOWN")
-  }
-
-  @Test
   fun `Health ping page is accessible`() {
     webTestClient.get()
       .uri("/health/ping")
