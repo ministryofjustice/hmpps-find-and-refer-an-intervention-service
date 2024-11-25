@@ -16,6 +16,7 @@ import uk.gov.justice.hmpps.test.kotlin.auth.JwtAuthorisationHelper
 @ActiveProfiles("test")
 abstract class IntegrationTestBase {
 
+  @Suppress("SpringJavaInjectionPointsAutowiringInspection")
   @Autowired
   protected lateinit var webTestClient: WebTestClient
 
@@ -30,6 +31,5 @@ abstract class IntegrationTestBase {
 
   protected fun stubPingWithResponse(status: Int) {
     hmppsAuth.stubHealthPing(status)
-    // exampleApi.stubHealthPing(status)
   }
 }

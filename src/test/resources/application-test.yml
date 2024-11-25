@@ -6,7 +6,7 @@ management.endpoint:
   info.cache.time-to-live: 0
 
 hmpps-auth:
-  url: "http://localhost:8090/auth"
+  url: "http://localhost:8093/auth"
 
 # example client configuration for calling out to other services
 # TODO: Remove / replace this configuration
