@@ -1,21 +1,5 @@
 version: "3"
 services:
-#  hmpps-find-and-refer-an-intervention-service:
-#    build:
-#      context: .
-#    networks:
-#      - hmpps
-#    container_name: hmpps-find-and-refer-an-intervention-service
-#    ports:
-#      - "8080:8080"
-#    healthcheck:
-#      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ping"]
-#    environment:
-#      - SERVER_PORT=8080
-#      - HMPPS_AUTH_URL=http://hmpps-auth:8080/auth
-#      - SPRING_PROFILES_ACTIVE=dev
-#      -
-
   postgres:
     image: postgres:16
     container_name: postgres

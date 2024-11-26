@@ -16,12 +16,12 @@ hmpps-auth:
 #    id: "example-api-client"
 #    secret: "example-api-client-secret"
 
-spring:
-  datasource:
-    hikari:
-      maximum-pool-size: 50
-      connection-timeout : 30000
-  flyway:
-    postgresql:
-      transactional:
-        lock: false
+#spring:
+#  datasource:
+#    hikari:
+#      maximum-pool-size: 50
+#      connection-timeout : 30000
+#  flyway:
+#    postgresql:
+#      transactional:
+#        lock: false
