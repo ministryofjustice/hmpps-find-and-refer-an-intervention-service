@@ -1,5 +1,5 @@
 hmpps-auth:
-  url: "http://localhost:8090/auth"
+  url: "http://localhost:8093/auth"
 
 postgres:
   uri: localhost:5432

@@ -5,13 +5,37 @@ parameters:
   releases-slack-channel:
     type: string
     default: SLACK_RELEASES_CHANNEL
+
+_db_docker_config: &db_docker_config
+  - image: cimg/openjdk:21.0.2
+    environment:
+      POSTGRES_DB: interventions_ci
+  - image: cimg/postgres:15.0
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: interventions_ci
+
 jobs:
   validate:
     executor:
       name: hmpps/java
       tag: "21.0"
+    docker: *db_docker_config
+
     steps:
       - checkout
+      - run:
+          name: Setup flyway and psql
+          command: |
+            wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
+              tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
+            sudo apt update
+            sudo apt install postgresql-client
+      - run:
+          name: Run migrations and local seeds
+          command: |
+            flyway -cleanDisabled="false" clean -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password"
+            flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration,src/main/resources/db/local" -postgresql.transactional.lock=false
       - restore_cache:
           keys:
             - gradle-{{ checksum "build.gradle.kts" }}
