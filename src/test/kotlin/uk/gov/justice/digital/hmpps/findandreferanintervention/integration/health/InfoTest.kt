@@ -16,7 +16,7 @@ class InfoTest : IntegrationTestBase() {
       .expectStatus()
       .isOk
       .expectBody()
-      .jsonPath("build.name").isEqualTo("find-and-refer-an-intervention-service")
+      .jsonPath("build.name").isEqualTo("hmpps-find-and-refer-an-intervention-service")
   }
 
   @Test
