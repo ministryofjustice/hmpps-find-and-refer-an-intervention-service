@@ -1,1 +1,1 @@
-rootProject.name = "find-and-refer-an-intervention-service"
+rootProject.name = "hmpps-find-and-refer-an-intervention-service"
