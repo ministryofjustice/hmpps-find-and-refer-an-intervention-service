@@ -5,7 +5,7 @@ management.endpoint:
   health.cache.time-to-live: 0
   info.cache.time-to-live: 0
 
-hmpps-auth:
+hmppsauth:
   url: "http://localhost:8093/auth"
 
 # example client configuration for calling out to other services

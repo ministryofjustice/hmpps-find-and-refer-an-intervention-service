@@ -18,18 +18,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${hmpps-auth.url}/.well-known/jwks.json
+          jwk-set-uri: ${hmppsauth.url}/.well-known/jwks.json
 
       client:
         provider:
-          hmpps-auth:
-            token-uri: ${hmpps-auth.url}/oauth/token
+          hmppsauth:
+            token-uri: ${hmppsauth.url}/oauth/token
 
         registration:
           # example client registration for calling out to other services
           # TODO: Remove / replace this registration
           example-api:
-            provider: hmpps-auth
+            provider: hmppsauth
             client-id: ${example-api.client.id}
             client-secret: ${example-api.client.secret}
             authorization-grant-type: client_credentials
