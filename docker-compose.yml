@@ -1,14 +1,14 @@
 version: "3"
 services:
-  postgres:
-    image: postgres:16
-    container_name: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=password
-    volumes:
-      - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
+#  postgres:
+#    image: postgres:16
+#    container_name: postgres
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - POSTGRES_PASSWORD=password
+#    volumes:
+#      - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
 
   hmpps-auth:
     image: quay.io/hmpps/hmpps-auth:latest
