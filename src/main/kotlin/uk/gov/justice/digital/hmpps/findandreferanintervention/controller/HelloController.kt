@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.controller
+package uk.gov.justice.digital.hmpps.findandreferanintervention.controller
 
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping

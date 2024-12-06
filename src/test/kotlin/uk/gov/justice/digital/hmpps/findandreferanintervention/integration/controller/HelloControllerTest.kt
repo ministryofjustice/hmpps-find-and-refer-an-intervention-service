@@ -1,7 +1,8 @@
-package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.controller
+package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.controller
 
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Test
+import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.HelloController
 
 internal class HelloControllerTest {
   private val helloController =
