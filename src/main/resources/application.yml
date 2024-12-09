@@ -34,13 +34,13 @@ spring:
             client-secret: ${example-api.client.secret}
             authorization-grant-type: client_credentials
             scope: read
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://${postgres.uri}/${postgres.db}
-#    username: ${postgres.username}
-#    password: ${postgres.password}
-#    hikari:
-#      maximum-pool-size: 50
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${postgres.uri}/${postgres.db}
+    username: ${postgres.username}
+    password: ${postgres.password}
+    hikari:
+      maximum-pool-size: 50
 
 server:
   port: 8080
