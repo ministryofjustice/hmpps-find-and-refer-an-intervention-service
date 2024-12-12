@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.jpa.entity
+package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id

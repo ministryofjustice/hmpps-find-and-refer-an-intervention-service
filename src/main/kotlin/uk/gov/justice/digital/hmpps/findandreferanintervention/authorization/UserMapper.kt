@@ -3,7 +3,7 @@ package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.aut
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
 import org.springframework.stereotype.Component
-import uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.jpa.entity.AuthUser
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
 import uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.jpa.repository.AuthUserRepository
 
 @Component

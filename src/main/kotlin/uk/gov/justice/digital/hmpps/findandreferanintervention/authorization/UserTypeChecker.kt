@@ -1,7 +1,7 @@
 package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.authorization
 
 import org.springframework.stereotype.Component
-import uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.jpa.entity.AuthUser
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
 
 @Component
 class UserTypeChecker {
