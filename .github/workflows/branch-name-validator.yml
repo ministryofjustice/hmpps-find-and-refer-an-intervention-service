@@ -9,5 +9,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '^(no-ticket/|renovate[-/]|hotfix/|FRI-[0-9]+/)' # start branch with either 'no-ticket/' or 'FIR-NUMBER/', allowing for bots and hotfixes
+          regex: '^(no-ticket/|renovate[-/]|hotfix/|FRI-[0-9]+/)' # start branch with either 'no-ticket/' or 'FRI-NUMBER/', allowing for bots and hotfixes
           ignore: main
