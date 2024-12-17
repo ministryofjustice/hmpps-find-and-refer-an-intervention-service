@@ -10,14 +10,14 @@ CREATE TABLE auth_user (
 	CONSTRAINT auth_user_pkey PRIMARY KEY (id)
 );
 create table nps_region (
-              id bpchar(1) not null,
+              id varchar(1) not null,
               name text,
               primary key (id)
 );
 create table pcc_region (
               id text not null,
               name text,
-              nps_region bpchar(1) not null,
+              nps_region varchar(1) not null,
               primary key (id),
               constraint fk__prr__nps_region foreign key (nps_region) references nps_region
 );
