@@ -2,7 +2,6 @@ version: "3"
 services:
   postgres:
     image: postgres:16
-    container_name: postgres
     ports:
       - "5432:5432"
     environment:
@@ -14,15 +13,32 @@ services:
     image: quay.io/hmpps/hmpps-auth:latest
     networks:
       - hmpps
-    container_name: hmpps-auth
+    depends_on:
+      - auth-db
     ports:
-      - "8090:8080"
+      - '8090:8090'
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/auth/health"]
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:8090/auth/health' ]
     environment:
-      - SERVER_PORT=8080
-      - SPRING_PROFILES_ACTIVE=dev
-      - APPLICATION_AUTHENTICATION_UI_ALLOWLIST=0.0.0.0/0
+      - SERVER_PORT=8090
+      - SPRING_PROFILES_ACTIVE=dev,delius,local-postgres
+      - SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=false
+      - SPRING_H2_CONSOLE_SETTINGS_WEBALLOWOTHERS=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-db:5432/auth-db
+
+  auth-db:
+    image: postgres:15
+    networks:
+      - hmpps
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin_password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=auth-db
+    healthcheck:
+      test: pg_isready -d auth-db
 
 networks:
   hmpps:
