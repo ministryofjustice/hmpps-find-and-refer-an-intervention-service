@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.authorization
+package uk.gov.justice.digital.hmpps.findandreferanintervention.authorization
 
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
