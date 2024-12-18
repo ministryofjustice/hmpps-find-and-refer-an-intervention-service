@@ -201,7 +201,7 @@ CREATE TABLE complexity_level (
 	title text NOT NULL,
 	description text NOT NULL,
 	service_category_id uuid NOT NULL,
-	complexity "complexities" NULL,
+	complexity complexities NULL,
 	CONSTRAINT complexity_level_pkey PRIMARY KEY (id),
 	CONSTRAINT fk_service_category_id FOREIGN KEY (service_category_id) REFERENCES service_category(id)
 );
