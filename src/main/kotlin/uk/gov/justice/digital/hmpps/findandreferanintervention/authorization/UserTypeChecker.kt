@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsfindandreferaninterventionsservice.authorization
+package uk.gov.justice.digital.hmpps.findandreferanintervention.authorization
 
 import org.springframework.stereotype.Component
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
