@@ -229,7 +229,7 @@ CREATE TABLE dynamic_framework_contract (
 	prime_provider_id varchar(30) NOT NULL,
 	start_date date NOT NULL,
 	end_date date NOT NULL,
-	nps_region_id bpchar(1) NULL,
+	nps_region_id varchar(1) NULL,
 	pcc_region_id text NULL,
 	allows_female bool NOT NULL DEFAULT true,
 	allows_male bool NOT NULL DEFAULT true,
