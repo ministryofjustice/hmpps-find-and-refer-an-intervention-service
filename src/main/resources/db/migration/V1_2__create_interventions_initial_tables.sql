@@ -203,7 +203,7 @@ CREATE TABLE complexity_level (
 	service_category_id uuid NOT NULL,
 	complexity complexities NULL,
 	CONSTRAINT complexity_level_pkey PRIMARY KEY (id),
-	CONSTRAINT fk_service_category_id FOREIGN KEY (service_category_id) REFERENCES service_category(id)
+	CONSTRAINT fk__cl__service_category_id FOREIGN KEY (service_category_id) REFERENCES service_category(id)
 );
 CREATE TABLE desired_outcome (
 	id uuid NOT NULL,
@@ -222,7 +222,7 @@ CREATE TABLE contract_type_service_category (
 	service_category_id uuid NOT NULL,
 	CONSTRAINT pk_contract_type_service_category PRIMARY KEY (contract_type_id, service_category_id),
 	CONSTRAINT fk_contract_type FOREIGN KEY (contract_type_id) REFERENCES contract_type(id),
-	CONSTRAINT fk_service_category_id FOREIGN KEY (service_category_id) REFERENCES service_category(id)
+	CONSTRAINT fk__ctsc__service_category_id FOREIGN KEY (service_category_id) REFERENCES service_category(id)
 );
 CREATE TABLE dynamic_framework_contract (
 	id uuid NOT NULL,
