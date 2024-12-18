@@ -23,14 +23,14 @@ create table pcc_region (
 );
 CREATE TABLE contract_type (
 	id uuid NOT NULL,
-	"name" text NOT NULL,
+	name text NOT NULL,
 	code varchar(10) NOT NULL,
 	CONSTRAINT contract_type_pkey PRIMARY KEY (id)
 );
 CREATE TABLE service_category (
 	id uuid NOT NULL,
 	created timestamp with time zone NULL,
-	"name" text NOT NULL,
+	name text NOT NULL,
 	CONSTRAINT service_category_pkey PRIMARY KEY (id)
 );
 create table intervention_catalogue (
