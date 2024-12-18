@@ -9,7 +9,7 @@ hmpps-auth:
   url: "http://localhost:8093/auth"
 
 postgres:
-  uri: localhost:5432
+  uri: localhost:5433
   db: findandrefer
   username: postgres
   password: password
