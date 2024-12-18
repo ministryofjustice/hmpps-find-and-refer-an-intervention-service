@@ -8,12 +8,12 @@ management.endpoint:
 hmpps-auth:
   url: "http://localhost:8093/auth"
 
-spring:
-  datasource:
-    hikari:
-      maximum-pool-size: 50
-      connection-timeout : 30000
-  flyway:
-    postgresql:
-      transactional:
-        lock: false
+#spring:
+#  datasource:
+#    hikari:
+#      maximum-pool-size: 50
+#      connection-timeout : 30000
+#  flyway:
+#    postgresql:
+#      transactional:
+#        lock: false
