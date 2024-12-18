@@ -29,7 +29,7 @@ CREATE TABLE contract_type (
 );
 CREATE TABLE service_category (
 	id uuid NOT NULL,
-	created timestamptz NULL,
+	created timestamp with time zone NULL,
 	"name" text NOT NULL,
 	CONSTRAINT service_category_pkey PRIMARY KEY (id)
 );
@@ -43,9 +43,9 @@ create table intervention_catalogue (
     session_detail text not null,
     commencement_date date not null,
     termination_date date not null,
-    created_date date not null,
+    created timestamp with time zone not null,
     created_by text not null,
-    last_modified_date date,
+    last_modified timestamp with time zone,
     last_modified_by text,
     primary key (id),
     constraint fk__ic__auth_user_id foreign key (created_by) references auth_user,
@@ -238,7 +238,7 @@ CREATE TABLE dynamic_framework_contract (
 	contract_reference varchar(30) NOT NULL,
 	contract_type_id uuid NOT NULL,
 	referral_start_date date NOT NULL DEFAULT '2021-01-01'::date,
-	referral_end_at timestamptz NULL,
+	referral_end_at timestamp with time zone NULL,
 	CONSTRAINT dynamic_framework_contract_contract_reference_key UNIQUE (contract_reference),
 	CONSTRAINT dynamic_framework_contract_pkey PRIMARY KEY (id),
 	CONSTRAINT fk__contract_type__contract_type_id FOREIGN KEY (contract_type_id) REFERENCES contract_type(id),
@@ -258,7 +258,7 @@ CREATE INDEX idx_sub_contractor_prime_provider_id ON dynamic_framework_contract_
 CREATE TABLE intervention (
 	id uuid NOT NULL,
 	dynamic_framework_contract_id uuid NOT NULL,
-	created_at timestamptz NOT NULL,
+	created_at timestamp with time zone NOT NULL,
 	title text NOT NULL,
 	description text NOT NULL,
 	incoming_referral_distribution_email text NOT NULL DEFAULT '__no_data__'::text,
