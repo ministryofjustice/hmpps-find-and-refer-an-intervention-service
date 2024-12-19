@@ -2,16 +2,15 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DummyRepository
 
 @DataJpaTest
-@RunWith(SpringRunner::class)
 @ActiveProfiles("local")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class DummyRepositoryTest @Autowired constructor(
   val dummyRepository: DummyRepository,
 ) {

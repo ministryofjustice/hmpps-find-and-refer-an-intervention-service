@@ -9,11 +9,12 @@ parameters:
 _db_docker_config: &db_docker_config
   - image: cimg/openjdk:21.0.2
     environment:
-      POSTGRES_DB: interventions_ci
+      POSTGRES_DB: findandrefer_ci
   - image: cimg/postgres:15.0
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: interventions_ci
+      POSTGRES_DB: findandrefer_ci
+      PGPORT: 5433
 
 jobs:
   validate:
@@ -34,8 +35,8 @@ jobs:
       - run:
           name: Run migrations and local seeds
           command: |
-            flyway -cleanDisabled="false" clean -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password"
-            flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration,src/main/resources/db/local" -postgresql.transactional.lock=false
+            flyway -cleanDisabled="false" clean -url="jdbc:postgresql://localhost:5433/$POSTGRES_DB" -user="postgres" -password="password"
+            flyway migrate -url="jdbc:postgresql://localhost:5433/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration,src/main/resources/db/local" -postgresql.transactional.lock=false
       - restore_cache:
           keys:
             - gradle-{{ checksum "build.gradle.kts" }}
