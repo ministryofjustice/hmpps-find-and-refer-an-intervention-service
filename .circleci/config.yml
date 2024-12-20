@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   hmpps: ministryofjustice/hmpps@10
+  mem: circleci/rememborb@0.0.2
 parameters:
   releases-slack-channel:
     type: string
@@ -51,10 +52,53 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
+
+  publish_data:
+    executor:
+      name: hmpps/java
+      tag: "21"
+    docker: *db_docker_config
+    steps:
+      - checkout
+      - mem/recall:
+          env_var: APP_VERSION
+      - run:
+          name: Migrate the database
+          command: |
+            wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
+              tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
+            flyway migrate -url="jdbc:postgresql://localhost:5433/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
+      - setup_remote_docker
+      - run:
+          name: Build data dictionary
+          command: |
+            sudo apt update && sudo apt install graphviz
+            script/build-data-dictionary.sh
+      - run:
+          name: Tag docker image
+          command: |
+            docker tag data-dictionary "quay.io/hmpps/${CIRCLE_PROJECT_REPONAME}:data-dictionary-${APP_VERSION}"
+      - when:
+          condition:
+            or:
+              - equal: [ main, << pipeline.git.branch >> ]
+              - matches:
+                  pattern: "^hotfix/.+$"
+                  value: << pipeline.git.branch >>
+          steps:
+            - run:
+                name: Publish docker image
+                command: |
+                  docker login -u="${QUAYIO_USERNAME}" -p="${QUAYIO_PASSWORD}" quay.io
+                  docker push "quay.io/hmpps/${CIRCLE_PROJECT_REPONAME}:data-dictionary-${APP_VERSION}"
+
 workflows:
   version: 2
   build-test-and-deploy:
     jobs:
+      - publish_data:
+          requires:
+            - build_docker
       - validate:
           filters:
             tags:
@@ -81,6 +125,7 @@ workflows:
           requires:
             - validate
             - build_docker
+            - publish_data
             - helm_lint
           helm_timeout: 5m
   #      - request-preprod-approval:
