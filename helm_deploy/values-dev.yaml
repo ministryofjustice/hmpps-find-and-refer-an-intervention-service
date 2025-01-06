@@ -5,8 +5,7 @@ generic-service:
   replicaCount: 2
 
   ingress:
-    enabled:
-      true
+    enabled: true
     hosts:
     - host: find-and-refer-intervention-api-dev.hmpps.service.justice.gov.uk
     migration:
