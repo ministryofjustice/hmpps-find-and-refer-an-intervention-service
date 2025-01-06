@@ -5,7 +5,22 @@ generic-service:
   replicaCount: 2
 
   ingress:
-    host: find-and-refer-intervention-api-dev.hmpps.service.justice.gov.uk
+    enabled:
+      true
+    hosts:
+    - host: find-and-refer-intervention-api-dev.hmpps.service.justice.gov.uk
+    migration:
+      colour: green
+
+  env_details:
+    contains_live_data: false
+
+  image:
+    repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service
+    tag: latest
+    ports:
+      app: 8080
+      dataDictionary: 8080
 
   env:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"
