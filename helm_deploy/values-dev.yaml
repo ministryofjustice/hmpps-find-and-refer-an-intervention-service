@@ -6,8 +6,7 @@ generic-service:
 
   ingress:
     enabled: true
-    hosts:
-    - host: find-and-refer-intervention-api-dev.hmpps.service.justice.gov.uk
+    host: find-and-refer-intervention-api-dev.hmpps.service.justice.gov.uk
     migration:
       colour: green
 
