@@ -1,3 +1,8 @@
-spring:
-  datasource:
-    url: "jdbc:postgresql://${database.endpoint:localhost:5432}/findandrefer?currentSchema=public&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified&sslmode=verify-full"
+#spring:
+#  datasource:
+#    url: "jdbc:postgresql://${database.endpoint:localhost:5432}/findandrefer?currentSchema=public&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified&sslmode=verify-full"
+postgres:
+  uri: localhost:5432
+  db: findandrefer
+  username: postgres
+  password: password
