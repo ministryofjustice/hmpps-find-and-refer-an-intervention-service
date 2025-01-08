@@ -106,9 +106,9 @@ workflows:
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/database_schema_report:
-          schema: "findandrefer"
-          initialise_database: "./gradlew check"
-          port: "5433"
+          schema: "public"
+          initialise_database: "SPRING_PROFILES_ACTIVE=schemaspy ./gradlew check"
+          port: "5432"
 #          filters:
 #            branches:
 #              only: main
