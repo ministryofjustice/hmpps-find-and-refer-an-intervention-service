@@ -108,6 +108,7 @@ workflows:
       - hmpps/database_schema_report:
           schema: "findandrefer"
           initialise_database: "./gradlew check"
+          port: "5433"
 #          filters:
 #            branches:
 #              only: main
