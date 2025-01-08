@@ -36,7 +36,7 @@ spring:
             scope: read
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/findandrefer?currentSchema=public&user=postgres&password=password&stringtype=unspecified&sslmode=verify-full
+    url: jdbc:postgresql://localhost:5432/findandrefer?currentSchema=public&user=postgres&password=password&stringtype=unspecified
     username: ${postgres.username}
     password: ${postgres.password}
     hikari:
