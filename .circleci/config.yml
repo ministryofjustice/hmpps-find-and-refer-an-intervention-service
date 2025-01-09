@@ -35,8 +35,8 @@ jobs:
       docker: *db_schema_config
       steps:
         - checkout
-        - mem/recall:
-            env_var: APP_VERSION
+        #- mem/recall:
+        #    env_var: APP_VERSION
         - run:
             name: Migrate the database
             command: |
