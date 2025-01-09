@@ -92,7 +92,7 @@ workflows:
           name: helm_lint
       - hmpps/database_schema_report:
           name: database_schema_report
-          schema: "public"
+          schema: "findandrefer"
           initialise_database: ./gradlew dependencies
           requires:
             - prep_schema
