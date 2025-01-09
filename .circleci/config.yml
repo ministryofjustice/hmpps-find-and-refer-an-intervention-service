@@ -93,6 +93,7 @@ workflows:
       - hmpps/database_schema_report:
           name: database_schema_report
           schema: "public"
+          initialise_database: ./gradlew dependencies
           requires:
             - prep_schema
 #          filters:
