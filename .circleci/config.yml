@@ -28,6 +28,23 @@ _db_schema_config: &db_schema_config
       PGPORT: 5432
 
 jobs:
+  prep_schema:
+      name: prep_schema
+      executor:
+        name: hmpps/java
+        tag: "21"
+      docker: *db_schema_config
+      steps:
+        - checkout
+        - mem/recall:
+            env_var: APP_VERSION
+        - run:
+            name: Migrate the database
+            command: |
+              wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
+                tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
+              flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
+
   validate:
     executor:
       name: hmpps/java
@@ -71,22 +88,6 @@ workflows:
           filters:
             tags:
               ignore: /.*/
-      - prep_schema:
-          name: prep_schema
-          executor:
-            name: hmpps/java
-            tag: "21"
-          docker: *db_schema_config
-          steps:
-            - checkout
-            - mem/recall:
-                env_var: APP_VERSION
-            - run:
-                name: Migrate the database
-                command: |
-                  wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
-                    tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
-                  flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/database_schema_report:
