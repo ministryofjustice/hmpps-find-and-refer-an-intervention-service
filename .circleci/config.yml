@@ -72,6 +72,7 @@ workflows:
             tags:
               ignore: /.*/
       - prep_schema:
+          name: prep_schema
           executor:
             name: hmpps/java
             tag: "21"
