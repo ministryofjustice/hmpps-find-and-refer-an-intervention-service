@@ -29,7 +29,6 @@ _db_schema_config: &db_schema_config
 
 jobs:
   prep_schema:
-      name: prep_schema
       executor:
         name: hmpps/java
         tag: "21"
