@@ -17,6 +17,16 @@ _db_docker_config: &db_docker_config
       POSTGRES_DB: findandrefer_ci
       PGPORT: 5433
 
+_db_schema_config: &db_schema_config
+  - image: cimg/openjdk:21.0.2
+    environment:
+      POSTGRES_DB: findandrefer_ci
+  - image: cimg/postgres:15.0
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: findandrefer_ci
+      PGPORT: 5432
+
 jobs:
   validate:
     executor:
@@ -53,11 +63,11 @@ jobs:
       - store_artifacts:
           path: build/reports/tests
 
-  publish_data:
+  publish_schema:
     executor:
       name: hmpps/java
       tag: "21"
-    docker: *db_docker_config
+    docker: *db_schema_config
     steps:
       - checkout
       - mem/recall:
@@ -67,13 +77,13 @@ jobs:
           command: |
             wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
               tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
-            flyway migrate -url="jdbc:postgresql://localhost:5433/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
+            flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
       - setup_remote_docker
-      - run:
-          name: Build data dictionary
-          command: |
-            sudo apt update && sudo apt install graphviz
-            script/build-data-dictionary.sh
+      - hmpps/database_schema_report:
+            schema: "public"
+          #          filters:
+          #            branches:
+          #              only: main
       - run:
           name: Tag docker image
           command: |
@@ -96,7 +106,7 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - publish_data:
+      - publish_schema:
           requires:
             - build_docker
       - validate:
@@ -105,13 +115,6 @@ workflows:
               ignore: /.*/
       - hmpps/helm_lint:
           name: helm_lint
-      - hmpps/database_schema_report:
-          schema: "public"
-          initialise_database: "SPRING_PROFILES_ACTIVE=schemaspy ./gradlew check"
-          port: "5432"
-#          filters:
-#            branches:
-#              only: main
       - hmpps/build_multiplatform_docker:
           name: build_docker
           filters:
@@ -132,7 +135,7 @@ workflows:
           requires:
             - validate
             - build_docker
-            - publish_data
+            - publish_schema
             - helm_lint
           helm_timeout: 5m
   #      - request-preprod-approval:
