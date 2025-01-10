@@ -38,6 +38,10 @@ workflows:
       - hmpps/database_schema_report:
           schema: "public"
           initialise_database: "./gradlew check"
+          filters:
+            branches:
+              only:
+                - main
       - validate:
           filters:
             tags:
