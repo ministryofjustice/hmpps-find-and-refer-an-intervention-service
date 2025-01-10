@@ -96,7 +96,7 @@ workflows:
           initialise_database: |
             wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
               tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
-            flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
+            flyway migrate -url="jdbc:postgresql://localhost:5432/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration" -postgresql.transactional.lock=false
 #          requires:
 #            - prep_schema
 #          filters:
