@@ -113,7 +113,7 @@ workflows:
           requires:
             - validate
             - build_docker
-            - publish_data
+            # - publish_data
             - helm_lint
           helm_timeout: 5m
   #      - request-preprod-approval:
