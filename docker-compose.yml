@@ -4,9 +4,10 @@ services:
     image: postgres:16
     container_name: find_postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
-      - POSTGRES_PASSWORD=password
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: dev
     volumes:
       - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
 

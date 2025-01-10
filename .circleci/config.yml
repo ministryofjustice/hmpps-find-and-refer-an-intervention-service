@@ -20,24 +20,12 @@ _db_docker_config: &db_docker_config
 jobs:
   validate:
     executor:
-      name: hmpps/java
-      tag: "21.0"
-    docker: *db_docker_config
+      name: hmpps/java_postgres
+      jdk_tag: "21.0"
+      postgres_tag: "16.1"
 
     steps:
       - checkout
-      - run:
-          name: Setup flyway and psql
-          command: |
-            wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.15.2/flyway-commandline-10.15.2-linux-x64.tar.gz | \
-              tar xvz && sudo ln -s `pwd`/flyway-10.15.2/flyway /usr/local/bin
-            sudo apt update
-            sudo apt install postgresql-client
-      - run:
-          name: Run migrations and local seeds
-          command: |
-            flyway -cleanDisabled="false" clean -url="jdbc:postgresql://localhost:5433/$POSTGRES_DB" -user="postgres" -password="password"
-            flyway migrate -url="jdbc:postgresql://localhost:5433/$POSTGRES_DB" -user="postgres" -password="password" -locations="src/main/resources/db/migration,src/main/resources/db/local" -postgresql.transactional.lock=false
       - restore_cache:
           keys:
             - gradle-{{ checksum "build.gradle.kts" }}
@@ -96,9 +84,9 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - publish_data:
-          requires:
-            - build_docker
+      - hmpps/database_schema_report:
+          schema: "public"
+          initialise_database: "./gradlew check"
       - validate:
           filters:
             tags:
