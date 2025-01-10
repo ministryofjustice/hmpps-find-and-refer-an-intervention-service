@@ -1,0 +1,45 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:16
+    container_name: find_postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
+
+  hmpps-auth:
+    image: quay.io/hmpps/hmpps-auth:latest
+    networks:
+      - hmpps
+    depends_on:
+      - auth-db
+    ports:
+      - '8090:8090'
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:8090/auth/health' ]
+    environment:
+      - SERVER_PORT=8090
+      - SPRING_PROFILES_ACTIVE=dev,delius,local-postgres
+      - SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=false
+      - SPRING_H2_CONSOLE_SETTINGS_WEBALLOWOTHERS=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-db:5432/auth-db
+
+  auth-db:
+    image: postgres:15
+    networks:
+      - hmpps
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin_password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=auth-db
+    healthcheck:
+      test: pg_isready -d auth-db
+
+networks:
+  hmpps:
