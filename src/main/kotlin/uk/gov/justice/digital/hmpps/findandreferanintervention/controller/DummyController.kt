@@ -9,7 +9,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Dummy
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DummyRepository
 
 @RestController
-@PreAuthorize("hasRole('ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI')")
+@PreAuthorize("hasRole('ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR')")
 class DummyController(
   private val dummyRepository: DummyRepository,
 ) {
