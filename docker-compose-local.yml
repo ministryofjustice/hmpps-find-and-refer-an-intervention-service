@@ -6,7 +6,8 @@ services:
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: dev
     volumes:
       - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
 

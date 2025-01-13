@@ -4,8 +4,6 @@ hmpps-auth:
 postgres:
   uri: localhost:5433
   db: findandrefer
-  username: postgres
-  password: password
 
 spring:
   flyway:
