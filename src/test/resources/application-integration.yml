@@ -13,3 +13,9 @@ spring:
     locations: classpath:db/migration,classpath:db/local
     clean-on-validation-error: true
     clean-disabled: false
+
+postgres:
+  uri: localhost:5433
+  db: findandrefer
+  username: postgres
+  password: password
