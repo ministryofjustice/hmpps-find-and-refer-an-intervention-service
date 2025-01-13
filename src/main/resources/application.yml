@@ -35,7 +35,7 @@ spring:
             authorization-grant-type: client_credentials
             scope: read
   datasource:
-    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:postgres}?currentSchema=${database.schema.name:public}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
+    url: jdbc:postgresql://${postgres.uri:localhost:5432}/${postgres.db:postgres}?currentSchema=${database.schema.name:public}&user=${postgres.username:root}&password=${postgres.password:dev}&stringtype=unspecified
     hikari:
       maximum-pool-size: 50
 
