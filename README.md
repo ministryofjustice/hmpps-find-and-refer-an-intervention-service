@@ -34,13 +34,13 @@ Run the following command to pull the relevant dependencies for the project.
 and then the following command to run the containers.
 
 ```bash
-  docker-compose up
+  docker-compose -f docker-compose-local.yml up
 ```
 
 can optionally be run in detached mode in order to retain terminal use
 
 ```bash
-  docker-compose up -d
+  docker-compose -f docker-compose-local.yml up -d
 ```
 
 ### Connecting to local database
@@ -52,11 +52,11 @@ client ([IntelliJ Ultimate](https://www.jetbrains.com/help/idea/database-tool-wi
 
 Create new connection using local database credentials;
 
-| Variable | Value    |
-|----------|----------|
-| Port     | 5432     |
-| Username | postgres |
-| Password | password |
+| Variable | Value |
+|----------|-------|
+| Port     | 5433  |
+| Username | root  |
+| Password | dev   |
 
 ### Authorization
 
