@@ -13,8 +13,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.Du
 @PreAuthorize("hasRole('ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR')")
 class DummyController(
   private val dummyRepository: DummyRepository,
-  private val telemetryClient: TelemetryClient
-
+  private val telemetryClient: TelemetryClient,
 ) {
   @GetMapping("/dummy/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getDummy(@PathVariable id: Int): Dummy? {
@@ -33,5 +32,3 @@ class DummyController(
     )
   }
 }
-
-
