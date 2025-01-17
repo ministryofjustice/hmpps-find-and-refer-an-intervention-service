@@ -79,7 +79,6 @@ workflows:
           pipeline_number: <<pipeline.number>>
           context:
             - hmpps-common-vars
-            - hmpps-template-kotlin-preprod
           helm_timeout: 5m
           requires:
             - deploy_dev
