@@ -1,6 +1,6 @@
 {
   "role": {
-    "name": "hmpps-template-kotlin"
+    "name": "find-and-refer-interventions-service"
   },
   "customDimensions": {
     "service.version": "${BUILD_NUMBER}"
