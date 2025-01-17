@@ -70,6 +70,18 @@ workflows:
             - build_docker
             - helm_lint
           helm_timeout: 5m
+      - hmpps/deploy_env:
+          name: deploy_preprod
+          env: "preprod"
+          jira_update: true
+          jira_env_type: staging
+          pipeline_id: <<pipeline.id>>
+          pipeline_number: <<pipeline.number>>
+          context:
+            - hmpps-common-vars
+          helm_timeout: 5m
+          requires:
+            - deploy_dev
   #      - request-preprod-approval:
   #          type: approval
   #          requires:
