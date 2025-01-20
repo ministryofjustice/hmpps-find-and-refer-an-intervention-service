@@ -33,8 +33,4 @@ open class PersonalEligibility {
   @NotNull
   @Column(name = "females", nullable = false)
   open var females: Boolean? = false
-
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id")
-  open var intervention: InterventionCatalogue? = null
 }
