@@ -7,7 +7,6 @@ hmpps-auth:
 #  password: dev
 
 postgres:
-  uri: localhost:5433
   db: findandrefer
   username: root
   password: dev
