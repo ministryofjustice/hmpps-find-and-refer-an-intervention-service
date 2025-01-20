@@ -1,5 +1,5 @@
 CREATE TYPE intervention_type AS ENUM ('SI','ACP','CRS');
-CREATE TYPE setting_type AS ENUM ('COMMUNITY','CUSTODY');
+CREATE TYPE setting_type AS ENUM ('COMMUNITY','CUSTODY','PRE_RELEASE');
 CREATE TYPE rosh_levels AS ENUM ('LOW','MEDIUM','HIGH','VERY_HIGH');
 CREATE TYPE complexities AS ENUM ('LOW','MEDIUM','HIGH');
 CREATE TABLE auth_user (
@@ -37,8 +37,8 @@ create table intervention_catalogue (
     id uuid not null,
     name text not null,
     int_type intervention_type not null,
-    short_decription text not null,
-    long_decription text not null,
+    short_description text not null,
+    long_description text not null,
     topic text not null,
     session_detail text not null,
     commencement_date date not null,
