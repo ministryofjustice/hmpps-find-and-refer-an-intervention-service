@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Local" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="local" />
+    <envs>
+      <env name="POSTGRES_URI" value="localhost:5433" />
+    </envs>
+    <module name="hmpps-find-and-refer-an-intervention-service.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="uk.gov.justice.digital.hmpps.findandreferanintervention.FindAndReferAnIntervention" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
