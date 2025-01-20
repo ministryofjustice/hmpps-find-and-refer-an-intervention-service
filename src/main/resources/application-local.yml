@@ -6,6 +6,12 @@ hmpps-auth:
 #  username: root
 #  password: dev
 
+postgres:
+  uri: localhost:5433
+  db: findandrefer
+  username: root
+  password: dev
+
 spring:
   flyway:
     locations: classpath:db/migration,classpath:db/local
