@@ -32,7 +32,7 @@ open class InterventionCatalogue {
   open var name: String? = null
 
   @NotNull
-  @Column(name = "short_description", nullable = true, length = Integer.MAX_VALUE)
+  @Column(name = "short_description", nullable = false, length = Integer.MAX_VALUE)
   open var shortDescription: String? = null
 
   @Column(name = "long_description", nullable = true, length = Integer.MAX_VALUE)
