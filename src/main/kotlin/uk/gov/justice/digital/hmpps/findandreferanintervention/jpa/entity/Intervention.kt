@@ -5,6 +5,8 @@ import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
@@ -40,4 +42,12 @@ open class Intervention {
   @ColumnDefault("'__no_data__'")
   @Column(name = "incoming_referral_distribution_email", nullable = false, length = Integer.MAX_VALUE)
   open var incomingReferralDistributionEmail: String? = null
+
+  @ManyToMany
+  @JoinTable(
+    name = "intervention_catalogue_map",
+    joinColumns = [JoinColumn(name = "intervention_id")],
+    inverseJoinColumns = [JoinColumn(name = "intervention_catalogue_id")],
+  )
+  open var interventionCatalogues: MutableSet<InterventionCatalogue> = mutableSetOf()
 }
