@@ -17,11 +17,6 @@ open class Exclusion {
   @Column(name = "id", nullable = false)
   open var id: UUID? = null
 
-  @NotNull
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "intervention_id", nullable = false)
-  open var intervention: InterventionCatalogue? = null
-
   @Column(name = "min_remaining_sentence_duration_guide", length = Integer.MAX_VALUE)
   open var minRemainingSentenceDurationGuide: String? = null
 
@@ -42,4 +37,9 @@ open class Exclusion {
 
   @Column(name = "schedule_frequency_guide", length = Integer.MAX_VALUE)
   open var scheduleFrequencyGuide: String? = null
+
+  @NotNull
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "intervention_id", nullable = false)
+  open var intervention: InterventionCatalogue? = null
 }

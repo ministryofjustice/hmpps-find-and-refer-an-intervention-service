@@ -18,10 +18,6 @@ open class PersonalEligibility {
   @Column(name = "id", nullable = false)
   open var id: UUID? = null
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id")
-  open var intervention: InterventionCatalogue? = null
-
   @ColumnDefault("18")
   @Column(name = "min_age")
   open var minAge: Int? = null
@@ -37,4 +33,8 @@ open class PersonalEligibility {
   @NotNull
   @Column(name = "females", nullable = false)
   open var females: Boolean? = false
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "intervention_id")
+  open var intervention: InterventionCatalogue? = null
 }

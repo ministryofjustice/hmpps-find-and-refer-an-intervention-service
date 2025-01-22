@@ -8,6 +8,6 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Interv
 import java.util.UUID
 
 interface InterventionCatalogueRepository : JpaRepository<InterventionCatalogue, UUID> {
-  @EntityGraph(attributePaths = ["criminogenic_need", "delivery_location", "delivery_method", "eligible_offence", "enabling_intervention", "excluded_offence", "intervention", "personal_eligibility", "possible_outcome", "risk_consideration", "special_education_needs"])
+  @EntityGraph(attributePaths = ["criminogenicNeeds", "deliveryLocations", "deliveryMethods", "eligibleOffences", "enablingInterventions", "excludedOffences", "exclusion", "interventions", "personalEligibility", "possibleOutcomes", "riskConsideration", "specialEducationalNeeds"])
   override fun findAll(pageable: Pageable): Page<InterventionCatalogue>
 }

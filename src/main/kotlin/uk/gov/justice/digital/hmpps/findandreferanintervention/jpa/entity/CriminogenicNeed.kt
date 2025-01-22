@@ -21,9 +21,4 @@ open class CriminogenicNeed {
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "need_id", nullable = false)
   open var need: CriminogenicNeedRef? = null
-
-  @NotNull
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "intervention_id", nullable = false)
-  open var intervention: InterventionCatalogue? = null
 }

@@ -20,10 +20,6 @@ open class EligibleOffence {
   @JoinColumn(name = "offence_type_id")
   open var offenceType: OffenceTypeRef? = null
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id")
-  open var intervention: InterventionCatalogue? = null
-
   @Column(name = "victim_type", length = Integer.MAX_VALUE)
   open var victimType: String? = null
 

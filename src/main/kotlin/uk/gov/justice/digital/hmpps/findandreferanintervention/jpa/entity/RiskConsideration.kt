@@ -21,11 +21,6 @@ open class RiskConsideration {
   @Column(name = "id", nullable = false)
   open var id: UUID? = null
 
-  @NotNull
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "intervention_id", nullable = false)
-  open var intervention: InterventionCatalogue? = null
-
   @Column(name = "cn_score_guide", length = Integer.MAX_VALUE)
   open var cnScoreGuide: String? = null
 
@@ -63,6 +58,11 @@ open class RiskConsideration {
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
   open var roshLevel: RoshLevel? = null
+
+  @NotNull
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "intervention_id", nullable = false)
+  open var intervention: InterventionCatalogue? = null
 
   enum class RoshLevel {
     LOW,

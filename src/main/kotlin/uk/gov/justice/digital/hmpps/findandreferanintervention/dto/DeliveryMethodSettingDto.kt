@@ -2,12 +2,20 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
 import jakarta.validation.constraints.NotNull
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethodSetting
-import java.io.Serializable
+import java.util.UUID
 
-/**
- * DTO for {@link uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethodSetting}
- */
 data class DeliveryMethodSettingDto(
-  @field:NotNull val deliveryMethod: DeliveryMethodDto? = null,
+  @NotNull
+  val id: UUID? = null,
+  @NotNull
   val setting: DeliveryMethodSetting.SettingType? = null,
-) : Serializable
+) {
+  companion object {
+    fun fromEntity(deliveryMethodSetting: DeliveryMethodSetting): DeliveryMethodSettingDto {
+      return DeliveryMethodSettingDto(
+        id = deliveryMethodSetting.id,
+        setting = deliveryMethodSetting.setting,
+      )
+    }
+  }
+}
