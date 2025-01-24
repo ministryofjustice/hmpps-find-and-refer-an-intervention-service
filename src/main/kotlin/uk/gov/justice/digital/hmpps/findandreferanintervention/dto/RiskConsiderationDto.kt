@@ -3,9 +3,6 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
 import java.util.UUID
 
-/**
- * DTO for {@link uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration}
- */
 data class RiskConsiderationDto(
   val id: UUID? = null,
   val cnScoreGuide: String? = null,
@@ -22,7 +19,7 @@ data class RiskConsiderationDto(
   val roshLevel: RiskConsideration.RoshLevel? = null,
 ) {
 
-  val listOfRisks =
+  val listOfRisks: () -> List<String?> =
     {
       listOf(
         cnScoreGuide,
