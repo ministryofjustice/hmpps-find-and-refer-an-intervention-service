@@ -1,11 +1,12 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.controller
 
+import com.microsoft.applicationinsights.TelemetryClient
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.MediaType
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
@@ -14,27 +15,23 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.service.Intervent
 @PreAuthorize("hasRole('ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR')")
 class InterventionCatalogueController(
   private val interventionCatalogueService: InterventionCatalogueService,
-//  private val telemetryClient: TelemetryClient,
+  private val telemetryClient: TelemetryClient,
 ) {
   @GetMapping("/interventions", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getInterventionsCatalogue(
-    @RequestParam(defaultValue = "0") pageNo: Int,
-    @RequestParam(defaultValue = "10") pageSize: Int,
+    @PageableDefault(page = 0, size = 10) pageable: Pageable,
   ): Page<InterventionCatalogueDto> {
-//    logToAppInsights(id)
-    val page = PageRequest.of(pageNo, pageSize)
-    val interventions = interventionCatalogueService.getInterventionsCatalogue(page)
-    return interventions
+    logToAppInsights()
+    return interventionCatalogueService.getInterventionsCatalogue(pageable)
   }
-  // TODO add app insights logging
-//  fun logToAppInsights(id: Int) {
-//    telemetryClient.trackEvent(
-//      "LoggingToAppInsights",
-//      mapOf(
-//        "userMessage" to "User has hit the dummy endpoint",
-//        "dummyId" to id.toString(),
-//      ),
-//      null,
-//    )
-//  }
+
+  fun logToAppInsights() {
+    telemetryClient.trackEvent(
+      "InterventionsCatalogue Summary",
+      mapOf(
+        "userMessage" to "User has hit interventions catalogue summary page",
+      ),
+      null,
+    )
+  }
 }
