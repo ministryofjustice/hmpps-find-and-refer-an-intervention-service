@@ -2,8 +2,8 @@ INSERT INTO criminogenic_need (id, need_id, intervention_id)
 VALUES
     (
      '9e109f41-2cff-4c7c-94e9-7ba26f488ae7',
-     'e8442b7f-720a-43de-8273-7d1f83f96cd1',
-     '4902a268-9907-4070-ba48-7c2870a3b77e'
+     '71471a03-f821-4b5d-a055-e4c7c6cf70d6',
+     '1471a03-f821-4b5d-a055-e4c7c6cf70d6'
     ),
     (
      'ef15157a-fdb7-446a-aa43-7ae9efda881e',
@@ -11,18 +11,23 @@ VALUES
      'd61fc961-243e-4321-bafb-5d71e1fd13a4'
     ),
     (
+     '53baab9c-99c0-473d-8433-daae30253c4b',
+     'b1086ca9-b51d-440f-88a5-b597852df483',
+     'd61fc961-243e-4321-bafb-5d71e1fd13a4'
+    ),
+    (
      'ab0192c5-35ef-4dac-a214-d77bd5b651c8',
-     'edd87755-2b0e-4f07-838e-4f9828e570d3',
+     'b1086ca9-b51d-440f-88a5-b597852df483',
      '432b2353-b794-4b12-8018-6c7ede6a1ed6'
     ),
     (
      'b6eee128-76e9-4edd-a062-f8e8da8b1d50',
-     'edd87755-2b0e-4f07-838e-4f9828e570d3',
+     'b1086ca9-b51d-440f-88a5-b597852df483',
      'a6c18ff3-83bd-4ad2-bcbe-1db3fb55a341'
     ),
     (
      '739a125a-9316-4b02-ac47-d4c2ad9e07b0',
-     'b1086ca9-b51d-440f-88a5-b597852df483',
+     'b1086ca9-b51d-440f-88a5-b597852df483', -- This includes Attitude which may get its own Id in the future
      '94af0e1f-f55f-4422-afc5-536178c63b5f'
     ),
     (
@@ -37,12 +42,7 @@ VALUES
     ),
     (
      '4bcf7803-faed-4686-9c62-dfcc0adae435',
-     '1cd19745-152d-4fe4-a4d2-6fcd8537f52c',
-     '7c479daa-9dd2-4307-a7e7-2e2ff4c3ced1'
-    ),
-    (
-     'bb376895-ba32-40f2-977b-2e69c11f1ef4',
-     '025215d3-bf02-433f-b8bc-90ba2e391e3a',
+     'edd87755-2b0e-4f07-838e-4f9828e570d3',
      '7c479daa-9dd2-4307-a7e7-2e2ff4c3ced1'
     ),
     (

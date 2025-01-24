@@ -4,7 +4,7 @@ VALUES
     (
      '4d139b00-60bf-4e95-ab6a-be85ed24b3c2',
      '4902a268-9907-4070-ba48-7c2870a3b77e',
-     'total score of 5+  OASys items
+     'total score of 5+ OASys items
                   2.6 - Recognises the impact and consequences of offending
                   7.2 - Regular activities encourage offending
                   11.4 - Temper control

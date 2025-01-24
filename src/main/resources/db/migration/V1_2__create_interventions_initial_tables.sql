@@ -1,5 +1,5 @@
 CREATE TYPE intervention_type AS ENUM ('SI','ACP','CRS');
-CREATE TYPE setting_type AS ENUM ('COMMUNITY','CUSTODY','PRE_RELEASE');
+CREATE TYPE setting_type AS ENUM ('COMMUNITY','CUSTODY');
 CREATE TYPE rosh_levels AS ENUM ('LOW','MEDIUM','HIGH','VERY_HIGH');
 CREATE TYPE complexities AS ENUM ('LOW','MEDIUM','HIGH');
 CREATE TABLE auth_user (
@@ -233,8 +233,8 @@ CREATE TABLE dynamic_framework_contract (
 	pcc_region_id text NULL,
 	allows_female bool NOT NULL DEFAULT true,
 	allows_male bool NOT NULL DEFAULT true,
-	minimum_age int4 NOT NULL DEFAULT 18,
-	maximum_age int4 NULL,
+	minimum_age integer NOT NULL DEFAULT 18,
+	maximum_age integer NULL,
 	contract_reference varchar(30) NOT NULL,
 	contract_type_id uuid NOT NULL,
 	referral_start_date date NOT NULL DEFAULT '2021-01-01'::date,

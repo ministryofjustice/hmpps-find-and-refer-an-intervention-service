@@ -46,7 +46,7 @@ VALUES
      null,
      null,
      true,
-     true
+     false
     ),
     (
      'e56345c0-258b-4523-9647-32caa2146da8',
@@ -54,7 +54,7 @@ VALUES
      null,
      null,
      true,
-     true
+     false
     ),
     (
      '862a3336-e0f3-43a2-b7cd-80e2ff9b1e63',
@@ -62,7 +62,7 @@ VALUES
      null,
      null,
      true,
-     true
+     false
     ),
     (
      '90397a0b-7837-4ff1-ba10-71853e074ab3',
@@ -70,5 +70,5 @@ VALUES
      null,
      null,
      true,
-     true
+     false
     );

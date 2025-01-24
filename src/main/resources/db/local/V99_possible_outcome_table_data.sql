@@ -23,7 +23,7 @@ VALUES
     (
      'd032f447-2382-44c7-bedc-ef05db56c8d1',
      '94af0e1f-f55f-4422-afc5-536178c63b5f',
-     ''
+     'Develop thinking (cognitive) skills to manage risk factors, develop protective factors, and achieve pro-social goals. Better recognise and manage emotions.'
     ),
     (
      'ec81f53e-edcb-447e-a6b5-5f4fd15c95b7',
@@ -39,7 +39,7 @@ VALUES
     (
      'a0a32c36-4dad-4e59-917a-649d1bdfd927',
      '7c479daa-9dd2-4307-a7e7-2e2ff4c3ced1',
-     ''
+     'Positive family relationships avoids harmful relationships positive, confident and responsible parenting behaviours improves ability to develop positive intimate relationshipsPositive coping strategies in the event of temporary or irretrievable breakdown of familial or other relationships. Complies with voluntary/mandatory family or relationship-focussed programmes.'
     ),
     (
      '80ab8e7e-b34e-4bc9-830e-4526985b43f5',

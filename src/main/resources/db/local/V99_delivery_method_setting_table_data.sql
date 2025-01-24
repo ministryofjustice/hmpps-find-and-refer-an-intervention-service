@@ -38,7 +38,7 @@ VALUES
     (
      '5f1ef1c1-4d25-4d51-9455-ade596bc31ab',
      '6eea69d7-5a34-4768-96bd-ef3c5e261b8f',
-     'PRE_RELEASE'
+     'CUSTODY'
     ),
     (
      '614c8324-06d7-44af-8f71-d919809e916c',
