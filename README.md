@@ -73,6 +73,27 @@ must be generated. This can be done through calling the auth endpoint in the Hmp
 
 For Client ID and Secret refer to the relevant credentials for the Find and Refer Project.
 
+## Branch naming validator
+
+This project has a branch naming validator in place in the GitHub action pipeline.
+
+To ensure these pipelines pass the branch name must conform one of the following patterns:
+
+* FRI-[0-9]/*branch-name-here*
+* no-ticket/*branch-name-here*
+* renovate/*branch-name-here*
+* hotfix/*branch-name-here*
+
+## Formatting
+
+This project is formatted using ktlint.
+
+Run the following command to add a pre-commit hook to ensure your code is formatted correctly before pushing.
+
+```bash
+./gradlew addKtlintFormatGitPreCommitHook
+```
+
 ## Troubleshooting
 
 For any issues please reach out to the Find and Refer Interventions team in
