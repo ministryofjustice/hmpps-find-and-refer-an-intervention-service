@@ -1,4 +1,4 @@
-INSERT INTO personal_eligility (id, intervention_id, min_age, max_age, males, females)
+INSERT INTO personal_eligibility (id, intervention_id, min_age, max_age, males, females)
 VALUES
     ('59d24745-fd2d-448f-b498-7496b92e0f19','4902a268-9907-4070-ba48-7c2870a3b77e',null,null,true,false),
     ('56521e25-9984-4126-bc36-008397e90180','d61fc961-243e-4321-bafb-5d71e1fd13a4',null,null,true,true),

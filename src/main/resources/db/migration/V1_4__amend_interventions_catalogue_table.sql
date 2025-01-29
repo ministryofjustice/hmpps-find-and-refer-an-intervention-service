@@ -10,3 +10,5 @@ alter table intervention_catalogue alter column termination_date drop not null;
 
 -- adding column in this table until final decision is made on where this data is displayed
 alter table intervention_catalogue add column reasons_for_referral text null;
+
+alter table delivery_location rename column pdu_estabishments to pdu_establishments;
