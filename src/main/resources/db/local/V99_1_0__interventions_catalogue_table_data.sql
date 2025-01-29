@@ -12,7 +12,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -28,7 +28,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -44,7 +44,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -60,7 +60,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -84,7 +84,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -100,7 +100,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -116,7 +116,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -136,7 +136,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       '',
       ''
@@ -156,7 +156,7 @@ VALUES
       '',
       TO_DATE('2025-01-10', 'YYYY-MM-DD'),
       null,
-      TO_TIMESTAMP_TZ('2025-01-1011:00:00-08:00', 'YYYY-MM-DD:MI:SSTZH:TZM'),
+      make_timestamptz(2025,1,10,11,00, 'Europe/London'),
       'Joe Bloggs',
       ''
     );
