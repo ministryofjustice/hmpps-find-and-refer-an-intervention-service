@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @PreAuthorize("hasRole('ROLE_INTERVENTIONS_API_READ_ALL')")
-class HelloController() {
+class HelloController {
   @GetMapping("/hello")
-  fun getHello(): String {
-    return "Hello from skeleton"
-  }
+  fun getHello(): String = "Hello from skeleton"
 }
