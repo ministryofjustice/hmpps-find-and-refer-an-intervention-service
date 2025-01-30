@@ -1,6 +1,9 @@
 hmpps-auth:
   url: "http://localhost:9090/auth"
 
+postgres:
+  uri: localhost:5433
+
 spring:
   flyway:
     locations: classpath:db/migration,classpath:db/local
