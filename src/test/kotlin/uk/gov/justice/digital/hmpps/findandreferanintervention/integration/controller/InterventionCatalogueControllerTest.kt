@@ -16,7 +16,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Interv
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
 import java.util.UUID
 
-internal class InterventionCatalogueTest {
+internal class InterventionCatalogueControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
   private val interventionCatalogueService = mock<InterventionCatalogueService>()
   private val interventionCatalogueController =
@@ -29,6 +29,7 @@ internal class InterventionCatalogueTest {
   fun `getInterventionsCatalogue when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
     val catalogue = InterventionCatalogueDto(
+      id = UUID.randomUUID(),
       title = "Test Title",
       description = "Test Description",
       intType = InterventionCatalogue.InterventionType.ACP,
@@ -45,7 +46,7 @@ internal class InterventionCatalogueTest {
     val response = interventionCatalogueController.getInterventionsCatalogue(pageable)
 
     verify(telemetryClient).trackEvent(
-      "LoggingToAppInsights",
+      "InterventionsCatalogue Summary",
       mapOf("userMessage" to "User has hit interventions catalogue summary page"),
       null,
     )
