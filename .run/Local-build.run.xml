@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Local-Build" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="Local-build" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="env">
         <map>
