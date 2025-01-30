@@ -5,14 +5,14 @@ import java.util.UUID
 
 data class DeliveryMethodDto(
   val id: UUID? = null,
-  val description: String,
+  val description: String? = null,
   val deliveryMethodSettings: List<DeliveryMethodSettingDto> = mutableListOf(),
 ) {
   companion object {
     fun fromEntity(deliveryMethod: DeliveryMethod): DeliveryMethodDto {
       return DeliveryMethodDto(
         id = deliveryMethod.id,
-        description = deliveryMethod.deliveryMethodDescription!!,
+        description = deliveryMethod.deliveryMethodDescription,
         deliveryMethodSettings = deliveryMethod.deliveryMethodSettings.map {
           DeliveryMethodSettingDto.fromEntity(it)
         },
