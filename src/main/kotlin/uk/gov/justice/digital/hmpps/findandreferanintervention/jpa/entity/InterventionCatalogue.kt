@@ -32,27 +32,22 @@ open class InterventionCatalogue {
   open var name: String? = null
 
   @NotNull
-  @Column(name = "short_description", nullable = false, length = Integer.MAX_VALUE)
+  @Column(name = "short_description", nullable = true, length = Integer.MAX_VALUE)
   open var shortDescription: String? = null
 
-  @NotNull
-  @Column(name = "long_description", nullable = false, length = Integer.MAX_VALUE)
+  @Column(name = "long_description", nullable = true, length = Integer.MAX_VALUE)
   open var longDescription: String? = null
 
-  @NotNull
-  @Column(name = "topic", nullable = false, length = Integer.MAX_VALUE)
+  @Column(name = "topic", nullable = true, length = Integer.MAX_VALUE)
   open var topic: String? = null
 
-  @NotNull
-  @Column(name = "session_detail", nullable = false, length = Integer.MAX_VALUE)
+  @Column(name = "session_detail", nullable = true, length = Integer.MAX_VALUE)
   open var sessionDetail: String? = null
 
-  @NotNull
-  @Column(name = "commencement_date", nullable = false)
+  @Column(name = "commencement_date", nullable = true)
   open var commencementDate: LocalDate? = null
 
-  @NotNull
-  @Column(name = "termination_date", nullable = false)
+  @Column(name = "termination_date", nullable = true)
   open var terminationDate: LocalDate? = null
 
   @NotNull
@@ -123,6 +118,9 @@ open class InterventionCatalogue {
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var riskConsideration: RiskConsideration? = null
+
+  @Column(name = "reasons_for_referral", nullable = true, length = Integer.MAX_VALUE)
+  open var reasonsForReferral: String? = null
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
