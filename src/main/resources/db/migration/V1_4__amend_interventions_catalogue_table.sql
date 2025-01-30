@@ -12,3 +12,6 @@ alter table intervention_catalogue alter column termination_date drop not null;
 alter table intervention_catalogue add column reasons_for_referral text null;
 
 alter table delivery_location rename column pdu_estabishments to pdu_establishments;
+
+alter table eligibile_offence rename to eligible_offence;
+alter table eligibile_ethnicity rename to eligible_ethnicity;

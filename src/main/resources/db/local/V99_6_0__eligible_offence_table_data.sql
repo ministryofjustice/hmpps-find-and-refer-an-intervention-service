@@ -1,4 +1,4 @@
-INSERT INTO eligibile_offence (id, offence_type_id, intervention_id, victim_type, motivation)
+INSERT INTO eligible_offence (id, offence_type_id, intervention_id, victim_type, motivation)
 VALUES
     (
      'c5886bce-32c6-47f8-8be0-e0c526786492',
