@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -22,82 +23,88 @@ import java.util.UUID
 
 @Entity
 @Table(name = "intervention_catalogue", schema = "public")
-open class InterventionCatalogue {
-  @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+open class InterventionCatalogue(
+  @Id open var id: UUID,
+  @NotNull
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  open var name: String,
 
   @NotNull
-  @Column(name = "name", nullable = false, length = Integer.MAX_VALUE)
-  open var name: String? = null
+  @Column(name = "short_description", length = Integer.MAX_VALUE)
+  open var shortDescription: String,
+
+  @Nullable
+  @Column(name = "long_description", length = Integer.MAX_VALUE)
+  open var longDescription: String? = null,
+
+  @Nullable
+  @Column(name = "topic", length = Integer.MAX_VALUE)
+  open var topic: String? = null,
+
+  @Nullable
+  @Column(name = "session_detail", length = Integer.MAX_VALUE)
+  open var sessionDetail: String? = null,
+
+  @Nullable
+  @Column(name = "commencement_date")
+  open var commencementDate: LocalDate? = null,
+
+  @Nullable
+  @Column(name = "termination_date")
+  open var terminationDate: LocalDate? = null,
 
   @NotNull
-  @Column(name = "short_description", nullable = true, length = Integer.MAX_VALUE)
-  open var shortDescription: String? = null
-
-  @Column(name = "long_description", nullable = true, length = Integer.MAX_VALUE)
-  open var longDescription: String? = null
-
-  @Column(name = "topic", nullable = true, length = Integer.MAX_VALUE)
-  open var topic: String? = null
-
-  @Column(name = "session_detail", nullable = true, length = Integer.MAX_VALUE)
-  open var sessionDetail: String? = null
-
-  @Column(name = "commencement_date", nullable = true)
-  open var commencementDate: LocalDate? = null
-
-  @Column(name = "termination_date", nullable = true)
-  open var terminationDate: LocalDate? = null
-
-  @NotNull
-  @Column(name = "created", nullable = false)
-  open var created: OffsetDateTime? = null
+  @Column(name = "created")
+  open var created: OffsetDateTime,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "created_by", nullable = false)
-  open var createdBy: AuthUser? = null
+  @JoinColumn(name = "created_by")
+  open var createdBy: AuthUser,
 
+  @Nullable
   @Column(name = "last_modified")
-  open var lastModified: OffsetDateTime? = null
+  open var lastModified: OffsetDateTime? = null,
 
+  @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "last_modified_by")
-  open var lastModifiedBy: AuthUser? = null
+  open var lastModifiedBy: AuthUser? = null,
 
-  @Column(name = "int_type", columnDefinition = "intervention_type not null")
+  @NotNull
+  @Column(name = "int_type")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
-  open var intType: InterventionType? = null
+  open var interventionType: InterventionType,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var criminogenicNeeds: MutableSet<CriminogenicNeed> = mutableSetOf()
+  open var criminogenicNeeds: MutableSet<CriminogenicNeed> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf()
+  open var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf()
+  open var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf()
+  open var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf()
+  open var enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf()
+  open var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
 
+  @Nullable
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var exclusion: Exclusion? = null
+  open var exclusion: Exclusion? = null,
 
   @ManyToMany
   @JoinTable(
@@ -105,30 +112,33 @@ open class InterventionCatalogue {
     joinColumns = [JoinColumn(name = "intervention_catalogue_id")],
     inverseJoinColumns = [JoinColumn(name = "intervention_id")],
   )
-  open var interventions: MutableSet<Intervention> = mutableSetOf()
+  open var interventions: MutableSet<Intervention> = mutableSetOf(),
 
+  @Nullable
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var personalEligibility: PersonalEligibility? = null
+  open var personalEligibility: PersonalEligibility? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf()
+  open var possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
 
+  @Nullable
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var riskConsideration: RiskConsideration? = null
+  open var riskConsideration: RiskConsideration? = null,
 
-  @Column(name = "reasons_for_referral", nullable = true, length = Integer.MAX_VALUE)
-  open var reasonsForReferral: String? = null
+  @Nullable
+  @Column(name = "reasons_for_referral", length = Integer.MAX_VALUE)
+  open var reasonsForReferral: String? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf()
+  open var specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
+)
 
-  enum class InterventionType {
-    SI,
-    ACP,
-    CRS,
-  }
+enum class InterventionType {
+  SI,
+  ACP,
+  CRS,
 }

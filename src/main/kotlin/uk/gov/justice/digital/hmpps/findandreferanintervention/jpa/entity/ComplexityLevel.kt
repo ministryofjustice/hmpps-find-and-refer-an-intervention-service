@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -16,33 +17,34 @@ import java.util.UUID
 
 @Entity
 @Table(name = "complexity_level", schema = "public")
-open class ComplexityLevel {
+open class ComplexityLevel(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "title", nullable = false, length = Integer.MAX_VALUE)
-  open var title: String? = null
+  @Column(name = "title", length = Integer.MAX_VALUE)
+  open var title: String,
 
   @NotNull
-  @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
-  open var description: String? = null
+  @Column(name = "description", length = Integer.MAX_VALUE)
+  open var description: String,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "service_category_id", nullable = false)
-  open var serviceCategory: ServiceCategory? = null
+  @JoinColumn(name = "service_category_id")
+  open var serviceCategory: ServiceCategory,
 
-  @NotNull
+  @Nullable
   @Column(name = "complexity", columnDefinition = "complexities")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
-  open var complexity: Complexities? = null
+  open var complexity: Complexities? = null,
+)
 
-  enum class Complexities {
-    LOW,
-    MEDIUM,
-    HIGH,
-  }
+enum class Complexities {
+  LOW,
+  MEDIUM,
+  HIGH,
 }

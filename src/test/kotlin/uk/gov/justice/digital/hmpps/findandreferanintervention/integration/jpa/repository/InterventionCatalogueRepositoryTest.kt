@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.directory
+package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.repository
 
 import au.com.dius.pact.core.support.hasProperty
 import org.assertj.core.api.Assertions.assertThat

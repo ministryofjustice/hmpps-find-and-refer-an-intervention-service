@@ -6,19 +6,23 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 import java.util.UUID
 
 @Entity
 @Table(name = "contract_type_service_category", schema = "public")
-open class ContractTypeServiceCategory {
+open class ContractTypeServiceCategory(
+  @NotNull
   @Id
-  open var id: UUID? = null
+  open var id: UUID,
 
+  @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "contract_type_id", nullable = false)
-  open var contractType: ContractType? = null
+  @JoinColumn(name = "contract_type_id")
+  open var contractType: ContractType,
 
+  @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "service_category_id", nullable = false)
-  open var serviceCategory: ServiceCategory? = null
-}
+  @JoinColumn(name = "service_category_id")
+  open var serviceCategory: ServiceCategory,
+)

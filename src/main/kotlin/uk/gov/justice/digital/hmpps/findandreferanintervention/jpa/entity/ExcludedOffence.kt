@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -7,22 +8,27 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 import java.util.UUID
 
 @Entity
 @Table(name = "excluded_offence", schema = "public")
-open class ExcludedOffence {
+open class ExcludedOffence(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
+  @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "offence_type_id")
-  open var offenceType: OffenceTypeRef? = null
+  open var offenceType: OffenceTypeRef? = null,
 
+  @Nullable
   @Column(name = "victim_type", length = Integer.MAX_VALUE)
-  open var victimType: String? = null
+  open var victimType: String? = null,
 
+  @Nullable
   @Column(name = "motivation", length = Integer.MAX_VALUE)
-  open var motivation: String? = null
-}
+  open var motivation: String? = null,
+)

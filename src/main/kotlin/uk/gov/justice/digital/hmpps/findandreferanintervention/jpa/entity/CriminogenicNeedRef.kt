@@ -9,12 +9,13 @@ import java.util.UUID
 
 @Entity
 @Table(name = "criminogenic_need_ref", schema = "public")
-open class CriminogenicNeedRef {
+open class CriminogenicNeedRef(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "name", nullable = false, length = Integer.MAX_VALUE)
-  open var name: String? = null
-}
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  open var name: String,
+)

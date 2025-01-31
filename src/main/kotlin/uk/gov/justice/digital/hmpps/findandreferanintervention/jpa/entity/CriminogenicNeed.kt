@@ -12,13 +12,15 @@ import java.util.UUID
 
 @Entity
 @Table(name = "criminogenic_need", schema = "public")
-open class CriminogenicNeed {
+open class CriminogenicNeed(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "need_id", nullable = false)
-  open var need: CriminogenicNeedRef? = null
-}
+  @JoinColumn(name = "need_id")
+  open var need: CriminogenicNeedRef,
+
+)

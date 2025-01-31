@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -16,58 +17,70 @@ import java.util.UUID
 
 @Entity
 @Table(name = "risk_consideration", schema = "public")
-open class RiskConsideration {
+open class RiskConsideration(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
+  @Nullable
   @Column(name = "cn_score_guide", length = Integer.MAX_VALUE)
-  open var cnScoreGuide: String? = null
+  open var cnScoreGuide: String,
 
+  @Nullable
   @Column(name = "extremism_risk_guide", length = Integer.MAX_VALUE)
-  open var extremismRiskGuide: String? = null
+  open var extremismRiskGuide: String,
 
+  @Nullable
   @Column(name = "sara_partner_score_guide", length = Integer.MAX_VALUE)
-  open var saraPartnerScoreGuide: String? = null
+  open var saraPartnerScoreGuide: String,
 
+  @Nullable
   @Column(name = "sara_other_score_guide", length = Integer.MAX_VALUE)
-  open var saraOtherScoreGuide: String? = null
+  open var saraOtherScoreGuide: String,
 
+  @Nullable
   @Column(name = "osp_score_guide", length = Integer.MAX_VALUE)
-  open var ospScoreGuide: String? = null
+  open var ospScoreGuide: String,
 
+  @Nullable
   @Column(name = "osp_dc_icc_combination_guide", length = Integer.MAX_VALUE)
-  open var ospDcIccCombinationGuide: String? = null
+  open var ospDcIccCombinationGuide: String,
 
+  @Nullable
   @Column(name = "ogrs_score_guide", length = Integer.MAX_VALUE)
-  open var ogrsScoreGuide: String? = null
+  open var ogrsScoreGuide: String,
 
+  @Nullable
   @Column(name = "ovp_guide", length = Integer.MAX_VALUE)
-  open var ovpGuide: String? = null
+  open var ovpGuide: String,
 
+  @Nullable
   @Column(name = "ogp_guide", length = Integer.MAX_VALUE)
-  open var ogpGuide: String? = null
+  open var ogpGuide: String,
 
+  @Nullable
   @Column(name = "pna_guide", length = Integer.MAX_VALUE)
-  open var pnaGuide: String? = null
+  open var pnaGuide: String,
 
+  @Nullable
   @Column(name = "rsr_guide", length = Integer.MAX_VALUE)
-  open var rsrGuide: String? = null
+  open var rsrGuide: String,
 
   @Column(name = "rosh_level", columnDefinition = "rosh_levels")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
-  open var roshLevel: RoshLevel? = null
+  open var roshLevel: RoshLevel,
 
   @NotNull
   @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "intervention_id", nullable = false)
-  open var intervention: InterventionCatalogue? = null
+  @JoinColumn(name = "intervention_id")
+  open var intervention: InterventionCatalogue,
+)
 
-  enum class RoshLevel {
-    LOW,
-    MEDIUM,
-    HIGH,
-    VERY_HIGH,
-  }
+enum class RoshLevel {
+  LOW,
+  MEDIUM,
+  HIGH,
+  VERY_HIGH,
 }

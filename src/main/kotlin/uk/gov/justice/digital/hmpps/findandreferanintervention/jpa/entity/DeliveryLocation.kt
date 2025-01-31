@@ -9,20 +9,21 @@ import java.util.UUID
 
 @Entity
 @Table(name = "delivery_location", schema = "public")
-open class DeliveryLocation {
+open class DeliveryLocation(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "provider_name", nullable = false, length = Integer.MAX_VALUE)
-  open var providerName: String? = null
+  @Column(name = "provider_name", length = Integer.MAX_VALUE)
+  open var providerName: String,
 
   @NotNull
-  @Column(name = "contact", nullable = false, length = Integer.MAX_VALUE)
-  open var contact: String? = null
+  @Column(name = "contact", length = Integer.MAX_VALUE)
+  open var contact: String,
 
   @NotNull
-  @Column(name = "pdu_establishments", nullable = false, length = Integer.MAX_VALUE)
-  open var pduEstablishments: String? = null
-}
+  @Column(name = "pdu_establishments", length = Integer.MAX_VALUE)
+  open var pduEstablishments: String,
+)
