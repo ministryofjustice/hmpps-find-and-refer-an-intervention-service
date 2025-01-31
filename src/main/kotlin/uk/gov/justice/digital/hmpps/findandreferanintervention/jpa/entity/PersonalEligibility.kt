@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -8,33 +9,34 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
-import org.hibernate.annotations.ColumnDefault
 import java.util.UUID
 
 @Entity
 @Table(name = "personal_eligibility", schema = "public")
-open class PersonalEligibility {
+open class PersonalEligibility(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  var id: UUID,
 
-  @ColumnDefault("18")
+  @Nullable
   @Column(name = "min_age")
-  open var minAge: Int? = null
+  var minAge: Int? = null,
 
-  @ColumnDefault("120")
+  @Nullable
   @Column(name = "max_age")
-  open var maxAge: Int? = null
+  var maxAge: Int? = null,
 
   @NotNull
-  @Column(name = "males", nullable = false)
-  open var males: Boolean? = false
+  @Column(name = "males")
+  var males: Boolean,
 
   @NotNull
-  @Column(name = "females", nullable = false)
-  open var females: Boolean? = false
+  @Column(name = "females")
+  var females: Boolean,
 
+  @Nullable
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id")
-  open var intervention: InterventionCatalogue? = null
-}
+  var intervention: InterventionCatalogue? = null,
+)

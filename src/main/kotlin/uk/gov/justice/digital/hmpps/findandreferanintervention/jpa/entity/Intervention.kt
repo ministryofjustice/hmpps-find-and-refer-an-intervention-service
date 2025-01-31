@@ -16,32 +16,33 @@ import java.util.UUID
 
 @Entity
 @Table(name = "intervention", schema = "public")
-open class Intervention {
+open class Intervention(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
   @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "dynamic_framework_contract_id", nullable = false)
-  open var dynamicFrameworkContract: DynamicFrameworkContract? = null
+  @JoinColumn(name = "dynamic_framework_contract_id")
+  open var dynamicFrameworkContract: DynamicFrameworkContract,
 
   @NotNull
-  @Column(name = "created_at", nullable = false)
-  open var createdAt: OffsetDateTime? = null
+  @Column(name = "created_at")
+  open var createdAt: OffsetDateTime,
 
   @NotNull
-  @Column(name = "title", nullable = false, length = Integer.MAX_VALUE)
-  open var title: String? = null
+  @Column(name = "title", length = Integer.MAX_VALUE)
+  open var title: String,
 
   @NotNull
-  @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
-  open var description: String? = null
+  @Column(name = "description", length = Integer.MAX_VALUE)
+  open var description: String,
 
   @NotNull
   @ColumnDefault("'__no_data__'")
-  @Column(name = "incoming_referral_distribution_email", nullable = false, length = Integer.MAX_VALUE)
-  open var incomingReferralDistributionEmail: String? = null
+  @Column(name = "incoming_referral_distribution_email", length = Integer.MAX_VALUE)
+  open var incomingReferralDistributionEmail: String,
 
   @ManyToMany
   @JoinTable(
@@ -49,5 +50,5 @@ open class Intervention {
     joinColumns = [JoinColumn(name = "intervention_id")],
     inverseJoinColumns = [JoinColumn(name = "intervention_catalogue_id")],
   )
-  open var interventionCatalogues: MutableSet<InterventionCatalogue> = mutableSetOf()
-}
+  open var interventionCatalogues: MutableSet<InterventionCatalogue> = mutableSetOf(),
+)

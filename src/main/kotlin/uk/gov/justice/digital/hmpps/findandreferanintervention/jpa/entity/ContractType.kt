@@ -10,17 +10,18 @@ import java.util.UUID
 
 @Entity
 @Table(name = "contract_type", schema = "public")
-open class ContractType {
+open class ContractType(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "name", nullable = false, length = Integer.MAX_VALUE)
-  open var name: String? = null
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  var name: String,
 
   @Size(max = 10)
   @NotNull
-  @Column(name = "code", nullable = false, length = 10)
-  open var code: String? = null
-}
+  @Column(name = "code", length = 10)
+  var code: String,
+)

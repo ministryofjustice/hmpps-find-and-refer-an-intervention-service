@@ -1,10 +1,11 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RoshLevel
 import java.util.UUID
 
 data class RiskConsiderationDto(
-  val id: UUID? = null,
+  val id: UUID,
   val cnScoreGuide: String? = null,
   val extremismRiskGuide: String? = null,
   val saraPartnerScoreGuide: String? = null,
@@ -16,12 +17,12 @@ data class RiskConsiderationDto(
   val ogpGuide: String? = null,
   val pnaGuide: String? = null,
   val rsrGuide: String? = null,
-  val roshLevel: RiskConsideration.RoshLevel? = null,
+  val roshLevel: RoshLevel? = null,
 ) {
 
-  val listOfRisks: () -> List<String?> =
+  val listOfRisks: () -> List<String> =
     {
-      listOf(
+      listOfNotNull(
         cnScoreGuide,
         extremismRiskGuide,
         saraPartnerScoreGuide,
@@ -41,6 +42,7 @@ data class RiskConsiderationDto(
 
     fun fromEntity(riskConsideration: RiskConsideration): RiskConsiderationDto {
       return RiskConsiderationDto(
+        id = riskConsideration.id,
         cnScoreGuide = riskConsideration.cnScoreGuide,
         extremismRiskGuide = riskConsideration.extremismRiskGuide,
         saraPartnerScoreGuide = riskConsideration.saraPartnerScoreGuide,

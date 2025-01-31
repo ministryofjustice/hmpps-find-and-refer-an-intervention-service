@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -12,34 +13,42 @@ import java.util.UUID
 
 @Entity
 @Table(name = "exclusion", schema = "public")
-open class Exclusion {
+open class Exclusion(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
+  @Nullable
   @Column(name = "min_remaining_sentence_duration_guide", length = Integer.MAX_VALUE)
-  open var minRemainingSentenceDurationGuide: String? = null
+  open var minRemainingSentenceDurationGuide: String? = null,
 
+  @Nullable
   @Column(name = "remaining_license_community_order_guide", length = Integer.MAX_VALUE)
-  open var remainingLicenseCommunityOrderGuide: String? = null
+  open var remainingLicenseCommunityOrderGuide: String? = null,
 
+  @Nullable
   @Column(name = "alcohol_drug_problem_guide", length = Integer.MAX_VALUE)
-  open var alcoholDrugProblemGuide: String? = null
+  open var alcoholDrugProblemGuide: String? = null,
 
+  @Nullable
   @Column(name = "mental_health_problem_guide", length = Integer.MAX_VALUE)
-  open var mentalHealthProblemGuide: String? = null
+  open var mentalHealthProblemGuide: String? = null,
 
+  @Nullable
   @Column(name = "other_preferred_method_guide", length = Integer.MAX_VALUE)
-  open var otherPreferredMethodGuide: String? = null
+  open var otherPreferredMethodGuide: String? = null,
 
+  @Nullable
   @Column(name = "same_type_rule_guide", length = Integer.MAX_VALUE)
-  open var sameTypeRuleGuide: String? = null
+  open var sameTypeRuleGuide: String? = null,
 
+  @Nullable
   @Column(name = "schedule_frequency_guide", length = Integer.MAX_VALUE)
-  open var scheduleFrequencyGuide: String? = null
+  open var scheduleFrequencyGuide: String? = null,
 
   @NotNull
   @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "intervention_id", nullable = false)
-  open var intervention: InterventionCatalogue? = null
-}
+  @JoinColumn(name = "intervention_id")
+  var intervention: InterventionCatalogue,
+)

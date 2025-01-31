@@ -4,7 +4,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Delive
 import java.util.UUID
 
 data class DeliveryMethodDto(
-  val id: UUID? = null,
+  val id: UUID,
   val description: String? = null,
   val deliveryMethodSettings: List<DeliveryMethodSettingDto> = mutableListOf(),
 ) {

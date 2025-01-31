@@ -1,8 +1,9 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
-import jakarta.validation.constraints.NotNull
+import java.util.UUID
 
 data class SpecialEducationalNeedDto(
-  @field:NotNull val learningDisabilityCateredFor: Boolean? = false,
-  val equivalentNonLdcProgrammeGuide: String? = null,
+  val id: UUID,
+  val learningDisabilityCateredFor: Boolean,
+  val equivalentNonLdcProgrammeGuide: String,
 )

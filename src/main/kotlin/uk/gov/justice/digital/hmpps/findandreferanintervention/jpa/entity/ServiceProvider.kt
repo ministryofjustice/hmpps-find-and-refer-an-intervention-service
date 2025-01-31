@@ -9,13 +9,14 @@ import jakarta.validation.constraints.Size
 
 @Entity
 @Table(name = "service_provider", schema = "public")
-open class ServiceProvider {
+open class ServiceProvider(
+  @NotNull
   @Id
   @Size(max = 30)
-  @Column(name = "id", nullable = false, length = 30)
-  open var id: String? = null
+  @Column(name = "id", length = 30)
+  open var id: String,
 
   @NotNull
-  @Column(name = "name", nullable = false, length = Integer.MAX_VALUE)
-  open var name: String? = null
-}
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  var name: String,
+)

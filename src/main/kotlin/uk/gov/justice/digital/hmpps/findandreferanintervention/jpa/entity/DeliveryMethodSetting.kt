@@ -6,24 +6,31 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.JdbcType
 import org.hibernate.dialect.PostgreSQLEnumJdbcType
 import java.util.UUID
 
 @Entity
 @Table(name = "delivery_method_setting", schema = "public")
-open class DeliveryMethodSetting {
+open class DeliveryMethodSetting(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
-  @Column(name = "setting", columnDefinition = "setting_type not null")
+  @NotNull
+  @Column(name = "delivery_method_id")
+  open var deliveryMethodId: UUID,
+
+  @NotNull
+  @Column(name = "setting")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
-  open var setting: SettingType? = null
+  open var setting: SettingType,
+)
 
-  enum class SettingType {
-    COMMUNITY,
-    CUSTODY,
-  }
+enum class SettingType {
+  COMMUNITY,
+  CUSTODY,
 }

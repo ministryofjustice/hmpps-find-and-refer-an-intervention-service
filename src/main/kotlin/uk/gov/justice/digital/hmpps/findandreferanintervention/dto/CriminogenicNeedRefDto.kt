@@ -1,5 +1,5 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
-import jakarta.validation.constraints.NotNull
+import java.util.UUID
 
-data class CriminogenicNeedRefDto(@field:NotNull val name: String? = null)
+data class CriminogenicNeedRefDto(val id: UUID, val name: String)
