@@ -19,9 +19,17 @@ open class DeliveryMethod(
   @Column(name = "id")
   open var id: UUID,
 
+  @Nullable
+  @Column(name = "attendance_type")
+  open var attendanceType: String? = null,
+
   @NotNull
   @Column(name = "intervention_id")
   open var interventionId: UUID,
+
+  @Nullable
+  @Column(name = "delivery_format")
+  open var deliveryFormat: String? = null,
 
   @Nullable
   @Column(name = "delivery_method_description", length = Integer.MAX_VALUE)

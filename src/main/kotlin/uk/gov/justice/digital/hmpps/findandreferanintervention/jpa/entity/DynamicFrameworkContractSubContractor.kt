@@ -14,15 +14,15 @@ import java.util.UUID
 open class DynamicFrameworkContractSubContractor(
   @NotNull
   @Id
-  var id: UUID,
+  open var id: UUID,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "subcontractor_provider_id")
-  var subcontractorProvider: ServiceProvider,
+  open var subcontractorProvider: ServiceProvider,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "dynamic_framework_contract_id")
-  var dynamicFrameworkContract: DynamicFrameworkContract,
+  open var dynamicFrameworkContract: DynamicFrameworkContract,
 )

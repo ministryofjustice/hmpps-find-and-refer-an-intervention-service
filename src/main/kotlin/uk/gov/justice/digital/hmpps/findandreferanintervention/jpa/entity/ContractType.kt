@@ -18,10 +18,10 @@ open class ContractType(
 
   @NotNull
   @Column(name = "name", length = Integer.MAX_VALUE)
-  var name: String,
+  open var name: String,
 
   @Size(max = 10)
   @NotNull
   @Column(name = "code", length = 10)
-  var code: String,
+  open var code: String,
 )

@@ -55,7 +55,7 @@ values ('1d7f8fcc-aa12-4705-a6a5-0d40467e03e9', '72e60faf-b8e5-4699-9d7c-aef631c
         TO_DATE('2021-12-11', 'YYYY-MM-DD'), TO_DATE('2025-12-11', 'YYYY-MM-DD'), null, 'avon-and-somerset', true, true,
         25, null, '0003'),
        ('c7d39f92-6f43-49a4-bb62-e0f42c864765', 'f9b59d2c-c60b-4eb0-8469-04c975d2e2ee', 'HARMONY_LIVING',
-        TO_DATE('2021-01-01', 'YYYY-MM-DD'), TO_DATE('2035-05-01', 'YYYY-MM-DD'), 'G', null, false, true, 18, default,
+        TO_DATE('2021-01-01', 'YYYY-MM-DD'), TO_DATE('2035-05-01', 'YYYY-MM-DD'), 'G', null, false, true, 18, null,
         '0004'),
        ('0b60d842-9c08-408e-8c8d-f6dbf8e5c3f4', 'f9b59d2c-c60b-4eb0-8469-04c975d2e2ee', 'HARMONY_LIVING',
         TO_DATE('2021-01-01', 'YYYY-MM-DD'), TO_DATE('2035-05-01', 'YYYY-MM-DD'), 'J', null, true, true, 18, null,

@@ -75,36 +75,36 @@ open class InterventionCatalogue(
   @Column(name = "int_type")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
-  var interventionType: InterventionType,
+  open var interventionType: InterventionType,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var criminogenicNeeds: MutableSet<CriminogenicNeed> = mutableSetOf(),
+  open var criminogenicNeeds: MutableSet<CriminogenicNeed> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
+  open var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
+  open var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
+  open var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
+  open var enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
+  open var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var exclusion: Exclusion? = null,
+  open var exclusion: Exclusion? = null,
 
   @ManyToMany
   @JoinTable(
@@ -112,29 +112,29 @@ open class InterventionCatalogue(
     joinColumns = [JoinColumn(name = "intervention_catalogue_id")],
     inverseJoinColumns = [JoinColumn(name = "intervention_id")],
   )
-  var interventions: MutableSet<Intervention> = mutableSetOf(),
+  open var interventions: MutableSet<Intervention> = mutableSetOf(),
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var personalEligibility: PersonalEligibility? = null,
+  open var personalEligibility: PersonalEligibility? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
+  open var possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var riskConsideration: RiskConsideration? = null,
+  open var riskConsideration: RiskConsideration? = null,
 
   @Nullable
   @Column(name = "reasons_for_referral", length = Integer.MAX_VALUE)
-  var reasonsForReferral: String? = null,
+  open var reasonsForReferral: String? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  var specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
+  open var specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
 )
 
 enum class InterventionType {

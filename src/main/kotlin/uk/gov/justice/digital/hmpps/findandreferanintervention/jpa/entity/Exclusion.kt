@@ -50,5 +50,5 @@ open class Exclusion(
   @NotNull
   @OneToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "intervention_id")
-  var intervention: InterventionCatalogue,
+  open var intervention: InterventionCatalogue,
 )

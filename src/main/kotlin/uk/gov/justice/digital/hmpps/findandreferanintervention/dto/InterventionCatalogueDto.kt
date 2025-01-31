@@ -17,7 +17,7 @@ data class InterventionCatalogueDto(
   val maxAge: Int,
   val riskCriteria: List<String?>?,
   val attendanceType: List<String>,
-  val deliveryMethod: List<String>,
+  val deliveryFormat: List<String>,
 ) {
   companion object {
     fun fromEntity(
@@ -41,9 +41,8 @@ data class InterventionCatalogueDto(
         riskCriteria = interventionCatalogue.riskConsideration?.let {
           RiskConsiderationDto.fromEntity(it).listOfRisks()
         },
-        // TODO need to add field in database for this field
-        attendanceType = emptyList(),
-        deliveryMethod = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.description },
+        attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
+        deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat },
       )
     }
   }

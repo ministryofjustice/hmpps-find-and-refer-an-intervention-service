@@ -21,67 +21,65 @@ open class DynamicFrameworkContract(
   @NotNull
   @Id
   @Column(name = "id")
-  var id: UUID,
+  open var id: UUID,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "prime_provider_id")
-  var primeProvider: ServiceProvider,
+  open var primeProvider: ServiceProvider,
 
   @NotNull
   @Column(name = "start_date")
-  var startDate: LocalDate,
+  open var startDate: LocalDate,
 
   @NotNull
   @Column(name = "end_date")
-  var endDate: LocalDate,
+  open var endDate: LocalDate,
 
   @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "nps_region_id")
-  var npsRegion: NpsRegion? = null,
+  open var npsRegion: NpsRegion? = null,
 
   @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "pcc_region_id")
-  var pccRegion: PccRegion? = null,
+  open var pccRegion: PccRegion? = null,
 
   @NotNull
   @ColumnDefault("true")
   @Column(name = "allows_female")
-  var allowsFemale: Boolean,
+  open var allowsFemale: Boolean,
 
   @NotNull
   @ColumnDefault("true")
   @Column(name = "allows_male")
-  var allowsMale: Boolean,
+  open var allowsMale: Boolean,
 
-  @NotNull
-  @ColumnDefault("18")
+  @Nullable
   @Column(name = "minimum_age")
-  var minimumAge: Int? = 18,
+  open var minimumAge: Int? = null,
 
-  @NotNull
-  @ColumnDefault("120")
+  @Nullable
   @Column(name = "maximum_age")
-  var maximumAge: Int? = 120,
+  open var maximumAge: Int? = null,
 
   @Size(max = 30)
   @NotNull
   @Column(name = "contract_reference", length = 30)
-  var contractReference: String,
+  open var contractReference: String,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "contract_type_id")
-  var contractType: ContractType,
+  open var contractType: ContractType,
 
   @NotNull
   @ColumnDefault("'2021-01-01'")
   @Column(name = "referral_start_date")
-  var referralStartDate: LocalDate,
+  open var referralStartDate: LocalDate,
 
   @Nullable
   @Column(name = "referral_end_at")
-  var referralEndAt: OffsetDateTime,
+  open var referralEndAt: OffsetDateTime,
 )

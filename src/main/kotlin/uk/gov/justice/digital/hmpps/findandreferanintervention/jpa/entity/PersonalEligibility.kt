@@ -17,26 +17,26 @@ open class PersonalEligibility(
   @NotNull
   @Id
   @Column(name = "id")
-  var id: UUID,
+  open var id: UUID,
 
   @Nullable
   @Column(name = "min_age")
-  var minAge: Int? = null,
+  open var minAge: Int? = null,
 
   @Nullable
   @Column(name = "max_age")
-  var maxAge: Int? = null,
+  open var maxAge: Int? = null,
 
   @NotNull
   @Column(name = "males")
-  var males: Boolean,
+  open var males: Boolean,
 
   @NotNull
   @Column(name = "females")
-  var females: Boolean,
+  open var females: Boolean,
 
   @Nullable
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id")
-  var intervention: InterventionCatalogue? = null,
+  open var intervention: InterventionCatalogue? = null,
 )

@@ -18,5 +18,5 @@ open class ServiceProvider(
 
   @NotNull
   @Column(name = "name", length = Integer.MAX_VALUE)
-  var name: String,
+  open var name: String,
 )

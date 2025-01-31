@@ -14,15 +14,15 @@ import java.util.UUID
 open class InterventionCatalogueMap(
   @NotNull
   @Id
-  var id: UUID? = null,
+  open var id: UUID? = null,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "intervention_catalogue_id")
-  var interventionCatalogue: InterventionCatalogue,
+  open var interventionCatalogue: InterventionCatalogue,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "intervention_id")
-  var intervention: Intervention,
+  open var intervention: Intervention,
 )
