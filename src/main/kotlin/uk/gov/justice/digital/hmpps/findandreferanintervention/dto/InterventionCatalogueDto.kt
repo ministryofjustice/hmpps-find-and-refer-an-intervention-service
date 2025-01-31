@@ -9,12 +9,12 @@ data class InterventionCatalogueDto(
   val id: UUID,
   val title: String,
   val description: String,
-  val intType: InterventionType,
+  val interventionType: InterventionType,
   val setting: List<SettingType>,
   val allowsMales: Boolean,
   val allowsFemales: Boolean,
-  val minAge: Int,
-  val maxAge: Int,
+  val minAge: Int?,
+  val maxAge: Int?,
   val riskCriteria: List<String?>?,
   val attendanceType: List<String>,
   val deliveryFormat: List<String>,
@@ -27,17 +27,16 @@ data class InterventionCatalogueDto(
         interventionCatalogue.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
       val deliveryMethodSettingList =
         deliveryMethodDtos.flatMap { methodDto -> methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting } }
-      val riskCriteria = interventionCatalogue.riskConsideration
       return InterventionCatalogueDto(
         id = interventionCatalogue.id,
         title = interventionCatalogue.name,
         description = interventionCatalogue.shortDescription,
-        intType = interventionCatalogue.interventionType,
+        interventionType = interventionCatalogue.interventionType,
         setting = deliveryMethodSettingList,
         allowsMales = interventionCatalogue.personalEligibility?.males!!,
         allowsFemales = interventionCatalogue.personalEligibility?.females!!,
-        minAge = interventionCatalogue.personalEligibility?.minAge ?: 18,
-        maxAge = interventionCatalogue.personalEligibility?.maxAge ?: 120,
+        minAge = interventionCatalogue.personalEligibility?.minAge,
+        maxAge = interventionCatalogue.personalEligibility?.maxAge,
         riskCriteria = interventionCatalogue.riskConsideration?.let {
           RiskConsiderationDto.fromEntity(it).listOfRisks()
         },
