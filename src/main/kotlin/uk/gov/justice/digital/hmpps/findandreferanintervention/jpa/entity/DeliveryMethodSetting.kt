@@ -17,7 +17,10 @@ open class DeliveryMethodSetting {
   @Column(name = "id", nullable = false)
   open var id: UUID? = null
 
-  @Column(name = "setting", columnDefinition = "setting_type not null")
+  @Column(name = "delivery_method_id", nullable = false)
+  open var deliveryMethodId: UUID? = null
+
+  @Column(name = "setting", columnDefinition = "setting_type not default")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
   open var setting: SettingType? = null

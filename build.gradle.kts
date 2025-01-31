@@ -12,10 +12,6 @@ dependencies {
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.1.1")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
-  // arrow
-  implementation("io.arrow-kt:arrow-core:2.0.1")
-  implementation("io.arrow-kt:arrow-fx-coroutines-jvm:2.0.1")
-
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2") // also needed runtime for AppInsights
