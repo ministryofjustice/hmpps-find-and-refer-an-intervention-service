@@ -54,7 +54,7 @@ Create new connection using local database credentials;
 
 | Variable | Value |
 |----------|-------|
-| Port     | 5433  |
+| Port     | 5432  |
 | Username | root  |
 | Password | dev   |
 
@@ -66,7 +66,7 @@ must be generated. This can be done through calling the auth endpoint in the Hmp
 | Variable         | Value                                   |
 |------------------|-----------------------------------------|
 | Grant type       | Client credentials                      |
-| Access token URL | http://hmpps-auth:8090/auth/oauth/token |
+| Access token URL | http://hmpps-auth:9090/auth/oauth/token |
 | Client ID        | -----                                   |
 | Client Secret    | -----                                   |
 | Scope            | Read                                    |
