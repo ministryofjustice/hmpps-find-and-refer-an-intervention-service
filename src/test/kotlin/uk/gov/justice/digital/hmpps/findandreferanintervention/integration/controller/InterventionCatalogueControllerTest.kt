@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.controller
 
+import au.com.dius.pact.core.support.hasProperty
 import com.microsoft.applicationinsights.TelemetryClient
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -49,5 +50,38 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
+    assertThat(
+      response.content.all {
+        it.hasProperty("id")
+        it.hasProperty("title")
+        it.hasProperty("description")
+        it.hasProperty("deliveryFormat")
+        it.hasProperty("interventionTyps")
+        it.hasProperty("setting")
+        it.hasProperty("allowsMales")
+        it.hasProperty("allowsFemales")
+        it.hasProperty("minAge")
+        it.hasProperty("maxAge")
+        it.hasProperty("riskCriteria")
+        it.hasProperty("attendanceType")
+      },
+    )
+    assertThat(response.content[0].title).isEqualTo("Test Title")
+  }
+
+  @Test
+  fun `getInterventionsCatalogue when empty return a empty list of interventions`() {
+    val pageable = PageRequest.of(0, 10)
+    whenever(interventionCatalogueService.getInterventionsCatalogue(pageable)).thenReturn(PageImpl(listOf()))
+    val response = interventionCatalogueController.getInterventionsCatalogue(pageable)
+
+    verify(telemetryClient).trackEvent(
+      "InterventionsCatalogue Summary",
+      mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+      null,
+    )
+
+    assertThat(response).isNotNull
+    assertThat(response.content).isEmpty()
   }
 }

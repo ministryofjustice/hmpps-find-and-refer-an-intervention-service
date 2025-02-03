@@ -34,7 +34,7 @@ data class RiskConsiderationDto(
         ogpGuide,
         pnaGuide,
         rsrGuide,
-        roshLevel.toString(),
+        roshLevel?.toString(),
       )
     }
 
