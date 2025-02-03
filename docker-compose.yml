@@ -18,11 +18,11 @@ services:
     depends_on:
       - auth-db
     ports:
-      - '8090:8090'
+      - '9090:8080'
     healthcheck:
-      test: [ 'CMD', 'curl', '-f', 'http://localhost:8090/auth/health' ]
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:8080/auth/health' ]
     environment:
-      - SERVER_PORT=8090
+      - SERVER_PORT=8080
       - SPRING_PROFILES_ACTIVE=dev,delius,local-postgres
       - SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=false
       - SPRING_H2_CONSOLE_SETTINGS_WEBALLOWOTHERS=true
