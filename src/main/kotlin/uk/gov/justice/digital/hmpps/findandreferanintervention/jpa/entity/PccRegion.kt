@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -11,16 +12,18 @@ import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "pcc_region", schema = "public")
-open class PccRegion {
+open class PccRegion(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false, length = Integer.MAX_VALUE)
-  open var id: String? = null
+  @Column(name = "id", length = Integer.MAX_VALUE)
+  open var id: String,
 
+  @Nullable
   @Column(name = "name", length = Integer.MAX_VALUE)
-  open var name: String? = null
+  open var name: String? = null,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "nps_region", nullable = false)
-  open var npsRegion: NpsRegion? = null
-}
+  @JoinColumn(name = "nps_region")
+  open var npsRegion: NpsRegion,
+)

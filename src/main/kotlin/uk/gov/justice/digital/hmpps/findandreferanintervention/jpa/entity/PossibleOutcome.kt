@@ -9,12 +9,13 @@ import java.util.UUID
 
 @Entity
 @Table(name = "possible_outcome", schema = "public")
-open class PossibleOutcome {
+open class PossibleOutcome(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "outcome", nullable = false, length = Integer.MAX_VALUE)
-  open var outcome: String? = null
-}
+  @Column(name = "outcome", length = Integer.MAX_VALUE)
+  open var outcome: String,
+)

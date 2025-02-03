@@ -6,19 +6,23 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 import java.util.UUID
 
 @Entity
 @Table(name = "dynamic_framework_contract_sub_contractor", schema = "public")
-open class DynamicFrameworkContractSubContractor {
+open class DynamicFrameworkContractSubContractor(
+  @NotNull
   @Id
-  open var id: UUID? = null
+  open var id: UUID,
 
+  @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "subcontractor_provider_id", nullable = false)
-  open var subcontractorProvider: ServiceProvider? = null
+  @JoinColumn(name = "subcontractor_provider_id")
+  open var subcontractorProvider: ServiceProvider,
 
+  @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "dynamic_framework_contract_id", nullable = false)
-  open var dynamicFrameworkContract: DynamicFrameworkContract? = null
-}
+  @JoinColumn(name = "dynamic_framework_contract_id")
+  open var dynamicFrameworkContract: DynamicFrameworkContract,
+)

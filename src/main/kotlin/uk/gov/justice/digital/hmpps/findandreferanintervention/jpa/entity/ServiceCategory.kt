@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -10,15 +11,17 @@ import java.util.UUID
 
 @Entity
 @Table(name = "service_category", schema = "public")
-open class ServiceCategory {
+open class ServiceCategory(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
+  @Nullable
   @Column(name = "created")
-  open var created: OffsetDateTime? = null
+  open var created: OffsetDateTime? = null,
 
   @NotNull
-  @Column(name = "name", nullable = false, length = Integer.MAX_VALUE)
-  open var name: String? = null
-}
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  open var name: String,
+)

@@ -12,17 +12,18 @@ import java.util.UUID
 
 @Entity
 @Table(name = "desired_outcome", schema = "public")
-open class DesiredOutcome {
+open class DesiredOutcome(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
-  open var description: String? = null
+  @Column(name = "description", length = Integer.MAX_VALUE)
+  open var description: String,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "service_category_id", nullable = false)
-  open var serviceCategory: ServiceCategory? = null
-}
+  @JoinColumn(name = "service_category_id")
+  open var serviceCategory: ServiceCategory,
+)

@@ -9,16 +9,17 @@ import java.util.UUID
 
 @Entity
 @Table(name = "ethnicity_ref", schema = "public")
-open class EthnicityRef {
+open class EthnicityRef(
+  @NotNull
   @Id
-  @Column(name = "id", nullable = false)
-  open var id: UUID? = null
+  @Column(name = "id")
+  open var id: UUID,
 
   @NotNull
-  @Column(name = "broad_group", nullable = false, length = Integer.MAX_VALUE)
-  open var broadGroup: String? = null
+  @Column(name = "broad_group", length = Integer.MAX_VALUE)
+  open var broadGroup: String,
 
   @NotNull
-  @Column(name = "name", nullable = false, length = Integer.MAX_VALUE)
-  open var name: String? = null
-}
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  open var name: String,
+)

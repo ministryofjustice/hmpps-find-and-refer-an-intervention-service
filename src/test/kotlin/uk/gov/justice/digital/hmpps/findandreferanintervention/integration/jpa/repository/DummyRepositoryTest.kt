@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.directory
+package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.repository
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
