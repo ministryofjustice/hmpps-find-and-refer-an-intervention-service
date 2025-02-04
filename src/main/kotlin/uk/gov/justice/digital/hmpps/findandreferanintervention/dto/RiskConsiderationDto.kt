@@ -40,22 +40,20 @@ data class RiskConsiderationDto(
 
   companion object {
 
-    fun fromEntity(riskConsideration: RiskConsideration): RiskConsiderationDto {
-      return RiskConsiderationDto(
-        id = riskConsideration.id,
-        cnScoreGuide = riskConsideration.cnScoreGuide,
-        extremismRiskGuide = riskConsideration.extremismRiskGuide,
-        saraPartnerScoreGuide = riskConsideration.saraPartnerScoreGuide,
-        saraOtherScoreGuide = riskConsideration.saraOtherScoreGuide,
-        ospScoreGuide = riskConsideration.ospScoreGuide,
-        ospDcIccCombinationGuide = riskConsideration.ospDcIccCombinationGuide,
-        ogrsScoreGuide = riskConsideration.ogrsScoreGuide,
-        ovpGuide = riskConsideration.ovpGuide,
-        ogpGuide = riskConsideration.ogpGuide,
-        pnaGuide = riskConsideration.pnaGuide,
-        rsrGuide = riskConsideration.rsrGuide,
-        roshLevel = riskConsideration.roshLevel,
-      )
-    }
+    fun fromEntity(riskConsideration: RiskConsideration): RiskConsiderationDto = RiskConsiderationDto(
+      id = riskConsideration.id,
+      cnScoreGuide = riskConsideration.cnScoreGuide,
+      extremismRiskGuide = riskConsideration.extremismRiskGuide,
+      saraPartnerScoreGuide = riskConsideration.saraPartnerScoreGuide,
+      saraOtherScoreGuide = riskConsideration.saraOtherScoreGuide,
+      ospScoreGuide = riskConsideration.ospScoreGuide,
+      ospDcIccCombinationGuide = riskConsideration.ospDcIccCombinationGuide,
+      ogrsScoreGuide = riskConsideration.ogrsScoreGuide,
+      ovpGuide = riskConsideration.ovpGuide,
+      ogpGuide = riskConsideration.ogpGuide,
+      pnaGuide = riskConsideration.pnaGuide,
+      rsrGuide = riskConsideration.rsrGuide,
+      roshLevel = riskConsideration.roshLevel,
+    )
   }
 }

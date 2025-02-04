@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "6.1.2"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.0.0"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.0.10"
   kotlin("plugin.spring") version "2.0.20"
 }
@@ -18,7 +18,7 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter:7.13.0")
+  implementation("io.sentry:sentry-spring-boot-starter:8.1.0")
   implementation("io.sentry:sentry-logback:7.13.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.0")

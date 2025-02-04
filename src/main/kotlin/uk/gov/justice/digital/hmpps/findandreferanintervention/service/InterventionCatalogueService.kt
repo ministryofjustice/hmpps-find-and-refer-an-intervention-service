@@ -11,8 +11,6 @@ class InterventionCatalogueService(
   val interventionCatalogueRepository: InterventionCatalogueRepository,
 ) {
 
-  fun getInterventionsCatalogue(pageable: Pageable): Page<InterventionCatalogueDto> {
-    return interventionCatalogueRepository.findAll(pageable)
-      .map { intervention -> InterventionCatalogueDto.fromEntity(intervention) }
-  }
+  fun getInterventionsCatalogue(pageable: Pageable): Page<InterventionCatalogueDto> = interventionCatalogueRepository.findAll(pageable)
+    .map { intervention -> InterventionCatalogueDto.fromEntity(intervention) }
 }
