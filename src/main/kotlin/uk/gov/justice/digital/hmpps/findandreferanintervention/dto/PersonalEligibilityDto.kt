@@ -11,14 +11,12 @@ data class PersonalEligibilityDto(
   val females: Boolean,
 ) {
   companion object {
-    fun fromEntity(personalEligibility: PersonalEligibility): PersonalEligibilityDto {
-      return PersonalEligibilityDto(
-        id = personalEligibility.id,
-        minAge = personalEligibility.minAge,
-        maxAge = personalEligibility.maxAge,
-        males = personalEligibility.males,
-        females = personalEligibility.females,
-      )
-    }
+    fun fromEntity(personalEligibility: PersonalEligibility): PersonalEligibilityDto = PersonalEligibilityDto(
+      id = personalEligibility.id,
+      minAge = personalEligibility.minAge,
+      maxAge = personalEligibility.maxAge,
+      males = personalEligibility.males,
+      females = personalEligibility.females,
+    )
   }
 }
