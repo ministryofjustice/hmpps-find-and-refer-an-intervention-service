@@ -7,8 +7,10 @@ import org.springframework.data.web.PageableDefault
 import org.springframework.http.MediaType
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
 
 @RestController
@@ -20,9 +22,14 @@ class InterventionCatalogueController(
   @GetMapping("/interventions", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getInterventionsCatalogue(
     @PageableDefault(page = 0, size = 10) pageable: Pageable,
+    @RequestParam(name = "interventionType", required = false)
+    interventionType: InterventionType?,
   ): Page<InterventionCatalogueDto> {
     logToAppInsights()
-    return interventionCatalogueService.getInterventionsCatalogue(pageable)
+    return interventionCatalogueService.getInterventionsCatalogueByCriteria(
+      pageable,
+      interventionType,
+    )
   }
 
   fun logToAppInsights() {
