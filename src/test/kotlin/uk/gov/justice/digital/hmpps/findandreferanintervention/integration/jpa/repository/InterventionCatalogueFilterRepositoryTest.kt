@@ -8,21 +8,28 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.data.domain.PageRequest
 import org.springframework.test.context.ActiveProfiles
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepositoryImpl
 
 @DataJpaTest
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class InterventionCatalogueRepositoryTest @Autowired constructor(
-  val interventionCatalogueRepository: InterventionCatalogueRepository,
+class InterventionCatalogueFilterRepositoryTest
+@Autowired
+constructor(
+  private val interventionCatalogueRepositoryImpl: InterventionCatalogueRepositoryImpl,
 ) {
 
   @Test
-  fun `whenFindAll with pageRequest and there are interventions return a page of interventions`() {
+  fun `findAllInterventionCatalogueByCriteria by interventionType = 'ACP' and there are interventions return a page of interventions`() {
     val pageRequest = PageRequest.of(0, 10)
-    val interventions = interventionCatalogueRepository.findAll(pageRequest)
+    val interventions =
+      interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionType = InterventionType.ACP,
+        pageable = pageRequest,
+      )
 
-    assertThat(interventions.totalElements).isGreaterThan(0)
+    assertThat(interventions.totalElements).isEqualTo(5)
     assertThat(
       interventions.content.all {
         it.hasProperty("name")
@@ -41,15 +48,34 @@ class InterventionCatalogueRepositoryTest @Autowired constructor(
         it.hasProperty("specialEducationalNeeds")
       },
     )
+    assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
   }
 
   @Test
-  fun `whenFindAll and there are interventions return a list of interventions`() {
-    val interventions = interventionCatalogueRepository.findAll()
+  fun `findAllInterventionCatalogueByCriteria by interventionType = 'SI' and there are no interventions return an empty page of interventions`() {
+    val pageRequest = PageRequest.of(0, 10)
+    val interventions =
+      interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionType = InterventionType.SI,
+        pageable = pageRequest,
+      )
 
-    assertThat(interventions.size).isGreaterThan(0)
+    assertThat(interventions.totalElements).isEqualTo(0)
+    assertThat(interventions.content).isEmpty()
+  }
+
+  @Test
+  fun `findAllInterventionCatalogueByCriteria with no criteria and there are interventions return a page of all interventions`() {
+    val pageRequest = PageRequest.of(0, 10)
+    val interventions =
+      interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionType = null,
+        pageable = pageRequest,
+      )
+
+    assertThat(interventions.totalElements).isEqualTo(9)
     assertThat(
-      interventions.all {
+      interventions.content.all {
         it.hasProperty("name")
         it.hasProperty("shortDescription")
         it.hasProperty("intType")
@@ -66,5 +92,6 @@ class InterventionCatalogueRepositoryTest @Autowired constructor(
         it.hasProperty("specialEducationalNeeds")
       },
     )
+    assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
   }
 }

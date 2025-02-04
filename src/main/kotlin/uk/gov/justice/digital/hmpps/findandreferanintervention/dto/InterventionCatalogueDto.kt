@@ -26,7 +26,9 @@ data class InterventionCatalogueDto(
       val deliveryMethodDtos =
         interventionCatalogue.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
       val deliveryMethodSettingList =
-        deliveryMethodDtos.flatMap { methodDto -> methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting } }
+        deliveryMethodDtos.flatMap { methodDto ->
+          methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting }
+        }
       return InterventionCatalogueDto(
         id = interventionCatalogue.id,
         title = interventionCatalogue.name,
@@ -37,7 +39,8 @@ data class InterventionCatalogueDto(
         allowsFemales = interventionCatalogue.personalEligibility?.females!!,
         minAge = interventionCatalogue.personalEligibility?.minAge,
         maxAge = interventionCatalogue.personalEligibility?.maxAge,
-        riskCriteria = interventionCatalogue.riskConsideration?.let {
+        riskCriteria =
+        interventionCatalogue.riskConsideration?.let {
           RiskConsiderationDto.fromEntity(it).listOfRisks()
         },
         attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
