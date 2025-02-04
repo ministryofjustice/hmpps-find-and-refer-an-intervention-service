@@ -1,7 +1,7 @@
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.0.0"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.0.10"
-  kotlin("plugin.spring") version "2.0.20"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.1.10"
+  kotlin("plugin.spring") version "2.1.10"
 }
 
 configurations {
@@ -14,7 +14,7 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
@@ -23,13 +23,13 @@ dependencies {
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.0")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2") // needed for OffsetDateTime for AppInsights
 
   // openapi
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.3")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4")
   implementation("javax.xml.bind:jaxb-api:2.3.1")
   // notifications
-  implementation("uk.gov.service.notify:notifications-java-client:5.2.0-RELEASE")
+  implementation("uk.gov.service.notify:notifications-java-client:5.2.1-RELEASE")
   implementation("org.json:json") {
     version {
       strictly("20231013")
@@ -50,27 +50,27 @@ dependencies {
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
-  implementation("com.h2database:h2:2.3.230")
-  implementation("org.hibernate:hibernate-core:6.5.2.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.8.2")
+  implementation("com.h2database:h2:2.3.232")
+  implementation("org.hibernate:hibernate-core:6.6.6.Final")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.9.1")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.3")
+  runtimeOnly("org.postgresql:postgresql:42.7.5")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
   // json and csv
   implementation("com.github.java-json-tools:json-patch:1.13")
-  implementation("org.apache.commons:commons-csv:1.11.0")
+  implementation("org.apache.commons:commons-csv:1.13.0")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.12")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.16")
   testImplementation("com.squareup.okhttp3:okhttp:4.12.0")
   testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("org.springframework.batch:spring-batch-test")
   // testImplementation("com.github.tomakehurst:wiremock-jre8:3.0.1")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.0.7")
-  testImplementation("org.wiremock:wiremock-standalone:3.9.1")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.22") {
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.1.1")
+  testImplementation("org.wiremock:wiremock-standalone:3.11.0")
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.25") {
     exclude(group = "io.swagger.core.v3")
   }
 }
