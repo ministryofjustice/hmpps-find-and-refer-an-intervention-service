@@ -129,8 +129,8 @@ open class InterventionCatalogue(
   open var riskConsideration: RiskConsideration? = null,
 
   @Nullable
-  @Column(name = "reasons_for_referral", length = Integer.MAX_VALUE)
-  open var reasonsForReferral: String? = null,
+  @Column(name = "reason_for_referral", length = Integer.MAX_VALUE)
+  open var reasonForReferral: String? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")

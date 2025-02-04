@@ -56,5 +56,5 @@ COMMENT ON COLUMN intervention.title IS 'intervention name';
 COMMENT ON COLUMN intervention.description IS 'intervention description';
 COMMENT ON COLUMN intervention.incoming_referral_distribution_email IS 'email address receiving notifications about new referrals';
 
-ALTER TABLE intervention_catalogue ALTER COLUMN short_description drop not null;
-ALTER TABLE intervention_catalogue RENAME COLUMN reasons_for_referral to reason_for_referral;
+ALTER TABLE intervention_catalogue ALTER COLUMN short_description DROP NOT NULL;
+ALTER TABLE intervention_catalogue RENAME COLUMN reasons_for_referral TO reason_for_referral;
