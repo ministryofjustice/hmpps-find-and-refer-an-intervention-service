@@ -11,16 +11,14 @@ data class DeliveryMethodDto(
   val deliveryMethodSettings: List<DeliveryMethodSettingDto> = mutableListOf(),
 ) {
   companion object {
-    fun fromEntity(deliveryMethod: DeliveryMethod): DeliveryMethodDto {
-      return DeliveryMethodDto(
-        id = deliveryMethod.id,
-        attendanceType = deliveryMethod.attendanceType,
-        description = deliveryMethod.deliveryMethodDescription,
-        deliveryFormat = deliveryMethod.deliveryFormat,
-        deliveryMethodSettings = deliveryMethod.deliveryMethodSettings.map {
-          DeliveryMethodSettingDto.fromEntity(it)
-        },
-      )
-    }
+    fun fromEntity(deliveryMethod: DeliveryMethod): DeliveryMethodDto = DeliveryMethodDto(
+      id = deliveryMethod.id,
+      attendanceType = deliveryMethod.attendanceType,
+      description = deliveryMethod.deliveryMethodDescription,
+      deliveryFormat = deliveryMethod.deliveryFormat,
+      deliveryMethodSettings = deliveryMethod.deliveryMethodSettings.map {
+        DeliveryMethodSettingDto.fromEntity(it)
+      },
+    )
   }
 }

@@ -9,11 +9,9 @@ data class DeliveryMethodSettingDto(
   val setting: SettingType,
 ) {
   companion object {
-    fun fromEntity(deliveryMethodSetting: DeliveryMethodSetting): DeliveryMethodSettingDto {
-      return DeliveryMethodSettingDto(
-        id = deliveryMethodSetting.id,
-        setting = deliveryMethodSetting.setting,
-      )
-    }
+    fun fromEntity(deliveryMethodSetting: DeliveryMethodSetting): DeliveryMethodSettingDto = DeliveryMethodSettingDto(
+      id = deliveryMethodSetting.id,
+      setting = deliveryMethodSetting.setting,
+    )
   }
 }
