@@ -14,7 +14,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionC
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
-import java.util.UUID
+import java.util.*
 
 internal class InterventionCatalogueControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
@@ -25,38 +25,43 @@ internal class InterventionCatalogueControllerTest {
   @Test
   fun `getInterventionsCatalogue when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    val catalogue = InterventionCatalogueDto(
-      id = UUID.randomUUID(),
-      title = "Test Title",
-      description = "Test Description",
-      deliveryFormat = listOf("In Person"),
-      interventionType = InterventionType.ACP,
-      setting = listOf(SettingType.COMMUNITY),
-      allowsMales = true,
-      allowsFemales = true,
-      minAge = 18,
-      maxAge = 30,
-      riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
-      attendanceType = listOf("One-to-one"),
-    )
-    whenever(interventionCatalogueService.getInterventionsCatalogue(pageable)).thenReturn(PageImpl(listOf(catalogue)))
+    val catalogue =
+      InterventionCatalogueDto(
+        id = UUID.randomUUID(),
+        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
+        title = "Test Title",
+        description = "Test Description",
+        deliveryFormat = listOf("In Person"),
+        interventionType = InterventionType.ACP,
+        setting = listOf(SettingType.COMMUNITY),
+        allowsMales = true,
+        allowsFemales = true,
+        minAge = 18,
+        maxAge = 30,
+        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
+        attendanceType = listOf("One-to-one"),
+      )
+    whenever(interventionCatalogueService.getInterventionsCatalogue(pageable))
+      .thenReturn(PageImpl(listOf(catalogue)))
     val response = interventionCatalogueController.getInterventionsCatalogue(pageable)
 
-    verify(telemetryClient).trackEvent(
-      "InterventionsCatalogue Summary",
-      mapOf("userMessage" to "User has hit interventions catalogue summary page"),
-      null,
-    )
+    verify(telemetryClient)
+      .trackEvent(
+        "InterventionsCatalogue Summary",
+        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+        null,
+      )
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
     assertThat(
       response.content.all {
         it.hasProperty("id")
+        it.hasProperty("criminogenicNeeds")
         it.hasProperty("title")
         it.hasProperty("description")
         it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionTyps")
+        it.hasProperty("interventionType")
         it.hasProperty("setting")
         it.hasProperty("allowsMales")
         it.hasProperty("allowsFemales")
@@ -72,7 +77,8 @@ internal class InterventionCatalogueControllerTest {
   @Test
   fun `getInterventionsCatalogue when empty return a empty list of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    whenever(interventionCatalogueService.getInterventionsCatalogue(pageable)).thenReturn(PageImpl(listOf()))
+    whenever(interventionCatalogueService.getInterventionsCatalogue(pageable))
+      .thenReturn(PageImpl(listOf()))
     val response = interventionCatalogueController.getInterventionsCatalogue(pageable)
 
     verify(telemetryClient).trackEvent(
