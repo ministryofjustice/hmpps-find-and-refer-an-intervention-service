@@ -1,130 +1,131 @@
-INSERT INTO service_provider (id, name) VALUES ('FOUNDATION', 'Foundation');
-INSERT INTO service_provider (id, name) VALUES ('LANCASHIRE_WOMEN', 'Lancashire Women');
-INSERT INTO service_provider (id, name) VALUES ('LINCS_ACTION_TRUST', 'Lincolnshire Action Trust');
-INSERT INTO service_provider (id, name) VALUES ('MAXIMUS_UK', 'MAXIMUS UK Services Limited');
-INSERT INTO service_provider (id, name) VALUES ('NACRO', 'Nacro');
-INSERT INTO service_provider (id, name) VALUES ('NOTT_WOMENS_CENTRE', 'Nottingham Women''s Centre');
-INSERT INTO service_provider (id, name) VALUES ('PSS_UK', 'PSS UK');
-INSERT INTO service_provider (id, name) VALUES ('SEETEC_BUS_TECH_CTR_LTD', 'Seetec Business Technology Centre Limited');
-INSERT INTO service_provider (id, name) VALUES ('SHELTER', 'Shelter');
-INSERT INTO service_provider (id, name) VALUES ('ST_GILES_WISE_GRP', 'St Giles Wise Group Partnership');
-INSERT INTO service_provider (id, name) VALUES ('WOMENS_COMM_MATTERS', 'Women''s Community Matters');
-INSERT INTO service_provider (id, name) VALUES ('WOMENS_WORK_DERBS_LTD', 'Women''s Work (Derbyshire) Ltd');
-INSERT INTO service_provider (id, name) VALUES ('ANAWIM', 'Anawim');
-INSERT INTO service_provider (id, name) VALUES ('AIR_SPORTS_NETWORK_LTD', 'AIR Sports Network Ltd');
-INSERT INTO service_provider (id, name) VALUES ('ALLIANCE_SPORT', 'Alliance of Sport');
-INSERT INTO service_provider (id, name) VALUES ('ANGLIA_CARE_TRUST', 'Anglia Care Trust (ACT)');
-INSERT INTO service_provider (id, name) VALUES ('AURORA_NEW_DAWN', 'Aurora New Dawn');
-INSERT INTO service_provider (id, name) VALUES ('BEDFORD_WOMENS_CENTRE', 'Bedford Women''s Centre');
-INSERT INTO service_provider (id, name) VALUES ('BIRTH_COMPANIONS', 'Birth Companions');
-INSERT INTO service_provider (id, name) VALUES ('BLACK_COUNTRY_WA', 'Black Country Women''s Aid');
-INSERT INTO service_provider (id, name) VALUES ('C2C', 'C2C');
-INSERT INTO service_provider (id, name) VALUES ('CAIS_LTD', 'CAIS Ltd');
-INSERT INTO service_provider (id, name) VALUES ('CAMBS_WMNS_RESOURCE_CTR', 'Cambridge Women''s Resource Centre');
-INSERT INTO service_provider (id, name) VALUES ('CHANGE_GROW_LIVE_LTD', 'Change Grow Live (CGL) Services Ltd');
-INSERT INTO service_provider (id, name) VALUES ('CIRCLES_UK', 'Circles UK');
-INSERT INTO service_provider (id, name) VALUES ('COMMUNITY_LED_INIT', 'Community Led Initiatives');
-INSERT INTO service_provider (id, name) VALUES ('DVIP_RICHMOND', 'DVIP (Richmond Fellowship)');
-INSERT INTO service_provider (id, name) VALUES ('EVOLVE_EAST_ANGLIA', 'Evolve East Anglia');
-INSERT INTO service_provider (id, name) VALUES ('GANGSLINE', 'Gangsline');
-INSERT INTO service_provider (id, name) VALUES ('GROUNDWORK_EAST', 'Groundwork East');
-INSERT INTO service_provider (id, name) VALUES ('GROW', 'Grow');
-INSERT INTO service_provider (id, name) VALUES ('HIBISCUS_INIT', 'Hibiscus Initiatives');
-INSERT INTO service_provider (id, name) VALUES ('HUMANKIND', 'HumanKind');
-INSERT INTO service_provider (id, name) VALUES ('INCLUSION', 'Inclusion');
-INSERT INTO service_provider (id, name) VALUES ('IDAS', 'Independent Domestic Abuse Service (IDAS)');
-INSERT INTO service_provider (id, name) VALUES ('INSPIRE_CUMBRIA_LTD', 'Inspira Cumbria Ltd');
-INSERT INTO service_provider (id, name) VALUES ('JUDAH_ARMANI', 'Judah Armani Public Service Design Practice');
-INSERT INTO service_provider (id, name) VALUES ('KALEIDOSCOPE', 'Kaleidoscope');
-INSERT INTO service_provider (id, name) VALUES ('KAREN_MACKEY', 'Karen Mackey Consultants');
-INSERT INTO service_provider (id, name) VALUES ('KSS_CRC', 'Kent, Surrey and Sussex CRC');
-INSERT INTO service_provider (id, name) VALUES ('KHIDMAT_CENTRE', 'Khidmat Centre');
-INSERT INTO service_provider (id, name) VALUES ('LEONARD_CHESHIRE', 'Leonard Cheshire Disability');
-INSERT INTO service_provider (id, name) VALUES ('MAGISTRA', 'Magistra');
-INSERT INTO service_provider (id, name) VALUES ('NEPACS', 'Nepacs');
-INSERT INTO service_provider (id, name) VALUES ('OFFPLOY', 'Offploy CIC');
-INSERT INTO service_provider (id, name) VALUES ('ORMISTON_FAMILIES', 'Ormiston Families');
-INSERT INTO service_provider (id, name) VALUES ('PACT', 'PACT');
-INSERT INTO service_provider (id, name) VALUES ('PACT_FUTURES_CIC', 'PACT Futures Community Interest Company');
-INSERT INTO service_provider (id, name) VALUES ('REFORM_RESTORE_RESPECT', 'Reform,Restore,Respect');
-INSERT INTO service_provider (id, name) VALUES ('RESTORATIVE_WALES', 'Restorative Wales');
-INSERT INTO service_provider (id, name) VALUES ('RETHINK_MI_LTD', 'Rethink Mental Illness Ltd');
-INSERT INTO service_provider (id, name) VALUES ('RFEA', 'RFEA');
-INSERT INTO service_provider (id, name) VALUES ('RISE_MUTUAL_CIC', 'RISE Mutual CIC');
-INSERT INTO service_provider (id, name) VALUES ('SAFE_GROUND', 'Safe Ground');
-INSERT INTO service_provider (id, name) VALUES ('SHP', 'SHP');
-INSERT INTO service_provider (id, name) VALUES ('SPARK_INSIDE', 'Spark Inside');
-INSERT INTO service_provider (id, name) VALUES ('ST_GILES_TRUST', 'St Giles Trust');
-INSERT INTO service_provider (id, name) VALUES ('SUSSEX_PATHWAYS', 'Sussex Pathways');
-INSERT INTO service_provider (id, name) VALUES ('THAMES_VALLEY_PART', 'Thames Valley Partnership');
-INSERT INTO service_provider (id, name) VALUES ('THE_BRIDGE_EM', 'The Bridge (East Midlands)');
-INSERT INTO service_provider (id, name) VALUES ('THE_WISE_GROUP_LTD', 'The Wise Group Limited');
-INSERT INTO service_provider (id, name) VALUES ('TOMORROWS_WOMEN_WIRRAL', 'Tomorrow''s Women Wirral');
-INSERT INTO service_provider (id, name) VALUES ('TOUCHSTONE_LEEDS', 'Touchstone - Leeds');
-INSERT INTO service_provider (id, name) VALUES ('UP_BEAT_LIFE', 'Up Beat Life');
-INSERT INTO service_provider (id, name) VALUES ('WORKING_CHANCE_LTD', 'Working Chance Ltd');
-INSERT INTO service_provider (id, name) VALUES ('YSS', 'YSS');
-INSERT INTO service_provider (id, name) VALUES ('GATEWAY_4_WOMEN', 'Gateway 4 Women');
-INSERT INTO service_provider (id, name) VALUES ('WOMEN_OUT_WEST', 'Women Out West');
-INSERT INTO service_provider (id, name) VALUES ('PLUSS_ORG_CIC', 'The Pluss Organisation CIC');
-INSERT INTO service_provider (id, name) VALUES ('STEPPINGSTONES_LUTON', 'Stepping Stones (Luton)');
-INSERT INTO service_provider (id, name) VALUES ('SAFER_PLACES', 'Safer Places');
-INSERT INTO service_provider (id, name) VALUES ('ONE_SMALL_THING', 'One Small Thing');
-INSERT INTO service_provider (id, name) VALUES ('RISING_SUN_DVA', 'Rising Sun Domestic Violence and Abuse Service');
-INSERT INTO service_provider (id, name) VALUES ('A_WAY_OUT', 'A Way Out');
-INSERT INTO service_provider (id, name) VALUES ('NEWDAWN_NEWDAY', 'New Dawn New Day');
-INSERT INTO service_provider (id, name) VALUES ('ACCORD_HOUSING_ASSOC', 'Accord Housing Association');
-INSERT INTO service_provider (id, name) VALUES ('WOMENSSUPPORTCTR_SURREY', 'Women''s Support Centre Surrey');
-INSERT INTO service_provider (id, name) VALUES ('GM_WOM_SUP_AL', 'Greater Manchester Women''s Support Alliance');
-INSERT INTO service_provider (id, name) VALUES ('GM_MH_NHS_FT', 'Greater Manchester Mental Health NHS Foundation Trust - Achieve Recovery Services');
-INSERT INTO service_provider (id, name) VALUES ('ROAR_TURNING_POINT', 'ROAR Turning Point');
-INSERT INTO service_provider (id, name) VALUES ('PENNINE_CARE_NHS_FT', 'Pennine Care NHS Foundation Trust - Pathfinder Stockport');
-INSERT INTO service_provider (id, name) VALUES ('WITH_YOU_WIGAN_LEIGH', 'With You - Wigan and Leigh');
-INSERT INTO service_provider (id, name) VALUES ('JIGSAW_SUPPORT', 'Jigsaw Support');
-INSERT INTO service_provider (id, name) VALUES ('POPS', 'Partners of Prisoners and Families Support Group (POPS)');
-INSERT INTO service_provider (id, name) VALUES ('PETRUS_COMMUNITY', 'Petrus Community');
-INSERT INTO service_provider (id, name) VALUES ('SALFORD_FOUNDATION', 'Salford Foundation Limited');
-INSERT INTO service_provider (id, name) VALUES ('URBAN_OUTREACH', 'Urban Outreach Bolton');
-INSERT INTO service_provider (id, name) VALUES ('WOMEN_FOR_WELL_WOMEN', 'Women for Well Women');
-INSERT INTO service_provider (id, name) VALUES ('WOMEN_OF_WORTH', 'Women of Worth');
-INSERT INTO service_provider (id, name) VALUES ('STOCKPORT_WOMENS_CENTRE', 'Stockport Women''s Centre');
-INSERT INTO service_provider (id, name) VALUES ('MANCHESTER_ATHENA', 'Manchester Athena');
-INSERT INTO service_provider (id, name) VALUES ('ACORN', 'Acorn');
-INSERT INTO service_provider (id, name) VALUES ('BIRMINGHAM_SETTLEMENT', 'Birmingham Settlement');
-INSERT INTO service_provider (id, name) VALUES ('ADFERIAD', 'Adferiad Recovery Limited');
-INSERT INTO service_provider (id, name) VALUES ('ST_GILES_WISE_LTD', 'St Giles Wise Ltd');
-INSERT INTO service_provider (id, name) VALUES ('ACHIEVE_NW', 'Achieve');
-INSERT INTO service_provider (id, name) VALUES ('ADVANCE_CHARITY', 'Advance Charity');
-INSERT INTO service_provider (id, name) VALUES ('BWC', 'BWC (Brighton Women''s Centre)');
-INSERT INTO service_provider (id, name) VALUES ('CATCH_22_CHARITY_LTD', 'Catch22 Charity Limited');
-INSERT INTO service_provider (id, name) VALUES ('CHANGING_LIVES', 'Changing Lives');
-INSERT INTO service_provider (id, name) VALUES ('INGEUS_UK_LIMITED', 'Ingeus UK Limited');
-INSERT INTO service_provider (id, name) VALUES ('ST_MUNGOS', 'St Mungos');
-INSERT INTO service_provider (id, name) VALUES ('THE_FORWARD_TRUST', 'The Forward Trust');
-INSERT INTO service_provider (id, name) VALUES ('WOMEN_IN_PRISON', 'Women in Prison');
-INSERT INTO service_provider (id, name) VALUES ('THE_GROWTH_COMPANY_LTD', 'The Growth Company Ltd');
-INSERT INTO service_provider (id, name) VALUES ('THE_NELSON_TRUST', 'The Nelson Trust');
-INSERT INTO service_provider (id, name) VALUES ('WOMENS_CTR_CORNWALL', 'The Women’s Centre Cornwall (TWCC)');
-INSERT INTO service_provider (id, name) VALUES ('THIRTEEN_HOUSING_GROUP', 'Thirteen Housing Group');
-INSERT INTO service_provider (id, name) VALUES ('TOGETHER_WOMEN_PROJECT', 'Together Women Project');
-INSERT INTO service_provider (id, name) VALUES ('WILLOWDENE', 'Willowdene Rehabilitation and Training');
-INSERT INTO service_provider (id, name) VALUES ('CHOICES', 'Choices');
-INSERT INTO service_provider (id, name) VALUES ('PRISON_ADVICE_CARE_TRST', 'Prison Advice and Care Trust (Pact)');
-INSERT INTO service_provider (id, name) VALUES ('ACCESS_2_ADVICE', 'Access 2 Advice');
-INSERT INTO service_provider (id, name) VALUES ('STEPCHANGE_DEBT_CHARITY', 'StepChange Debt Charity');
-INSERT INTO service_provider (id, name) VALUES ('IMO_CHARITY', 'IMO Charity');
-INSERT INTO service_provider (id, name) VALUES ('ROTUNDA', 'Rotunda');
-INSERT INTO service_provider (id, name) VALUES ('HOUSING_4_WOMEN', 'Housing 4 Women');
-INSERT INTO service_provider (id, name) VALUES ('CLEAN_BREAK', 'Clean Break');
-INSERT INTO service_provider (id, name) VALUES ('INSPIRIT_T_D', 'Inspirit Training and Development Ltd');
-INSERT INTO service_provider (id, name) VALUES ('PECAN', 'Pecan');
-INSERT INTO service_provider (id, name) VALUES ('WE_ARE_WITH_YOU', 'We Are With You');
-INSERT INTO service_provider (id, name) VALUES ('BACK_ON_TRACK', 'Back On Track');
-INSERT INTO service_provider (id, name) VALUES ('BIG_LIFE_GROUP', 'Big Life Group');
-INSERT INTO service_provider (id, name) VALUES ('BOLTON_COMMUNITY_ADVICE', 'Bolton Community Advice');
-INSERT INTO service_provider (id, name) VALUES ('FOUNDATION_92', 'Foundation 92');
-INSERT INTO service_provider (id, name) VALUES ('OUT_THERE_IN_TRAFFORD', 'Out There In Trafford');
-INSERT INTO service_provider (id, name) VALUES ('ROCHDALE_CONNECTIONS_TRUST', 'Rochdale Connections Trust');
-INSERT INTO service_provider (id, name) VALUES ('STEPPINGSTONE_BURY', 'Stepping Stone (Bury)');
-INSERT INTO service_provider (id, name) VALUES ('POSITIVE_STEPS', 'Positive Steps');
-INSERT INTO service_provider (id, name) VALUES ('ROCHDALE_CONNECTIONS_TR', 'Rochdale Connections Trust');
+INSERT INTO service_provider (id, name) 
+VALUES  ('FOUNDATION', 'Foundation'),
+        ('LANCASHIRE_WOMEN', 'Lancashire Women'),
+        ('LINCS_ACTION_TRUST', 'Lincolnshire Action Trust'),
+        ('MAXIMUS_UK', 'MAXIMUS UK Services Limited'),
+        ('NACRO', 'Nacro'),
+        ('NOTT_WOMENS_CENTRE', 'Nottingham Women''s Centre'),
+        ('PSS_UK', 'PSS UK'),
+        ('SEETEC_BUS_TECH_CTR_LTD', 'Seetec Business Technology Centre Limited'),
+        ('SHELTER', 'Shelter'),
+        ('ST_GILES_WISE_GRP', 'St Giles Wise Group Partnership'),
+        ('WOMENS_COMM_MATTERS', 'Women''s Community Matters'),
+        ('WOMENS_WORK_DERBS_LTD', 'Women''s Work (Derbyshire) Ltd'),
+        ('ANAWIM', 'Anawim'),
+        ('AIR_SPORTS_NETWORK_LTD', 'AIR Sports Network Ltd'),
+        ('ALLIANCE_SPORT', 'Alliance of Sport'),
+        ('ANGLIA_CARE_TRUST', 'Anglia Care Trust (ACT)'),
+        ('AURORA_NEW_DAWN', 'Aurora New Dawn'),
+        ('BEDFORD_WOMENS_CENTRE', 'Bedford Women''s Centre'),
+        ('BIRTH_COMPANIONS', 'Birth Companions'),
+        ('BLACK_COUNTRY_WA', 'Black Country Women''s Aid'),
+        ('C2C', 'C2C'),
+        ('CAIS_LTD', 'CAIS Ltd'),
+        ('CAMBS_WMNS_RESOURCE_CTR', 'Cambridge Women''s Resource Centre'),
+        ('CHANGE_GROW_LIVE_LTD', 'Change Grow Live (CGL) Services Ltd'),
+        ('CIRCLES_UK', 'Circles UK'),
+        ('COMMUNITY_LED_INIT', 'Community Led Initiatives'),
+        ('DVIP_RICHMOND', 'DVIP (Richmond Fellowship)'),
+        ('EVOLVE_EAST_ANGLIA', 'Evolve East Anglia'),
+        ('GANGSLINE', 'Gangsline'),
+        ('GROUNDWORK_EAST', 'Groundwork East'),
+        ('GROW', 'Grow'),
+        ('HIBISCUS_INIT', 'Hibiscus Initiatives'),
+        ('HUMANKIND', 'HumanKind'),
+        ('INCLUSION', 'Inclusion'),
+        ('IDAS', 'Independent Domestic Abuse Service (IDAS)'),
+        ('INSPIRE_CUMBRIA_LTD', 'Inspira Cumbria Ltd'),
+        ('JUDAH_ARMANI', 'Judah Armani Public Service Design Practice'),
+        ('KALEIDOSCOPE', 'Kaleidoscope'),
+        ('KAREN_MACKEY', 'Karen Mackey Consultants'),
+        ('KSS_CRC', 'Kent, Surrey and Sussex CRC'),
+        ('KHIDMAT_CENTRE', 'Khidmat Centre'),
+        ('LEONARD_CHESHIRE', 'Leonard Cheshire Disability'),
+        ('MAGISTRA', 'Magistra'),
+        ('NEPACS', 'Nepacs'),
+        ('OFFPLOY', 'Offploy CIC'),
+        ('ORMISTON_FAMILIES', 'Ormiston Families'),
+        ('PACT', 'PACT'),
+        ('PACT_FUTURES_CIC', 'PACT Futures Community Interest Company'),
+        ('REFORM_RESTORE_RESPECT', 'Reform,Restore,Respect'),
+        ('RESTORATIVE_WALES', 'Restorative Wales'),
+        ('RETHINK_MI_LTD', 'Rethink Mental Illness Ltd'),
+        ('RFEA', 'RFEA'),
+        ('RISE_MUTUAL_CIC', 'RISE Mutual CIC'),
+        ('SAFE_GROUND', 'Safe Ground'),
+        ('SHP', 'SHP'),
+        ('SPARK_INSIDE', 'Spark Inside'),
+        ('ST_GILES_TRUST', 'St Giles Trust'),
+        ('SUSSEX_PATHWAYS', 'Sussex Pathways'),
+        ('THAMES_VALLEY_PART', 'Thames Valley Partnership'),
+        ('THE_BRIDGE_EM', 'The Bridge (East Midlands)'),
+        ('THE_WISE_GROUP_LTD', 'The Wise Group Limited'),
+        ('TOMORROWS_WOMEN_WIRRAL', 'Tomorrow''s Women Wirral'),
+        ('TOUCHSTONE_LEEDS', 'Touchstone - Leeds'),
+        ('UP_BEAT_LIFE', 'Up Beat Life'),
+        ('WORKING_CHANCE_LTD', 'Working Chance Ltd'),
+        ('YSS', 'YSS'),
+        ('GATEWAY_4_WOMEN', 'Gateway 4 Women'),
+        ('WOMEN_OUT_WEST', 'Women Out West'),
+        ('PLUSS_ORG_CIC', 'The Pluss Organisation CIC'),
+        ('STEPPINGSTONES_LUTON', 'Stepping Stones (Luton)'),
+        ('SAFER_PLACES', 'Safer Places'),
+        ('ONE_SMALL_THING', 'One Small Thing'),
+        ('RISING_SUN_DVA', 'Rising Sun Domestic Violence and Abuse Service'),
+        ('A_WAY_OUT', 'A Way Out'),
+        ('NEWDAWN_NEWDAY', 'New Dawn New Day'),
+        ('ACCORD_HOUSING_ASSOC', 'Accord Housing Association'),
+        ('WOMENSSUPPORTCTR_SURREY', 'Women''s Support Centre Surrey'),
+        ('GM_WOM_SUP_AL', 'Greater Manchester Women''s Support Alliance'),
+        ('GM_MH_NHS_FT', 'Greater Manchester Mental Health NHS Foundation Trust - Achieve Recovery Services'),
+        ('ROAR_TURNING_POINT', 'ROAR Turning Point'),
+        ('PENNINE_CARE_NHS_FT', 'Pennine Care NHS Foundation Trust - Pathfinder Stockport'),
+        ('WITH_YOU_WIGAN_LEIGH', 'With You - Wigan and Leigh'),
+        ('JIGSAW_SUPPORT', 'Jigsaw Support'),
+        ('POPS', 'Partners of Prisoners and Families Support Group (POPS)'),
+        ('PETRUS_COMMUNITY', 'Petrus Community'),
+        ('SALFORD_FOUNDATION', 'Salford Foundation Limited'),
+        ('URBAN_OUTREACH', 'Urban Outreach Bolton'),
+        ('WOMEN_FOR_WELL_WOMEN', 'Women for Well Women'),
+        ('WOMEN_OF_WORTH', 'Women of Worth'),
+        ('STOCKPORT_WOMENS_CENTRE', 'Stockport Women''s Centre'),
+        ('MANCHESTER_ATHENA', 'Manchester Athena'),
+        ('ACORN', 'Acorn'),
+        ('BIRMINGHAM_SETTLEMENT', 'Birmingham Settlement'),
+        ('ADFERIAD', 'Adferiad Recovery Limited'),
+        ('ST_GILES_WISE_LTD', 'St Giles Wise Ltd'),
+        ('ACHIEVE_NW', 'Achieve'),
+        ('ADVANCE_CHARITY', 'Advance Charity'),
+        ('BWC', 'BWC (Brighton Women''s Centre)'),
+        ('CATCH_22_CHARITY_LTD', 'Catch22 Charity Limited'),
+        ('CHANGING_LIVES', 'Changing Lives'),
+        ('INGEUS_UK_LIMITED', 'Ingeus UK Limited'),
+        ('ST_MUNGOS', 'St Mungos'),
+        ('THE_FORWARD_TRUST', 'The Forward Trust'),
+        ('WOMEN_IN_PRISON', 'Women in Prison'),
+        ('THE_GROWTH_COMPANY_LTD', 'The Growth Company Ltd'),
+        ('THE_NELSON_TRUST', 'The Nelson Trust'),
+        ('WOMENS_CTR_CORNWALL', 'The Women’s Centre Cornwall (TWCC)'),
+        ('THIRTEEN_HOUSING_GROUP', 'Thirteen Housing Group'),
+        ('TOGETHER_WOMEN_PROJECT', 'Together Women Project'),
+        ('WILLOWDENE', 'Willowdene Rehabilitation and Training'),
+        ('CHOICES', 'Choices'),
+        ('PRISON_ADVICE_CARE_TRST', 'Prison Advice and Care Trust (Pact)'),
+        ('ACCESS_2_ADVICE', 'Access 2 Advice'),
+        ('STEPCHANGE_DEBT_CHARITY', 'StepChange Debt Charity'),
+        ('IMO_CHARITY', 'IMO Charity'),
+        ('ROTUNDA', 'Rotunda'),
+        ('HOUSING_4_WOMEN', 'Housing 4 Women'),
+        ('CLEAN_BREAK', 'Clean Break'),
+        ('INSPIRIT_T_D', 'Inspirit Training and Development Ltd'),
+        ('PECAN', 'Pecan'),
+        ('WE_ARE_WITH_YOU', 'We Are With You'),
+        ('BACK_ON_TRACK', 'Back On Track'),
+        ('BIG_LIFE_GROUP', 'Big Life Group'),
+        ('BOLTON_COMMUNITY_ADVICE', 'Bolton Community Advice'),
+        ('FOUNDATION_92', 'Foundation 92'),
+        ('OUT_THERE_IN_TRAFFORD', 'Out There In Trafford'),
+        ('ROCHDALE_CONNECTIONS_TRUST', 'Rochdale Connections Trust'),
+        ('STEPPINGSTONE_BURY', 'Stepping Stone (Bury)'),
+        ('POSITIVE_STEPS', 'Positive Steps'),
+        ('ROCHDALE_CONNECTIONS_TR', 'Rochdale Connections Trust');

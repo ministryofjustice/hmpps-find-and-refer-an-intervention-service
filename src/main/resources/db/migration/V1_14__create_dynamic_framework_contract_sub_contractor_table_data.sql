@@ -1,341 +1,342 @@
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('49a75337-d136-47b5-bb82-7e47048d6c96', 'THE_BRIDGE_EM');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('49a75337-d136-47b5-bb82-7e47048d6c96', 'SHELTER');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('98021507-e414-4064-a79a-c805b3461426', 'YSS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('71ef36f3-b4f3-4e2d-97b5-93d61c5a18bd', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e618f0d6-efc2-486b-80fd-41185bf11cc3', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d2eb080a-cacd-4c0b-9006-6fed288b39d7', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('73ffc0ca-84f5-4537-9ae8-b8d27eee9925', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f05529f0-f382-4bee-bf23-159d0cf06f62', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('6f217dc5-735f-4717-8799-11eb82937a43', 'KALEIDOSCOPE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cb039ae4-6abf-4168-8185-1d0f07dd983b', 'KALEIDOSCOPE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d16c95ef-d571-4370-8f5d-bbf2aef466fd', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d16c95ef-d571-4370-8f5d-bbf2aef466fd', 'NACRO');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('07753dfc-166f-4744-b666-e9f6dea458e3', 'SHP');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1ef6e659-558c-4c9c-b2a1-e9e7d4f01df6', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1ef6e659-558c-4c9c-b2a1-e9e7d4f01df6', 'LEONARD_CHESHIRE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('35a03d0b-6a81-4f42-8a6d-d9273d8f215c', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('35a03d0b-6a81-4f42-8a6d-d9273d8f215c', 'LEONARD_CHESHIRE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e3bc47e8-9997-433f-8ccc-8e3974ff732a', 'INSPIRE_CUMBRIA_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('740b232b-4d8a-4193-85f6-9b5a5c4ba6b3', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4f14bb52-a5a3-4a4b-a072-13bdcccf93d4', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4f14bb52-a5a3-4a4b-a072-13bdcccf93d4', 'KAREN_MACKEY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('afee90f4-355b-4d77-a058-0cc0d3ff5f85', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('afee90f4-355b-4d77-a058-0cc0d3ff5f85', 'KAREN_MACKEY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('6319857e-52bf-488c-8b21-7432e1cb7fcd', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('6319857e-52bf-488c-8b21-7432e1cb7fcd', 'KAREN_MACKEY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('09da067e-9f30-44d6-a367-c61fc2a45db2', 'LEONARD_CHESHIRE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2886fa71-635a-4952-b554-5fe3206cca8f', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2886fa71-635a-4952-b554-5fe3206cca8f', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2886fa71-635a-4952-b554-5fe3206cca8f', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2886fa71-635a-4952-b554-5fe3206cca8f', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2886fa71-635a-4952-b554-5fe3206cca8f', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2886fa71-635a-4952-b554-5fe3206cca8f', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'AIR_SPORTS_NETWORK_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'THAMES_VALLEY_PART');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('09470283-0456-47ed-9b93-dfc58b274fe7', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('127fc64e-086a-4bf9-8cba-921c9756b967', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('127fc64e-086a-4bf9-8cba-921c9756b967', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('9945fae3-cef0-4bad-b713-154481c73ec7', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('9945fae3-cef0-4bad-b713-154481c73ec7', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1d28acdd-1179-4c8d-aa74-56ce3340d771', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1d28acdd-1179-4c8d-aa74-56ce3340d771', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('9bb92fef-1361-4d9b-9111-c39550caf0f3', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('9bb92fef-1361-4d9b-9111-c39550caf0f3', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('366d7963-eff8-4969-8bec-0a094d74b174', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('366d7963-eff8-4969-8bec-0a094d74b174', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5ec6ce79-b4dc-491d-ad05-7fec5a7de873', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5ec6ce79-b4dc-491d-ad05-7fec5a7de873', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('31a7726e-e424-4c49-8571-1aa136e55697', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('31a7726e-e424-4c49-8571-1aa136e55697', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1ded2793-3692-4da8-8560-6d4ec3730eb7', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1ded2793-3692-4da8-8560-6d4ec3730eb7', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f336b0fd-c32f-4a82-8725-dd2d74b962eb', 'ORMISTON_FAMILIES');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b56ce337-ebe5-42c6-a988-a1c4cfb70cc7', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('32b9648b-b418-449b-8609-a2026a632045', 'ORMISTON_FAMILIES');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'PRISON_ADVICE_CARE_TRST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'THE_FORWARD_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'KSS_CRC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'PRISON_ADVICE_CARE_TRST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'THE_FORWARD_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('552421bb-6cf4-475b-945a-65d99975269a', 'NEPACS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('552421bb-6cf4-475b-945a-65d99975269a', 'RETHINK_MI_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('552421bb-6cf4-475b-945a-65d99975269a', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('552421bb-6cf4-475b-945a-65d99975269a', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('552421bb-6cf4-475b-945a-65d99975269a', 'THIRTEEN_HOUSING_GROUP');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'NEPACS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'RETHINK_MI_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('90e054ea-2432-4272-8506-6c2fbd0e7a71', 'CAIS_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('90e054ea-2432-4272-8506-6c2fbd0e7a71', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('90e054ea-2432-4272-8506-6c2fbd0e7a71', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('55381bbb-f4ee-41e6-80a4-daf78c5645aa', 'RESTORATIVE_WALES');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('55381bbb-f4ee-41e6-80a4-daf78c5645aa', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('55381bbb-f4ee-41e6-80a4-daf78c5645aa', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('230b8868-3f84-4baa-b026-e10c4882232e', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('230b8868-3f84-4baa-b026-e10c4882232e', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('331cd39b-37bf-47aa-a94c-6326616d85f9', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('331cd39b-37bf-47aa-a94c-6326616d85f9', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'GANGSLINE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'GROUNDWORK_EAST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'COMMUNITY_LED_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'GANGSLINE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'GROUNDWORK_EAST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'COMMUNITY_LED_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'GANGSLINE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'GROUNDWORK_EAST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'COMMUNITY_LED_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'LINCS_ACTION_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'GANGSLINE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'GROUNDWORK_EAST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'COMMUNITY_LED_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'EVOLVE_EAST_ANGLIA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'SAFE_GROUND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'SUSSEX_PATHWAYS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'SPARK_INSIDE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'MAGISTRA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'REFORM_RESTORE_RESPECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'RFEA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'UP_BEAT_LIFE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'DVIP_RICHMOND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'SAFE_GROUND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'SUSSEX_PATHWAYS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'SPARK_INSIDE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a4889d46-14d7-4a40-9a3c-161899271127', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a4889d46-14d7-4a40-9a3c-161899271127', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a4889d46-14d7-4a40-9a3c-161899271127', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a4889d46-14d7-4a40-9a3c-161899271127', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a4889d46-14d7-4a40-9a3c-161899271127', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a4889d46-14d7-4a40-9a3c-161899271127', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e5e14556-acf8-4315-9885-8e0127ad4297', 'WILLOWDENE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e5e14556-acf8-4315-9885-8e0127ad4297', 'JUDAH_ARMANI');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e5e14556-acf8-4315-9885-8e0127ad4297', 'ALLIANCE_SPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e5e14556-acf8-4315-9885-8e0127ad4297', 'RISE_MUTUAL_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e5e14556-acf8-4315-9885-8e0127ad4297', 'CIRCLES_UK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e5e14556-acf8-4315-9885-8e0127ad4297', 'OFFPLOY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('bf7a7f57-e641-47b7-a83a-10ff0b67393a', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('81348c2b-072a-4d99-a5e5-d9a441476d83', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f7b5abdd-acd8-4372-8dde-840d1c73906d', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('84748538-da5c-4eb6-949d-a03319de949c', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ce0be839-f8ff-4dc5-8221-72853238736d', 'PACT_FUTURES_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ce0be839-f8ff-4dc5-8221-72853238736d', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'BEDFORD_WOMENS_CENTRE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'AURORA_NEW_DAWN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'CAMBS_WMNS_RESOURCE_CTR');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'AURORA_NEW_DAWN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'INCLUSION');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'AURORA_NEW_DAWN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'AURORA_NEW_DAWN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'BWC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'CHOICES');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'AURORA_NEW_DAWN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8b34f0f1-96ae-4930-bf3a-b9b26fd8b8a2', 'SHELTER');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8b34f0f1-96ae-4930-bf3a-b9b26fd8b8a2', 'CHANGE_GROW_LIVE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cda7996f-3507-424d-ba90-659499def371', 'GROW');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('01f90f16-44a5-4513-8732-12651bad0f2f', 'ANAWIM');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('01f90f16-44a5-4513-8732-12651bad0f2f', 'BLACK_COUNTRY_WA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f4279de9-be0d-4123-a9e0-a5ba2f6f0cb2', 'THE_GROWTH_COMPANY_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f4279de9-be0d-4123-a9e0-a5ba2f6f0cb2', 'TOMORROWS_WOMEN_WIRRAL');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('817618b8-75a0-4d79-a115-2f9c0ee40ce8', 'THE_GROWTH_COMPANY_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('817618b8-75a0-4d79-a115-2f9c0ee40ce8', 'TOMORROWS_WOMEN_WIRRAL');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('65b78598-9e4a-4f3d-8900-8b8dd451a83e', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('65b78598-9e4a-4f3d-8900-8b8dd451a83e', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('af58d97b-20dd-4be8-8901-39169d1e4665', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('af58d97b-20dd-4be8-8901-39169d1e4665', 'HUMANKIND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d3dfc493-3bc0-4802-815e-7575ff07deb1', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d3dfc493-3bc0-4802-815e-7575ff07deb1', 'ANGLIA_CARE_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'FOUNDATION');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'IDAS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cadcf866-fbda-4fe5-87e4-325683943e55', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cadcf866-fbda-4fe5-87e4-325683943e55', 'ANGLIA_CARE_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('aea78365-7b57-40d8-90a4-49d3c58df992', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('aea78365-7b57-40d8-90a4-49d3c58df992', 'SHELTER');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('aea78365-7b57-40d8-90a4-49d3c58df992', 'LINCS_ACTION_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'KHIDMAT_CENTRE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'SHELTER');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'TOUCHSTONE_LEEDS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5e86290d-1dbd-4568-8f34-45295e7de194', 'PACT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5e86290d-1dbd-4568-8f34-45295e7de194', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5e86290d-1dbd-4568-8f34-45295e7de194', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5e86290d-1dbd-4568-8f34-45295e7de194', 'AURORA_NEW_DAWN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('5e86290d-1dbd-4568-8f34-45295e7de194', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8f65de88-f8ca-4265-a01d-38291b63b7b0', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8f65de88-f8ca-4265-a01d-38291b63b7b0', 'C2C');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('faa061db-fd1f-4b45-9ab6-20c5c74ec1a6', 'GATEWAY_4_WOMEN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('faa061db-fd1f-4b45-9ab6-20c5c74ec1a6', 'WOMEN_OUT_WEST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('22e19a63-8606-45a7-89ea-0dc34b967c91', 'KALEIDOSCOPE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('71ef36f3-b4f3-4e2d-97b5-93d61c5a18bd', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e618f0d6-efc2-486b-80fd-41185bf11cc3', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d2eb080a-cacd-4c0b-9006-6fed288b39d7', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('73ffc0ca-84f5-4537-9ae8-b8d27eee9925', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4f14bb52-a5a3-4a4b-a072-13bdcccf93d4', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('afee90f4-355b-4d77-a058-0cc0d3ff5f85', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('6319857e-52bf-488c-8b21-7432e1cb7fcd', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'PLUSS_ORG_CIC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('bf7a7f57-e641-47b7-a83a-10ff0b67393a', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('81348c2b-072a-4d99-a5e5-d9a441476d83', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('84748538-da5c-4eb6-949d-a03319de949c', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'STEPPINGSTONES_LUTON');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'SAFER_PLACES');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'SAFER_PLACES');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'ONE_SMALL_THING');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('e240405c-6302-4613-a5c3-1d14d85451f0', 'RISING_SUN_DVA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8b34f0f1-96ae-4930-bf3a-b9b26fd8b8a2', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d5e84209-e44c-4834-b45c-67390404501e', 'A_WAY_OUT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c9061aaa-89d2-401e-bdcc-9bc938321595', 'NEWDAWN_NEWDAY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cda7996f-3507-424d-ba90-659499def371', 'TOGETHER_WOMEN_PROJECT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c82df197-0915-45dc-966e-91b9f3e68022', 'ACCORD_HOUSING_ASSOC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('01f90f16-44a5-4513-8732-12651bad0f2f', 'ACCORD_HOUSING_ASSOC');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('65b78598-9e4a-4f3d-8900-8b8dd451a83e', 'ANGLIA_CARE_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('af58d97b-20dd-4be8-8901-39169d1e4665', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('d3dfc493-3bc0-4802-815e-7575ff07deb1', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cadcf866-fbda-4fe5-87e4-325683943e55', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('8f65de88-f8ca-4265-a01d-38291b63b7b0', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f8d9cb6f-70ef-486b-9e72-5b75e44c69e8', 'WOMENSSUPPORTCTR_SURREY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f5dbaa2e-841d-4cd2-80eb-2a76f404dca8', 'JIGSAW_SUPPORT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b4ab34b8-d426-4a0c-ae28-dcc303001b44', 'POPS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('eb72a9a0-4096-41df-afb5-e47e33fecbc9', 'PETRUS_COMMUNITY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('87513a02-7fc0-41dc-be0b-5a8bb314774c', 'SALFORD_FOUNDATION');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('17f3b0c6-dab5-4b1c-829b-9a07887383e9', 'URBAN_OUTREACH');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2d64c5d5-1f1a-4a92-bbd3-5a14d424636b', 'WOMEN_FOR_WELL_WOMEN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('796e5b73-1495-4d11-8cf5-1b23614d3ed7', 'WOMEN_IN_PRISON');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('79915b3c-efdf-48a8-8d76-22aeecb3df21', 'WOMEN_OF_WORTH');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('df6e90b4-166d-4362-9238-ba3ab0c010a1', 'STOCKPORT_WOMENS_CENTRE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('767024f3-6aa5-4ca6-a3fa-dddd4b5c4d99', 'MANCHESTER_ATHENA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('767024f3-6aa5-4ca6-a3fa-dddd4b5c4d99', 'ACORN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b0640bd2-d4db-4de8-956e-f4051826f5bb', 'ACCESS_2_ADVICE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('82d5715c-6172-4a1e-a349-27dd4476cf81', 'BIRMINGHAM_SETTLEMENT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('71947388-6d27-4231-9da7-7b9dd1ea9402', 'ACCESS_2_ADVICE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0487f430-7008-4383-bffc-631d0ee1c5cd', 'CATCH_22_CHARITY_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b6525117-d604-4206-b046-6da53d12e461', 'HUMANKIND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b8749ab4-af69-41ee-9fb2-1daf91266765', 'HUMANKIND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2c15b134-ad58-4887-ad93-22ac58816222', 'HUMANKIND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('af813600-bed0-42ac-91b5-94434fcb58b0', 'HUMANKIND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('308c0396-44b2-4cb6-82bf-f25cb27ababa', 'RETHINK_MI_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('27aa4c15-3951-48af-973e-b0df8954742f', 'HUMANKIND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('13cf8811-446e-4a81-851d-1196a314b9bf', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('13cf8811-446e-4a81-851d-1196a314b9bf', 'ADFERIAD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('13cf8811-446e-4a81-851d-1196a314b9bf', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('308c0396-44b2-4cb6-82bf-f25cb27ababa', 'ST_GILES_TRUST');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('308c0396-44b2-4cb6-82bf-f25cb27ababa', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0539cfa4-74ff-4beb-805d-15b0b40129fb', 'STEPCHANGE_DEBT_CHARITY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('350f014f-e556-4099-a52a-764cb6093f83', 'THE_WISE_GROUP_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('350f014f-e556-4099-a52a-764cb6093f83', 'RETHINK_MI_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('350f014f-e556-4099-a52a-764cb6093f83', 'IMO_CHARITY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('350f014f-e556-4099-a52a-764cb6093f83', 'ROTUNDA');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'HOUSING_4_WOMEN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'CLEAN_BREAK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'SAFE_GROUND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'INSPIRIT_T_D');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'HIBISCUS_INIT');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'HOUSING_4_WOMEN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'WORKING_CHANCE_LTD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'CLEAN_BREAK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'SAFE_GROUND');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'INSPIRIT_T_D');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'BIRTH_COMPANIONS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('ecb4c70a-b126-47da-bf9b-af6ff932de81', 'PECAN');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1c04580a-004b-4868-9e2d-2c1c47c7c963', 'OUT_THERE_IN_TRAFFORD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a3fe3745-a058-43e5-bb40-696afc3373be', 'BOLTON_COMMUNITY_ADVICE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c3c4a501-271c-4445-8e7a-9b5974f9ac72', 'SALFORD_FOUNDATION');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('bbc669b0-7954-455b-8111-a1add8772a77', 'SALFORD_FOUNDATION');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('cc41363b-f75a-4a51-8dac-e00a6091e76a', 'BOLTON_COMMUNITY_ADVICE');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('10076c53-a4a9-4796-941d-f08cae2846a4', 'BACK_ON_TRACK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('6c36675c-d210-4484-9ddb-4b22cbe765e2', 'STEPPINGSTONE_BURY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('1d047e66-9151-4744-ae62-e5767cb8e537', 'FOUNDATION_92');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('f7b312e0-1b5d-4b05-87a7-cfff1d379e32', 'STEPPINGSTONE_BURY');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('58df5715-52dc-4c0a-9c5f-003de40a0b9f', 'BACK_ON_TRACK');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('b63d4aa7-36ea-4cf7-b78d-3398c3c744bf', 'FOUNDATION_92');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2480c792-ef59-404c-bcc3-92fe6ff14e70', 'OUT_THERE_IN_TRAFFORD');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2536cd67-89c2-4bb1-81e6-11e01610ec81', 'POSITIVE_STEPS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('a1077bfa-1e46-47f7-80d9-65ea055b9705', 'POSITIVE_STEPS');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('c63c0ca5-d425-4967-9257-85e4c3c49692', 'ROCHDALE_CONNECTIONS_TR');
-INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) VALUES ('2aa92170-d585-40d4-830c-c4a77b904bf9', 'ROCHDALE_CONNECTIONS_TR');
+INSERT INTO dynamic_framework_contract_sub_contractor (dynamic_framework_contract_id, subcontractor_provider_id) 
+VALUES  ('49a75337-d136-47b5-bb82-7e47048d6c96', 'THE_BRIDGE_EM'),
+        ('49a75337-d136-47b5-bb82-7e47048d6c96', 'SHELTER'),
+        ('98021507-e414-4064-a79a-c805b3461426', 'YSS'),
+        ('71ef36f3-b4f3-4e2d-97b5-93d61c5a18bd', 'KSS_CRC'),
+        ('e618f0d6-efc2-486b-80fd-41185bf11cc3', 'KSS_CRC'),
+        ('d2eb080a-cacd-4c0b-9006-6fed288b39d7', 'KSS_CRC'),
+        ('73ffc0ca-84f5-4537-9ae8-b8d27eee9925', 'KSS_CRC'),
+        ('f05529f0-f382-4bee-bf23-159d0cf06f62', 'THE_WISE_GROUP_LTD'),
+        ('6f217dc5-735f-4717-8799-11eb82937a43', 'KALEIDOSCOPE'),
+        ('cb039ae4-6abf-4168-8185-1d0f07dd983b', 'KALEIDOSCOPE'),
+        ('d16c95ef-d571-4370-8f5d-bbf2aef466fd', 'ST_GILES_TRUST'),
+        ('d16c95ef-d571-4370-8f5d-bbf2aef466fd', 'NACRO'),
+        ('07753dfc-166f-4744-b666-e9f6dea458e3', 'SHP'),
+        ('1ef6e659-558c-4c9c-b2a1-e9e7d4f01df6', 'CHANGE_GROW_LIVE_LTD'),
+        ('1ef6e659-558c-4c9c-b2a1-e9e7d4f01df6', 'LEONARD_CHESHIRE'),
+        ('35a03d0b-6a81-4f42-8a6d-d9273d8f215c', 'CHANGE_GROW_LIVE_LTD'),
+        ('35a03d0b-6a81-4f42-8a6d-d9273d8f215c', 'LEONARD_CHESHIRE'),
+        ('e3bc47e8-9997-433f-8ccc-8e3974ff732a', 'INSPIRE_CUMBRIA_LTD'),
+        ('740b232b-4d8a-4193-85f6-9b5a5c4ba6b3', 'WILLOWDENE'),
+        ('4f14bb52-a5a3-4a4b-a072-13bdcccf93d4', 'KSS_CRC'),
+        ('4f14bb52-a5a3-4a4b-a072-13bdcccf93d4', 'KAREN_MACKEY'),
+        ('afee90f4-355b-4d77-a058-0cc0d3ff5f85', 'KSS_CRC'),
+        ('afee90f4-355b-4d77-a058-0cc0d3ff5f85', 'KAREN_MACKEY'),
+        ('6319857e-52bf-488c-8b21-7432e1cb7fcd', 'KSS_CRC'),
+        ('6319857e-52bf-488c-8b21-7432e1cb7fcd', 'KAREN_MACKEY'),
+        ('09da067e-9f30-44d6-a367-c61fc2a45db2', 'LEONARD_CHESHIRE'),
+        ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'WILLOWDENE'),
+        ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'JUDAH_ARMANI'),
+        ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'ALLIANCE_SPORT'),
+        ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'RISE_MUTUAL_CIC'),
+        ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'CIRCLES_UK'),
+        ('7633b5ad-4060-4e9f-93ad-d9bcda5702b2', 'OFFPLOY'),
+        ('2886fa71-635a-4952-b554-5fe3206cca8f', 'WILLOWDENE'),
+        ('2886fa71-635a-4952-b554-5fe3206cca8f', 'JUDAH_ARMANI'),
+        ('2886fa71-635a-4952-b554-5fe3206cca8f', 'ALLIANCE_SPORT'),
+        ('2886fa71-635a-4952-b554-5fe3206cca8f', 'RISE_MUTUAL_CIC'),
+        ('2886fa71-635a-4952-b554-5fe3206cca8f', 'CIRCLES_UK'),
+        ('2886fa71-635a-4952-b554-5fe3206cca8f', 'OFFPLOY'),
+        ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'WILLOWDENE'),
+        ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'JUDAH_ARMANI'),
+        ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'ALLIANCE_SPORT'),
+        ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'RISE_MUTUAL_CIC'),
+        ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'CIRCLES_UK'),
+        ('0dbbac58-3e7d-492f-af04-2e54807245b3', 'OFFPLOY'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'WILLOWDENE'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'JUDAH_ARMANI'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'ALLIANCE_SPORT'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'RISE_MUTUAL_CIC'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'CIRCLES_UK'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'OFFPLOY'),
+        ('c4f3c1d6-ea4e-4bda-b2d1-306d3f354faa', 'AIR_SPORTS_NETWORK_LTD'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'WILLOWDENE'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'JUDAH_ARMANI'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'ALLIANCE_SPORT'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'RISE_MUTUAL_CIC'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'CIRCLES_UK'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'OFFPLOY'),
+        ('f945e2fe-3ffa-4cb9-923d-1adda03ee433', 'THAMES_VALLEY_PART'),
+        ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'WILLOWDENE'),
+        ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'JUDAH_ARMANI'),
+        ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'ALLIANCE_SPORT'),
+        ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'RISE_MUTUAL_CIC'),
+        ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'CIRCLES_UK'),
+        ('f9d083d7-aa68-41f6-8e2b-5d407dbc37a3', 'OFFPLOY'),
+        ('09470283-0456-47ed-9b93-dfc58b274fe7', 'ST_GILES_TRUST'),
+        ('127fc64e-086a-4bf9-8cba-921c9756b967', 'CHANGE_GROW_LIVE_LTD'),
+        ('127fc64e-086a-4bf9-8cba-921c9756b967', 'PACT_FUTURES_CIC'),
+        ('9945fae3-cef0-4bad-b713-154481c73ec7', 'CHANGE_GROW_LIVE_LTD'),
+        ('9945fae3-cef0-4bad-b713-154481c73ec7', 'PACT_FUTURES_CIC'),
+        ('1d28acdd-1179-4c8d-aa74-56ce3340d771', 'CHANGE_GROW_LIVE_LTD'),
+        ('1d28acdd-1179-4c8d-aa74-56ce3340d771', 'PACT_FUTURES_CIC'),
+        ('9bb92fef-1361-4d9b-9111-c39550caf0f3', 'CHANGE_GROW_LIVE_LTD'),
+        ('9bb92fef-1361-4d9b-9111-c39550caf0f3', 'PACT_FUTURES_CIC'),
+        ('366d7963-eff8-4969-8bec-0a094d74b174', 'CHANGE_GROW_LIVE_LTD'),
+        ('366d7963-eff8-4969-8bec-0a094d74b174', 'PACT_FUTURES_CIC'),
+        ('5ec6ce79-b4dc-491d-ad05-7fec5a7de873', 'CHANGE_GROW_LIVE_LTD'),
+        ('5ec6ce79-b4dc-491d-ad05-7fec5a7de873', 'PACT_FUTURES_CIC'),
+        ('31a7726e-e424-4c49-8571-1aa136e55697', 'CHANGE_GROW_LIVE_LTD'),
+        ('31a7726e-e424-4c49-8571-1aa136e55697', 'PACT_FUTURES_CIC'),
+        ('1ded2793-3692-4da8-8560-6d4ec3730eb7', 'CHANGE_GROW_LIVE_LTD'),
+        ('1ded2793-3692-4da8-8560-6d4ec3730eb7', 'PACT_FUTURES_CIC'),
+        ('f336b0fd-c32f-4a82-8725-dd2d74b962eb', 'ORMISTON_FAMILIES'),
+        ('b56ce337-ebe5-42c6-a988-a1c4cfb70cc7', 'PACT_FUTURES_CIC'),
+        ('32b9648b-b418-449b-8609-a2026a632045', 'ORMISTON_FAMILIES'),
+        ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'KSS_CRC'),
+        ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'PRISON_ADVICE_CARE_TRST'),
+        ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'THE_FORWARD_TRUST'),
+        ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'KSS_CRC'),
+        ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'PRISON_ADVICE_CARE_TRST'),
+        ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'THE_FORWARD_TRUST'),
+        ('552421bb-6cf4-475b-945a-65d99975269a', 'NEPACS'),
+        ('552421bb-6cf4-475b-945a-65d99975269a', 'RETHINK_MI_LTD'),
+        ('552421bb-6cf4-475b-945a-65d99975269a', 'ST_GILES_TRUST'),
+        ('552421bb-6cf4-475b-945a-65d99975269a', 'THE_WISE_GROUP_LTD'),
+        ('552421bb-6cf4-475b-945a-65d99975269a', 'THIRTEEN_HOUSING_GROUP'),
+        ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'NEPACS'),
+        ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'RETHINK_MI_LTD'),
+        ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'ST_GILES_TRUST'),
+        ('0deeff8b-df60-4dbe-a904-45b0c1f6d891', 'THE_WISE_GROUP_LTD'),
+        ('90e054ea-2432-4272-8506-6c2fbd0e7a71', 'CAIS_LTD'),
+        ('90e054ea-2432-4272-8506-6c2fbd0e7a71', 'ST_GILES_TRUST'),
+        ('90e054ea-2432-4272-8506-6c2fbd0e7a71', 'THE_WISE_GROUP_LTD'),
+        ('55381bbb-f4ee-41e6-80a4-daf78c5645aa', 'RESTORATIVE_WALES'),
+        ('55381bbb-f4ee-41e6-80a4-daf78c5645aa', 'ST_GILES_TRUST'),
+        ('55381bbb-f4ee-41e6-80a4-daf78c5645aa', 'THE_WISE_GROUP_LTD'),
+        ('230b8868-3f84-4baa-b026-e10c4882232e', 'ST_GILES_TRUST'),
+        ('230b8868-3f84-4baa-b026-e10c4882232e', 'THE_WISE_GROUP_LTD'),
+        ('331cd39b-37bf-47aa-a94c-6326616d85f9', 'ST_GILES_TRUST'),
+        ('331cd39b-37bf-47aa-a94c-6326616d85f9', 'THE_WISE_GROUP_LTD'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'MAGISTRA'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'REFORM_RESTORE_RESPECT'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'RFEA'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'UP_BEAT_LIFE'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'DVIP_RICHMOND'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'GANGSLINE'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'GROUNDWORK_EAST'),
+        ('50c2ec5c-4ac3-410b-9fe5-a4b2d8538740', 'COMMUNITY_LED_INIT'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'MAGISTRA'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'REFORM_RESTORE_RESPECT'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'RFEA'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'UP_BEAT_LIFE'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'DVIP_RICHMOND'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'GANGSLINE'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'GROUNDWORK_EAST'),
+        ('1b53aceb-a4de-4119-bcd2-2d077d0a0bfe', 'COMMUNITY_LED_INIT'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'MAGISTRA'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'REFORM_RESTORE_RESPECT'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'RFEA'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'UP_BEAT_LIFE'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'DVIP_RICHMOND'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'GANGSLINE'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'GROUNDWORK_EAST'),
+        ('8aeeea30-0bc3-4667-969e-88e842bcca3e', 'COMMUNITY_LED_INIT'),
+        ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'MAGISTRA'),
+        ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'REFORM_RESTORE_RESPECT'),
+        ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'RFEA'),
+        ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'UP_BEAT_LIFE'),
+        ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'DVIP_RICHMOND'),
+        ('03708ec5-2a4e-41e9-83b3-263afcb4fb33', 'LINCS_ACTION_TRUST'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'MAGISTRA'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'REFORM_RESTORE_RESPECT'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'RFEA'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'UP_BEAT_LIFE'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'DVIP_RICHMOND'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'GANGSLINE'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'GROUNDWORK_EAST'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'COMMUNITY_LED_INIT'),
+        ('2e8a782b-fbf9-4472-ae55-4ad05eee37eb', 'EVOLVE_EAST_ANGLIA'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'MAGISTRA'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'REFORM_RESTORE_RESPECT'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'RFEA'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'UP_BEAT_LIFE'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'DVIP_RICHMOND'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'SAFE_GROUND'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'SUSSEX_PATHWAYS'),
+        ('3cc9a2cd-968e-4d00-8bff-e2fe764710c5', 'SPARK_INSIDE'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'MAGISTRA'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'REFORM_RESTORE_RESPECT'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'RFEA'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'UP_BEAT_LIFE'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'DVIP_RICHMOND'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'SAFE_GROUND'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'SUSSEX_PATHWAYS'),
+        ('b8c100a5-e440-4f72-bd2a-ab427dd433c4', 'SPARK_INSIDE'),
+        ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'WILLOWDENE'),
+        ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'JUDAH_ARMANI'),
+        ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'ALLIANCE_SPORT'),
+        ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'RISE_MUTUAL_CIC'),
+        ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'CIRCLES_UK'),
+        ('56e7d1cf-f3f7-4315-aa5a-0001c2da97ee', 'OFFPLOY'),
+        ('a4889d46-14d7-4a40-9a3c-161899271127', 'WILLOWDENE'),
+        ('a4889d46-14d7-4a40-9a3c-161899271127', 'JUDAH_ARMANI'),
+        ('a4889d46-14d7-4a40-9a3c-161899271127', 'ALLIANCE_SPORT'),
+        ('a4889d46-14d7-4a40-9a3c-161899271127', 'RISE_MUTUAL_CIC'),
+        ('a4889d46-14d7-4a40-9a3c-161899271127', 'CIRCLES_UK'),
+        ('a4889d46-14d7-4a40-9a3c-161899271127', 'OFFPLOY'),
+        ('e5e14556-acf8-4315-9885-8e0127ad4297', 'WILLOWDENE'),
+        ('e5e14556-acf8-4315-9885-8e0127ad4297', 'JUDAH_ARMANI'),
+        ('e5e14556-acf8-4315-9885-8e0127ad4297', 'ALLIANCE_SPORT'),
+        ('e5e14556-acf8-4315-9885-8e0127ad4297', 'RISE_MUTUAL_CIC'),
+        ('e5e14556-acf8-4315-9885-8e0127ad4297', 'CIRCLES_UK'),
+        ('e5e14556-acf8-4315-9885-8e0127ad4297', 'OFFPLOY'),
+        ('bf7a7f57-e641-47b7-a83a-10ff0b67393a', 'ST_GILES_TRUST'),
+        ('81348c2b-072a-4d99-a5e5-d9a441476d83', 'ST_GILES_TRUST'),
+        ('f7b5abdd-acd8-4372-8dde-840d1c73906d', 'ST_GILES_TRUST'),
+        ('84748538-da5c-4eb6-949d-a03319de949c', 'ST_GILES_TRUST'),
+        ('ce0be839-f8ff-4dc5-8221-72853238736d', 'PACT_FUTURES_CIC'),
+        ('ce0be839-f8ff-4dc5-8221-72853238736d', 'CHANGE_GROW_LIVE_LTD'),
+        ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'BEDFORD_WOMENS_CENTRE'),
+        ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'HIBISCUS_INIT'),
+        ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'WORKING_CHANCE_LTD'),
+        ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'AURORA_NEW_DAWN'),
+        ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'CAMBS_WMNS_RESOURCE_CTR'),
+        ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'HIBISCUS_INIT'),
+        ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'WORKING_CHANCE_LTD'),
+        ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'AURORA_NEW_DAWN'),
+        ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'BIRTH_COMPANIONS'),
+        ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'INCLUSION'),
+        ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'HIBISCUS_INIT'),
+        ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'WORKING_CHANCE_LTD'),
+        ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'AURORA_NEW_DAWN'),
+        ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'BIRTH_COMPANIONS'),
+        ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'HIBISCUS_INIT'),
+        ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'WORKING_CHANCE_LTD'),
+        ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'AURORA_NEW_DAWN'),
+        ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'BIRTH_COMPANIONS'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'BWC'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'CHOICES'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'HIBISCUS_INIT'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'WORKING_CHANCE_LTD'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'AURORA_NEW_DAWN'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'BIRTH_COMPANIONS'),
+        ('8b34f0f1-96ae-4930-bf3a-b9b26fd8b8a2', 'SHELTER'),
+        ('8b34f0f1-96ae-4930-bf3a-b9b26fd8b8a2', 'CHANGE_GROW_LIVE_LTD'),
+        ('cda7996f-3507-424d-ba90-659499def371', 'GROW'),
+        ('01f90f16-44a5-4513-8732-12651bad0f2f', 'ANAWIM'),
+        ('01f90f16-44a5-4513-8732-12651bad0f2f', 'BLACK_COUNTRY_WA'),
+        ('f4279de9-be0d-4123-a9e0-a5ba2f6f0cb2', 'THE_GROWTH_COMPANY_LTD'),
+        ('f4279de9-be0d-4123-a9e0-a5ba2f6f0cb2', 'TOMORROWS_WOMEN_WIRRAL'),
+        ('817618b8-75a0-4d79-a115-2f9c0ee40ce8', 'THE_GROWTH_COMPANY_LTD'),
+        ('817618b8-75a0-4d79-a115-2f9c0ee40ce8', 'TOMORROWS_WOMEN_WIRRAL'),
+        ('65b78598-9e4a-4f3d-8900-8b8dd451a83e', 'ST_GILES_TRUST'),
+        ('65b78598-9e4a-4f3d-8900-8b8dd451a83e', 'THE_WISE_GROUP_LTD'),
+        ('af58d97b-20dd-4be8-8901-39169d1e4665', 'THE_WISE_GROUP_LTD'),
+        ('af58d97b-20dd-4be8-8901-39169d1e4665', 'HUMANKIND'),
+        ('d3dfc493-3bc0-4802-815e-7575ff07deb1', 'THE_WISE_GROUP_LTD'),
+        ('d3dfc493-3bc0-4802-815e-7575ff07deb1', 'ANGLIA_CARE_TRUST'),
+        ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'THE_WISE_GROUP_LTD'),
+        ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'FOUNDATION'),
+        ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'IDAS'),
+        ('cadcf866-fbda-4fe5-87e4-325683943e55', 'THE_WISE_GROUP_LTD'),
+        ('cadcf866-fbda-4fe5-87e4-325683943e55', 'ANGLIA_CARE_TRUST'),
+        ('aea78365-7b57-40d8-90a4-49d3c58df992', 'ST_GILES_TRUST'),
+        ('aea78365-7b57-40d8-90a4-49d3c58df992', 'SHELTER'),
+        ('aea78365-7b57-40d8-90a4-49d3c58df992', 'LINCS_ACTION_TRUST'),
+        ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'ST_GILES_TRUST'),
+        ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'KHIDMAT_CENTRE'),
+        ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'SHELTER'),
+        ('da0bae6a-c9b7-424e-aa3a-1df9adf857e1', 'TOUCHSTONE_LEEDS'),
+        ('5e86290d-1dbd-4568-8f34-45295e7de194', 'PACT'),
+        ('5e86290d-1dbd-4568-8f34-45295e7de194', 'HIBISCUS_INIT'),
+        ('5e86290d-1dbd-4568-8f34-45295e7de194', 'WORKING_CHANCE_LTD'),
+        ('5e86290d-1dbd-4568-8f34-45295e7de194', 'AURORA_NEW_DAWN'),
+        ('5e86290d-1dbd-4568-8f34-45295e7de194', 'BIRTH_COMPANIONS'),
+        ('8f65de88-f8ca-4265-a01d-38291b63b7b0', 'ST_GILES_TRUST'),
+        ('8f65de88-f8ca-4265-a01d-38291b63b7b0', 'C2C'),
+        ('faa061db-fd1f-4b45-9ab6-20c5c74ec1a6', 'GATEWAY_4_WOMEN'),
+        ('faa061db-fd1f-4b45-9ab6-20c5c74ec1a6', 'WOMEN_OUT_WEST'),
+        ('22e19a63-8606-45a7-89ea-0dc34b967c91', 'KALEIDOSCOPE'),
+        ('71ef36f3-b4f3-4e2d-97b5-93d61c5a18bd', 'PLUSS_ORG_CIC'),
+        ('e618f0d6-efc2-486b-80fd-41185bf11cc3', 'PLUSS_ORG_CIC'),
+        ('d2eb080a-cacd-4c0b-9006-6fed288b39d7', 'PLUSS_ORG_CIC'),
+        ('73ffc0ca-84f5-4537-9ae8-b8d27eee9925', 'PLUSS_ORG_CIC'),
+        ('4f14bb52-a5a3-4a4b-a072-13bdcccf93d4', 'PLUSS_ORG_CIC'),
+        ('afee90f4-355b-4d77-a058-0cc0d3ff5f85', 'PLUSS_ORG_CIC'),
+        ('6319857e-52bf-488c-8b21-7432e1cb7fcd', 'PLUSS_ORG_CIC'),
+        ('ae8f64a3-56d2-46e6-a5d6-820bfb72411c', 'PLUSS_ORG_CIC'),
+        ('fadf83ab-a2f9-43ed-99bd-1c86f0db51f0', 'PLUSS_ORG_CIC'),
+        ('bf7a7f57-e641-47b7-a83a-10ff0b67393a', 'THE_WISE_GROUP_LTD'),
+        ('81348c2b-072a-4d99-a5e5-d9a441476d83', 'THE_WISE_GROUP_LTD'),
+        ('84748538-da5c-4eb6-949d-a03319de949c', 'THE_WISE_GROUP_LTD'),
+        ('2c02b50c-e848-4258-acf0-ec028d64f3d3', 'STEPPINGSTONES_LUTON'),
+        ('790ecc70-4cfe-4522-ad86-c69a7019b10b', 'SAFER_PLACES'),
+        ('4c8b1575-8ef3-4d2a-8e8c-37fca6d6cb94', 'SAFER_PLACES'),
+        ('2397773b-6abd-4c7c-ab90-5a9b7a65fd6e', 'ONE_SMALL_THING'),
+        ('e240405c-6302-4613-a5c3-1d14d85451f0', 'RISING_SUN_DVA'),
+        ('8b34f0f1-96ae-4930-bf3a-b9b26fd8b8a2', 'WORKING_CHANCE_LTD'),
+        ('d5e84209-e44c-4834-b45c-67390404501e', 'A_WAY_OUT'),
+        ('c9061aaa-89d2-401e-bdcc-9bc938321595', 'NEWDAWN_NEWDAY'),
+        ('cda7996f-3507-424d-ba90-659499def371', 'TOGETHER_WOMEN_PROJECT'),
+        ('c82df197-0915-45dc-966e-91b9f3e68022', 'ACCORD_HOUSING_ASSOC'),
+        ('01f90f16-44a5-4513-8732-12651bad0f2f', 'ACCORD_HOUSING_ASSOC'),
+        ('65b78598-9e4a-4f3d-8900-8b8dd451a83e', 'ANGLIA_CARE_TRUST'),
+        ('af58d97b-20dd-4be8-8901-39169d1e4665', 'ST_GILES_TRUST'),
+        ('d3dfc493-3bc0-4802-815e-7575ff07deb1', 'ST_GILES_TRUST'),
+        ('a7256d64-2cc5-4736-a67a-fd7a80d4de79', 'ST_GILES_TRUST'),
+        ('cadcf866-fbda-4fe5-87e4-325683943e55', 'ST_GILES_TRUST'),
+        ('8f65de88-f8ca-4265-a01d-38291b63b7b0', 'THE_WISE_GROUP_LTD'),
+        ('f8d9cb6f-70ef-486b-9e72-5b75e44c69e8', 'WOMENSSUPPORTCTR_SURREY'),
+        ('f5dbaa2e-841d-4cd2-80eb-2a76f404dca8', 'JIGSAW_SUPPORT'),
+        ('b4ab34b8-d426-4a0c-ae28-dcc303001b44', 'POPS'),
+        ('eb72a9a0-4096-41df-afb5-e47e33fecbc9', 'PETRUS_COMMUNITY'),
+        ('87513a02-7fc0-41dc-be0b-5a8bb314774c', 'SALFORD_FOUNDATION'),
+        ('17f3b0c6-dab5-4b1c-829b-9a07887383e9', 'URBAN_OUTREACH'),
+        ('2d64c5d5-1f1a-4a92-bbd3-5a14d424636b', 'WOMEN_FOR_WELL_WOMEN'),
+        ('796e5b73-1495-4d11-8cf5-1b23614d3ed7', 'WOMEN_IN_PRISON'),
+        ('79915b3c-efdf-48a8-8d76-22aeecb3df21', 'WOMEN_OF_WORTH'),
+        ('df6e90b4-166d-4362-9238-ba3ab0c010a1', 'STOCKPORT_WOMENS_CENTRE'),
+        ('767024f3-6aa5-4ca6-a3fa-dddd4b5c4d99', 'MANCHESTER_ATHENA'),
+        ('767024f3-6aa5-4ca6-a3fa-dddd4b5c4d99', 'ACORN'),
+        ('b0640bd2-d4db-4de8-956e-f4051826f5bb', 'ACCESS_2_ADVICE'),
+        ('82d5715c-6172-4a1e-a349-27dd4476cf81', 'BIRMINGHAM_SETTLEMENT'),
+        ('71947388-6d27-4231-9da7-7b9dd1ea9402', 'ACCESS_2_ADVICE'),
+        ('0487f430-7008-4383-bffc-631d0ee1c5cd', 'CATCH_22_CHARITY_LTD'),
+        ('b6525117-d604-4206-b046-6da53d12e461', 'HUMANKIND'),
+        ('b8749ab4-af69-41ee-9fb2-1daf91266765', 'HUMANKIND'),
+        ('2c15b134-ad58-4887-ad93-22ac58816222', 'HUMANKIND'),
+        ('af813600-bed0-42ac-91b5-94434fcb58b0', 'HUMANKIND'),
+        ('308c0396-44b2-4cb6-82bf-f25cb27ababa', 'RETHINK_MI_LTD'),
+        ('27aa4c15-3951-48af-973e-b0df8954742f', 'HUMANKIND'),
+        ('13cf8811-446e-4a81-851d-1196a314b9bf', 'ST_GILES_TRUST'),
+        ('13cf8811-446e-4a81-851d-1196a314b9bf', 'ADFERIAD'),
+        ('13cf8811-446e-4a81-851d-1196a314b9bf', 'THE_WISE_GROUP_LTD'),
+        ('308c0396-44b2-4cb6-82bf-f25cb27ababa', 'ST_GILES_TRUST'),
+        ('308c0396-44b2-4cb6-82bf-f25cb27ababa', 'THE_WISE_GROUP_LTD'),
+        ('0539cfa4-74ff-4beb-805d-15b0b40129fb', 'STEPCHANGE_DEBT_CHARITY'),
+        ('350f014f-e556-4099-a52a-764cb6093f83', 'THE_WISE_GROUP_LTD'),
+        ('350f014f-e556-4099-a52a-764cb6093f83', 'RETHINK_MI_LTD'),
+        ('350f014f-e556-4099-a52a-764cb6093f83', 'IMO_CHARITY'),
+        ('350f014f-e556-4099-a52a-764cb6093f83', 'ROTUNDA'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'HIBISCUS_INIT'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'HOUSING_4_WOMEN'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'WORKING_CHANCE_LTD'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'CLEAN_BREAK'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'SAFE_GROUND'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'INSPIRIT_T_D'),
+        ('0b3b960c-9131-4c21-8603-ad7d61015ea1', 'BIRTH_COMPANIONS'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'HIBISCUS_INIT'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'HOUSING_4_WOMEN'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'WORKING_CHANCE_LTD'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'CLEAN_BREAK'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'SAFE_GROUND'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'INSPIRIT_T_D'),
+        ('1a6d0fd8-4dd1-4eb1-b0f4-7934e717b2b8', 'BIRTH_COMPANIONS'),
+        ('ecb4c70a-b126-47da-bf9b-af6ff932de81', 'PECAN'),
+        ('1c04580a-004b-4868-9e2d-2c1c47c7c963', 'OUT_THERE_IN_TRAFFORD'),
+        ('a3fe3745-a058-43e5-bb40-696afc3373be', 'BOLTON_COMMUNITY_ADVICE'),
+        ('c3c4a501-271c-4445-8e7a-9b5974f9ac72', 'SALFORD_FOUNDATION'),
+        ('bbc669b0-7954-455b-8111-a1add8772a77', 'SALFORD_FOUNDATION'),
+        ('cc41363b-f75a-4a51-8dac-e00a6091e76a', 'BOLTON_COMMUNITY_ADVICE'),
+        ('10076c53-a4a9-4796-941d-f08cae2846a4', 'BACK_ON_TRACK'),
+        ('6c36675c-d210-4484-9ddb-4b22cbe765e2', 'STEPPINGSTONE_BURY'),
+        ('1d047e66-9151-4744-ae62-e5767cb8e537', 'FOUNDATION_92'),
+        ('f7b312e0-1b5d-4b05-87a7-cfff1d379e32', 'STEPPINGSTONE_BURY'),
+        ('58df5715-52dc-4c0a-9c5f-003de40a0b9f', 'BACK_ON_TRACK'),
+        ('b63d4aa7-36ea-4cf7-b78d-3398c3c744bf', 'FOUNDATION_92'),
+        ('2480c792-ef59-404c-bcc3-92fe6ff14e70', 'OUT_THERE_IN_TRAFFORD'),
+        ('2536cd67-89c2-4bb1-81e6-11e01610ec81', 'POSITIVE_STEPS'),
+        ('a1077bfa-1e46-47f7-80d9-65ea055b9705', 'POSITIVE_STEPS'),
+        ('c63c0ca5-d425-4967-9257-85e4c3c49692', 'ROCHDALE_CONNECTIONS_TR'),
+        ('2aa92170-d585-40d4-830c-c4a77b904bf9', 'ROCHDALE_CONNECTIONS_TR');
