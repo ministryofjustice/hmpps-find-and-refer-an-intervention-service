@@ -14,7 +14,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionC
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
-import java.util.*
+import java.util.UUID
 
 internal class InterventionCatalogueControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
