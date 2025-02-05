@@ -7,6 +7,7 @@ import java.util.UUID
 
 data class InterventionCatalogueDto(
   val id: UUID,
+  val criminogenicNeeds: List<String>,
   val title: String,
   val description: String,
   val interventionType: InterventionType,
@@ -26,9 +27,15 @@ data class InterventionCatalogueDto(
       val deliveryMethodDtos =
         interventionCatalogue.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
       val deliveryMethodSettingList =
-        deliveryMethodDtos.flatMap { methodDto -> methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting } }
+        deliveryMethodDtos.flatMap { methodDto ->
+          methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting }
+        }
       return InterventionCatalogueDto(
         id = interventionCatalogue.id,
+        criminogenicNeeds =
+        interventionCatalogue.criminogenicNeeds.map {
+          CriminogenicNeedDto.fromEntity(it).need
+        },
         title = interventionCatalogue.name,
         description = interventionCatalogue.shortDescription,
         interventionType = interventionCatalogue.interventionType,
@@ -37,7 +44,8 @@ data class InterventionCatalogueDto(
         allowsFemales = interventionCatalogue.personalEligibility?.females!!,
         minAge = interventionCatalogue.personalEligibility?.minAge,
         maxAge = interventionCatalogue.personalEligibility?.maxAge,
-        riskCriteria = interventionCatalogue.riskConsideration?.let {
+        riskCriteria =
+        interventionCatalogue.riskConsideration?.let {
           RiskConsiderationDto.fromEntity(it).listOfRisks()
         },
         attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
