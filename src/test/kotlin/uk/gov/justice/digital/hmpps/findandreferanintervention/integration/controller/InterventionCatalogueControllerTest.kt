@@ -28,7 +28,7 @@ internal class InterventionCatalogueControllerTest {
     val catalogue =
       InterventionCatalogueDto(
         id = UUID.randomUUID(),
-        criminogenicNeeds = listOf("NEED_1","NEED_2"),
+        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
         title = "Test Title",
         description = "Test Description",
         deliveryFormat = listOf("In Person"),
@@ -98,7 +98,7 @@ internal class InterventionCatalogueControllerTest {
     val catalogue =
       InterventionCatalogueDto(
         id = UUID.randomUUID(),
-        criminogenicNeeds = listOf("NEED_1","NEED_2"),
+        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
         title = "Test Title",
         description = "Test Description",
         deliveryFormat = listOf("In Person"),
