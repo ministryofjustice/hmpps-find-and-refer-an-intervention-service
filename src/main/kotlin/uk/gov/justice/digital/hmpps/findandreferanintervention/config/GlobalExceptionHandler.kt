@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.springframework.web.servlet.resource.NoResourceFoundException
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 
 @RestControllerAdvice
@@ -66,8 +65,7 @@ class GlobalExceptionHandler {
   @ResponseStatus(BAD_REQUEST)
   fun handleEnumMismatchException(ex: MethodArgumentTypeMismatchException): ResponseEntity<String> {
     val errorMessage =
-      "Invalid value for InterventionType: ${ex.value}. Valid values are: ${
-        InterventionType.entries}"
+      "Invalid value for parameter ${ex.parameter.parameterName}: ${ex.value}"
     return ResponseEntity(errorMessage, BAD_REQUEST)
   }
 
