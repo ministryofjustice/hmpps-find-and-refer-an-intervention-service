@@ -26,6 +26,6 @@ interface InterventionCatalogueFilterRepository {
   )
   fun findAllInterventionCatalogueByCriteria(
     pageable: Pageable,
-    interventionType: InterventionType?,
+    interventionTypes: List<InterventionType>?,
   ): Page<InterventionCatalogue>
 }

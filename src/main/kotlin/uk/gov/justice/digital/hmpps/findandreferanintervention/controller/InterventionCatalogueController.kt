@@ -23,12 +23,13 @@ class InterventionCatalogueController(
   fun getInterventionsCatalogue(
     @PageableDefault(page = 0, size = 10) pageable: Pageable,
     @RequestParam(name = "interventionType", required = false)
-    interventionType: InterventionType?,
+    interventionTypes: List<InterventionType>?,
   ): Page<InterventionCatalogueDto> {
     logToAppInsights()
+
     return interventionCatalogueService.getInterventionsCatalogueByCriteria(
       pageable,
-      interventionType,
+      interventionTypes,
     )
   }
 

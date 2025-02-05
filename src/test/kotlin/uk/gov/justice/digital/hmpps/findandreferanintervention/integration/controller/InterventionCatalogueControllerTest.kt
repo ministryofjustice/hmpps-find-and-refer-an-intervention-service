@@ -94,8 +94,8 @@ internal class InterventionCatalogueControllerTest {
   @Test
   fun `getInterventionsCatalogueByInterventionType when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    val interventionType = InterventionType.ACP
-    val catalogue =
+    val interventionTypes = listOf(InterventionType.ACP)
+    val acpIntervention =
       InterventionCatalogueDto(
         id = UUID.randomUUID(),
         criminogenicNeeds = listOf("NEED_1", "NEED_2"),
@@ -114,12 +114,12 @@ internal class InterventionCatalogueControllerTest {
     whenever(
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
-        interventionType,
+        interventionTypes,
       ),
     )
-      .thenReturn(PageImpl(listOf(catalogue)))
+      .thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionType)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
 
     verify(telemetryClient)
       .trackEvent(
@@ -151,18 +151,94 @@ internal class InterventionCatalogueControllerTest {
   }
 
   @Test
-  fun `getInterventionsCatalogueByInterventionType when empty return a paged result of interventions`() {
+  fun `getInterventionsCatalogueByInterventionType when searching by multiple types and they are present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    val interventionType = InterventionType.ACP
+    val interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS)
+    val acpIntervention =
+      InterventionCatalogueDto(
+        id = UUID.randomUUID(),
+        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
+        title = "Test Title",
+        description = "Test Description",
+        deliveryFormat = listOf("In Person"),
+        interventionType = InterventionType.ACP,
+        setting = listOf(SettingType.COMMUNITY),
+        allowsMales = true,
+        allowsFemales = true,
+        minAge = 18,
+        maxAge = 30,
+        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
+        attendanceType = listOf("One-to-one"),
+      )
+    val crsIntervention =
+      InterventionCatalogueDto(
+        id = UUID.randomUUID(),
+        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
+        title = "Test Title",
+        description = "Test Description",
+        deliveryFormat = listOf("In Person"),
+        interventionType = InterventionType.CRS,
+        setting = listOf(SettingType.COMMUNITY),
+        allowsMales = true,
+        allowsFemales = true,
+        minAge = 18,
+        maxAge = 30,
+        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
+        attendanceType = listOf("One-to-one"),
+      )
     whenever(
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
-        interventionType,
+        interventionTypes,
+      ),
+    )
+      .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
+    val response =
+      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+
+    verify(telemetryClient)
+      .trackEvent(
+        "InterventionsCatalogue Summary",
+        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+        null,
+      )
+
+    assertThat(response).isNotNull
+    assertThat(response.content).isNotEmpty
+    assertThat(
+      response.content.all {
+        it.hasProperty("id")
+        it.hasProperty("criminogenicNeeds")
+        it.hasProperty("title")
+        it.hasProperty("description")
+        it.hasProperty("deliveryFormat")
+        it.hasProperty("interventionType")
+        it.hasProperty("setting")
+        it.hasProperty("allowsMales")
+        it.hasProperty("allowsFemales")
+        it.hasProperty("minAge")
+        it.hasProperty("maxAge")
+        it.hasProperty("riskCriteria")
+        it.hasProperty("attendanceType")
+      },
+    )
+    assertThat(response.totalElements).isEqualTo(2)
+    assertThat(response.content[0].title).isEqualTo("Test Title")
+  }
+
+  @Test
+  fun `getInterventionsCatalogueByInterventionType when empty return a paged result of interventions`() {
+    val pageable = PageRequest.of(0, 10)
+    val interventionTypes = listOf(InterventionType.ACP)
+    whenever(
+      interventionCatalogueService.getInterventionsCatalogueByCriteria(
+        pageable,
+        interventionTypes,
       ),
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionType)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
 
     verify(telemetryClient)
       .trackEvent(

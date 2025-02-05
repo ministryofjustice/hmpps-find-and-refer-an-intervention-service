@@ -16,13 +16,13 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
 
   override fun findAllInterventionCatalogueByCriteria(
     pageable: Pageable,
-    interventionType: InterventionType?,
+    interventionTypes: List<InterventionType>?,
   ): Page<InterventionCatalogue> {
     val criteriaQuery: CriteriaQuery<InterventionCatalogue> =
       criteriaBuilder.createQuery(InterventionCatalogue::class.java)
     val root: Root<InterventionCatalogue> = criteriaQuery.from(InterventionCatalogue::class.java)
 
-    interventionType?.let { filterByInterventionType(interventionType, criteriaQuery, root) }
+    interventionTypes?.let { filterByInterventionType(interventionTypes, criteriaQuery, root) }
 
     val query = entityManager.createQuery(criteriaQuery)
     query.setFirstResult(pageable.offset.toInt())
@@ -30,20 +30,21 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
 
     val resultList = query.resultList
 
-    val totalCount = getTotalCount(interventionType)
+    val totalCount = getTotalCount(interventionTypes)
 
     return PageImpl(resultList, pageable, totalCount)
   }
 
   private fun <T> filterByInterventionType(
-    interventionType: InterventionType?,
+    interventionTypes: List<InterventionType>?,
     criteriaQuery: CriteriaQuery<T>,
     root: Root<InterventionCatalogue>,
-  ): CriteriaQuery<T> = criteriaQuery.where(
-    criteriaBuilder.equal(root.get<String>("interventionType"), interventionType),
-  )
+  ): CriteriaQuery<T> {
+    val predicate = root.get<String>("interventionType").`in`(interventionTypes)
+    return criteriaQuery.where(predicate)
+  }
 
-  private fun getTotalCount(interventionType: InterventionType?): Long {
+  private fun getTotalCount(interventionType: List<InterventionType>?): Long {
     val countCriteriaQuery: CriteriaQuery<Long> = criteriaBuilder.createQuery(Long::class.java)
     val countRoot: Root<InterventionCatalogue> =
       countCriteriaQuery.from(InterventionCatalogue::class.java)

@@ -14,8 +14,8 @@ class InterventionCatalogueService(
 
   fun getInterventionsCatalogueByCriteria(
     pageable: Pageable,
-    interventionType: InterventionType?,
+    interventionTypes: List<InterventionType>?,
   ): Page<InterventionCatalogueDto> = interventionCatalogueRepository
-    .findAllInterventionCatalogueByCriteria(pageable, interventionType)
+    .findAllInterventionCatalogueByCriteria(pageable, interventionTypes)
     .map { intervention -> InterventionCatalogueDto.fromEntity(intervention) }
 }

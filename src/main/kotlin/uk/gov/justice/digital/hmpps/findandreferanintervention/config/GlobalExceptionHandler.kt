@@ -63,11 +63,17 @@ class GlobalExceptionHandler {
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)
   @ResponseStatus(BAD_REQUEST)
-  fun handleEnumMismatchException(ex: MethodArgumentTypeMismatchException): ResponseEntity<String> {
-    val errorMessage =
-      "Invalid value for parameter ${ex.parameter.parameterName}: ${ex.value}"
-    return ResponseEntity(errorMessage, BAD_REQUEST)
-  }
+  fun handleEnumMismatchException(e: MethodArgumentTypeMismatchException): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
+    .body(
+      ErrorResponse(
+        status = BAD_REQUEST,
+        userMessage = "Invalid value for parameter ${e.parameter.parameterName}",
+        developerMessage = e.message,
+      ),
+    )
+    .also {
+      log.error("Unexpected exception", e)
+    }
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)

@@ -25,7 +25,7 @@ constructor(
     val pageRequest = PageRequest.of(0, 10)
     val interventions =
       interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-        interventionType = InterventionType.ACP,
+        interventionTypes = listOf(InterventionType.ACP),
         pageable = pageRequest,
       )
 
@@ -56,7 +56,7 @@ constructor(
     val pageRequest = PageRequest.of(0, 10)
     val interventions =
       interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-        interventionType = InterventionType.SI,
+        interventionTypes = listOf(InterventionType.SI),
         pageable = pageRequest,
       )
 
@@ -65,11 +65,45 @@ constructor(
   }
 
   @Test
+  fun `findAllInterventionCatalogueByCriteria by interventionType = 'ACP' AND interventionType = 'CRS' and there are interventions return a page of interventions`() {
+    val pageRequest = PageRequest.of(0, 10)
+    val interventions =
+      interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
+        pageable = pageRequest,
+      )
+
+    assertThat(interventions.totalElements).isEqualTo(9)
+    assertThat(
+      interventions.content.all {
+        it.hasProperty("name")
+        it.hasProperty("shortDescription")
+        it.hasProperty("intType")
+        it.hasProperty("criminogenicNeeds")
+        it.hasProperty("deliveryLocations")
+        it.hasProperty("deliveryMethods")
+        it.hasProperty("eligibleOffences")
+        it.hasProperty("enablingInterventions")
+        it.hasProperty("excludedOffences")
+        it.hasProperty("exclusion")
+        it.hasProperty("personalEligibility")
+        it.hasProperty("possibleOutcomes")
+        it.hasProperty("riskConsideration")
+        it.hasProperty("specialEducationalNeeds")
+      },
+    )
+    assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
+    assertThat(assertThat(interventions.content[0].interventionType).isEqualTo(InterventionType.ACP))
+    assertThat(interventions.content[5].name).isEqualTo("Accommodation")
+    assertThat(assertThat(interventions.content[5].interventionType).isEqualTo(InterventionType.CRS))
+  }
+
+  @Test
   fun `findAllInterventionCatalogueByCriteria with no criteria and there are interventions return a page of all interventions`() {
     val pageRequest = PageRequest.of(0, 10)
     val interventions =
       interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-        interventionType = null,
+        interventionTypes = null,
         pageable = pageRequest,
       )
 
