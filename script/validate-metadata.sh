@@ -1,11 +1,10 @@
 #!/bin/bash
 PGPASSWORD=dev
-#m.*
-missing_columns="SELECT *
+missing_columns="SELECT i.table_name, i.column_name, m.sensitive, m.domain_data
 FROM information_schema.columns i
          LEFT JOIN metadata m ON i.table_name = m.table_name AND i.column_name = m.column_name
 WHERE i.table_schema = 'public'
-  AND (m.sensitive IS NULL OR m.domain_data IS NULL);"
+  AND (m.sensitive IS NULL OR m.domain_data IS NULL) order by i.table_name, i.column_name;"
 
 missing_table_comment="SELECT c.table_name, pg_catalog.obj_description(c.table_name::regclass::oid) AS table_comment
 FROM information_schema.columns AS c
