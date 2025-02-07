@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository
 import jakarta.persistence.EntityManager
 import jakarta.persistence.criteria.CriteriaBuilder
 import jakarta.persistence.criteria.CriteriaQuery
+import jakarta.persistence.criteria.Predicate
 import jakarta.persistence.criteria.Root
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
@@ -27,11 +28,7 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
     val criteriaQuery: CriteriaQuery<InterventionCatalogue> =
       criteriaBuilder.createQuery(InterventionCatalogue::class.java)
     val root = criteriaQuery.from(InterventionCatalogue::class.java)
-
-    allowsFemales?.let { filterByFemale(criteriaQuery, root, allowsFemales) }
-    allowsMales?.let { filterByMale(criteriaQuery, root, allowsMales) }
-    interventionTypes?.let { filterByInterventionType(criteriaQuery, root, interventionTypes) }
-    settingType?.let { filterBySetting(criteriaQuery, root, settingType) }
+    criteriaQuery.where(getPredicates(root, allowsFemales, allowsMales, interventionTypes, settingType))
 
     val query = entityManager.createQuery(criteriaQuery)
     query.setFirstResult(pageable.offset.toInt())
@@ -44,45 +41,41 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
     return PageImpl(resultList, pageable, totalCount)
   }
 
-  private fun <T> filterByFemale(
-    criteriaQuery: CriteriaQuery<T>,
+  private fun filterByFemalePredicate(
     root: Root<InterventionCatalogue>,
     allowsFemales: Boolean?,
-  ): CriteriaQuery<T> = criteriaQuery.where(
+  ): Predicate? = allowsFemales?.let {
     criteriaBuilder.equal(
       root.get<PersonalEligibility>("personalEligibility").get<Boolean>("females"),
       allowsFemales,
-    ),
-  )
+    )
+  }
 
-  private fun <T> filterByMale(
-    criteriaQuery: CriteriaQuery<T>,
+  private fun filterByMalePredicate(
     root: Root<InterventionCatalogue>,
-    allowsMales: Boolean,
-  ): CriteriaQuery<T> = criteriaQuery.where(
+    allowsMales: Boolean?,
+  ): Predicate? = allowsMales?.let {
     criteriaBuilder.equal(
       root.get<PersonalEligibility>("personalEligibility").get<Boolean>("males"),
       allowsMales,
-    ),
-  )
+    )
+  }
 
-  private fun <T> filterByInterventionType(
-    criteriaQuery: CriteriaQuery<T>,
+  private fun filterByInterventionTypePredicate(
     root: Root<InterventionCatalogue>,
     interventionTypes: List<InterventionType>?,
-  ): CriteriaQuery<T> = criteriaQuery.where(root.get<String>("interventionType").`in`(interventionTypes))
+  ): Predicate? = interventionTypes?.let { root.get<String>("interventionType").`in`(interventionTypes) }
 
-  private fun <T> filterBySetting(
-    criteriaQuery: CriteriaQuery<T>,
+  private fun filterBySettingPredicate(
     root: Root<InterventionCatalogue>,
-    settingType: SettingType,
-  ) = criteriaQuery.where(
+    settingType: SettingType?,
+  ): Predicate? = settingType?.let {
     criteriaBuilder.equal(
       root.get<PersonalEligibility>("deliveryMethods").get<DeliveryMethodSetting>("deliveryMethodSettings")
         .get<SettingType>("setting"),
       settingType,
-    ),
-  )
+    )
+  }
 
   private fun getTotalCount(
     allowsFemales: Boolean?,
@@ -94,14 +87,39 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
     val countRoot: Root<InterventionCatalogue> =
       countCriteriaQuery.from(InterventionCatalogue::class.java)
 
-    allowsFemales?.let { filterByMale(countCriteriaQuery, countRoot, allowsFemales) }
-    allowsMales?.let { filterByMale(countCriteriaQuery, countRoot, allowsMales) }
-    interventionTypes?.let {
-      filterByInterventionType(countCriteriaQuery, countRoot, interventionTypes)
-    }
-    settingType?.let { filterBySetting(countCriteriaQuery, countRoot, settingType) }
+    countCriteriaQuery.where(
+      getPredicates(
+        countRoot,
+        allowsFemales,
+        allowsMales,
+        interventionTypes,
+        settingType,
+      ),
+    )
 
     countCriteriaQuery.select(criteriaBuilder.count(countRoot))
     return entityManager.createQuery(countCriteriaQuery).singleResult
+  }
+
+  private fun getPredicates(
+    root: Root<InterventionCatalogue>,
+    allowsFemales: Boolean?,
+    allowsMales: Boolean?,
+    interventionTypes: List<InterventionType>?,
+    settingType: SettingType?,
+  ): Predicate {
+    val filterByFemalePredicate = filterByFemalePredicate(root, allowsFemales)
+    val filterByMalePredicate = filterByMalePredicate(root, allowsMales)
+    val filterByInterventionTypesPredicate = filterByInterventionTypePredicate(root, interventionTypes)
+    val filterBySettingTypePredicate = filterBySettingPredicate(root, settingType)
+
+    val predicates = listOfNotNull(
+      filterByFemalePredicate,
+      filterByMalePredicate,
+      filterByInterventionTypesPredicate,
+      filterBySettingTypePredicate,
+    )
+
+    return criteriaBuilder.and(*predicates.toTypedArray())
   }
 }
