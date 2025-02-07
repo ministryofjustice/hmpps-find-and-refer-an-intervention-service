@@ -48,7 +48,20 @@ open class Exclusion(
   open var scheduleFrequencyGuide: String? = null,
 
   @NotNull
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @OneToOne(mappedBy = "interventionCatalogue", fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "intervention_id")
   open var intervention: InterventionCatalogue,
-)
+) {
+  // This is to avoid stack overflow issues with the bi-directional association with referral
+  override fun toString(): String = "Exclusion(id=$id, minRemainingSentenceDurationGuide=$minRemainingSentenceDurationGuide,remainingLicenseCommunityOrderGuide=$remainingLicenseCommunityOrderGuide,alcoholDrugProblemGuide=$alcoholDrugProblemGuide,alcoholDrugProblemGuide=$alcoholDrugProblemGuide,otherPreferredMethodGuide=$otherPreferredMethodGuide,sameTypeRuleGuide=$sameTypeRuleGuide,scheduleFrequencyGuide=$scheduleFrequencyGuide,intervention=$intervention )"
+
+  override fun hashCode(): Int = id.hashCode()
+
+  override fun equals(other: Any?): Boolean {
+    if (other == null || other !is Exclusion) {
+      return false
+    }
+
+    return id == other.id
+  }
+}
