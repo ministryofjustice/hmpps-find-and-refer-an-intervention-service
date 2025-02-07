@@ -29,7 +29,7 @@ open class InterventionCatalogue(
   @Column(name = "name", length = Integer.MAX_VALUE)
   open var name: String,
 
-  @NotNull
+  @Nullable
   @Column(name = "short_description", length = Integer.MAX_VALUE)
   open var shortDescription: String,
 

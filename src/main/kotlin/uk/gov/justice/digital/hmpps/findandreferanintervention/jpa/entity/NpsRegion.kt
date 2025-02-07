@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
-import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -17,7 +16,7 @@ open class NpsRegion(
   @Column(name = "id", length = 1)
   open var id: String,
 
-  @Nullable
+  @NotNull
   @Column(name = "name", length = Integer.MAX_VALUE)
   open var name: String? = null,
 )

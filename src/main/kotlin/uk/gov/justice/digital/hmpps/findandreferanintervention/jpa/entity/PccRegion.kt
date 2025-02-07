@@ -24,6 +24,6 @@ open class PccRegion(
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "nps_region")
+  @JoinColumn(name = "nps_region_id")
   open var npsRegion: NpsRegion,
 )
