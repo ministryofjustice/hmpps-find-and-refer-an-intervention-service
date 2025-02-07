@@ -41,9 +41,9 @@ internal class InterventionCatalogueControllerTest {
         riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
         attendanceType = listOf("One-to-one"),
       )
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null))
+    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf(catalogue)))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null)
+    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -76,9 +76,9 @@ internal class InterventionCatalogueControllerTest {
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when empty return a empty list of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null))
+    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf()))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null)
+    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -115,11 +115,14 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
+        null,
+        null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -190,11 +193,14 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
+        null,
+        null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -234,11 +240,14 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
+        null,
+        null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(

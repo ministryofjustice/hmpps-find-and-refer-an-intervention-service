@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.EntityGraph
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 
 interface InterventionCatalogueFilterRepository {
 
@@ -26,6 +27,9 @@ interface InterventionCatalogueFilterRepository {
   )
   fun findAllInterventionCatalogueByCriteria(
     pageable: Pageable,
+    allowsFemales: Boolean?,
+    allowsMales: Boolean?,
     interventionTypes: List<InterventionType>?,
+    settingType: SettingType?,
   ): Page<InterventionCatalogue>
 }

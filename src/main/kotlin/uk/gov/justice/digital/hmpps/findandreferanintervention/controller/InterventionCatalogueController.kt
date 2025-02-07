@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
 
 @RestController
@@ -24,12 +25,21 @@ class InterventionCatalogueController(
     @PageableDefault(page = 0, size = 10) pageable: Pageable,
     @RequestParam(name = "interventionType", required = false)
     interventionTypes: List<InterventionType>?,
+    @RequestParam(name = "setting", required = false)
+    settingType: SettingType?,
+    @RequestParam(name = "allowsMales", required = false)
+    allowsMales: Boolean?,
+    @RequestParam(name = "allowsFemales", required = false)
+    allowsFemales: Boolean?,
   ): Page<InterventionCatalogueDto> {
     logToAppInsights()
 
     return interventionCatalogueService.getInterventionsCatalogueByCriteria(
       pageable,
       interventionTypes,
+      settingType,
+      allowsMales,
+      allowsFemales,
     )
   }
 
