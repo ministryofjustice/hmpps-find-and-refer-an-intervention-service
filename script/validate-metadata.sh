@@ -1,6 +1,7 @@
 #!/bin/bash
-PGPASSWORD=password
-missing_columns="SELECT m.*
+PGPASSWORD=dev
+#m.*
+missing_columns="SELECT *
 FROM information_schema.columns i
          LEFT JOIN metadata m ON i.table_name = m.table_name AND i.column_name = m.column_name
 WHERE i.table_schema = 'public'
@@ -17,7 +18,7 @@ ORDER BY c.table_name;"
 
 found_missing_doc=""
 
-column_validation="$(psql -v"ON_ERROR_STOP=1" -U "postgres" "postgresql://localhost:5432/${POSTGRES_DB:-findandrefer}" \
+column_validation="$(psql -v"ON_ERROR_STOP=1" -U "root" "postgresql://localhost:5432/${POSTGRES_DB:-postgres}" \
   --command "$missing_columns")"
 
 echo
@@ -35,7 +36,7 @@ else
   echo "INSERT INTO metadata (table_name, column_name, ...) VALUES (..., ..., ...);"
 fi
 
-table_comment_validation="$(psql -v"ON_ERROR_STOP=1" -U "postgres" "postgresql://localhost:5432/${POSTGRES_DB:-findandrefer}" \
+table_comment_validation="$(psql -v"ON_ERROR_STOP=1" -U "root" "postgresql://localhost:5432/${POSTGRES_DB:-postgres}" \
   --command "$missing_table_comment")"
 
 echo
