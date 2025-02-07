@@ -54,22 +54,23 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
-    assertThat(
-      response.content.all {
-        it.hasProperty("id")
-        it.hasProperty("title")
-        it.hasProperty("description")
-        it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionTyps")
-        it.hasProperty("setting")
-        it.hasProperty("allowsMales")
-        it.hasProperty("allowsFemales")
-        it.hasProperty("minAge")
-        it.hasProperty("maxAge")
-        it.hasProperty("riskCriteria")
-        it.hasProperty("attendanceType")
-      },
-    )
+
+    response.content.forEach { item ->
+      assertThat(item).hasProperty("id")
+      assertThat(item.hasProperty("criminogenicNeeds"))
+      assertThat(item.hasProperty("title"))
+      assertThat(item.hasProperty("description"))
+      assertThat(item.hasProperty("deliveryFormat"))
+      assertThat(item.hasProperty("interventionType"))
+      assertThat(item.hasProperty("setting"))
+      assertThat(item.hasProperty("allowsMales"))
+      assertThat(item.hasProperty("allowsFemales"))
+      assertThat(item.hasProperty("minAge"))
+      assertThat(item.hasProperty("maxAge"))
+      assertThat(item.hasProperty("riskCriteria"))
+      assertThat(item.hasProperty("attendanceType"))
+    }
+
     assertThat(response.content[0].title).isEqualTo("Test Title")
   }
 
@@ -122,7 +123,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes, null, null, null)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -133,23 +134,21 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
-    assertThat(
-      response.content.all {
-        it.hasProperty("id")
-        it.hasProperty("criminogenicNeeds")
-        it.hasProperty("title")
-        it.hasProperty("description")
-        it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionType")
-        it.hasProperty("setting")
-        it.hasProperty("allowsMales")
-        it.hasProperty("allowsFemales")
-        it.hasProperty("minAge")
-        it.hasProperty("maxAge")
-        it.hasProperty("riskCriteria")
-        it.hasProperty("attendanceType")
-      },
-    )
+    response.content.forEach { item ->
+      assertThat(item).hasProperty("id")
+      assertThat(item.hasProperty("criminogenicNeeds"))
+      assertThat(item.hasProperty("title"))
+      assertThat(item.hasProperty("description"))
+      assertThat(item.hasProperty("deliveryFormat"))
+      assertThat(item.hasProperty("interventionType"))
+      assertThat(item.hasProperty("setting"))
+      assertThat(item.hasProperty("allowsMales"))
+      assertThat(item.hasProperty("allowsFemales"))
+      assertThat(item.hasProperty("minAge"))
+      assertThat(item.hasProperty("maxAge"))
+      assertThat(item.hasProperty("riskCriteria"))
+      assertThat(item.hasProperty("attendanceType"))
+    }
     assertThat(response.content[0].title).isEqualTo("Test Title")
   }
 
@@ -200,7 +199,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes, null, null, null)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -211,23 +210,21 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
-    assertThat(
-      response.content.all {
-        it.hasProperty("id")
-        it.hasProperty("criminogenicNeeds")
-        it.hasProperty("title")
-        it.hasProperty("description")
-        it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionType")
-        it.hasProperty("setting")
-        it.hasProperty("allowsMales")
-        it.hasProperty("allowsFemales")
-        it.hasProperty("minAge")
-        it.hasProperty("maxAge")
-        it.hasProperty("riskCriteria")
-        it.hasProperty("attendanceType")
-      },
-    )
+    response.content.forEach { item ->
+      assertThat(item).hasProperty("id")
+      assertThat(item.hasProperty("criminogenicNeeds"))
+      assertThat(item.hasProperty("title"))
+      assertThat(item.hasProperty("description"))
+      assertThat(item.hasProperty("deliveryFormat"))
+      assertThat(item.hasProperty("interventionType"))
+      assertThat(item.hasProperty("setting"))
+      assertThat(item.hasProperty("allowsMales"))
+      assertThat(item.hasProperty("allowsFemales"))
+      assertThat(item.hasProperty("minAge"))
+      assertThat(item.hasProperty("maxAge"))
+      assertThat(item.hasProperty("riskCriteria"))
+      assertThat(item.hasProperty("attendanceType"))
+    }
     assertThat(response.totalElements).isEqualTo(2)
     assertThat(response.content[0].title).isEqualTo("Test Title")
   }
@@ -247,7 +244,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes, null, null, null)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(

@@ -25,52 +25,52 @@ open class RiskConsideration(
 
   @Nullable
   @Column(name = "cn_score_guide", length = Integer.MAX_VALUE)
-  open var cnScoreGuide: String,
+  open var cnScoreGuide: String?,
 
   @Nullable
   @Column(name = "extremism_risk_guide", length = Integer.MAX_VALUE)
-  open var extremismRiskGuide: String,
+  open var extremismRiskGuide: String?,
 
   @Nullable
   @Column(name = "sara_partner_score_guide", length = Integer.MAX_VALUE)
-  open var saraPartnerScoreGuide: String,
+  open var saraPartnerScoreGuide: String?,
 
   @Nullable
   @Column(name = "sara_other_score_guide", length = Integer.MAX_VALUE)
-  open var saraOtherScoreGuide: String,
+  open var saraOtherScoreGuide: String?,
 
   @Nullable
   @Column(name = "osp_score_guide", length = Integer.MAX_VALUE)
-  open var ospScoreGuide: String,
+  open var ospScoreGuide: String?,
 
   @Nullable
   @Column(name = "osp_dc_icc_combination_guide", length = Integer.MAX_VALUE)
-  open var ospDcIccCombinationGuide: String,
+  open var ospDcIccCombinationGuide: String?,
 
   @Nullable
   @Column(name = "ogrs_score_guide", length = Integer.MAX_VALUE)
-  open var ogrsScoreGuide: String,
+  open var ogrsScoreGuide: String?,
 
   @Nullable
   @Column(name = "ovp_guide", length = Integer.MAX_VALUE)
-  open var ovpGuide: String,
+  open var ovpGuide: String?,
 
   @Nullable
   @Column(name = "ogp_guide", length = Integer.MAX_VALUE)
-  open var ogpGuide: String,
+  open var ogpGuide: String?,
 
   @Nullable
   @Column(name = "pna_guide", length = Integer.MAX_VALUE)
-  open var pnaGuide: String,
+  open var pnaGuide: String?,
 
   @Nullable
   @Column(name = "rsr_guide", length = Integer.MAX_VALUE)
-  open var rsrGuide: String,
+  open var rsrGuide: String?,
 
   @Column(name = "rosh_level", columnDefinition = "rosh_levels")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
-  open var roshLevel: RoshLevel,
+  open var roshLevel: RoshLevel?,
 
   @NotNull
   @OneToOne(fetch = FetchType.LAZY, optional = false)

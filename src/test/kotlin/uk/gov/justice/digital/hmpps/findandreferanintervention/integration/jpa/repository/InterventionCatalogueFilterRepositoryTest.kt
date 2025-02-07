@@ -41,7 +41,7 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(5)
-      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
     }
 
@@ -74,7 +74,7 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(9)
-      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
       assertThat(assertThat(interventions.content[0].interventionType).isEqualTo(InterventionType.ACP))
       assertThat(interventions.content[5].name).isEqualTo("Accommodation")
@@ -98,7 +98,7 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(5)
-      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
       assertThat(assertThat(interventions.content[0].interventionType).isEqualTo(InterventionType.ACP))
     }
@@ -120,7 +120,7 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(9)
-      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
     }
 
@@ -137,7 +137,7 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(2)
-      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content.all { it.personalEligibility!!.females }).isTrue()
     }
 
@@ -154,9 +154,31 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(2)
-      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content.all { it.personalEligibility!!.females }).isTrue()
       assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
+    }
+  }
+
+  @Nested
+  @DisplayName("Multiple filters")
+  inner class FilterByMultiple {
+    @Test
+    fun `findInterventionByTypeSettingAndGender and there are interventions return a page of interventions`() {
+      val pageRequest = PageRequest.of(0, 10)
+      val interventions =
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+          pageable = pageRequest,
+          allowsFemales = null,
+          allowsMales = true,
+          interventionTypes = listOf(InterventionType.ACP),
+          settingType = SettingType.CUSTODY,
+        )
+
+      assertThat(interventions.totalElements).isEqualTo(2)
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
+      assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
+      assertThat(interventions.content.all { it.interventionType == InterventionType.ACP })
     }
   }
 
@@ -173,7 +195,7 @@ constructor(
       )
 
     assertThat(interventions.totalElements).isEqualTo(9)
-    assertThat(hasAllCatalogueProperties(interventions))
+    assertThat(hasAllCatalogueProperties(interventions)).isTrue()
     assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
   }
 

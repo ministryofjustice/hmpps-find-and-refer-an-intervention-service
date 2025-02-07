@@ -22,5 +22,4 @@ open class CriminogenicNeed(
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "need_id")
   open var need: CriminogenicNeedRef,
-
 )
