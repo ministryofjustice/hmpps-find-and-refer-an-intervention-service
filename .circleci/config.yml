@@ -26,6 +26,10 @@ jobs:
           paths:
             - ~/.gradle
           key: gradle-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Validate metadata
+          command: |
+            script/validate-metadata.sh
       - store_test_results:
           path: build/test-results
       - store_artifacts:
