@@ -41,9 +41,9 @@ internal class InterventionCatalogueControllerTest {
         riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
         attendanceType = listOf("One-to-one"),
       )
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null))
+    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf(catalogue)))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null)
+    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -54,31 +54,32 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
-    assertThat(
-      response.content.all {
-        it.hasProperty("id")
-        it.hasProperty("title")
-        it.hasProperty("description")
-        it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionTyps")
-        it.hasProperty("setting")
-        it.hasProperty("allowsMales")
-        it.hasProperty("allowsFemales")
-        it.hasProperty("minAge")
-        it.hasProperty("maxAge")
-        it.hasProperty("riskCriteria")
-        it.hasProperty("attendanceType")
-      },
-    )
+
+    response.content.forEach { item ->
+      assertThat(item).hasProperty("id")
+      assertThat(item.hasProperty("criminogenicNeeds"))
+      assertThat(item.hasProperty("title"))
+      assertThat(item.hasProperty("description"))
+      assertThat(item.hasProperty("deliveryFormat"))
+      assertThat(item.hasProperty("interventionType"))
+      assertThat(item.hasProperty("setting"))
+      assertThat(item.hasProperty("allowsMales"))
+      assertThat(item.hasProperty("allowsFemales"))
+      assertThat(item.hasProperty("minAge"))
+      assertThat(item.hasProperty("maxAge"))
+      assertThat(item.hasProperty("riskCriteria"))
+      assertThat(item.hasProperty("attendanceType"))
+    }
+
     assertThat(response.content[0].title).isEqualTo("Test Title")
   }
 
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when empty return a empty list of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null))
+    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf()))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null)
+    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -115,11 +116,14 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
+        null,
+        null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -130,23 +134,21 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
-    assertThat(
-      response.content.all {
-        it.hasProperty("id")
-        it.hasProperty("criminogenicNeeds")
-        it.hasProperty("title")
-        it.hasProperty("description")
-        it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionType")
-        it.hasProperty("setting")
-        it.hasProperty("allowsMales")
-        it.hasProperty("allowsFemales")
-        it.hasProperty("minAge")
-        it.hasProperty("maxAge")
-        it.hasProperty("riskCriteria")
-        it.hasProperty("attendanceType")
-      },
-    )
+    response.content.forEach { item ->
+      assertThat(item).hasProperty("id")
+      assertThat(item.hasProperty("criminogenicNeeds"))
+      assertThat(item.hasProperty("title"))
+      assertThat(item.hasProperty("description"))
+      assertThat(item.hasProperty("deliveryFormat"))
+      assertThat(item.hasProperty("interventionType"))
+      assertThat(item.hasProperty("setting"))
+      assertThat(item.hasProperty("allowsMales"))
+      assertThat(item.hasProperty("allowsFemales"))
+      assertThat(item.hasProperty("minAge"))
+      assertThat(item.hasProperty("maxAge"))
+      assertThat(item.hasProperty("riskCriteria"))
+      assertThat(item.hasProperty("attendanceType"))
+    }
     assertThat(response.content[0].title).isEqualTo("Test Title")
   }
 
@@ -190,11 +192,14 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
+        null,
+        null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -205,23 +210,21 @@ internal class InterventionCatalogueControllerTest {
 
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
-    assertThat(
-      response.content.all {
-        it.hasProperty("id")
-        it.hasProperty("criminogenicNeeds")
-        it.hasProperty("title")
-        it.hasProperty("description")
-        it.hasProperty("deliveryFormat")
-        it.hasProperty("interventionType")
-        it.hasProperty("setting")
-        it.hasProperty("allowsMales")
-        it.hasProperty("allowsFemales")
-        it.hasProperty("minAge")
-        it.hasProperty("maxAge")
-        it.hasProperty("riskCriteria")
-        it.hasProperty("attendanceType")
-      },
-    )
+    response.content.forEach { item ->
+      assertThat(item).hasProperty("id")
+      assertThat(item.hasProperty("criminogenicNeeds"))
+      assertThat(item.hasProperty("title"))
+      assertThat(item.hasProperty("description"))
+      assertThat(item.hasProperty("deliveryFormat"))
+      assertThat(item.hasProperty("interventionType"))
+      assertThat(item.hasProperty("setting"))
+      assertThat(item.hasProperty("allowsMales"))
+      assertThat(item.hasProperty("allowsFemales"))
+      assertThat(item.hasProperty("minAge"))
+      assertThat(item.hasProperty("maxAge"))
+      assertThat(item.hasProperty("riskCriteria"))
+      assertThat(item.hasProperty("attendanceType"))
+    }
     assertThat(response.totalElements).isEqualTo(2)
     assertThat(response.content[0].title).isEqualTo("Test Title")
   }
@@ -234,11 +237,14 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
+        null,
+        null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, interventionTypes)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
