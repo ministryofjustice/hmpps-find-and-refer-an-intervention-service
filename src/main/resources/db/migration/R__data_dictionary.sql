@@ -66,7 +66,6 @@ COMMENT ON COLUMN nps_region.name IS 'NPS region name';
 COMMENT ON TABLE pcc_region IS '**reference data** Police and Crime Commissioner (PCC) region details';
 COMMENT ON COLUMN pcc_region.id IS 'PCC region unique identifier';
 COMMENT ON COLUMN pcc_region.name IS 'PCC region name';
-COMMENT ON COLUMN pcc_region.nps_region IS 'the ID of the National Probation Service (NPS) region the PCC is in';
 
 COMMENT ON TABLE service_provider IS 'service provider details';
 COMMENT ON COLUMN service_provider.id IS 'service provider unique identifier, used in hmpps-auth as group code';
