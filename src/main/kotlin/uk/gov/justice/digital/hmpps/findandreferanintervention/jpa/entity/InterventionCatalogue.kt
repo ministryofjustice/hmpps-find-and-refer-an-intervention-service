@@ -29,7 +29,7 @@ open class InterventionCatalogue(
   @Column(name = "name", length = Integer.MAX_VALUE)
   open var name: String,
 
-  @NotNull
+  @Nullable
   @Column(name = "short_description", length = Integer.MAX_VALUE)
   open var shortDescription: String,
 
@@ -129,8 +129,8 @@ open class InterventionCatalogue(
   open var riskConsideration: RiskConsideration? = null,
 
   @Nullable
-  @Column(name = "reasons_for_referral", length = Integer.MAX_VALUE)
-  open var reasonsForReferral: String? = null,
+  @Column(name = "reason_for_referral", length = Integer.MAX_VALUE)
+  open var reasonForReferral: String? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")

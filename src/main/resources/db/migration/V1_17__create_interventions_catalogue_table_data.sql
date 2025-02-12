@@ -1,4 +1,4 @@
-INSERT INTO intervention_catalogue (id, name, int_type, short_description, long_description, reasons_for_referral,
+INSERT INTO intervention_catalogue (id, name, int_type, short_description, long_description, reason_for_referral,
                                     topic, session_detail,
                                     commencement_date, termination_date, created, created_by, last_modified,
                                     last_modified_by)
