@@ -154,7 +154,7 @@ COMMENT ON COLUMN intervention_catalogue.created IS 'date the intervention recor
 COMMENT ON COLUMN intervention_catalogue.created_by IS 'auth identifier of the user that created this intervention record';
 COMMENT ON COLUMN intervention_catalogue.last_modified IS 'date the intervention record was last modified';
 COMMENT ON COLUMN intervention_catalogue.last_modified_by IS 'auth identifier of the user that last mofified this intervention record';
-COMMENT ON COLUMN intervention_catalogue.reasons_for_referral IS 'valid reasons that referral to this intervention can be made';
+COMMENT ON COLUMN intervention_catalogue.reason_for_referral IS 'valid reason that referral to this intervention can be made';
 
 COMMENT ON TABLE intervention_catalogue_map IS 'mapping table covering where there are more than one matching implementation';
 COMMENT ON COLUMN intervention_catalogue_map.intervention_catalogue_id IS 'service-owned unique identifier';
