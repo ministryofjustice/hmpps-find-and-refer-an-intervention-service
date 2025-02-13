@@ -8,8 +8,6 @@ import java.util.UUID
 
 class RiskConsiderationFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
-private val interventionCatalogueFactory: InterventionCatalogueFactory = InterventionCatalogueFactory()
-
 fun RiskConsiderationFactory.create(
   id: UUID = UUID.randomUUID(),
   cnScoreGuide: String? = null,

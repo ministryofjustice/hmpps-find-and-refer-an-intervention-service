@@ -6,6 +6,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
@@ -34,4 +35,9 @@ open class DeliveryMethod(
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "delivery_method_id", referencedColumnName = "id")
   open var deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),
+
+  @Nullable
+  @ManyToOne
+  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  open var intervention: InterventionCatalogue?,
 )

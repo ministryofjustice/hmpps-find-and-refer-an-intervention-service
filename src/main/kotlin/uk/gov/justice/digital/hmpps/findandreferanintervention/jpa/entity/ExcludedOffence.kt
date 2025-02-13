@@ -31,4 +31,9 @@ open class ExcludedOffence(
   @Nullable
   @Column(name = "motivation", length = Integer.MAX_VALUE)
   open var motivation: String? = null,
+
+  @Nullable
+  @ManyToOne
+  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  open var intervention: InterventionCatalogue?,
 )
