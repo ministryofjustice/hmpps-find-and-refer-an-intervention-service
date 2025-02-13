@@ -72,10 +72,10 @@ open class RiskConsideration(
   @JdbcType(PostgreSQLEnumJdbcType::class)
   open var roshLevel: RoshLevel?,
 
-  @NotNull
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "intervention_id")
-  open var intervention: InterventionCatalogue,
+  @Nullable
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  open var intervention: InterventionCatalogue?,
 )
 
 enum class RoshLevel {

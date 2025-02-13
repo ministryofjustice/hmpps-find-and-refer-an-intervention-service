@@ -56,7 +56,7 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("attendanceType"))
     }
 
-    assertThat(response.content[0].title).isEqualTo("Test Title")
+    assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
 
   @Test
@@ -119,7 +119,7 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("riskCriteria"))
       assertThat(item.hasProperty("attendanceType"))
     }
-    assertThat(response.content[0].title).isEqualTo("Test Title")
+    assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
 
   @Test
@@ -166,7 +166,7 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("attendanceType"))
     }
     assertThat(response.totalElements).isEqualTo(2)
-    assertThat(response.content[0].title).isEqualTo("Test Title")
+    assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
 
   @Test

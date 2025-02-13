@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PersonalEligibility
 import java.util.UUID
 
@@ -14,6 +15,7 @@ fun PersonalEligibilityFactory.create(
   maxAge: Int? = null,
   males: Boolean = true,
   females: Boolean = false,
+  intervention: InterventionCatalogue? = null,
 ): PersonalEligibility = save(
   PersonalEligibility(
     id,
@@ -21,5 +23,6 @@ fun PersonalEligibilityFactory.create(
     maxAge,
     males,
     females,
+    intervention,
   ),
 )

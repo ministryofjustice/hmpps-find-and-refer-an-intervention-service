@@ -102,8 +102,7 @@ open class InterventionCatalogue(
   open var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
 
   @Nullable
-  @OneToOne
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToOne(mappedBy = "intervention")
   open var exclusion: Exclusion? = null,
 
   @ManyToMany
@@ -116,7 +115,6 @@ open class InterventionCatalogue(
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var personalEligibility: PersonalEligibility? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
@@ -125,7 +123,6 @@ open class InterventionCatalogue(
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var riskConsideration: RiskConsideration? = null,
 
   @Nullable
@@ -135,20 +132,7 @@ open class InterventionCatalogue(
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
-) {
-  // This is to avoid stack overflow issues with the bi-directional association with referral
-  override fun toString(): String = "InterventionCatalogue(id=$id,name=$name,shortDescription=$shortDescription,longDescription=$longDescription, topic=$topic,sessionDetail=$sessionDetail,commencementDate=$commencementDate,terminationDate=$terminationDate, created=$created, createdBy=$createdBy, lastModified=$lastModified,lastModifiedBy=$lastModifiedBy, intervetionType=$interventionType,criminogenicNeeds=$criminogenicNeeds),deliveryLocations=$deliveryLocations,deliveryMethods=$deliveryMethods, eligibleOffences=$eligibleOffences, enablingInterventions=$enablingInterventions,excludedOffences=$excludedOffences, exclusion=$exclusion, interventions=$interventions, personalEligibility=$personalEligibility,possibleOutcomes=$possibleOutcomes, riskConsideration=$riskConsideration,reasonsForReferral=$reasonsForReferral, specialEducationNeeds=$specialEducationalNeeds"
-
-  override fun hashCode(): Int = id.hashCode()
-
-  override fun equals(other: Any?): Boolean {
-    if (other == null || other !is InterventionCatalogue) {
-      return false
-    }
-
-    return id == other.id
-  }
-}
+)
 
 enum class InterventionType {
   SI,

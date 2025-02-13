@@ -24,7 +24,7 @@ fun RiskConsiderationFactory.create(
   pnaGuide: String? = null,
   rsrGuide: String? = null,
   roshLevel: RoshLevel? = null,
-  intervention: InterventionCatalogue = interventionCatalogueFactory.create(),
+  intervention: InterventionCatalogue? = null,
 ): RiskConsideration = save(
   RiskConsideration(
     id,

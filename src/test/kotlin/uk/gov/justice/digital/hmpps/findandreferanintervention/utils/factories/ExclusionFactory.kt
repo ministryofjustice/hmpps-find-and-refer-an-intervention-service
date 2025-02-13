@@ -29,6 +29,6 @@ fun ExclusionFactory.create(
     otherPreferredMethodGuide,
     ameTypeRuleGuide,
     scheduleFrequencyGuide,
-    intervention ?: interventionCatalogueFactory.create(),
+    intervention,
   ),
 )

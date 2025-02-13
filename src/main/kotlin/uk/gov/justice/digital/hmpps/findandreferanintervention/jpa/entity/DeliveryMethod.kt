@@ -23,10 +23,6 @@ open class DeliveryMethod(
   @Column(name = "attendance_type")
   open var attendanceType: String? = null,
 
-  @NotNull
-  @Column(name = "intervention_id")
-  open var interventionId: UUID,
-
   @Nullable
   @Column(name = "delivery_format")
   open var deliveryFormat: String? = null,
