@@ -10,37 +10,22 @@ import org.mockito.kotlin.whenever
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.InterventionCatalogueController
-import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
-import java.util.UUID
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.InterventionCatalogueFactory
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.createDto
 
 internal class InterventionCatalogueControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
   private val interventionCatalogueService = mock<InterventionCatalogueService>()
   private val interventionCatalogueController =
     InterventionCatalogueController(interventionCatalogueService, telemetryClient)
+  private val interventionCatalogueFactory: InterventionCatalogueFactory = InterventionCatalogueFactory()
 
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    val catalogue =
-      InterventionCatalogueDto(
-        id = UUID.randomUUID(),
-        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
-        title = "Test Title",
-        description = "Test Description",
-        deliveryFormat = listOf("In Person"),
-        interventionType = InterventionType.ACP,
-        setting = listOf(SettingType.COMMUNITY),
-        allowsMales = true,
-        allowsFemales = true,
-        minAge = 18,
-        maxAge = 30,
-        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
-        attendanceType = listOf("One-to-one"),
-      )
+    val catalogue = interventionCatalogueFactory.createDto()
     whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf(catalogue)))
     val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
@@ -71,7 +56,7 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("attendanceType"))
     }
 
-    assertThat(response.content[0].title).isEqualTo("Test Title")
+    assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
 
   @Test
@@ -96,22 +81,7 @@ internal class InterventionCatalogueControllerTest {
   fun `getInterventionsCatalogueByInterventionType when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
     val interventionTypes = listOf(InterventionType.ACP)
-    val acpIntervention =
-      InterventionCatalogueDto(
-        id = UUID.randomUUID(),
-        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
-        title = "Test Title",
-        description = "Test Description",
-        deliveryFormat = listOf("In Person"),
-        interventionType = InterventionType.ACP,
-        setting = listOf(SettingType.COMMUNITY),
-        allowsMales = true,
-        allowsFemales = true,
-        minAge = 18,
-        maxAge = 30,
-        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
-        attendanceType = listOf("One-to-one"),
-      )
+    val acpIntervention = interventionCatalogueFactory.createDto()
     whenever(
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
@@ -149,45 +119,15 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("riskCriteria"))
       assertThat(item.hasProperty("attendanceType"))
     }
-    assertThat(response.content[0].title).isEqualTo("Test Title")
+    assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
 
   @Test
   fun `getInterventionsCatalogueByInterventionType when searching by multiple types and they are present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
     val interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS)
-    val acpIntervention =
-      InterventionCatalogueDto(
-        id = UUID.randomUUID(),
-        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
-        title = "Test Title",
-        description = "Test Description",
-        deliveryFormat = listOf("In Person"),
-        interventionType = InterventionType.ACP,
-        setting = listOf(SettingType.COMMUNITY),
-        allowsMales = true,
-        allowsFemales = true,
-        minAge = 18,
-        maxAge = 30,
-        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
-        attendanceType = listOf("One-to-one"),
-      )
-    val crsIntervention =
-      InterventionCatalogueDto(
-        id = UUID.randomUUID(),
-        criminogenicNeeds = listOf("NEED_1", "NEED_2"),
-        title = "Test Title",
-        description = "Test Description",
-        deliveryFormat = listOf("In Person"),
-        interventionType = InterventionType.CRS,
-        setting = listOf(SettingType.COMMUNITY),
-        allowsMales = true,
-        allowsFemales = true,
-        minAge = 18,
-        maxAge = 30,
-        riskCriteria = listOf("RISK_CRITERIA_1", "RISK_CRITERIA_2"),
-        attendanceType = listOf("One-to-one"),
-      )
+    val acpIntervention = interventionCatalogueFactory.createDto(interventionType = InterventionType.ACP)
+    val crsIntervention = interventionCatalogueFactory.createDto(interventionType = InterventionType.CRS)
     whenever(
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
@@ -226,7 +166,7 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("attendanceType"))
     }
     assertThat(response.totalElements).isEqualTo(2)
-    assertThat(response.content[0].title).isEqualTo("Test Title")
+    assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
 
   @Test

@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -22,4 +23,9 @@ open class CriminogenicNeed(
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "need_id")
   open var need: CriminogenicNeedRef,
+
+  @Nullable
+  @ManyToOne
+  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  open var intervention: InterventionCatalogue?,
 )

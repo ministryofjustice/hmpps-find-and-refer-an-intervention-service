@@ -77,33 +77,26 @@ open class InterventionCatalogue(
   @JdbcType(PostgreSQLEnumJdbcType::class)
   open var interventionType: InterventionType,
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var criminogenicNeeds: MutableSet<CriminogenicNeed> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var exclusion: Exclusion? = null,
 
   @ManyToMany
@@ -116,7 +109,6 @@ open class InterventionCatalogue(
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var personalEligibility: PersonalEligibility? = null,
 
   @OneToMany(fetch = FetchType.LAZY)
@@ -125,7 +117,6 @@ open class InterventionCatalogue(
 
   @Nullable
   @OneToOne(mappedBy = "intervention")
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var riskConsideration: RiskConsideration? = null,
 
   @Nullable
