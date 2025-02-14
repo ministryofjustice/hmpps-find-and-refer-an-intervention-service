@@ -30,6 +30,7 @@ private val criminogenicNeedFactory = CriminogenicNeedFactory()
 private val exclusionFactory = ExclusionFactory()
 private val riskConsiderationFactory = RiskConsiderationFactory()
 private val personalEligibilityFactory = PersonalEligibilityFactory()
+private val specialEducationNeedFactory = SpecialEducationNeedFactory()
 
 private val testLocalDate: LocalDate = LocalDate.of(2025, 1, 1)
 private val testOffsetDateTime: OffsetDateTime = OffsetDateTime.of(testLocalDate, LocalTime.NOON, ZoneOffset.UTC)
@@ -48,6 +49,8 @@ fun InterventionCatalogueFactory.create(
   lastModified: OffsetDateTime = testOffsetDateTime,
   lastModifiedBy: AuthUser = authUserFactory.create(),
   interventionType: InterventionType = InterventionType.CRS,
+  timeToComplete: String = "At least 6 months",
+  reasonsForReferral: String = "Lifestyle and associate",
   criminogenicNeeds: MutableSet<CriminogenicNeed> = criminogenicNeedFactory.createSet(),
   deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
   deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
@@ -59,8 +62,7 @@ fun InterventionCatalogueFactory.create(
   personalEligibility: PersonalEligibility = personalEligibilityFactory.create(),
   possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
   riskConsideration: RiskConsideration = riskConsiderationFactory.create(),
-  reasonsForReferral: String = "Lifestyle and associate",
-  specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
+  specialEducationalNeeds: SpecialEducationalNeed = specialEducationNeedFactory.create(),
 ): InterventionCatalogue = save(
   InterventionCatalogue(
     id,
@@ -76,6 +78,8 @@ fun InterventionCatalogueFactory.create(
     lastModified,
     lastModifiedBy,
     interventionType,
+    timeToComplete,
+    reasonsForReferral,
     criminogenicNeeds,
     deliveryLocations,
     deliveryMethods,
@@ -87,7 +91,6 @@ fun InterventionCatalogueFactory.create(
     personalEligibility,
     possibleOutcomes,
     riskConsideration,
-    reasonsForReferral,
     specialEducationalNeeds,
   ),
 )
@@ -106,6 +109,8 @@ fun InterventionCatalogueFactory.createDto(
   lastModified: OffsetDateTime = testOffsetDateTime,
   lastModifiedBy: AuthUser = authUserFactory.create(),
   interventionType: InterventionType = InterventionType.CRS,
+  timeToComplete: String = "At least 6 months",
+  reasonsForReferral: String = "Lifestyle and associate",
   criminogenicNeeds: MutableSet<CriminogenicNeed> = criminogenicNeedFactory.createSet(),
   deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
   deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
@@ -117,8 +122,7 @@ fun InterventionCatalogueFactory.createDto(
   personalEligibility: PersonalEligibility = personalEligibilityFactory.create(),
   possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
   riskConsideration: RiskConsideration = riskConsiderationFactory.create(),
-  reasonsForReferral: String = "Lifestyle and associate",
-  specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
+  specialEducationalNeeds: SpecialEducationalNeed = specialEducationNeedFactory.create(),
 ): InterventionCatalogueDto {
   val entity = this.create(
     id,
@@ -134,6 +138,8 @@ fun InterventionCatalogueFactory.createDto(
     lastModified,
     lastModifiedBy,
     interventionType,
+    timeToComplete,
+    reasonsForReferral,
     criminogenicNeeds,
     deliveryLocations,
     deliveryMethods,
@@ -145,7 +151,6 @@ fun InterventionCatalogueFactory.createDto(
     personalEligibility,
     possibleOutcomes,
     riskConsideration,
-    reasonsForReferral,
     specialEducationalNeeds,
   )
   return InterventionCatalogueDto.fromEntity(entity)

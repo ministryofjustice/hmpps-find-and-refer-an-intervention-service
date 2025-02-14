@@ -35,6 +35,6 @@ open class SpecialEducationalNeed(
 
   @Nullable
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id")
-  open var intervention: InterventionCatalogue? = null,
+  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
+  open var intervention: InterventionCatalogue?,
 )

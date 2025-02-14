@@ -50,10 +50,10 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("setting"))
       assertThat(item.hasProperty("allowsMales"))
       assertThat(item.hasProperty("allowsFemales"))
-      assertThat(item.hasProperty("minAge"))
-      assertThat(item.hasProperty("maxAge"))
       assertThat(item.hasProperty("riskCriteria"))
       assertThat(item.hasProperty("attendanceType"))
+      assertThat(item.hasProperty("suitableForPeopleWithLearningDifficulties"))
+      assertThat(item.hasProperty("equivalentNonLdcProgramme"))
     }
 
     assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
@@ -114,10 +114,10 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("setting"))
       assertThat(item.hasProperty("allowsMales"))
       assertThat(item.hasProperty("allowsFemales"))
-      assertThat(item.hasProperty("minAge"))
-      assertThat(item.hasProperty("maxAge"))
       assertThat(item.hasProperty("riskCriteria"))
       assertThat(item.hasProperty("attendanceType"))
+      assertThat(item.hasProperty("suitableForPeopleWithLearningDifficulties"))
+      assertThat(item.hasProperty("equivalentNonLdcProgramme"))
     }
     assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
   }
@@ -160,10 +160,10 @@ internal class InterventionCatalogueControllerTest {
       assertThat(item.hasProperty("setting"))
       assertThat(item.hasProperty("allowsMales"))
       assertThat(item.hasProperty("allowsFemales"))
-      assertThat(item.hasProperty("minAge"))
-      assertThat(item.hasProperty("maxAge"))
       assertThat(item.hasProperty("riskCriteria"))
       assertThat(item.hasProperty("attendanceType"))
+      assertThat(item.hasProperty("suitableForPeopleWithLearningDifficulties"))
+      assertThat(item.hasProperty("equivalentNonLdcProgramme"))
     }
     assertThat(response.totalElements).isEqualTo(2)
     assertThat(response.content[0].title).isEqualTo("Finance, Benefit & Debt")
