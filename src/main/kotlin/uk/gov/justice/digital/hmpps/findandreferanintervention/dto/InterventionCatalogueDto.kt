@@ -1,24 +1,28 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import java.util.UUID
 
+// Excludes any properties that have null values when creating dto.
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class InterventionCatalogueDto(
-  val id: UUID,
-  val criminogenicNeeds: List<String>,
-  val title: String,
-  val description: String,
-  val interventionType: InterventionType,
-  val setting: List<SettingType>,
-  val allowsMales: Boolean,
-  val allowsFemales: Boolean,
-  val minAge: Int?,
-  val maxAge: Int?,
-  val riskCriteria: List<String?>?,
-  val attendanceType: List<String>,
-  val deliveryFormat: List<String>,
+  val id: UUID, //
+  val criminogenicNeeds: List<String>, //
+  val title: String, //
+  val description: String, //
+  val interventionType: InterventionType, //
+  val setting: List<SettingType>, //
+  val allowsMales: Boolean, //
+  val allowsFemales: Boolean, //
+  val riskCriteria: List<String>?, //
+  val attendanceType: List<String>, //
+  val deliveryFormat: List<String>, //
+  val timeToComplete: String?, //
+  val suitableForPeopleWithLearningDifficulties: Boolean?,
+  val equivalentNonLdcProgramme: String?,
 ) {
   companion object {
     fun fromEntity(
@@ -42,14 +46,15 @@ data class InterventionCatalogueDto(
         setting = deliveryMethodSettingList,
         allowsMales = interventionCatalogue.personalEligibility?.males!!,
         allowsFemales = interventionCatalogue.personalEligibility?.females!!,
-        minAge = interventionCatalogue.personalEligibility?.minAge,
-        maxAge = interventionCatalogue.personalEligibility?.maxAge,
         riskCriteria =
         interventionCatalogue.riskConsideration?.let {
           RiskConsiderationDto.fromEntity(it).listOfRisks()
         },
         attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
         deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat },
+        timeToComplete = interventionCatalogue.timeToComplete,
+        suitableForPeopleWithLearningDifficulties = interventionCatalogue.specialEducationalNeeds?.learningDisabilityCateredFor,
+        equivalentNonLdcProgramme = interventionCatalogue.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
       )
     }
   }

@@ -77,6 +77,10 @@ open class InterventionCatalogue(
   @JdbcType(PostgreSQLEnumJdbcType::class)
   open var interventionType: InterventionType,
 
+  @Nullable
+  @Column(name = "time_to_complete")
+  open var timeToComplete: String? = null,
+
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var criminogenicNeeds: MutableSet<CriminogenicNeed> = mutableSetOf(),
 
@@ -123,9 +127,9 @@ open class InterventionCatalogue(
   @Column(name = "reason_for_referral", length = Integer.MAX_VALUE)
   open var reasonForReferral: String? = null,
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var specialEducationalNeeds: MutableSet<SpecialEducationalNeed> = mutableSetOf(),
+  @Nullable
+  @OneToOne(mappedBy = "intervention")
+  open var specialEducationalNeeds: SpecialEducationalNeed? = null,
 )
 
 enum class InterventionType {

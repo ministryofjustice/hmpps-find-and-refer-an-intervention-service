@@ -214,5 +214,7 @@ constructor(
     it.hasProperty("possibleOutcomes")
     it.hasProperty("riskConsideration")
     it.hasProperty("specialEducationalNeeds")
+    it.hasProperty("reasonsForReferral")
+    it.hasProperty("timeToComplete")
   }
 }
