@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.1.1"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.1.2"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.1.10"
   kotlin("plugin.spring") version "2.1.10"
 }
@@ -51,8 +51,8 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:6.6.7.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.9.1")
+  implementation("org.hibernate:hibernate-core:6.6.8.Final")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.9.2")
 
   runtimeOnly("org.postgresql:postgresql:42.7.5")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
@@ -61,7 +61,7 @@ dependencies {
   implementation("com.github.java-json-tools:json-patch:1.13")
   implementation("org.apache.commons:commons-csv:1.13.0")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.16")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.17")
   testImplementation("com.squareup.okhttp3:okhttp:4.12.0")
   testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
   testImplementation("org.mockito:mockito-inline:5.2.0")
