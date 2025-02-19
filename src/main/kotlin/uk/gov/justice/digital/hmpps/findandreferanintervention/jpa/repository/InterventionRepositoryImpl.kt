@@ -14,7 +14,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Interv
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PersonalEligibility
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 
-class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManager) : InterventionCatalogueFilterRepository {
+class InterventionRepositoryImpl(private val entityManager: EntityManager) : InterventionFilterRepository {
 
   private val criteriaBuilder: CriteriaBuilder = entityManager.criteriaBuilder
 
