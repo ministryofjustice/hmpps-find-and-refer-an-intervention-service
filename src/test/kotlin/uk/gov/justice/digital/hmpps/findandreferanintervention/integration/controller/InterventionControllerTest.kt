@@ -9,26 +9,26 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
-import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.InterventionCatalogueController
+import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.InterventionController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
-import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
+import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionService
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.InterventionCatalogueFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.createDto
 
-internal class InterventionCatalogueControllerTest {
+internal class InterventionControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
-  private val interventionCatalogueService = mock<InterventionCatalogueService>()
-  private val interventionCatalogueController =
-    InterventionCatalogueController(interventionCatalogueService, telemetryClient)
+  private val interventionService = mock<InterventionService>()
+  private val interventionController =
+    InterventionController(interventionService, telemetryClient)
   private val interventionCatalogueFactory: InterventionCatalogueFactory = InterventionCatalogueFactory()
 
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
     val catalogue = interventionCatalogueFactory.createDto()
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
+    whenever(interventionService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf(catalogue)))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
+    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -62,9 +62,9 @@ internal class InterventionCatalogueControllerTest {
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when empty return a empty list of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
+    whenever(interventionService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
       .thenReturn(PageImpl(listOf()))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
+    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -83,7 +83,7 @@ internal class InterventionCatalogueControllerTest {
     val interventionTypes = listOf(InterventionType.ACP)
     val acpIntervention = interventionCatalogueFactory.createDto()
     whenever(
-      interventionCatalogueService.getInterventionsCatalogueByCriteria(
+      interventionService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
         null,
@@ -93,7 +93,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
+      interventionController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -129,7 +129,7 @@ internal class InterventionCatalogueControllerTest {
     val acpIntervention = interventionCatalogueFactory.createDto(interventionType = InterventionType.ACP)
     val crsIntervention = interventionCatalogueFactory.createDto(interventionType = InterventionType.CRS)
     whenever(
-      interventionCatalogueService.getInterventionsCatalogueByCriteria(
+      interventionService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
         null,
@@ -139,7 +139,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
+      interventionController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
@@ -174,7 +174,7 @@ internal class InterventionCatalogueControllerTest {
     val pageable = PageRequest.of(0, 10)
     val interventionTypes = listOf(InterventionType.ACP)
     whenever(
-      interventionCatalogueService.getInterventionsCatalogueByCriteria(
+      interventionService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
         null,
@@ -184,7 +184,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
+      interventionController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
 
     verify(telemetryClient)
       .trackEvent(
