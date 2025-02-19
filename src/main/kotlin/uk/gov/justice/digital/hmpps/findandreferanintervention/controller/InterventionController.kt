@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.controller
 
-import com.microsoft.applicationinsights.TelemetryClient
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -10,16 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import uk.gov.justice.digital.hmpps.findandreferanintervention.Utils
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
-import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
+import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionService
+import java.util.UUID
 
 @RestController
 @PreAuthorize("hasRole('ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR')")
-class InterventionCatalogueController(
-  private val interventionCatalogueService: InterventionCatalogueService,
-  private val telemetryClient: TelemetryClient,
+class InterventionController(
+  private val interventionService: InterventionService,
 ) {
   @GetMapping("/interventions/{setting}", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getInterventionsCatalogue(
@@ -33,9 +34,14 @@ class InterventionCatalogueController(
     @PathVariable(name = "setting", required = true)
     settingType: SettingType,
   ): Page<InterventionCatalogueDto> {
-    logToAppInsights()
+    Utils.logToAppInsights(
+      "InterventionsCatalogue Summary",
+      mapOf(
+        "userMessage" to "User has hit interventions catalogue summary page",
+      ),
+    )
 
-    return interventionCatalogueService.getInterventionsCatalogueByCriteria(
+    return interventionService.getInterventionsCatalogueByCriteria(
       pageable,
       interventionTypes,
       settingType,
@@ -44,13 +50,11 @@ class InterventionCatalogueController(
     )
   }
 
-  fun logToAppInsights() {
-    telemetryClient.trackEvent(
-      "InterventionsCatalogue Summary",
-      mapOf(
-        "userMessage" to "User has hit interventions catalogue summary page",
-      ),
-      null,
+  @GetMapping("/interventions/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
+  fun getInterventionDetails(@PathVariable id: UUID): InterventionDetailsDto {
+    Utils.logToAppInsights(
+      "InterventionsDetail page",
+      mapOf("userMessage" to "User has hit interventions details page", "interventionId" to id.toString()),
     )
   }
 }
