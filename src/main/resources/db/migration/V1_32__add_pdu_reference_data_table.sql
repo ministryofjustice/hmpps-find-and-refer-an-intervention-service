@@ -10,7 +10,11 @@ CREATE TABLE pdu_ref
 );
 
 COMMENT ON TABLE pdu_ref IS '**reference data** Probation Delivery Unit (PDU) details';
-
 COMMENT ON COLUMN pdu_ref.id IS 'PDU unique identifier';
-
 COMMENT ON COLUMN pdu_ref.name IS 'PDU name';
+COMMENT ON COLUMN pdu_ref.pcc_region_id IS 'ID of the PCC region that the PDU is related to';
+
+INSERT INTO metadata (table_name, column_name, sensitive, domain_data)
+VALUES ('pdu_ref', 'id', 'FALSE', 'TRUE'),
+       ('pdu_ref', 'name', 'FALSE', 'TRUE'),
+       ('pdu_ref', 'pcc_region_id', 'FALSE', 'TRUE');
