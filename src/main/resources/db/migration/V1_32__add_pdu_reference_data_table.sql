@@ -5,10 +5,7 @@ CREATE TABLE pdu_ref
     pcc_region_id text NOT NULL,
     CONSTRAINT pdu_pkey PRIMARY KEY (id),
     CONSTRAINT pdu_name_key UNIQUE (name),
-    CONSTRAINT fk__pdu__pcc_region_id FOREIGN KEY (pcc_region_id)
-        REFERENCES pcc_region (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+    CONSTRAINT fk__pdu__pcc_region_id FOREIGN KEY (pcc_region_id) REFERENCES pcc_region (id)
 
 );
 

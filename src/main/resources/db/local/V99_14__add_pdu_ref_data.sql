@@ -1,4 +1,3 @@
--- sample records to insert for testing
 insert into pdu_ref(id, name, pcc_region_id)
 values ('redcar-cleveland-and-middlesbrough', 'Redcar, Cleveland and Middlesbrough', 'cleveland'),
        ('stockton-and-hartlepool', 'Stockton and Hartlepool', 'cleveland'),
