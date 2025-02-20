@@ -7,6 +7,7 @@ import org.springframework.data.web.PageableDefault
 import org.springframework.http.MediaType
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
@@ -20,7 +21,7 @@ class InterventionCatalogueController(
   private val interventionCatalogueService: InterventionCatalogueService,
   private val telemetryClient: TelemetryClient,
 ) {
-  @GetMapping("/interventions", produces = [MediaType.APPLICATION_JSON_VALUE])
+  @GetMapping("/interventions/{setting}", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getInterventionsCatalogue(
     @PageableDefault(page = 0, size = 10) pageable: Pageable,
     @RequestParam(name = "allowsFemales", required = false)
@@ -29,8 +30,8 @@ class InterventionCatalogueController(
     allowsMales: Boolean?,
     @RequestParam(name = "interventionType", required = false)
     interventionTypes: List<InterventionType>?,
-    @RequestParam(name = "setting", required = false)
-    settingType: SettingType?,
+    @PathVariable(name = "setting", required = true)
+    settingType: SettingType,
   ): Page<InterventionCatalogueDto> {
     logToAppInsights()
 
