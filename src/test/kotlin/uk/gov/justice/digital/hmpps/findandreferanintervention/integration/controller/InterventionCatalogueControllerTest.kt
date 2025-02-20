@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.InterventionCatalogueController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.InterventionCatalogueService
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.InterventionCatalogueFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.createDto
@@ -26,9 +27,18 @@ internal class InterventionCatalogueControllerTest {
   fun `getInterventionsCatalogueByCriteria with no criteria when present return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
     val catalogue = interventionCatalogueFactory.createDto()
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
+    whenever(
+      interventionCatalogueService.getInterventionsCatalogueByCriteria(
+        pageable,
+        null,
+        SettingType.CUSTODY,
+        null,
+        null,
+      ),
+    )
       .thenReturn(PageImpl(listOf(catalogue)))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
+    val response =
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
 
     verify(telemetryClient)
       .trackEvent(
@@ -62,9 +72,18 @@ internal class InterventionCatalogueControllerTest {
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when empty return a empty list of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    whenever(interventionCatalogueService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
+    whenever(
+      interventionCatalogueService.getInterventionsCatalogueByCriteria(
+        pageable,
+        null,
+        SettingType.CUSTODY,
+        null,
+        null,
+      ),
+    )
       .thenReturn(PageImpl(listOf()))
-    val response = interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null)
+    val response =
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
 
     verify(telemetryClient)
       .trackEvent(
@@ -86,14 +105,20 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
-        null,
+        SettingType.CUSTODY,
         null,
         null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
+      interventionCatalogueController.getInterventionsCatalogue(
+        pageable,
+        null,
+        null,
+        interventionTypes,
+        SettingType.CUSTODY,
+      )
 
     verify(telemetryClient)
       .trackEvent(
@@ -132,14 +157,20 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
-        null,
+        SettingType.CUSTODY,
         null,
         null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
+      interventionCatalogueController.getInterventionsCatalogue(
+        pageable,
+        null,
+        null,
+        interventionTypes,
+        SettingType.CUSTODY,
+      )
 
     verify(telemetryClient)
       .trackEvent(
@@ -177,14 +208,20 @@ internal class InterventionCatalogueControllerTest {
       interventionCatalogueService.getInterventionsCatalogueByCriteria(
         pageable,
         interventionTypes,
-        null,
+        SettingType.CUSTODY,
         null,
         null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, interventionTypes, null)
+      interventionCatalogueController.getInterventionsCatalogue(
+        pageable,
+        null,
+        null,
+        interventionTypes,
+        SettingType.CUSTODY,
+      )
 
     verify(telemetryClient)
       .trackEvent(
