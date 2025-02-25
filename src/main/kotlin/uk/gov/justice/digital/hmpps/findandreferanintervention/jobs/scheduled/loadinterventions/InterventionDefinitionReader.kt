@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @JobScope
-class InterventionDefinitionReader(val resourcePathOverride : String?) : ItemReader<InterventionCatalogDefinition> {
+class InterventionDefinitionReader(val resourcePathOverride: String?) : ItemReader<InterventionCatalogDefinition> {
   companion object : KLogging()
 
   private val defaultresourcepath = "classpath:/db/interventions/*.json"
@@ -18,7 +18,6 @@ class InterventionDefinitionReader(val resourcePathOverride : String?) : ItemRea
   private val objectMapper = ObjectMapper().registerModule(JavaTimeModule())
 
   override fun read(): InterventionCatalogDefinition? {
-
     var files: List<String>
 
     if (resourcePathOverride.isNullOrEmpty()) {
