@@ -1,7 +1,12 @@
 info.app:
   name: HMPPS Find And Refer An Intervention Service
   version: 1.0
-
+logging:
+  level:
+    org:
+      springframework:
+         beans:
+           factory: WARN
 spring:
   application:
     name: hmpps-find-and-refer-an-intervention-service
@@ -28,6 +33,16 @@ spring:
     url: jdbc:postgresql://${postgres.uri:localhost:5432}/${postgres.db:postgres}?currentSchema=${database.schema.name:public}&user=${postgres.username:root}&password=${postgres.password:dev}&stringtype=unspecified
     hikari:
       maximum-pool-size: 50
+
+  batch:
+    job:
+      enabled: false  # run jobs at application startup
+    jdbc:
+      initialize-schema: never # we manage the spring batch schema with our own migrations
+    concurrency:
+      pool-size: 4 # run up to 4 jobs at a time...
+      queue-size: 10000 # unless the number of queued jobs exceeds this number
+    table-prefix: public.BATCH_
 
 server:
   port: 8080

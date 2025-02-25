@@ -1,13 +1,16 @@
-package uk.gov.justice.digital.hmpps.hmppsinterventionsservice.jobs.scheduled.loadinterventions
+package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions
 
 import mu.KLogging
 import org.springframework.batch.core.Job
+import org.springframework.batch.core.JobParameters
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.job.builder.JobBuilder
+import org.springframework.batch.core.launch.support.TaskExecutorJobLauncher
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
+import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.PlatformTransactionManager
@@ -27,27 +30,9 @@ class UpsertInterventionsJobConfiguration(
   @Bean
   fun upsertInterventionsJobLauncher(upsertInterventionsJob: Job): ApplicationRunner = onStartupJobLauncherFactory.makeBatchLauncher(upsertInterventionsJob)
 
-  /*@Bean
-  fun jobLauncherCommandlineRunner(jobLauncher: TaskExecutorJobLauncher, upsertInterventionsJob: Job): CommandLineRunner {
-    return CommandLineRunner { jobLauncher.run(upsertInterventionsJob, null) }
-  }*/
-
-  /*  @Bean
-  fun upsertProvidersStep(
-    providerSetup: OutcomeSetupTasklet,
-    platformTransactionManager: PlatformTransactionManager,
-  ): Step = StepBuilder("upsertProvidersStep", jobRepository)
-    .tasklet(providerSetup, platformTransactionManager)
-    .build()
-
   @Bean
-  fun upsertContractDetailsStep(
-    contractDetailsSetupTasklet: InterventionSetupTasklet,
-    platformTransactionManager: PlatformTransactionManager,
-  ): Step = StepBuilder("upsertContractDetailsStep", jobRepository)
-    .tasklet(contractDetailsSetupTasklet, platformTransactionManager)
-    .build()
-*/
+  fun jobLauncherCommandlineRunner(jobLauncher: TaskExecutorJobLauncher, upsertInterventionsJob: Job): CommandLineRunner = CommandLineRunner { jobLauncher.run(upsertInterventionsJob, JobParameters()) }
+
   @Bean
   fun upsertInterventionsJob(upsertInterventionsStep: Step, jobRepository: JobRepository): Job {
     logger("starting to instantiate Job...")
@@ -71,6 +56,7 @@ class UpsertInterventionsJobConfiguration(
     .chunk<InterventionCatalogDefinition, InterventionCatalogue>(10, platformTransactionManager)
     .reader(reader)
     .processor(processor)
+    .writer {}
     .transactionManager(platformTransactionManager)
     .build()
 }
