@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsinterventionsservice.jobs.scheduled.loadinterventions
+package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
@@ -17,7 +17,7 @@ data class InterventionCatalogDefinition(
   @JsonProperty("possible outcome") val possibleOutcome: Array<PossibleOutcomeDefinition>,
   @JsonProperty("risk consideration") val riskConsideration: RiskConsiderationDefinition,
   @JsonProperty("special educational need") val specialEducationalNeed: SpecialEducationalNeedDefinition,
-  @JsonProperty("exclusion definition") val exclusion: ExclusionDefinition,
+  @JsonProperty("exclusion") val exclusion: ExclusionDefinition,
 )
 
 data class InterventionCatalogEntryDefinition(
@@ -43,7 +43,7 @@ data class DeliveryMethodDefinition(
 )
 
 data class DeliveryMethodSettingDefinition(
-  @JsonProperty("delivery method setting") val deliveryMethodSetting: SettingType,
+  @JsonProperty("setting") val deliveryMethodSetting: SettingType,
 )
 
 data class EnablingInterventionDefinition(
@@ -78,18 +78,18 @@ data class PossibleOutcomeDefinition(
 )
 
 data class RiskConsiderationDefinition(
-  @JsonProperty("cn score guide") val cnScoreGuide: String,
-  @JsonProperty("extremism risk guide") val extremismRiskGuide: String,
-  @JsonProperty("sara partner score guide") val saraPartnerScoreGuide: String,
-  @JsonProperty("sara other score guide") val saraOtherScoreGuide: String,
-  @JsonProperty("osp score guide") val ospScoreGuide: String,
-  @JsonProperty("osp dc icc combination guide") val ospDcIccScoreGuide: String,
-  @JsonProperty("ogrs score guide") val ogrsScoreGuide: String,
-  @JsonProperty("ovp guide") val ovpGuide: String,
-  @JsonProperty("ogp guide") val ogpGuide: String,
-  @JsonProperty("pna guide") val pnaGuide: String,
-  @JsonProperty("rosh level") val roshLevel: String,
-  @JsonProperty("rsr guide") val rsrGuide: String,
+  @JsonProperty("cn score guide") val cnScoreGuide: String?,
+  @JsonProperty("extremism risk guide") val extremismRiskGuide: String?,
+  @JsonProperty("sara partner score guide") val saraPartnerScoreGuide: String?,
+  @JsonProperty("sara other score guide") val saraOtherScoreGuide: String?,
+  @JsonProperty("osp score guide") val ospScoreGuide: String?,
+  @JsonProperty("osp dc icc combination guide") val ospDcIccScoreGuide: String?,
+  @JsonProperty("ogrs score guide") val ogrsScoreGuide: String?,
+  @JsonProperty("ovp guide") val ovpGuide: String?,
+  @JsonProperty("ogp guide") val ogpGuide: String?,
+  @JsonProperty("pna guide") val pnaGuide: String?,
+  @JsonProperty("rosh level") val roshLevel: String?,
+  @JsonProperty("rsr guide") val rsrGuide: String?,
 )
 
 data class SpecialEducationalNeedDefinition(
