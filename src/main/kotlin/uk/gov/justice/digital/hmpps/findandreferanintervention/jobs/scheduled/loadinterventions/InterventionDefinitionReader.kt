@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsinterventionsservice.jobs.scheduled.loadinterventions
+package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -9,14 +9,24 @@ import org.springframework.stereotype.Component
 
 @Component
 @JobScope
-class InterventionDefinitionReader : ItemReader<InterventionCatalogDefinition> {
+class InterventionDefinitionReader(val resourcePathOverride : String?) : ItemReader<InterventionCatalogDefinition> {
   companion object : KLogging()
 
-  val files = InterventionLoadFileReaderHelper.getResourceUrls("classpath:/interventions/*.json")
+  private val defaultresourcepath = "classpath:/db/interventions/*.json"
+
   private var index = 0
   private val objectMapper = ObjectMapper().registerModule(JavaTimeModule())
 
   override fun read(): InterventionCatalogDefinition? {
+
+    var files: List<String>
+
+    if (resourcePathOverride.isNullOrEmpty()) {
+      files = InterventionLoadFileReaderHelper.getResourceUrls(defaultresourcepath)
+    } else {
+      files = InterventionLoadFileReaderHelper.getResourceUrls(resourcePathOverride.toString())
+    }
+
     logger.info("ready to read interventions files; {} found", files.size)
 
     if (files.size <= index) return null
@@ -25,7 +35,7 @@ class InterventionDefinitionReader : ItemReader<InterventionCatalogDefinition> {
     index++
 
     val file = files[currentIndex]
-    logger.info("Reading file $index/${this.files.size}: $file")
+    logger.info("Reading file $index/${files.size}: $file")
     return objectMapper.readValue(InterventionLoadFileReaderHelper.getResource(file), InterventionCatalogDefinition::class.java)
   }
 }
