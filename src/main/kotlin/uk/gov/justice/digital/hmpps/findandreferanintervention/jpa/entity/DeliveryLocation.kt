@@ -1,13 +1,14 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
-import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryLocationDto
 import java.util.UUID
 
 @Entity
@@ -19,19 +20,18 @@ open class DeliveryLocation(
   open var id: UUID,
 
   @NotNull
-  @Column(name = "provider_name", length = Integer.MAX_VALUE)
-  open var providerName: String,
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "pdu_ref_id", referencedColumnName = "id")
+  open var pduRef: PduRef,
 
   @NotNull
-  @Column(name = "contact", length = Integer.MAX_VALUE)
-  open var contact: String,
-
-  @NotNull
-  @Column(name = "pdu_establishments", length = Integer.MAX_VALUE)
-  open var pduEstablishments: String,
-
-  @Nullable
   @ManyToOne
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var intervention: InterventionCatalogue?,
+  open var intervention: InterventionCatalogue,
+)
+
+fun DeliveryLocation.toDto(): DeliveryLocationDto = DeliveryLocationDto(
+  id = this.id,
+  pduRef = this.pduRef.toDto(),
+  intervention = this.intervention,
 )

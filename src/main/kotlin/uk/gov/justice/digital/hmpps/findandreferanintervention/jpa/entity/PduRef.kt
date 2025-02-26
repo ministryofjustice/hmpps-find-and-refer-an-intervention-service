@@ -9,16 +9,14 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
-import jakarta.validation.constraints.Size
-import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.PccRegionDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.PduRefDto
 
 @Entity
-@Table(name = "pcc_region", schema = "public")
-open class PccRegion(
+@Table(name = "pdu_ref", schema = "public")
+open class PduRef(
   @NotNull
   @Id
-  @Size(max = 1)
-  @Column(name = "id", length = 1)
+  @Column(name = "id", length = Integer.MAX_VALUE)
   open var id: String,
 
   @NotNull
@@ -26,17 +24,16 @@ open class PccRegion(
   open var name: String,
 
   @NotNull
-  @ManyToOne
-  @JoinColumn(name = "nps_region_id", referencedColumnName = "id")
-  open var npsRegion: NpsRegion,
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "pcc_region_id", referencedColumnName = "id")
+  open var pccRegion: PccRegion,
 
   @NotNull
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "pccRegion")
-  open var pduRef: MutableSet<PduRef> = mutableSetOf(),
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "pduRef")
+  open var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
 )
 
-fun PccRegion.toDto(): PccRegionDto = PccRegionDto(
+fun PduRef.toDto(): PduRefDto = PduRefDto(
   id = this.id,
   name = this.name,
-  pduRef = this.pduRef.map { it.toDto() }.toMutableSet(),
 )

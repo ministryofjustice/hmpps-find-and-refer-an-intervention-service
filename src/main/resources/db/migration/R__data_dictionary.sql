@@ -110,7 +110,7 @@ COMMENT ON TABLE delivery_location IS 'details of the location where applicable 
 COMMENT ON COLUMN delivery_location.intervention_id IS 'reference of the intervention record that is applicable';
 COMMENT ON COLUMN delivery_location.provider_name IS 'name of the provider of this delivery location';
 COMMENT ON COLUMN delivery_location.contact IS 'contact details for the provider';
-COMMENT ON COLUMN delivery_location.pdu_establishments IS 'description of the probation delivery units that this location covers';
+COMMENT ON COLUMN delivery_location.pdu_ref_id IS 'the pdu id which relates to this delivery location';
 
 COMMENT ON TABLE enabling_intervention IS 'description of any enabling interventions that this one needs prior to delivery';
 COMMENT ON COLUMN enabling_intervention.id IS 'service-owned unique identifier';
