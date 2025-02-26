@@ -98,6 +98,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     ).thenReturn(PageImpl(listOf()))
     val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
@@ -119,6 +120,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     ).thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
@@ -127,6 +129,7 @@ class InterventionControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
@@ -164,6 +167,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
@@ -173,6 +177,7 @@ class InterventionControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
@@ -209,6 +214,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
@@ -219,6 +225,7 @@ class InterventionControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 

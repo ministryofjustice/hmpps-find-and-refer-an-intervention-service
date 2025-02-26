@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.repository
 
+import au.com.dius.pact.core.support.contains
 import au.com.dius.pact.core.support.hasProperty
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -38,6 +39,7 @@ constructor(
           allowsMales = null,
           interventionTypes = listOf(InterventionType.ACP),
           settingType = null,
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(5)
@@ -55,6 +57,7 @@ constructor(
           allowsMales = null,
           interventionTypes = listOf(InterventionType.SI),
           settingType = null,
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(0)
@@ -71,6 +74,7 @@ constructor(
           allowsMales = null,
           interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
           settingType = null,
+          programmeName = null
         )
 
       assertThat(interventions.totalElements).isEqualTo(9)
@@ -95,6 +99,7 @@ constructor(
           allowsMales = null,
           interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
           settingType = SettingType.COMMUNITY,
+          programmeName = null
         )
 
       assertThat(interventions.totalElements).isEqualTo(5)
@@ -117,6 +122,7 @@ constructor(
           allowsMales = true,
           interventionTypes = null,
           settingType = null,
+          programmeName = null
         )
 
       assertThat(interventions.totalElements).isEqualTo(9)
@@ -134,6 +140,7 @@ constructor(
           allowsMales = null,
           interventionTypes = null,
           settingType = null,
+          programmeName = null
         )
 
       assertThat(interventions.totalElements).isEqualTo(2)
@@ -151,6 +158,7 @@ constructor(
           allowsMales = true,
           interventionTypes = null,
           settingType = null,
+          programmeName = null
         )
 
       assertThat(interventions.totalElements).isEqualTo(2)
@@ -161,10 +169,32 @@ constructor(
   }
 
   @Nested
+  @DisplayName("Filter Interventions by gender")
+  inner class FilterByProgrammeName {
+    @Test
+    fun `FilterByProgrammeName = 'programme name' and there are interventions return a page of interventions`() {
+      val pageRequest = PageRequest.of(0, 10)
+      val interventions =
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+          pageable = pageRequest,
+          allowsFemales = null,
+          allowsMales = true,
+          interventionTypes = null,
+          settingType = null,
+          programmeName = "Better"
+        )
+
+      assertThat(interventions.totalElements).isEqualTo(1)
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
+      assertThat(interventions.content.all { it.name.contains("Better") }).isTrue()
+    }
+  }
+
+  @Nested
   @DisplayName("Multiple filters")
   inner class FilterByMultiple {
     @Test
-    fun `findInterventionByTypeSettingAndGender and there are interventions return a page of interventions`() {
+    fun `findInterventionByTypeSettingGenderAndProgrammeName and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
         interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
@@ -173,9 +203,10 @@ constructor(
           allowsMales = true,
           interventionTypes = listOf(InterventionType.ACP),
           settingType = SettingType.CUSTODY,
+          programmeName = "Healthy"
         )
 
-      assertThat(interventions.totalElements).isEqualTo(2)
+      assertThat(interventions.totalElements).isEqualTo(1)
       assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
       assertThat(interventions.content.all { it.interventionType == InterventionType.ACP })
@@ -192,6 +223,7 @@ constructor(
         allowsMales = null,
         interventionTypes = null,
         settingType = null,
+        programmeName = null
       )
 
     assertThat(interventions.totalElements).isEqualTo(9)

@@ -24,11 +24,12 @@ class InterventionRepositoryImpl(private val entityManager: EntityManager) : Int
     allowsMales: Boolean?,
     interventionTypes: List<InterventionType>?,
     settingType: SettingType?,
+    programmeName: String?,
   ): Page<InterventionCatalogue> {
     val criteriaQuery: CriteriaQuery<InterventionCatalogue> =
       criteriaBuilder.createQuery(InterventionCatalogue::class.java)
     val root = criteriaQuery.from(InterventionCatalogue::class.java)
-    criteriaQuery.where(getPredicates(root, allowsFemales, allowsMales, interventionTypes, settingType))
+    criteriaQuery.where(getPredicates(root, allowsFemales, allowsMales, interventionTypes, settingType, programmeName))
 
     val query = entityManager.createQuery(criteriaQuery)
     query.setFirstResult(pageable.offset.toInt())
@@ -36,7 +37,7 @@ class InterventionRepositoryImpl(private val entityManager: EntityManager) : Int
 
     val resultList = query.resultList
 
-    val totalCount = getTotalCount(allowsFemales, allowsMales, interventionTypes, settingType)
+    val totalCount = getTotalCount(allowsFemales, allowsMales, interventionTypes, settingType, programmeName)
 
     return PageImpl(resultList, pageable, totalCount)
   }
@@ -77,11 +78,20 @@ class InterventionRepositoryImpl(private val entityManager: EntityManager) : Int
     )
   }
 
+  private fun filterByProgrammeNamePredicate(
+    root: Root<InterventionCatalogue>,
+    programmeName: String?,
+  ): Predicate? = programmeName?.let {
+    criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%$programmeName%".lowercase())
+  }
+
+
   private fun getTotalCount(
     allowsFemales: Boolean?,
     allowsMales: Boolean?,
     interventionTypes: List<InterventionType>?,
     settingType: SettingType?,
+    programmeName: String?
   ): Long {
     val countCriteriaQuery: CriteriaQuery<Long> = criteriaBuilder.createQuery(Long::class.java)
     val countRoot: Root<InterventionCatalogue> =
@@ -94,6 +104,7 @@ class InterventionRepositoryImpl(private val entityManager: EntityManager) : Int
         allowsMales,
         interventionTypes,
         settingType,
+        programmeName
       ),
     )
 
@@ -107,17 +118,20 @@ class InterventionRepositoryImpl(private val entityManager: EntityManager) : Int
     allowsMales: Boolean?,
     interventionTypes: List<InterventionType>?,
     settingType: SettingType?,
+    programmeName: String?,
   ): Predicate {
     val filterByFemalePredicate = filterByFemalePredicate(root, allowsFemales)
     val filterByMalePredicate = filterByMalePredicate(root, allowsMales)
     val filterByInterventionTypesPredicate = filterByInterventionTypePredicate(root, interventionTypes)
     val filterBySettingTypePredicate = filterBySettingPredicate(root, settingType)
+    val filterByProgrammeNamePredicate = filterByProgrammeNamePredicate(root, programmeName)
 
     val predicates = listOfNotNull(
       filterByFemalePredicate,
       filterByMalePredicate,
       filterByInterventionTypesPredicate,
       filterBySettingTypePredicate,
+      filterByProgrammeNamePredicate
     )
 
     return criteriaBuilder.and(*predicates.toTypedArray())

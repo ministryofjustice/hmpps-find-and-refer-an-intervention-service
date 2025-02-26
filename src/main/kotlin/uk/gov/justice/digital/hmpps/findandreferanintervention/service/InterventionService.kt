@@ -23,8 +23,9 @@ class InterventionService(
     settingType: SettingType?,
     allowsMales: Boolean?,
     allowsFemales: Boolean?,
+    programmeName: String?,
   ): Page<InterventionCatalogueDto> = interventionRepository
-    .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType)
+    .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType, programmeName)
     .map { it.toDto() }
 
   fun getInterventionDetailsById(interventionId: UUID): InterventionDetailsDto? = interventionRepository
