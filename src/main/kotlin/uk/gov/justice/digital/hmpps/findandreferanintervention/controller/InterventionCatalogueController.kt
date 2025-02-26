@@ -43,7 +43,7 @@ class InterventionCatalogueController(
       settingType,
       allowsMales,
       allowsFemales,
-      programmeName
+      programmeName,
     )
   }
 

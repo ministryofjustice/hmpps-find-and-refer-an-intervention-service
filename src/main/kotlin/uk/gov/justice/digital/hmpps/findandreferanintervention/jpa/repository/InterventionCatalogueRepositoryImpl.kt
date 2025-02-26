@@ -85,13 +85,12 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
     criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%$programmeName%".lowercase())
   }
 
-
   private fun getTotalCount(
     allowsFemales: Boolean?,
     allowsMales: Boolean?,
     interventionTypes: List<InterventionType>?,
     settingType: SettingType?,
-    programmeName: String?
+    programmeName: String?,
   ): Long {
     val countCriteriaQuery: CriteriaQuery<Long> = criteriaBuilder.createQuery(Long::class.java)
     val countRoot: Root<InterventionCatalogue> =
@@ -104,7 +103,7 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
         allowsMales,
         interventionTypes,
         settingType,
-        programmeName
+        programmeName,
       ),
     )
 
@@ -131,7 +130,7 @@ class InterventionCatalogueRepositoryImpl(private val entityManager: EntityManag
       filterByMalePredicate,
       filterByInterventionTypesPredicate,
       filterBySettingTypePredicate,
-      filterByProgrammeNamePredicate
+      filterByProgrammeNamePredicate,
     )
 
     return criteriaBuilder.and(*predicates.toTypedArray())

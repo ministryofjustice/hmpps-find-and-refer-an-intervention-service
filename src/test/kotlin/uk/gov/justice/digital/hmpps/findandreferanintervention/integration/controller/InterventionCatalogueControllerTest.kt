@@ -85,7 +85,7 @@ internal class InterventionCatalogueControllerTest {
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null,null ,SettingType.CUSTODY)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verify(telemetryClient)
       .trackEvent(
