@@ -19,7 +19,8 @@ class InterventionCatalogueService(
     settingType: SettingType?,
     allowsMales: Boolean?,
     allowsFemales: Boolean?,
+    programmeName: String?,
   ): Page<InterventionCatalogueDto> = interventionCatalogueRepository
-    .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType)
+    .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType, programmeName)
     .map { intervention -> InterventionCatalogueDto.fromEntity(intervention) }
 }
