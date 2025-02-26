@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import java.util.UUID
 
 // Excludes any properties that have null values when creating dto.
@@ -29,12 +30,17 @@ data class InterventionDetailsDto(
   val communityLocations: List<CommunityLocation>?,
   val custodyLocations: List<CustodyLocation>?,
 ) {
+  data class CommunityLocation(val name: String, val locations: List<String>)
+
+  data class CustodyLocation(val name: String, val category: String, val county: String)
+
   companion object {
     fun fromEntity(
       interventionCatalogue: InterventionCatalogue,
     ): InterventionDetailsDto {
       val deliveryMethodDtos =
         interventionCatalogue.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
+      val interventionDtos = interventionCatalogue.interventions.map { it.toDto() }.ifEmpty { null }
       return InterventionDetailsDto(
         id = interventionCatalogue.id,
         criminogenicNeeds =
@@ -57,16 +63,28 @@ data class InterventionDetailsDto(
         equivalentNonLdcProgramme = interventionCatalogue.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
         minAge = interventionCatalogue.personalEligibility?.minAge,
         maxAge = interventionCatalogue.personalEligibility?.maxAge,
-        eligibility = "Eligibilty text",
-        outcomes = "Out come text",
+        // TODO do we need a database fields for these strings to be displayed correctly
+        eligibility = "Eligibility text",
+        outcomes = "Outcome text",
         sessionDetails = interventionCatalogue.sessionDetail,
-        communityLocations = listOf(),
+        communityLocations = interventionDtos?.let { getCommunityLocations(interventionDtos) },
         custodyLocations = listOf(),
       )
     }
 
-    data class CommunityLocation(val name: String)
-
-    data class CustodyLocation(val name: String, val category: String, val county: String)
+    private fun getCommunityLocations(interventionDtos: List<InterventionDto>): List<CommunityLocation>? {
+      return interventionDtos.map { interventionDto ->
+        val contract = interventionDto.dynamicFrameworkContract
+        if (contract.npsRegion != null) {
+          val pccRegions = contract.npsRegion.pccRegions
+          val pduRefsPerPcc = pccRegions.associate { region -> region.name to region.pduRef.map { it.name } }
+          return pduRefsPerPcc.map { CommunityLocation(it.key, it.value) }
+        } else if (contract.pccRegion != null) {
+          val pduRefsPerPcc = contract.pccRegion.pduRef.map { it.name }
+          return pduRefsPerPcc.map { CommunityLocation(contract.pccRegion.name, pduRefsPerPcc) }
+        }
+        return null
+      }.ifEmpty { null }
+    }
   }
 }

@@ -50,7 +50,7 @@ class InterventionController(
     )
   }
 
-  @GetMapping("/interventions/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
+  @GetMapping("/interventions/details/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getInterventionDetails(@PathVariable id: UUID): InterventionDetailsDto {
     Utils.logToAppInsights(
       "InterventionsDetail page",

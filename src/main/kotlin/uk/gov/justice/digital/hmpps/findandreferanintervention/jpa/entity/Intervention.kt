@@ -2,7 +2,6 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
@@ -11,6 +10,7 @@ import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.ColumnDefault
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDto
 import java.time.OffsetDateTime
 import java.util.UUID
 
@@ -23,8 +23,8 @@ open class Intervention(
   open var id: UUID,
 
   @NotNull
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "dynamic_framework_contract_id")
+  @OneToOne
+  @JoinColumn(name = "dynamic_framework_contract_id", referencedColumnName = "id")
   open var dynamicFrameworkContract: DynamicFrameworkContract,
 
   @NotNull
@@ -51,4 +51,11 @@ open class Intervention(
     inverseJoinColumns = [JoinColumn(name = "intervention_catalogue_id")],
   )
   open var interventionCatalogues: MutableSet<InterventionCatalogue> = mutableSetOf(),
+)
+
+fun Intervention.toDto(): InterventionDto = InterventionDto(
+  id = this.id,
+  title = this.title,
+  description = this.description,
+  dynamicFrameworkContract = this.dynamicFrameworkContract.toDto(),
 )
