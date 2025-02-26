@@ -74,7 +74,7 @@ constructor(
           allowsMales = null,
           interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
           settingType = null,
-          programmeName = null
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(9)
@@ -99,7 +99,7 @@ constructor(
           allowsMales = null,
           interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
           settingType = SettingType.COMMUNITY,
-          programmeName = null
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(5)
@@ -122,7 +122,7 @@ constructor(
           allowsMales = true,
           interventionTypes = null,
           settingType = null,
-          programmeName = null
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(9)
@@ -140,7 +140,7 @@ constructor(
           allowsMales = null,
           interventionTypes = null,
           settingType = null,
-          programmeName = null
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(2)
@@ -158,7 +158,7 @@ constructor(
           allowsMales = true,
           interventionTypes = null,
           settingType = null,
-          programmeName = null
+          programmeName = null,
         )
 
       assertThat(interventions.totalElements).isEqualTo(2)
@@ -181,7 +181,7 @@ constructor(
           allowsMales = true,
           interventionTypes = null,
           settingType = null,
-          programmeName = "Better"
+          programmeName = "Better",
         )
 
       assertThat(interventions.totalElements).isEqualTo(1)
@@ -203,7 +203,7 @@ constructor(
           allowsMales = true,
           interventionTypes = listOf(InterventionType.ACP),
           settingType = SettingType.CUSTODY,
-          programmeName = "Healthy"
+          programmeName = "Healthy",
         )
 
       assertThat(interventions.totalElements).isEqualTo(1)
@@ -223,7 +223,7 @@ constructor(
         allowsMales = null,
         interventionTypes = null,
         settingType = null,
-        programmeName = null
+        programmeName = null,
       )
 
     assertThat(interventions.totalElements).isEqualTo(9)

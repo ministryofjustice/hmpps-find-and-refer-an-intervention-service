@@ -53,7 +53,7 @@ class InterventionController(
       settingType,
       allowsMales,
       allowsFemales,
-      programmeName
+      programmeName,
     )
   }
 
