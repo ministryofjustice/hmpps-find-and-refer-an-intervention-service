@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 internal class DummyControllerTest {
   private val dummyRepository = mock<DummyRepository>()
   private val telemetryClient = org.mockito.kotlin.mock<TelemetryClient>()
-  private val dummyController = DummyController(dummyRepository, telemetryClient)
+  private val dummyController = DummyController(dummyRepository)
 
   @Test
   fun `getDummyRecordById returns Dummy when present`() {
@@ -23,7 +23,11 @@ internal class DummyControllerTest {
     whenever(dummyRepository.findByDummyId(any())).thenReturn(testDummyRecord)
     val response = dummyController.getDummy(1)
 
-    verify(telemetryClient).trackEvent("LoggingToAppInsights", mapOf("userMessage" to "User has hit the dummy endpoint", "dummyId" to "1"), null)
+    verify(telemetryClient).trackEvent(
+      "LoggingToAppInsights",
+      mapOf("userMessage" to "User has hit the dummy endpoint", "dummyId" to "1"),
+      null,
+    )
 
     assertThat(response).isNotNull
     assertThat(response?.dummyDescription).isEqualTo("dummy text 1")
@@ -35,7 +39,11 @@ internal class DummyControllerTest {
     whenever(dummyRepository.findByDummyId(any())).thenReturn(null)
     val response = dummyController.getDummy(50)
 
-    verify(telemetryClient).trackEvent("LoggingToAppInsights", mapOf("userMessage" to "User has hit the dummy endpoint", "dummyId" to "50"), null)
+    verify(telemetryClient).trackEvent(
+      "LoggingToAppInsights",
+      mapOf("userMessage" to "User has hit the dummy endpoint", "dummyId" to "50"),
+      null,
+    )
 
     assertThat(response).isNull()
   }
