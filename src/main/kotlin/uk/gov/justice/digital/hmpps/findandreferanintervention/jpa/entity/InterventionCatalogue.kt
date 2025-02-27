@@ -130,6 +130,14 @@ open class InterventionCatalogue(
   @Nullable
   @OneToOne(mappedBy = "intervention")
   open var specialEducationalNeeds: SpecialEducationalNeed? = null,
+
+  @ManyToMany
+  @JoinTable(
+    name = "intervention_catalogue_to_course_map",
+    joinColumns = [JoinColumn(name = "intervention_catalogue_id")],
+    inverseJoinColumns = [JoinColumn(name = "course_id")],
+  )
+  open var courses: MutableSet<Course> = mutableSetOf(),
 )
 
 enum class InterventionType {

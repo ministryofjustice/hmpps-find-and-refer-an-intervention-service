@@ -6,7 +6,6 @@ CREATE TABLE pdu_ref
     CONSTRAINT pdu_pkey PRIMARY KEY (id),
     CONSTRAINT pdu_name_key UNIQUE (name),
     CONSTRAINT fk__pdu__pcc_region_id FOREIGN KEY (pcc_region_id) REFERENCES pcc_region (id)
-
 );
 
 COMMENT ON TABLE pdu_ref IS '**reference data** Probation Delivery Unit (PDU) details';
