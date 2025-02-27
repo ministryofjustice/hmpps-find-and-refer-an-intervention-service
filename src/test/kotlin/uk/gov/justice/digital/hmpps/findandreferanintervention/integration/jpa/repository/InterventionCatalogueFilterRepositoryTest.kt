@@ -169,7 +169,7 @@ constructor(
   }
 
   @Nested
-  @DisplayName("Filter Interventions by gender")
+  @DisplayName("Filter Interventions by programme name")
   inner class FilterByProgrammeName {
     @Test
     fun `FilterByProgrammeName = 'programme name' and there are interventions return a page of interventions`() {
@@ -181,7 +181,7 @@ constructor(
           allowsMales = true,
           interventionTypes = null,
           settingType = null,
-          programmeName = "Better",
+          programmeName = "bEtTer",
         )
 
       assertThat(interventions.totalElements).isEqualTo(1)
@@ -207,6 +207,26 @@ constructor(
         )
 
       assertThat(interventions.totalElements).isEqualTo(1)
+      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
+      assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
+      assertThat(interventions.content.all { it.interventionType == InterventionType.ACP })
+      assertThat(interventions.content.all { it.name.contains("Healthy") })
+    }
+
+    @Test
+    fun `findInterventionByTypeSettingGenderButNotProgrammeName and there are interventions return a page of interventions`() {
+      val pageRequest = PageRequest.of(0, 10)
+      val interventions =
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+          pageable = pageRequest,
+          allowsFemales = null,
+          allowsMales = true,
+          interventionTypes = listOf(InterventionType.ACP),
+          settingType = SettingType.CUSTODY,
+          programmeName = null,
+        )
+
+      assertThat(interventions.totalElements).isEqualTo(2)
       assertThat(hasAllCatalogueProperties(interventions)).isTrue()
       assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
       assertThat(interventions.content.all { it.interventionType == InterventionType.ACP })
