@@ -119,18 +119,12 @@ class InterventionRepositoryImpl(private val entityManager: EntityManager) : Int
     settingType: SettingType?,
     programmeName: String?,
   ): Predicate {
-    val filterByFemalePredicate = filterByFemalePredicate(root, allowsFemales)
-    val filterByMalePredicate = filterByMalePredicate(root, allowsMales)
-    val filterByInterventionTypesPredicate = filterByInterventionTypePredicate(root, interventionTypes)
-    val filterBySettingTypePredicate = filterBySettingPredicate(root, settingType)
-    val filterByProgrammeNamePredicate = filterByProgrammeNamePredicate(root, programmeName)
-
     val predicates = listOfNotNull(
-      filterByFemalePredicate,
-      filterByMalePredicate,
-      filterByInterventionTypesPredicate,
-      filterBySettingTypePredicate,
-      filterByProgrammeNamePredicate,
+      filterByFemalePredicate(root, allowsFemales),
+      filterByMalePredicate(root, allowsMales),
+      filterByInterventionTypePredicate(root, interventionTypes),
+      filterBySettingPredicate(root, settingType),
+      filterByProgrammeNamePredicate(root, programmeName),
     )
 
     return criteriaBuilder.and(*predicates.toTypedArray())
