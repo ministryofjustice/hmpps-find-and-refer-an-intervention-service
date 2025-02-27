@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.MapsId
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "prerequisite", schema = "public")
@@ -14,8 +15,9 @@ open class Prerequisite(
   @EmbeddedId
   open var id: PrerequisiteId? = null,
 
+  @NotNull
   @MapsId("courseId")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "course_id")
-  open var course: Course? = null,
+  open var course: Course,
 )

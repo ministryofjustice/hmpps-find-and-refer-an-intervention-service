@@ -35,7 +35,7 @@ open class Course(
   open var alternateName: String? = null,
 
   @NotNull
-  @ColumnDefault("''")
+  @ColumnDefault("")
   @Column(name = "identifier", length = Integer.MAX_VALUE)
   open var identifier: String,
 
