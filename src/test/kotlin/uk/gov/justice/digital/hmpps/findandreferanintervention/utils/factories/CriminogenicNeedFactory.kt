@@ -10,11 +10,11 @@ class CriminogenicNeedFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
 fun CriminogenicNeedFactory.create(
   id: UUID = UUID.randomUUID(),
-  criminogenicNeedRef: CriminogenicNeedRef = CriminogenicNeedRef(UUID.randomUUID(), "Relationships and Family"),
+  criminogenicNeedRef: CriminogenicNeedRef = CriminogenicNeedRef(UUID.randomUUID(), "Relatives and Family"),
   intervention: InterventionCatalogue? = null,
 ): CriminogenicNeed = save(CriminogenicNeed(id, criminogenicNeedRef, intervention))
 
 fun CriminogenicNeedFactory.createSet(
   id: UUID = UUID.randomUUID(),
-  criminogenicNeedRef: CriminogenicNeedRef = CriminogenicNeedRef(UUID.randomUUID(), "Relationships and Family"),
+  criminogenicNeedRef: CriminogenicNeedRef = CriminogenicNeedRef(UUID.randomUUID(), "Relatives and Family"),
 ): MutableSet<CriminogenicNeed> = save(mutableSetOf(create(id, criminogenicNeedRef)))

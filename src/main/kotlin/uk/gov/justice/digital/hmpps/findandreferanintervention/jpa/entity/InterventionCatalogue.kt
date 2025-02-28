@@ -208,7 +208,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     eligibility = this.personalEligibility?.whoIsEligibleText,
     outcomes = outcomesText,
     sessionDetails = this.sessionDetail,
-    communityLocations = getCommunityLocations(this),
+    communityLocations = getCommunityLocations(this)?.sortedBy { it.name },
     /**
      * We currently do not have the database tables for this to be added to the response.
      * The work will be done as part of this ticket https://dsdmoj.atlassian.net/browse/FRI-294

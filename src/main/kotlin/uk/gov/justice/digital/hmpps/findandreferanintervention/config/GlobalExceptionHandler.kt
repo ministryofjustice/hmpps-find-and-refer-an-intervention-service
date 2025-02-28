@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+import org.springframework.web.server.ResponseStatusException
 import org.springframework.web.servlet.resource.NoResourceFoundException
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 
@@ -63,7 +64,7 @@ class GlobalExceptionHandler {
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)
   @ResponseStatus(BAD_REQUEST)
-  fun handleEnumMismatchException(e: MethodArgumentTypeMismatchException): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
+  fun handleEnumMismatchException(e: MethodArgumentTypeMismatchException): ResponseEntity<ErrorResponse> = ResponseEntity.status(BAD_REQUEST)
     .body(
       ErrorResponse(
         status = BAD_REQUEST,
@@ -74,6 +75,13 @@ class GlobalExceptionHandler {
     .also {
       log.error("Unexpected exception", e)
     }
+
+  @ExceptionHandler(ResponseStatusException::class)
+  @ResponseStatus(NOT_FOUND)
+  fun handleResponseException(e: ResponseStatusException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
+    .body(
+      ErrorResponse(status = NOT_FOUND, userMessage = e.reason, developerMessage = e.message),
+    ).also { log.error("Unexpected exception", e) }
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
