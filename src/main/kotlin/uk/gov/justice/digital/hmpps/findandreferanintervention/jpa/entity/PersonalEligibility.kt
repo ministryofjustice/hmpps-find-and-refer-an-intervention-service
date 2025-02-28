@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.PersonalEligibilityDto
 import java.util.UUID
 
 @Entity
@@ -36,7 +37,20 @@ open class PersonalEligibility(
   open var females: Boolean,
 
   @Nullable
+  @Column(name = "who_is_eligible_guide")
+  open var whoIsEligibleText: String? = null,
+
+  @Nullable
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var intervention: InterventionCatalogue?,
+)
+
+fun PersonalEligibility.toDto(): PersonalEligibilityDto = PersonalEligibilityDto(
+  id = this.id,
+  minAge = this.minAge,
+  maxAge = this.maxAge,
+  males = this.males,
+  females = this.females,
+  whoIsEligibleText = this.whoIsEligibleText,
 )

@@ -12,6 +12,7 @@ import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.ColumnDefault
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CourseDto
 import java.util.UUID
 
 @Entity
@@ -83,4 +84,19 @@ open class Course(
     inverseJoinColumns = [JoinColumn(name = "intervention_catalogue_id")],
   )
   open var interventionCatalogues: MutableSet<InterventionCatalogue> = mutableSetOf(),
+)
+
+fun Course.toDto(): CourseDto = CourseDto(
+  id = this.id,
+  name = this.name,
+  description = this.description,
+  alternateName = this.alternateName,
+  identifier = this.identifier,
+  audience = this.audience,
+  audienceColour = this.audienceColour,
+  version = this.version,
+  displayOnProgrammeDirectory = this.displayOnProgrammeDirectory,
+  intensity = this.intensity,
+  prerequisite = this.prerequisite.map { it.toDto() },
+  offering = this.offering.map { it.toDto() },
 )

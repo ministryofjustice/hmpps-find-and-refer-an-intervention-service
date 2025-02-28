@@ -3,12 +3,20 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.cont
 import au.com.dius.pact.core.support.hasProperty
 import com.microsoft.applicationinsights.TelemetryClient
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.mock
+import org.mockito.kotlin.reset
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
+import uk.gov.justice.digital.hmpps.findandreferanintervention.config.TelemetryClientConfig
+import uk.gov.justice.digital.hmpps.findandreferanintervention.config.logToAppInsights
 import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.InterventionController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
@@ -16,12 +24,31 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.service.Intervent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.InterventionCatalogueFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.createDto
 
-internal class InterventionControllerTest {
+@Import(TelemetryClientConfig::class)
+class InterventionControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
   private val interventionService = mock<InterventionService>()
   private val interventionController =
-    InterventionController(interventionService)
+    InterventionController(interventionService, telemetryClient)
   private val interventionCatalogueFactory: InterventionCatalogueFactory = InterventionCatalogueFactory()
+
+  @BeforeEach
+  fun beforeEach() {
+    doNothing().`when`(telemetryClient).logToAppInsights(
+      "InterventionsCatalogue Summary",
+      mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+    )
+  }
+
+  @AfterEach
+  fun afterEach() {
+    reset(telemetryClient)
+  }
+
+  private fun verifyAppInsights() = verify(telemetryClient, times(1)).logToAppInsights(
+    "InterventionsCatalogue Summary",
+    mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+  )
 
   @Test
   fun `getInterventionsCatalogueByCriteria with no criteria when present return a paged result of interventions`() {
@@ -35,18 +62,10 @@ internal class InterventionControllerTest {
         null,
         null,
       ),
-    )
-    whenever(interventionService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
-      .thenReturn(PageImpl(listOf(catalogue)))
+    ).thenReturn(PageImpl(listOf(catalogue)))
     val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
 
-    verify(telemetryClient)
-      .trackEvent(
-        "InterventionsCatalogue Summary",
-        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
-        null,
-      )
-
+    verifyAppInsights()
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
 
@@ -80,18 +99,10 @@ internal class InterventionControllerTest {
         null,
         null,
       ),
-    )
-    whenever(interventionService.getInterventionsCatalogueByCriteria(pageable, null, null, null, null))
-      .thenReturn(PageImpl(listOf()))
+    ).thenReturn(PageImpl(listOf()))
     val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
 
-    verify(telemetryClient)
-      .trackEvent(
-        "InterventionsCatalogue Summary",
-        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
-        null,
-      )
-
+    verifyAppInsights()
     assertThat(response).isNotNull
     assertThat(response.content).isEmpty()
   }
@@ -109,8 +120,7 @@ internal class InterventionControllerTest {
         null,
         null,
       ),
-    )
-      .thenReturn(PageImpl(listOf(acpIntervention)))
+    ).thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
       interventionController.getInterventionsCatalogue(
         pageable,
@@ -119,15 +129,8 @@ internal class InterventionControllerTest {
         interventionTypes,
         SettingType.CUSTODY,
       )
-    interventionController.getInterventionsCatalogue(pageable, null, null, interventionTypes, SettingType.CUSTODY)
 
-    verify(telemetryClient)
-      .trackEvent(
-        "InterventionsCatalogue Summary",
-        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
-        null,
-      )
-
+    verifyAppInsights()
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
     response.content.forEach { item ->
@@ -165,15 +168,15 @@ internal class InterventionControllerTest {
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
     val response =
-      interventionController.getInterventionsCatalogue(pageable, null, null, interventionTypes, SettingType.CUSTODY)
-
-    verify(telemetryClient)
-      .trackEvent(
-        "InterventionsCatalogue Summary",
-        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+      interventionController.getInterventionsCatalogue(
+        pageable,
         null,
+        null,
+        interventionTypes,
+        SettingType.CUSTODY,
       )
 
+    verifyAppInsights()
     assertThat(response).isNotNull
     assertThat(response.content).isNotEmpty
     response.content.forEach { item ->
@@ -211,15 +214,15 @@ internal class InterventionControllerTest {
       .thenReturn(PageImpl(listOf()))
     val response =
 
-      interventionController.getInterventionsCatalogue(pageable, null, null, interventionTypes, SettingType.CUSTODY)
-
-    verify(telemetryClient)
-      .trackEvent(
-        "InterventionsCatalogue Summary",
-        mapOf("userMessage" to "User has hit interventions catalogue summary page"),
+      interventionController.getInterventionsCatalogue(
+        pageable,
         null,
+        null,
+        interventionTypes,
+        SettingType.CUSTODY,
       )
 
+    verifyAppInsights()
     assertThat(response).isNotNull
     assertThat(response.content).isEmpty()
   }

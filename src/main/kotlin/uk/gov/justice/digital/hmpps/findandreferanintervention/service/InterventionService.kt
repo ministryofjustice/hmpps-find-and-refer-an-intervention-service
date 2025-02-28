@@ -7,6 +7,8 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionC
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepository
 import java.util.UUID
 
@@ -23,9 +25,9 @@ class InterventionService(
     allowsFemales: Boolean?,
   ): Page<InterventionCatalogueDto> = interventionRepository
     .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType)
-    .map { intervention -> InterventionCatalogueDto.fromEntity(intervention) }
+    .map { it.toDto() }
 
   fun getInterventionDetailsById(
     interventionId: UUID,
-  ): InterventionDetailsDto = InterventionDetailsDto.fromEntity(interventionRepository.findInterventionCatalogueById(interventionId))
+  ): InterventionDetailsDto = interventionRepository.findInterventionCatalogueById(interventionId).toDetailsDto()
 }

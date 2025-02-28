@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.ColumnDefault
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.OfferingDto
 import java.util.UUID
 
 @Entity
@@ -51,4 +52,14 @@ open class Offering(
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "course_id")
   open var course: Course,
+)
+
+fun Offering.toDto(): OfferingDto = OfferingDto(
+  id = this.id,
+  organisationId = this.organisationId,
+  contactEmail = this.contactEmail,
+  secondaryContactEmail = this.secondaryContactEmail,
+  withdrawn = this.withdrawn,
+  referable = this.referable,
+  version = this.version,
 )
