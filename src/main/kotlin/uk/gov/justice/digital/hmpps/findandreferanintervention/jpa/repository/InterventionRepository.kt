@@ -7,5 +7,5 @@ import java.util.UUID
 interface InterventionRepository :
   JpaRepository<InterventionCatalogue, UUID>,
   InterventionFilterRepository {
-  fun findInterventionCatalogueById(id: UUID): InterventionCatalogue
+  fun findInterventionCatalogueById(id: UUID): InterventionCatalogue?
 }

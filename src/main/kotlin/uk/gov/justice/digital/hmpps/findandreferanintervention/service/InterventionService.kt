@@ -29,5 +29,5 @@ class InterventionService(
 
   fun getInterventionDetailsById(
     interventionId: UUID,
-  ): InterventionDetailsDto = interventionRepository.findInterventionCatalogueById(interventionId).toDetailsDto()
+  ): InterventionDetailsDto? = interventionRepository.findInterventionCatalogueById(interventionId)?.toDetailsDto()
 }

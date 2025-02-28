@@ -32,6 +32,7 @@ private val exclusionFactory = ExclusionFactory()
 private val riskConsiderationFactory = RiskConsiderationFactory()
 private val personalEligibilityFactory = PersonalEligibilityFactory()
 private val specialEducationNeedFactory = SpecialEducationNeedFactory()
+private val interventionFactory = InterventionFactory()
 
 private val testLocalDate: LocalDate = LocalDate.of(2025, 1, 1)
 private val testOffsetDateTime: OffsetDateTime = OffsetDateTime.of(testLocalDate, LocalTime.NOON, ZoneOffset.UTC)

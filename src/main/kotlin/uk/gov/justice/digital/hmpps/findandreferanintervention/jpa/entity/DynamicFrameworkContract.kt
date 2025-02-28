@@ -82,7 +82,7 @@ open class DynamicFrameworkContract(
 
   @Nullable
   @Column(name = "referral_end_at")
-  open var referralEndAt: OffsetDateTime,
+  open var referralEndAt: OffsetDateTime? = null,
 )
 
 fun DynamicFrameworkContract.toDto(): DynamicFrameworkContractDto = DynamicFrameworkContractDto(
