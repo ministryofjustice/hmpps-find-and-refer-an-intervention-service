@@ -6,5 +6,5 @@ data class InterventionDto(
   val id: UUID,
   val title: String,
   val description: String,
-  val interventionCatalogues: MutableSet<InterventionCatalogueDto> = mutableSetOf(),
+  val dynamicFrameworkContract: DynamicFrameworkContractDto,
 )
