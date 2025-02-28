@@ -20,6 +20,14 @@ open class DeliveryLocation(
   open var id: UUID,
 
   @NotNull
+  @Column(name = "provider_name", length = Integer.MAX_VALUE)
+  open var providerName: String,
+
+  @NotNull
+  @Column(name = "contact", length = Integer.MAX_VALUE)
+  open var contact: String,
+
+  @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "pdu_ref_id", referencedColumnName = "id")
   open var pduRef: PduRef,
@@ -33,5 +41,7 @@ open class DeliveryLocation(
 fun DeliveryLocation.toDto(): DeliveryLocationDto = DeliveryLocationDto(
   id = this.id,
   pduRef = this.pduRef.toDto(),
+  providerName = this.providerName,
+  contact = this.contact,
   intervention = this.intervention,
 )
