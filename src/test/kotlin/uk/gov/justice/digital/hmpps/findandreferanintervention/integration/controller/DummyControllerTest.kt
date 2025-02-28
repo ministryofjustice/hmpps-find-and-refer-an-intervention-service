@@ -14,8 +14,8 @@ import java.time.LocalDateTime
 
 internal class DummyControllerTest {
   private val dummyRepository = mock<DummyRepository>()
-  private val telemetryClient = org.mockito.kotlin.mock<TelemetryClient>()
-  private val dummyController = DummyController(dummyRepository)
+  private val telemetryClient = mock<TelemetryClient>()
+  private val dummyController = DummyController(dummyRepository, telemetryClient)
 
   @Test
   fun `getDummyRecordById returns Dummy when present`() {

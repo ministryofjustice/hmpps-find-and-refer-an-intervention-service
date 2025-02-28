@@ -17,6 +17,13 @@ import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.JdbcType
 import org.hibernate.dialect.PostgreSQLEnumJdbcType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CriminogenicNeedDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryMethodDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto.CommunityLocation
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto.CustodyLocation
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.RiskConsiderationDto
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
@@ -139,6 +146,96 @@ open class InterventionCatalogue(
   )
   open var courses: MutableSet<Course> = mutableSetOf(),
 )
+
+fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
+  val deliveryMethodDtos =
+    this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
+  val deliveryMethodSettingList =
+    deliveryMethodDtos.flatMap { methodDto ->
+      methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting }
+    }
+  return InterventionCatalogueDto(
+    id = this.id,
+    criminogenicNeeds =
+    this.criminogenicNeeds.map {
+      CriminogenicNeedDto.fromEntity(it).need
+    },
+    title = this.name,
+    description = this.shortDescription,
+    interventionType = this.interventionType,
+    setting = deliveryMethodSettingList,
+    allowsMales = this.personalEligibility?.males!!,
+    allowsFemales = this.personalEligibility?.females!!,
+    riskCriteria =
+    this.riskConsideration?.let {
+      RiskConsiderationDto.fromEntity(it).listOfRisks()
+    },
+    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
+    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat },
+    timeToComplete = this.timeToComplete,
+    suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
+    equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
+  )
+}
+
+fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
+  val deliveryMethodDtos =
+    this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
+  val outcomeDtos = this.possibleOutcomes.map { it.toDto().outcome }
+  val outcomesText = if (outcomeDtos.isNotEmpty()) outcomeDtos.joinToString() else null
+  return InterventionDetailsDto(
+    id = this.id,
+    criminogenicNeeds =
+    this.criminogenicNeeds.map {
+      CriminogenicNeedDto.fromEntity(it).need
+    },
+    title = this.name,
+    description = this.shortDescription,
+    interventionType = this.interventionType,
+    allowsMales = this.personalEligibility?.males!!,
+    allowsFemales = this.personalEligibility?.females!!,
+    riskCriteria =
+    this.riskConsideration?.let {
+      RiskConsiderationDto.fromEntity(it).listOfRisks()
+    },
+    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
+    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat },
+    timeToComplete = this.timeToComplete,
+    suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
+    equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
+    minAge = this.personalEligibility?.minAge,
+    maxAge = this.personalEligibility?.maxAge,
+    eligibility = this.personalEligibility?.whoIsEligibleText,
+    outcomes = outcomesText,
+    sessionDetails = this.sessionDetail,
+    communityLocations = getCommunityLocations(this),
+    /**
+     * We currently do not have the database tables for this to be added to the response.
+     * The work will be done as part of this ticket https://dsdmoj.atlassian.net/browse/FRI-294
+     */
+    custodyLocations = listOf(),
+  )
+}
+
+private fun getCommunityLocations(interventionCatalogue: InterventionCatalogue): List<CommunityLocation>? {
+  return interventionCatalogue.interventions.map { it.toDto() }.map { interventionDto ->
+    val contract = interventionDto.dynamicFrameworkContract
+    if (contract.npsRegion != null) {
+      val pccRegions = contract.npsRegion.pccRegions
+      val pduRefsPerPcc = pccRegions.associate { region -> region.name to region.pduRef.map { it.name } }
+      return pduRefsPerPcc.map { CommunityLocation(it.key, it.value) }
+    } else if (contract.pccRegion != null) {
+      val pduRefsPerPcc = contract.pccRegion.pduRef.map { it.name }
+      return pduRefsPerPcc.map { CommunityLocation(contract.pccRegion.name, pduRefsPerPcc) }
+    }
+    return null
+  }.ifEmpty { null }
+}
+
+private fun getCustodyLocations(interventionCatalogue: InterventionCatalogue): List<CustodyLocation>? {
+  val courses = interventionCatalogue.courses.map { it.toDto() }
+  return emptyList()
+}
 
 enum class InterventionType {
   SI,

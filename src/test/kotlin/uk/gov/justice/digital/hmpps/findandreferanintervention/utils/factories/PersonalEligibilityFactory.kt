@@ -15,6 +15,7 @@ fun PersonalEligibilityFactory.create(
   maxAge: Int? = null,
   males: Boolean = true,
   females: Boolean = false,
+  whoIsEligibleText: String? = null,
   intervention: InterventionCatalogue? = null,
 ): PersonalEligibility = save(
   PersonalEligibility(
@@ -23,6 +24,7 @@ fun PersonalEligibilityFactory.create(
     maxAge,
     males,
     females,
+    whoIsEligibleText,
     intervention,
   ),
 )
