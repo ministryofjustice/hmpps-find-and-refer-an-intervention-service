@@ -201,7 +201,7 @@ class InterventionControllerTest {
   @Test
   fun `getInterventionsCatalogueByInterventionType when empty return a paged result of interventions`() {
     val pageable = PageRequest.of(0, 10)
-    val interventionTypes = listOf(InterventionType.ACP)
+    val interventionTypes = listOf(InterventionType.TOOLKITS)
     whenever(
       interventionService.getInterventionsCatalogueByCriteria(
         pageable,
