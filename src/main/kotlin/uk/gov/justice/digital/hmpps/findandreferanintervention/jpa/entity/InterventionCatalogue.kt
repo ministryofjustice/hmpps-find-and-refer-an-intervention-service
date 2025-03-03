@@ -22,6 +22,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryMetho
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto.CommunityLocation
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.RiskConsiderationDto
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -180,6 +181,7 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
 fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   val deliveryMethodDtos =
     this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
+  val interventionsDtos = this.interventions.map { it.toDto() }
   return InterventionDetailsDto(
     id = this.id,
     criminogenicNeeds =
@@ -203,7 +205,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     minAge = this.personalEligibility?.minAge,
     maxAge = this.personalEligibility?.maxAge,
     sessionDetails = this.sessionDetail,
-    communityLocations = getCommunityLocations(this)?.sortedBy { it.name },
+    communityLocations = getCommunityLocations(interventionsDtos)?.sortedBy { it.name },
     /**
      * We currently do not have the database tables for this to be added to the response.
      * The work will be done as part of this ticket https://dsdmoj.atlassian.net/browse/FRI-294
@@ -212,13 +214,16 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   )
 }
 
-private fun getCommunityLocations(interventionCatalogue: InterventionCatalogue): List<CommunityLocation>? {
-  return interventionCatalogue.interventions.map { it.toDto() }.map { interventionDto ->
+private fun getCommunityLocations(interventionsDtos: List<InterventionDto>): List<CommunityLocation>? {
+  return interventionsDtos.map { interventionDto ->
     val contract = interventionDto.dynamicFrameworkContract
     if (contract.npsRegion != null) {
-      val pccRegions = contract.npsRegion.pccRegions
-      val pduRefsPerPcc = pccRegions.associate { region -> region.name to region.pduRef.map { it.name } }
-      return pduRefsPerPcc.map { CommunityLocation(it.key, it.value) }
+      return contract.npsRegion.pccRegions.map { region ->
+        CommunityLocation(
+          region.name,
+          region.pduRef.map { it.name },
+        )
+      }
     } else if (contract.pccRegion != null) {
       val pduRefsPerPcc = contract.pccRegion.pduRef.map { it.name }
       return pduRefsPerPcc.map { CommunityLocation(contract.pccRegion.name, pduRefsPerPcc) }
