@@ -22,7 +22,6 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryMetho
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto.CommunityLocation
-import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto.CustodyLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.RiskConsiderationDto
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -181,8 +180,6 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
 fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   val deliveryMethodDtos =
     this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
-  val outcomeDtos = this.possibleOutcomes.map { it.toDto().outcome }
-  val outcomesText = if (outcomeDtos.isNotEmpty()) outcomeDtos.joinToString() else null
   return InterventionDetailsDto(
     id = this.id,
     criminogenicNeeds =
@@ -205,8 +202,6 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
     minAge = this.personalEligibility?.minAge,
     maxAge = this.personalEligibility?.maxAge,
-    eligibility = this.personalEligibility?.whoIsEligibleText,
-    outcomes = outcomesText,
     sessionDetails = this.sessionDetail,
     communityLocations = getCommunityLocations(this)?.sortedBy { it.name },
     /**
@@ -230,11 +225,6 @@ private fun getCommunityLocations(interventionCatalogue: InterventionCatalogue):
     }
     return null
   }.ifEmpty { null }
-}
-
-private fun getCustodyLocations(interventionCatalogue: InterventionCatalogue): List<CustodyLocation>? {
-  val courses = interventionCatalogue.courses.map { it.toDto() }
-  return emptyList()
 }
 
 enum class InterventionType {

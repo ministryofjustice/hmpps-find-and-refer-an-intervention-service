@@ -27,7 +27,6 @@ class InterventionService(
     .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType)
     .map { it.toDto() }
 
-  fun getInterventionDetailsById(
-    interventionId: UUID,
-  ): InterventionDetailsDto? = interventionRepository.findInterventionCatalogueById(interventionId)?.toDetailsDto()
+  fun getInterventionDetailsById(interventionId: UUID): InterventionDetailsDto? = interventionRepository
+    .findInterventionCatalogueById(interventionId)?.toDetailsDto()
 }

@@ -60,9 +60,7 @@ class InterventionController(
       "InterventionsDetail page",
       mapOf("userMessage" to "User has hit interventions details page", "interventionId" to id.toString()),
     )
-    return interventionService.getInterventionDetailsById(id) ?: throw ResponseStatusException(
-      HttpStatus.NOT_FOUND,
-      "Intervention Not Found with ID: $id",
-    )
+    return interventionService.getInterventionDetailsById(id)
+      ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Intervention Not Found with ID: $id")
   }
 }

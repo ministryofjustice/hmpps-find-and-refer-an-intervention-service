@@ -60,7 +60,7 @@ fun InterventionCatalogueFactory.create(
   enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
   excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
   exclusion: Exclusion = exclusionFactory.create(),
-  interventions: MutableSet<Intervention> = mutableSetOf(),
+  interventions: MutableSet<Intervention> = mutableSetOf(interventionFactory.create()),
   personalEligibility: PersonalEligibility = personalEligibilityFactory.create(),
   possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
   riskConsideration: RiskConsideration = riskConsiderationFactory.create(),

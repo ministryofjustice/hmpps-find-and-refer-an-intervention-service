@@ -7,15 +7,12 @@ import java.util.UUID
 
 class PersonalEligibilityFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
-private val interventionCatalogueFactory = InterventionCatalogueFactory()
-
 fun PersonalEligibilityFactory.create(
   id: UUID = UUID.randomUUID(),
   minAge: Int? = null,
   maxAge: Int? = null,
   males: Boolean = true,
   females: Boolean = false,
-  whoIsEligibleText: String? = null,
   intervention: InterventionCatalogue? = null,
 ): PersonalEligibility = save(
   PersonalEligibility(
@@ -24,7 +21,6 @@ fun PersonalEligibilityFactory.create(
     maxAge,
     males,
     females,
-    whoIsEligibleText,
     intervention,
   ),
 )

@@ -8,5 +8,4 @@ data class PersonalEligibilityDto(
   val maxAge: Int?,
   val males: Boolean,
   val females: Boolean,
-  val whoIsEligibleText: String?,
 )

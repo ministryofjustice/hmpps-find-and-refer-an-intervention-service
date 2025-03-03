@@ -22,8 +22,6 @@ data class InterventionDetailsDto(
   val deliveryFormat: List<String>,
   val attendanceType: List<String>,
   val description: String,
-  val eligibility: String?,
-  val outcomes: String?,
   val sessionDetails: String?,
   val communityLocations: List<CommunityLocation>?,
   val custodyLocations: List<CustodyLocation>?,
