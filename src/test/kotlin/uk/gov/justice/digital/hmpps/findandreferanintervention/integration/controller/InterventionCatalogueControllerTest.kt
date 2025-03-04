@@ -34,11 +34,12 @@ internal class InterventionCatalogueControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(catalogue)))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verify(telemetryClient)
       .trackEvent(
@@ -79,11 +80,12 @@ internal class InterventionCatalogueControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
     val response =
-      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
+      interventionCatalogueController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verify(telemetryClient)
       .trackEvent(
@@ -108,6 +110,7 @@ internal class InterventionCatalogueControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention)))
@@ -117,6 +120,7 @@ internal class InterventionCatalogueControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
@@ -160,6 +164,7 @@ internal class InterventionCatalogueControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
@@ -169,6 +174,7 @@ internal class InterventionCatalogueControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
@@ -211,6 +217,7 @@ internal class InterventionCatalogueControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
@@ -220,6 +227,7 @@ internal class InterventionCatalogueControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
