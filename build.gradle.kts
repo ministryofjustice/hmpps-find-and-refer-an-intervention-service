@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.1.2"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.1.3"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.1.10"
   kotlin("plugin.spring") version "2.1.10"
 }
@@ -9,21 +9,21 @@ configurations {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.2.1")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.3.1")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.3") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter:8.2.0")
-  implementation("io.sentry:sentry-logback:8.2.0")
+  implementation("io.sentry:sentry-spring-boot-starter:8.3.0")
+  implementation("io.sentry:sentry-logback:8.3.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.0")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.3") // needed for OffsetDateTime for AppInsights
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
@@ -51,7 +51,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:6.6.8.Final")
+  implementation("org.hibernate:hibernate-core:6.6.9.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.9.2")
 
   runtimeOnly("org.postgresql:postgresql:42.7.5")
@@ -68,8 +68,8 @@ dependencies {
   testImplementation("org.springframework.batch:spring-batch-test")
   // testImplementation("com.github.tomakehurst:wiremock-jre8:3.0.1")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.2.1")
-  testImplementation("org.wiremock:wiremock-standalone:3.12.0")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.3.1")
+  testImplementation("org.wiremock:wiremock-standalone:3.12.1")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.25") {
     exclude(group = "io.swagger.core.v3")
   }
