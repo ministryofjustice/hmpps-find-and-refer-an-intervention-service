@@ -102,7 +102,7 @@ workflows:
           slack_channel_name: << pipeline.parameters.releases-slack-channel >>
           context:
             - hmpps-common-vars
-            - hmpps-template-kotlin-prod
+            - hmpps-find-and-refer-an-intervention-prod-deploy
           requires:
             - request-prod-approval
           helm_timeout: 5m
