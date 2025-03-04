@@ -17,6 +17,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Person
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PossibleOutcome
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.OffsetDateTime
@@ -31,6 +32,7 @@ private val exclusionFactory = ExclusionFactory()
 private val riskConsiderationFactory = RiskConsiderationFactory()
 private val personalEligibilityFactory = PersonalEligibilityFactory()
 private val specialEducationNeedFactory = SpecialEducationNeedFactory()
+private val interventionFactory = InterventionFactory()
 
 private val testLocalDate: LocalDate = LocalDate.of(2025, 1, 1)
 private val testOffsetDateTime: OffsetDateTime = OffsetDateTime.of(testLocalDate, LocalTime.NOON, ZoneOffset.UTC)
@@ -58,7 +60,7 @@ fun InterventionCatalogueFactory.create(
   enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
   excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
   exclusion: Exclusion = exclusionFactory.create(),
-  interventions: MutableSet<Intervention> = mutableSetOf(),
+  interventions: MutableSet<Intervention> = mutableSetOf(interventionFactory.create()),
   personalEligibility: PersonalEligibility = personalEligibilityFactory.create(),
   possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
   riskConsideration: RiskConsideration = riskConsiderationFactory.create(),
@@ -123,35 +125,32 @@ fun InterventionCatalogueFactory.createDto(
   possibleOutcomes: MutableSet<PossibleOutcome> = mutableSetOf(),
   riskConsideration: RiskConsideration = riskConsiderationFactory.create(),
   specialEducationalNeeds: SpecialEducationalNeed = specialEducationNeedFactory.create(),
-): InterventionCatalogueDto {
-  val entity = this.create(
-    id,
-    name,
-    shortDescription,
-    longDescription,
-    topic,
-    sessionDetail,
-    commencementDate,
-    terminationDate,
-    created,
-    createdBy,
-    lastModified,
-    lastModifiedBy,
-    interventionType,
-    timeToComplete,
-    reasonsForReferral,
-    criminogenicNeeds,
-    deliveryLocations,
-    deliveryMethods,
-    eligibleOffences,
-    enablingInterventions,
-    excludedOffences,
-    exclusion,
-    interventions,
-    personalEligibility,
-    possibleOutcomes,
-    riskConsideration,
-    specialEducationalNeeds,
-  )
-  return InterventionCatalogueDto.fromEntity(entity)
-}
+): InterventionCatalogueDto = this.create(
+  id,
+  name,
+  shortDescription,
+  longDescription,
+  topic,
+  sessionDetail,
+  commencementDate,
+  terminationDate,
+  created,
+  createdBy,
+  lastModified,
+  lastModifiedBy,
+  interventionType,
+  timeToComplete,
+  reasonsForReferral,
+  criminogenicNeeds,
+  deliveryLocations,
+  deliveryMethods,
+  eligibleOffences,
+  enablingInterventions,
+  excludedOffences,
+  exclusion,
+  interventions,
+  personalEligibility,
+  possibleOutcomes,
+  riskConsideration,
+  specialEducationalNeeds,
+).toDto()

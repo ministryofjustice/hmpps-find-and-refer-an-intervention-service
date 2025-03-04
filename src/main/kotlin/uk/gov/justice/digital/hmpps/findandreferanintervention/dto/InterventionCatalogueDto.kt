@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import java.util.UUID
@@ -23,39 +22,4 @@ data class InterventionCatalogueDto(
   val timeToComplete: String?,
   val suitableForPeopleWithLearningDifficulties: Boolean?,
   val equivalentNonLdcProgramme: String?,
-) {
-  companion object {
-    fun fromEntity(
-      interventionCatalogue: InterventionCatalogue,
-    ): InterventionCatalogueDto {
-      val deliveryMethodDtos =
-        interventionCatalogue.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
-      val deliveryMethodSettingList =
-        deliveryMethodDtos.flatMap { methodDto ->
-          methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting }
-        }
-      return InterventionCatalogueDto(
-        id = interventionCatalogue.id,
-        criminogenicNeeds =
-        interventionCatalogue.criminogenicNeeds.map {
-          CriminogenicNeedDto.fromEntity(it).need
-        },
-        title = interventionCatalogue.name,
-        description = interventionCatalogue.shortDescription,
-        interventionType = interventionCatalogue.interventionType,
-        setting = deliveryMethodSettingList,
-        allowsMales = interventionCatalogue.personalEligibility?.males!!,
-        allowsFemales = interventionCatalogue.personalEligibility?.females!!,
-        riskCriteria =
-        interventionCatalogue.riskConsideration?.let {
-          RiskConsiderationDto.fromEntity(it).listOfRisks()
-        },
-        attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
-        deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat },
-        timeToComplete = interventionCatalogue.timeToComplete,
-        suitableForPeopleWithLearningDifficulties = interventionCatalogue.specialEducationalNeeds?.learningDisabilityCateredFor,
-        equivalentNonLdcProgramme = interventionCatalogue.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
-      )
-    }
-  }
-}
+)

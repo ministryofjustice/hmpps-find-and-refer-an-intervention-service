@@ -13,10 +13,11 @@ class InterventionFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
 private val testLocalDate: LocalDate = LocalDate.of(2025, 1, 1)
 private val testOffsetDateTime: OffsetDateTime = OffsetDateTime.of(testLocalDate, LocalTime.NOON, ZoneOffset.UTC)
+private val dynamicFrameworkContractFactory: DynamicFrameworkContractFactory = DynamicFrameworkContractFactory()
 
 fun InterventionFactory.create(
   id: UUID = UUID.randomUUID(),
-  dynamicFrameworkContract: DynamicFrameworkContract = TODO(),
+  dynamicFrameworkContract: DynamicFrameworkContract = dynamicFrameworkContractFactory.create(),
   createdAt: OffsetDateTime = testOffsetDateTime,
   title: String = "Sheffield Housing Services",
   description: String = "Inclusive housing for South Yorkshire",

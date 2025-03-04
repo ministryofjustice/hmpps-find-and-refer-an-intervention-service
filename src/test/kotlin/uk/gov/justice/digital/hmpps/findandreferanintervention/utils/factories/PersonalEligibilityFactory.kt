@@ -7,8 +7,6 @@ import java.util.UUID
 
 class PersonalEligibilityFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
-private val interventionCatalogueFactory = InterventionCatalogueFactory()
-
 fun PersonalEligibilityFactory.create(
   id: UUID = UUID.randomUUID(),
   minAge: Int? = null,

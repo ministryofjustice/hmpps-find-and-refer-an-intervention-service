@@ -11,6 +11,7 @@ import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DynamicFrameworkContractDto
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
@@ -38,12 +39,12 @@ open class DynamicFrameworkContract(
 
   @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "nps_region_id")
+  @JoinColumn(name = "nps_region_id", referencedColumnName = "id")
   open var npsRegion: NpsRegion? = null,
 
   @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "pcc_region_id")
+  @JoinColumn(name = "pcc_region_id", referencedColumnName = "id")
   open var pccRegion: PccRegion? = null,
 
   @NotNull
@@ -70,7 +71,7 @@ open class DynamicFrameworkContract(
   open var contractReference: String,
 
   @NotNull
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne
   @JoinColumn(name = "contract_type_id")
   open var contractType: ContractType,
 
@@ -81,5 +82,20 @@ open class DynamicFrameworkContract(
 
   @Nullable
   @Column(name = "referral_end_at")
-  open var referralEndAt: OffsetDateTime,
+  open var referralEndAt: OffsetDateTime? = null,
+)
+
+fun DynamicFrameworkContract.toDto(): DynamicFrameworkContractDto = DynamicFrameworkContractDto(
+  id = this.id,
+  startDate = this.startDate,
+  endDate = this.endDate,
+  npsRegion = this.npsRegion?.toDto(),
+  pccRegion = this.pccRegion?.toDto(),
+  allowsFemale = this.allowsFemale,
+  allowsMale = this.allowsMale,
+  minimumAge = this.minimumAge,
+  maximumAge = this.maximumAge,
+  contractReference = this.contractReference,
+  referralStartDate = this.referralStartDate,
+  referralEndAt = this.referralEndAt,
 )

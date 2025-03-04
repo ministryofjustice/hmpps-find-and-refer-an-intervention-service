@@ -8,16 +8,21 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.MapsId
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.PrerequisiteDto
 
 @Entity
 @Table(name = "prerequisite", schema = "public")
 open class Prerequisite(
   @EmbeddedId
-  open var id: PrerequisiteId? = null,
+  open var id: PrerequisiteId,
 
   @NotNull
   @MapsId("courseId")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "course_id")
   open var course: Course,
+)
+
+fun Prerequisite.toDto(): PrerequisiteDto = PrerequisiteDto(
+  id = this.id.toDto(),
 )

@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import java.util.UUID
 
-interface InterventionCatalogueRepository :
+interface InterventionRepository :
   JpaRepository<InterventionCatalogue, UUID>,
-  InterventionCatalogueFilterRepository
+  InterventionFilterRepository {
+  fun findInterventionCatalogueById(id: UUID): InterventionCatalogue?
+}
