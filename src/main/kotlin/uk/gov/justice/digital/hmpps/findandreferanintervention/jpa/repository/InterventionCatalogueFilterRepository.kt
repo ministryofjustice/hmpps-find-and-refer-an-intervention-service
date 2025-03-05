@@ -7,7 +7,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Interv
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 
-interface InterventionFilterRepository {
+interface InterventionCatalogueFilterRepository {
 
   @EntityGraph(
     attributePaths =

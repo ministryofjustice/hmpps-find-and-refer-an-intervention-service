@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 import uk.gov.justice.digital.hmpps.findandreferanintervention.config.logToAppInsights
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
@@ -65,5 +66,25 @@ class InterventionController(
     )
     return interventionService.getInterventionDetailsById(id)
       ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Intervention Not Found with ID: $id")
+  }
+
+  @GetMapping("/intervention/{interventionId}/pdu/{pduRefId}", produces = [MediaType.APPLICATION_JSON_VALUE])
+  fun getCrsInterventionsDetails(
+    @PathVariable interventionId: UUID,
+    @PathVariable pduRefId: String,
+  ): CrsInterventionDetailsDto? {
+    telemetryClient.logToAppInsights(
+      "CRS InterventionsDetail page",
+      mapOf(
+        "userMessage" to "Use has hit CRS interventions details page",
+        "interventionId" to interventionId.toString(),
+        "pduRefId" to pduRefId,
+      ),
+    )
+    return interventionService.getCrsInterventionDetailsByIdAndPdu(interventionId, pduRefId)
+      ?: throw ResponseStatusException(
+        HttpStatus.NOT_FOUND,
+        "Intervention Not Found with ID: $interventionId and PduId $pduRefId",
+      )
   }
 }

@@ -20,6 +20,8 @@ import uk.gov.justice.hmpps.test.kotlin.auth.JwtAuthorisationHelper
 @EnableTransactionManagement
 abstract class IntegrationTestBase {
 
+  val interventionClientRole = "ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"
+
   @Autowired
   protected lateinit var webTestClient: WebTestClient
 
