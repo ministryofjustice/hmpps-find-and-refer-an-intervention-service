@@ -61,9 +61,10 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     ).thenReturn(PageImpl(listOf(catalogue)))
-    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
+    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verifyAppInsights()
     assertThat(response).isNotNull
@@ -101,7 +102,7 @@ class InterventionControllerTest {
         null,
       ),
     ).thenReturn(PageImpl(listOf()))
-    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
+    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verifyAppInsights()
     assertThat(response).isNotNull

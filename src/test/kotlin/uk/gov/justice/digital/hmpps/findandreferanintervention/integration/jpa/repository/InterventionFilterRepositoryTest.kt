@@ -175,7 +175,7 @@ constructor(
     fun `FilterByProgrammeName = 'programme name' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = true,
@@ -217,7 +217,7 @@ constructor(
     fun `findInterventionByTypeSettingGenderButNotProgrammeName and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = true,
