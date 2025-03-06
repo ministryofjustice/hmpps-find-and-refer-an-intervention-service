@@ -31,5 +31,6 @@ interface InterventionFilterRepository {
     allowsMales: Boolean?,
     interventionTypes: List<InterventionType>?,
     settingType: SettingType?,
+    programmeName: String?,
   ): Page<InterventionCatalogue>
 }

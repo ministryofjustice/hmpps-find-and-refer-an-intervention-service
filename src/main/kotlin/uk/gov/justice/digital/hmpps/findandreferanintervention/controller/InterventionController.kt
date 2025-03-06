@@ -35,6 +35,8 @@ class InterventionController(
     allowsMales: Boolean?,
     @RequestParam(name = "interventionType", required = false)
     interventionTypes: List<InterventionType>?,
+    @RequestParam(name = "programmeName", required = false)
+    programmeName: String?,
     @PathVariable(name = "setting", required = true)
     settingType: SettingType,
   ): Page<InterventionCatalogueDto> {
@@ -51,6 +53,7 @@ class InterventionController(
       settingType,
       allowsMales,
       allowsFemales,
+      programmeName,
     )
   }
 

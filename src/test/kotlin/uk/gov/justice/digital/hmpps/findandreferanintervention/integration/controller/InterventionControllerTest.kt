@@ -61,9 +61,10 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     ).thenReturn(PageImpl(listOf(catalogue)))
-    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
+    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verifyAppInsights()
     assertThat(response).isNotNull
@@ -98,9 +99,10 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     ).thenReturn(PageImpl(listOf()))
-    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, SettingType.CUSTODY)
+    val response = interventionController.getInterventionsCatalogue(pageable, null, null, null, null, SettingType.CUSTODY)
 
     verifyAppInsights()
     assertThat(response).isNotNull
@@ -119,6 +121,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     ).thenReturn(PageImpl(listOf(acpIntervention)))
     val response =
@@ -127,6 +130,7 @@ class InterventionControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
@@ -164,6 +168,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf(acpIntervention, crsIntervention)))
@@ -173,6 +178,7 @@ class InterventionControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
@@ -209,6 +215,7 @@ class InterventionControllerTest {
         SettingType.CUSTODY,
         null,
         null,
+        null,
       ),
     )
       .thenReturn(PageImpl(listOf()))
@@ -219,6 +226,7 @@ class InterventionControllerTest {
         null,
         null,
         interventionTypes,
+        null,
         SettingType.CUSTODY,
       )
 
