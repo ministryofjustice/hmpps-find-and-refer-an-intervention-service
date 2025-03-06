@@ -25,7 +25,8 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
     val interventionId = UUID.fromString("ce0bf924-d5eb-498f-9376-8a01a07510f5")
     val pduId = "redcar-cleveland-and-middlesbrough"
     val pduRef = pduRefRepository.findPduRefById(pduId)!!
-    val pduDetails = interventionRepository.findInterventionCatalogueById(interventionId)!!.toCrsDetailsDto(pduRef)
+    val pduDetails =
+      interventionRepository.findInterventionCatalogueById(interventionId)!!.toCrsDetailsDto(pduRef)!!
 
     webTestClient.get()
       .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
