@@ -6,16 +6,19 @@ import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import java.util.UUID
 
 @Service
 class InterventionService(
-  val interventionRepository: InterventionCatalogueRepository,
+  val interventionCatalogueRepository: InterventionCatalogueRepository,
+  val pduRefRepository: PduRefRepository,
 ) {
 
   fun getInterventionsCatalogueByCriteria(
@@ -25,27 +28,24 @@ class InterventionService(
     allowsMales: Boolean?,
     allowsFemales: Boolean?,
     programmeName: String?,
-  ): Page<InterventionCatalogueDto> = interventionRepository
-    .findAllInterventionCatalogueByCriteria(pageable, allowsFemales, allowsMales, interventionTypes, settingType, programmeName)
+  ): Page<InterventionCatalogueDto> = interventionCatalogueRepository
+    .findAllInterventionCatalogueByCriteria(
+      pageable,
+      allowsFemales,
+      allowsMales,
+      interventionTypes,
+      settingType,
+      programmeName,
+    )
     .map { it.toDto() }
 
-  fun getInterventionDetailsById(interventionId: UUID): InterventionDetailsDto? = interventionRepository
+  fun getInterventionDetailsById(interventionId: UUID): InterventionDetailsDto? = interventionCatalogueRepository
     .findInterventionCatalogueById(interventionId)?.toDetailsDto()
 
   fun getCrsInterventionDetailsByIdAndPdu(interventionId: UUID, pduRefId: String): CrsInterventionDetailsDto? {
-    val intervention = interventionRepository.findInterventionCatalogueById(interventionId) ?: return null
-    return CrsInterventionDetailsDto(
-      interventionCatalogueId = interventionId,
-      interventionType = intervention.interventionType,
-      region = "RegionTest",
-      location = "LocationTest",
-      serviceCategory = "TODO()",
-      provider = "TODO()",
-      minAge = intervention.personalEligibility?.minAge,
-      maxAge = intervention.personalEligibility?.maxAge,
-      allowsMales = intervention.personalEligibility!!.males,
-      allowsFemales = intervention.personalEligibility!!.females,
-      description = intervention.shortDescription,
-    )
+    val interventionCatalogue =
+      interventionCatalogueRepository.findInterventionCatalogueById(interventionId) ?: return null
+    val pduRef = pduRefRepository.findPduRefById(pduRefId) ?: return null
+    return interventionCatalogue.toCrsDetailsDto(pduRef)
   }
 }

@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
+import jakarta.persistence.ManyToMany
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import java.time.OffsetDateTime
@@ -24,4 +25,8 @@ open class ServiceCategory(
   @NotNull
   @Column(name = "name", length = Integer.MAX_VALUE)
   open var name: String,
+
+  @NotNull
+  @ManyToMany(mappedBy = "serviceCategories")
+  open var contractTypes: MutableSet<ContractType> = mutableSetOf(),
 )

@@ -33,10 +33,16 @@ open class PccRegion(
   @NotNull
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "pccRegion")
   open var pduRef: MutableSet<PduRef> = mutableSetOf(),
+
+  @NotNull
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "pccRegion")
+  open var dynamicFrameworkContracts: MutableSet<DynamicFrameworkContract> = mutableSetOf(),
 )
 
 fun PccRegion.toDto(): PccRegionDto = PccRegionDto(
   id = this.id,
   name = this.name,
-  pduRef = this.pduRef.map { it.toDto() }.toMutableSet(),
+  npsRegion = this.npsRegion,
+  pduRef = this.pduRef,
+  dynamicFrameworkContracts = this.dynamicFrameworkContracts,
 )

@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.expectBody
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventionDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
 
@@ -14,24 +17,26 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
   @Autowired
   private lateinit var interventionRepository: InterventionCatalogueRepository
 
-  private val interventionsDetailsPath = "/interventions/details"
+  @Autowired
+  private lateinit var pduRefRepository: PduRefRepository
 
   @Test
   fun `getCrsInterventionDetails return 200 when intervention exists`() {
-    val interventionId = UUID.fromString("3ccb511b-89b2-42f7-803b-304f54d85a24")
+    val interventionId = UUID.fromString("ce0bf924-d5eb-498f-9376-8a01a07510f5")
     val pduId = "redcar-cleveland-and-middlesbrough"
-//    val pduDetails: CrsInterventionDetailsDto = CrsInterventionDetailsDto()
+    val pduRef = pduRefRepository.findPduRefById(pduId)!!
+    val pduDetails = interventionRepository.findInterventionCatalogueById(interventionId)!!.toCrsDetailsDto(pduRef)
 
     webTestClient.get()
-      .uri { it.path("$interventionsDetailsPath/$interventionId/pdu/$pduId").build() }
+      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
       .headers(setAuthorisation(roles = listOf(interventionClientRole)))
       .exchange()
       .expectStatus()
       .isOk
       .expectHeader()
       .contentType(MediaType.APPLICATION_JSON)
-//      .expectBody<CrsInterventionDetailsDto>()
-//      .isEqualTo(pduDetails)
+      .expectBody<CrsInterventionDetailsDto>()
+      .isEqualTo(pduDetails)
   }
 
   @Test
@@ -40,7 +45,7 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
     val pduId = "redcar-cleveland-and-middlesbrough"
 
     webTestClient.get()
-      .uri { it.path("$interventionsDetailsPath/$interventionId/pdu/$pduId").build() }
+      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
       .headers(setAuthorisation(roles = listOf(interventionClientRole)))
       .exchange()
       .expectStatus()
@@ -63,7 +68,7 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
     val pduId = "INVALID_PDU"
 
     webTestClient.get()
-      .uri { it.path("$interventionsDetailsPath/$interventionId/pdu/$pduId").build() }
+      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
       .headers(setAuthorisation(roles = listOf(interventionClientRole)))
       .exchange()
       .expectStatus()
@@ -86,7 +91,7 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
     val pduId = "PDU_ID"
 
     webTestClient.get()
-      .uri { it.path("$interventionsDetailsPath/$interventionId/pdu/$pduId").build() }
+      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
       .exchange()
       .expectStatus()
       .isUnauthorized
