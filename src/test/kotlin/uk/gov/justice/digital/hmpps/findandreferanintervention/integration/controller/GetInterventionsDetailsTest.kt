@@ -9,13 +9,13 @@ import org.springframework.test.web.reactive.server.expectBody
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDetailsDto
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
 
 class GetInterventionsDetailsTest : IntegrationTestBase() {
   @Autowired
-  private lateinit var interventionRepository: InterventionRepository
+  private lateinit var interventionRepository: InterventionCatalogueRepository
 
   @Test
   fun `getInterventionsDetails for ACP Building Better Relationships return 200 OK and InterventionDetailsDto`() {

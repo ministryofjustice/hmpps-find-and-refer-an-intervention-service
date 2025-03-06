@@ -36,4 +36,6 @@ open class PduRef(
 fun PduRef.toDto(): PduRefDto = PduRefDto(
   id = this.id,
   name = this.name,
+  pccRegionDto = this.pccRegion,
+  deliveryLocations = this.deliveryLocations,
 )

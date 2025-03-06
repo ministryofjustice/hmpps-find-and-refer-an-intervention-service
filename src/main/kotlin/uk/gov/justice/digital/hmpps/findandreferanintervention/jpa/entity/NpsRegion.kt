@@ -25,6 +25,9 @@ open class NpsRegion(
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "npsRegion")
   open var pccRegions: MutableSet<PccRegion> = mutableSetOf(),
+
+  @OneToMany(mappedBy = "npsRegion")
+  open var dynamicFrameworkContracts: MutableSet<DynamicFrameworkContract> = mutableSetOf(),
 )
 
 fun NpsRegion.toDto(): NpsRegionDto = NpsRegionDto(

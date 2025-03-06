@@ -57,5 +57,5 @@ fun Intervention.toDto(): InterventionDto = InterventionDto(
   id = this.id,
   title = this.title,
   description = this.description,
-  dynamicFrameworkContract = this.dynamicFrameworkContract.toDto(),
+  dynamicFrameworkContract = this.dynamicFrameworkContract,
 )
