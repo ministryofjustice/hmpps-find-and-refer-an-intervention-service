@@ -217,8 +217,8 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
 private fun getCommunityLocations(interventionsDtos: List<InterventionDto>): List<CommunityLocation>? {
   return interventionsDtos.map { interventionDto ->
     val contract = interventionDto.dynamicFrameworkContract
-    if (contract.npsRegion != null) {
-      return contract.npsRegion!!.pccRegions.map { region ->
+    return if (contract.npsRegion != null) {
+      contract.npsRegion!!.pccRegions.map { region ->
         CommunityLocation(
           region.name,
           region.pduRef.map { it.name },
@@ -226,9 +226,10 @@ private fun getCommunityLocations(interventionsDtos: List<InterventionDto>): Lis
       }
     } else if (contract.pccRegion != null) {
       val pduRefsPerPcc = contract.pccRegion!!.pduRef.map { it.name }
-      return pduRefsPerPcc.map { CommunityLocation(contract.pccRegion!!.name, pduRefsPerPcc) }
+      pduRefsPerPcc.map { CommunityLocation(contract.pccRegion!!.name, pduRefsPerPcc) }
+    } else {
+      null
     }
-    return null
   }.ifEmpty { null }
 }
 
