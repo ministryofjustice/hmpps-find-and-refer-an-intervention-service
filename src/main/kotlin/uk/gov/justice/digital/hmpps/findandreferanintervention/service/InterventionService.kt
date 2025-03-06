@@ -39,12 +39,12 @@ class InterventionService(
     )
     .map { it.toDto() }
 
-  fun getInterventionDetailsById(interventionId: UUID): InterventionDetailsDto? = interventionCatalogueRepository
-    .findInterventionCatalogueById(interventionId)?.toDetailsDto()
+  fun getInterventionDetailsById(interventionCatalogueId: UUID): InterventionDetailsDto? = interventionCatalogueRepository
+    .findInterventionCatalogueById(interventionCatalogueId)?.toDetailsDto()
 
-  fun getCrsInterventionDetailsByIdAndPdu(interventionId: UUID, pduRefId: String): CrsInterventionDetailsDto? {
+  fun getCrsInterventionDetailsByIdAndPdu(interventionCatalogueId: UUID, pduRefId: String): CrsInterventionDetailsDto? {
     val interventionCatalogue =
-      interventionCatalogueRepository.findInterventionCatalogueById(interventionId) ?: return null
+      interventionCatalogueRepository.findInterventionCatalogueById(interventionCatalogueId) ?: return null
     val pduRef = pduRefRepository.findPduRefById(pduRefId) ?: return null
     return interventionCatalogue.toCrsDetailsDto(pduRef)
   }

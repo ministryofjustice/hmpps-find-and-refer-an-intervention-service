@@ -68,23 +68,23 @@ class InterventionController(
       ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Intervention Not Found with ID: $id")
   }
 
-  @GetMapping("/intervention/{interventionId}/pdu/{pduRefId}", produces = [MediaType.APPLICATION_JSON_VALUE])
+  @GetMapping("/intervention/{interventionCatalogueId}/pdu/{pduRefId}", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getCrsInterventionsDetails(
-    @PathVariable interventionId: UUID,
+    @PathVariable interventionCatalogueId: UUID,
     @PathVariable pduRefId: String,
   ): CrsInterventionDetailsDto? {
     telemetryClient.logToAppInsights(
-      "CRS InterventionsDetail page",
+      "CRS InterventionsDetails page",
       mapOf(
-        "userMessage" to "Use has hit CRS interventions details page",
-        "interventionId" to interventionId.toString(),
+        "userMessage" to "User has hit CRS interventions details page",
+        "interventionCatalogueId" to interventionCatalogueId.toString(),
         "pduRefId" to pduRefId,
       ),
     )
-    return interventionService.getCrsInterventionDetailsByIdAndPdu(interventionId, pduRefId)
+    return interventionService.getCrsInterventionDetailsByIdAndPdu(interventionCatalogueId, pduRefId)
       ?: throw ResponseStatusException(
         HttpStatus.NOT_FOUND,
-        "Intervention Not Found with ID: $interventionId and PduId $pduRefId",
+        "Intervention Not Found with ID: $interventionCatalogueId and PduId $pduRefId",
       )
   }
 }

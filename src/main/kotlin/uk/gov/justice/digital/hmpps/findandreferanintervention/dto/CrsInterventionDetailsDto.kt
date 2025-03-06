@@ -3,7 +3,6 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PduRef
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import java.util.UUID
 
 data class CrsInterventionDetailsDto(
@@ -21,16 +20,14 @@ data class CrsInterventionDetailsDto(
 )
 
 fun InterventionCatalogue.toCrsDetailsDto(pduRef: PduRef): CrsInterventionDetailsDto? {
-  val contractIdsForIntervention =
-    this.interventions.map { it.toDto() }.map { it.dynamicFrameworkContract.id }
-  val npsRegion = pduRef.pccRegion.npsRegion.name
-  val pccRegions = pduRef.pccRegion.npsRegion.pccRegions.map { it.name }.sorted()
-  val contractInPdu =
-    pduRef.pccRegion.npsRegion.dynamicFrameworkContracts.find { it.id in contractIdsForIntervention } ?: return null
+  val contractIdsForIntervention = this.interventions.map { it.dynamicFrameworkContract.id }
+  val npsRegion = pduRef.pccRegion.npsRegion
+  val pccRegions = npsRegion.pccRegions.map { it.name }.sorted()
+  val contractInPdu = npsRegion.dynamicFrameworkContracts.find { it.id in contractIdsForIntervention } ?: return null
   return CrsInterventionDetailsDto(
     interventionCatalogueId = this.id,
     interventionType = this.interventionType,
-    npsRegion = npsRegion,
+    npsRegion = npsRegion.name,
     pccRegions = pccRegions,
     serviceCategory = contractInPdu.contractType.serviceCategories.map { it.name }.sorted(),
     provider = contractInPdu.primeProvider.name,
