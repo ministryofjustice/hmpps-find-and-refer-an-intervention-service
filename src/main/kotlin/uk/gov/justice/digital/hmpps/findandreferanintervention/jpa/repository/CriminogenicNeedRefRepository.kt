@@ -5,5 +5,5 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Crimin
 import java.util.*
 
 interface CriminogenicNeedRefRepository : JpaRepository<CriminogenicNeedRef, UUID> {
-  fun findByName(name: String): CriminogenicNeedRef?
+  fun findByName(name: String?): CriminogenicNeedRef?
 }

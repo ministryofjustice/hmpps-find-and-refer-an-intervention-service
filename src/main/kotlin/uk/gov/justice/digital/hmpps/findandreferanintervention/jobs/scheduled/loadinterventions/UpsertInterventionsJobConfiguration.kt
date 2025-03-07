@@ -53,7 +53,7 @@ class UpsertInterventionsJobConfiguration(
     processor: UpsertInterventionProcessor,
     platformTransactionManager: PlatformTransactionManager,
   ): Step = StepBuilder("upsertInterventionsStep", jobRepository)
-    .chunk<InterventionCatalogDefinition, InterventionCatalogue>(10, platformTransactionManager)
+    .chunk<InterventionCatalogueDefinition, InterventionCatalogue>(10, platformTransactionManager)
     .reader(reader)
     .processor(processor)
     .writer {}
