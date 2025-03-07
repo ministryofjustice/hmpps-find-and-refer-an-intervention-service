@@ -5,11 +5,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import mu.KLogging
 import org.springframework.batch.core.configuration.annotation.JobScope
 import org.springframework.batch.item.ItemReader
-import org.springframework.stereotype.Component
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 
-@Component
 @JobScope
-class InterventionDefinitionReader(val resourcePathOverride: String?) : ItemReader<InterventionCatalogDefinition> {
+@EnableAutoConfiguration
+class InterventionDefinitionReader(private val resourcePathOverride: String?) : ItemReader<InterventionCatalogueDefinition> {
   companion object : KLogging()
 
   private val defaultresourcepath = "classpath:/db/interventions/*.json"
@@ -17,7 +17,7 @@ class InterventionDefinitionReader(val resourcePathOverride: String?) : ItemRead
   private var index = 0
   private val objectMapper = ObjectMapper().registerModule(JavaTimeModule())
 
-  override fun read(): InterventionCatalogDefinition? {
+  override fun read(): InterventionCatalogueDefinition? {
     var files: List<String>
 
     if (resourcePathOverride.isNullOrEmpty()) {
@@ -35,6 +35,6 @@ class InterventionDefinitionReader(val resourcePathOverride: String?) : ItemRead
 
     val file = files[currentIndex]
     logger.info("Reading file $index/${files.size}: $file")
-    return objectMapper.readValue(InterventionLoadFileReaderHelper.getResource(file), InterventionCatalogDefinition::class.java)
+    return objectMapper.readValue(InterventionLoadFileReaderHelper.getResource(file), InterventionCatalogueDefinition::class.java)
   }
 }
