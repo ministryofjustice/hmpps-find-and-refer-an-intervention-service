@@ -27,4 +27,12 @@ open class Organisation(
   @Nullable
   @Column(name = "gender", length = Integer.MAX_VALUE)
   open var gender: String? = null,
+
+  @Nullable
+  @Column(name = "category", length = Integer.MAX_VALUE)
+  open var category: String,
+
+  @Nullable
+  @Column(name = "county", length = Integer.MAX_VALUE)
+  open var county: String,
 )
