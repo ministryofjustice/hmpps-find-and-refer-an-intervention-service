@@ -13,13 +13,15 @@ import java.util.UUID
 class DynamicFrameworkContractFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
 private val testLocalDate: LocalDate = LocalDate.of(2025, 1, 1)
+private val npsRegionFactory = NpsRegionFactory()
+private val serviceProviderFactory = ServiceProviderFactory()
 
 fun DynamicFrameworkContractFactory.create(
   id: UUID = UUID.randomUUID(),
-  primeProvider: ServiceProvider = ServiceProvider("POSITIVE_STEPS", "Positive Steps"),
+  primeProvider: ServiceProvider = serviceProviderFactory.create(),
   startDate: LocalDate = testLocalDate,
   endDate: LocalDate = testLocalDate.plusYears(2),
-  npsRegion: NpsRegion? = null,
+  npsRegion: NpsRegion? = npsRegionFactory.create(),
   pccRegion: PccRegion? = null,
   allowsFemale: Boolean = true,
   allowsMale: Boolean = true,

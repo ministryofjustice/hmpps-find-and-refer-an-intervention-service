@@ -7,8 +7,6 @@ import java.util.UUID
 
 class ExclusionFactory(em: TestEntityManager? = null) : EntityFactory(em)
 
-private val interventionCatalogueFactory = InterventionCatalogueFactory()
-
 fun ExclusionFactory.create(
   id: UUID = UUID.randomUUID(),
   minRemainingSentenceDurationGuide: String? = null,

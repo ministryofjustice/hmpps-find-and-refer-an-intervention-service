@@ -43,5 +43,5 @@ fun DeliveryLocation.toDto(): DeliveryLocationDto = DeliveryLocationDto(
   pduRef = this.pduRef.toDto(),
   providerName = this.providerName,
   contact = this.contact,
-  intervention = this.intervention,
+  intervention = this.intervention.toDto(),
 )

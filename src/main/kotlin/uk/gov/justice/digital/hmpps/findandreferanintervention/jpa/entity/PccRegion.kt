@@ -2,7 +2,6 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -31,12 +30,15 @@ open class PccRegion(
   open var npsRegion: NpsRegion,
 
   @NotNull
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "pccRegion")
-  open var pduRef: MutableSet<PduRef> = mutableSetOf(),
+  @OneToMany(mappedBy = "pccRegion")
+  open var pduRefs: MutableSet<PduRef> = mutableSetOf(),
 )
 
 fun PccRegion.toDto(): PccRegionDto = PccRegionDto(
   id = this.id,
   name = this.name,
-  pduRef = this.pduRef.map { it.toDto() }.toMutableSet(),
+  pduRefs = this.pduRefs.map { it.toDto() }.toMutableSet(),
 )
+
+fun PccRegion.getPduRefsForPccRegion(): List<PduRef> = pduRefs.map { it }
+fun PccRegion.getPduRefsNamesForPccRegion(): List<String> = pduRefs.map { it.name }

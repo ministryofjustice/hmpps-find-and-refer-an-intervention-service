@@ -15,15 +15,15 @@ import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepositoryImpl
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepositoryImpl
 
 @DataJpaTest
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class InterventionFilterRepositoryTest
+class InterventionCatalogueFilterRepositoryTest
 @Autowired
 constructor(
-  private val interventionRepositoryImpl: InterventionRepositoryImpl,
+  private val interventionCatalogueRepositoryImpl: InterventionCatalogueRepositoryImpl,
 ) {
 
   @Nested
@@ -33,7 +33,7 @@ constructor(
     fun `findAllInterventionCatalogueByCriteria by interventionType = 'ACP' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = null,
@@ -51,7 +51,7 @@ constructor(
     fun `findAllInterventionCatalogueByCriteria by interventionType = 'SI' and there are no interventions return an empty page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = null,
@@ -68,7 +68,7 @@ constructor(
     fun `findAllInterventionCatalogueByCriteria by interventionType = 'ACP' AND interventionType = 'CRS' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = null,
@@ -93,7 +93,7 @@ constructor(
     fun `findAllInterventionCatalogueByCriteria by settingType = 'COMMUNITY' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = null,
@@ -116,7 +116,7 @@ constructor(
     fun `findInterventionByGender = 'allow males' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = true,
@@ -134,7 +134,7 @@ constructor(
     fun `findInterventionByGender = 'allow females' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = true,
           allowsMales = null,
@@ -152,7 +152,7 @@ constructor(
     fun `findInterventionByGender = 'allow females' & 'allow males' and there are interventions return a page of interventions allowing both genders`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = true,
           allowsMales = true,
@@ -175,7 +175,7 @@ constructor(
     fun `FilterByProgrammeName = 'programme name' and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = true,
@@ -197,7 +197,7 @@ constructor(
     fun `findInterventionByTypeSettingGenderAndProgrammeName and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = true,
@@ -217,7 +217,7 @@ constructor(
     fun `findInterventionByTypeSettingGenderButNotProgrammeName and there are interventions return a page of interventions`() {
       val pageRequest = PageRequest.of(0, 10)
       val interventions =
-        interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
           pageable = pageRequest,
           allowsFemales = null,
           allowsMales = true,
@@ -237,7 +237,7 @@ constructor(
   fun `findAllInterventionCatalogueByCriteria with no criteria and there are interventions return a page of all interventions`() {
     val pageRequest = PageRequest.of(0, 10)
     val interventions =
-      interventionRepositoryImpl.findAllInterventionCatalogueByCriteria(
+      interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
         pageable = pageRequest,
         allowsFemales = null,
         allowsMales = null,

@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import java.util.UUID
 
 data class DeliveryLocationDto(
@@ -8,5 +7,5 @@ data class DeliveryLocationDto(
   val providerName: String,
   val contact: String,
   val pduRef: PduRefDto,
-  val intervention: InterventionCatalogue,
+  val intervention: InterventionCatalogueDto,
 )
