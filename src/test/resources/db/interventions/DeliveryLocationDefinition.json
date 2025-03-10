@@ -1,0 +1,12 @@
+[
+  {
+    "provider_name": "Default Provider Name 1",
+    "contact": "Group",
+    "pdu_establishments": ["Default PDU Ref1", "Default PDU Ref2"]
+  },
+  {
+    "provider_name": "Default Provider Name 2",
+    "contact": "One-to-one",
+    "pdu_establishments": ["Default PDU Ref3"]
+  }
+]
