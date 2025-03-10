@@ -30,9 +30,9 @@ open class Organisation(
 
   @Nullable
   @Column(name = "category", length = Integer.MAX_VALUE)
-  open var category: String,
+  open var category: String? = null,
 
   @Nullable
   @Column(name = "county", length = Integer.MAX_VALUE)
-  open var county: String,
+  open var county: String? = null,
 )
