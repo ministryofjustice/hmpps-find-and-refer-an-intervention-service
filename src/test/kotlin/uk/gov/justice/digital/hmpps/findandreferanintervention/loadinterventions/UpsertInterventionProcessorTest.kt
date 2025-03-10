@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.AdditionalAnswers
 import org.mockito.ArgumentMatchers.anyList
 import org.mockito.Mockito.mock
@@ -34,7 +35,10 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Exclud
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Exclusion
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.NpsRegion
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.OffenceTypeRef
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PccRegion
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PduRef
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PersonalEligibility
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PossibleOutcome
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
@@ -49,8 +53,9 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.El
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EnablingInterventionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExcludedOffenceRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExclusionRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.OffenceTypeRefRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PersonalEligibilityRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PossibleOutcomeRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.RiskConsiderationRepository
@@ -61,10 +66,11 @@ import java.util.UUID
 
 internal class UpsertInterventionProcessorTest {
 
-  private val interventionCatalogueRepository = mock<InterventionCatalogueRepository>()
+  private val interventionRepository = mock<InterventionRepository>()
   private val criminogenicNeedRepository = mock<CriminogenicNeedRepository>()
   private val criminogenicNeedRefRepository = mock<CriminogenicNeedRefRepository>()
   private val deliveryLocationRepository = mock<DeliveryLocationRepository>()
+  private val pduRefRepository = mock<PduRefRepository>()
   private val deliveryMethodRepository = mock<DeliveryMethodRepository>()
   private val deliveryMethodSettingRepository = mock<DeliveryMethodSettingRepository>()
   private val eligibleOffenceRepository = mock<EligibleOffenceRepository>()
@@ -81,10 +87,11 @@ internal class UpsertInterventionProcessorTest {
   private val catalogue = interventionCatalogueFactory.create()
 
   private val processor = UpsertInterventionProcessor(
-    interventionCatalogueRepository,
+    interventionRepository,
     criminogenicNeedRepository,
     criminogenicNeedRefRepository,
     deliveryLocationRepository,
+    pduRefRepository,
     deliveryMethodRepository,
     deliveryMethodSettingRepository,
     eligibleOffenceRepository,
@@ -100,11 +107,16 @@ internal class UpsertInterventionProcessorTest {
 
   @BeforeEach
   fun setup() {
-    whenever(interventionCatalogueRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
+    whenever(interventionRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
     whenever(criminogenicNeedRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeed>())
     whenever(criminogenicNeedRefRepository.findByName(any())).thenReturn(CriminogenicNeedRef(id = UUID.randomUUID(), name = "Default Need Type"))
     whenever(criminogenicNeedRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
-    whenever(deliveryLocationRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryLocation>())
+    whenever(deliveryLocationRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryLocation>())
+    val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
+    val defaultPccRegion = PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
+    val defaultPduRef1 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
+    val defaultPduRef2 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
+    whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
     whenever(deliveryMethodRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
     whenever(deliveryMethodSettingRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
     whenever(eligibleOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EligibleOffence>())
@@ -134,7 +146,7 @@ internal class UpsertInterventionProcessorTest {
     assertThat(result?.name).isEqualTo("Accommodation")
     assertThat(result?.interventionType).isEqualTo(InterventionType.CRS)
     assertThat(result?.personalEligibility?.minAge).isEqualTo(18)
-    verify(interventionCatalogueRepository, times(2)).save(any())
+    verify(interventionRepository, times(2)).save(any())
   }
 
   @Test
@@ -150,7 +162,7 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.process(interventionCatalogueDefinitions)
 
     assertThat(result).isEqualTo(null)
-    verify(interventionCatalogueRepository, times(0)).save(any())
+    verify(interventionRepository, times(0)).save(any())
   }
 
   @Test
@@ -166,7 +178,7 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.process(interventionCatalogueDefinitions)
 
     assertThat(result).isEqualTo(null)
-    verify(interventionCatalogueRepository, times(0)).save(any())
+    verify(interventionRepository, times(0)).save(any())
   }
 
   @Test
@@ -183,7 +195,7 @@ internal class UpsertInterventionProcessorTest {
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
-    verify(interventionCatalogueRepository, times(2)).save(any())
+    verify(interventionRepository, times(2)).save(any())
   }
 
   @Test
@@ -202,7 +214,7 @@ internal class UpsertInterventionProcessorTest {
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
-    verify(interventionCatalogueRepository, times(1)).save(any())
+    verify(interventionRepository, times(1)).save(any())
   }
 
   @Test
@@ -249,10 +261,32 @@ internal class UpsertInterventionProcessorTest {
     val deliveryLocationDefinitions =
       ObjectMapper().readValue(deliveryLocationDefinitionJson, object : TypeReference<Array<DeliveryLocationDefinition>>() {})
 
+    val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
+    val defaultPccRegion = PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
+    val defaultPduRef = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
+
+    whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef)
+
     val result = processor.insertDeliveryLocations(deliveryLocationDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(2)
-    verify(deliveryLocationRepository, times(1)).saveAll(anyList())
+    assertThat(result.count()).isEqualTo(3)
+    verify(deliveryLocationRepository, times(3)).save(any())
+  }
+
+  @Test
+  fun `Providing Json with INVALID PDU Reference to throw an exception when extracting as an Array of Delivery Location Definition objects`() {
+    val deliveryLocationDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryLocationDefinitionInvalidPduRef.json")
+
+    val deliveryLocationDefinitions =
+      ObjectMapper().readValue(deliveryLocationDefinitionJson, object : TypeReference<Array<DeliveryLocationDefinition>>() {})
+
+    val exception = assertThrows<RuntimeException> {
+      processor.insertDeliveryLocations(deliveryLocationDefinitions, catalogue)
+    }
+
+    assertThat(exception.message).contains("PDU for Default Provider Name 2 was not found")
+    verify(deliveryLocationRepository, times(2)).save(any())
   }
 
   @Test

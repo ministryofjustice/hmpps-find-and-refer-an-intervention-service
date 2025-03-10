@@ -34,7 +34,7 @@ data class InterventionCatalogueEntryDefinition(
 data class DeliveryLocationDefinition(
   @JsonProperty("provider_name") val providerName: String,
   @JsonProperty("contact") val contact: String,
-  @JsonProperty("pdu_establishments") val pduEstablishments: String,
+  @JsonProperty("pdu_establishments") val pduRefs: Array<String>,
 )
 
 data class DeliveryMethodDefinition(

@@ -32,8 +32,9 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.El
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EnablingInterventionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExcludedOffenceRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExclusionRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.OffenceTypeRefRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PersonalEligibilityRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PossibleOutcomeRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.RiskConsiderationRepository
@@ -45,10 +46,11 @@ import java.util.UUID
 @Component
 @JobScope
 class UpsertInterventionProcessor(
-  private val interventionCatalogueRepository: InterventionCatalogueRepository,
+  private val interventionRepository: InterventionRepository,
   private val criminogenicNeedRepository: CriminogenicNeedRepository,
   private val criminogenicNeedRefRepository: CriminogenicNeedRefRepository,
   private val deliveryLocationRepository: DeliveryLocationRepository,
+  private val pduRefRepository: PduRefRepository,
   private val deliveryMethodRepository: DeliveryMethodRepository,
   private val deliveryMethodSettingRepository: DeliveryMethodSettingRepository,
   private val eligibleOffenceRepository: EligibleOffenceRepository,
@@ -131,7 +133,7 @@ class UpsertInterventionProcessor(
     }
 
     logger.info("Intervention Catalogue Record Inserted for - ${catalogue.name}")
-    return interventionCatalogueRepository.save(catalogue)
+    return interventionRepository.save(catalogue)
   }
 
   fun insertInterventionCatalogueEntry(catalogue: InterventionCatalogueEntryDefinition, catalogueId: UUID): InterventionCatalogue {
@@ -161,7 +163,7 @@ class UpsertInterventionProcessor(
       specialEducationalNeeds = null,
     )
 
-    return interventionCatalogueRepository.save(catalogueRecord)
+    return interventionRepository.save(catalogueRecord)
   }
 
   fun insertCriminogenicNeeds(
@@ -197,19 +199,29 @@ class UpsertInterventionProcessor(
     val deliveryLocationList = mutableListOf<DeliveryLocation>()
 
     for (deliveryLocation in deliveryLocations) {
-      deliveryLocationList.add(
-        DeliveryLocation(
-          id = UUID.randomUUID(),
-          providerName = deliveryLocation.providerName,
-          contact = deliveryLocation.contact,
-          pduEstablishments = deliveryLocation.pduEstablishments,
-          intervention = catalogue,
-        ),
-      )
+      for (pdu in deliveryLocation.pduRefs) {
+        val pduRef = pduRefRepository.findByName(pdu)
+
+        if (pduRef != null) {
+          val insertedDeliveryLocation = deliveryLocationRepository.save(
+            DeliveryLocation(
+              id = UUID.randomUUID(),
+              providerName = deliveryLocation.providerName,
+              contact = deliveryLocation.contact,
+              pduRef = pduRef,
+              intervention = catalogue,
+            ),
+          )
+
+          deliveryLocationList.add(insertedDeliveryLocation)
+        } else {
+          throw RuntimeException("PDU for ${deliveryLocation.providerName} was not found")
+        }
+      }
     }
 
     logger.info("Inserted Delivery Location records for Intervention Catalogue Entry - ${catalogue.name}")
-    return deliveryLocationRepository.saveAll(deliveryLocationList).toMutableSet()
+    return deliveryLocationList.toMutableSet()
   }
 
   fun insertDeliveryMethods(
