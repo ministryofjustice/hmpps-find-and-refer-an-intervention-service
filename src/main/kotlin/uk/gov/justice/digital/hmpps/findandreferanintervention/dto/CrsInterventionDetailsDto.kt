@@ -1,16 +1,19 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Intervention
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PduRef
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.getNpsRegion
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.getPccRegionNames
 import java.util.UUID
 
 data class CrsInterventionDetailsDto(
   val interventionCatalogueId: UUID,
+  val interventionId: UUID,
   val interventionType: InterventionType,
   val npsRegion: String,
   val pccRegions: List<String>,
-  val serviceCategory: List<String>,
+  val serviceCategories: List<String>,
   val provider: String,
   val minAge: Int?,
   val maxAge: Int?,
@@ -19,22 +22,22 @@ data class CrsInterventionDetailsDto(
   val description: String,
 )
 
-fun InterventionCatalogue.toCrsDetailsDto(pduRef: PduRef): CrsInterventionDetailsDto? {
-  val contractIdsForIntervention = this.interventions.map { it.dynamicFrameworkContract.id }
-  val npsRegion = pduRef.pccRegion.npsRegion
-  val pccRegions = npsRegion.pccRegions.map { it.name }.sorted()
-  val contractInPdu = npsRegion.dynamicFrameworkContracts.find { it.id in contractIdsForIntervention } ?: return null
+fun InterventionCatalogue.toCrsDetailsDto(
+  intervention: Intervention,
+): CrsInterventionDetailsDto {
+  val contract = intervention.dynamicFrameworkContract
   return CrsInterventionDetailsDto(
-    interventionCatalogueId = this.id,
-    interventionType = this.interventionType,
-    npsRegion = npsRegion.name,
-    pccRegions = pccRegions,
-    serviceCategory = contractInPdu.contractType.serviceCategories.map { it.name }.sorted(),
-    provider = contractInPdu.primeProvider.name,
-    minAge = contractInPdu.minimumAge,
-    maxAge = contractInPdu.maximumAge,
-    allowsMales = contractInPdu.allowsMale,
-    allowsFemales = contractInPdu.allowsFemale,
-    description = this.shortDescription,
+    interventionCatalogueId = id,
+    interventionId = intervention.id,
+    interventionType = interventionType,
+    npsRegion = contract.getNpsRegion().name,
+    pccRegions = contract.getPccRegionNames(),
+    serviceCategories = contract.contractType.serviceCategories.map { it.name }.sorted(),
+    provider = contract.primeProvider.name,
+    minAge = contract.minAge,
+    maxAge = contract.maxAge,
+    allowsMales = contract.allowsMale,
+    allowsFemales = contract.allowsFemale,
+    description = intervention.description,
   )
 }

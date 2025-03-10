@@ -9,16 +9,15 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionD
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.getPduRefsForContract
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import java.util.UUID
 
 @Service
 class InterventionService(
   val interventionCatalogueRepository: InterventionCatalogueRepository,
-  val pduRefRepository: PduRefRepository,
 ) {
 
   fun getInterventionsCatalogueByCriteria(
@@ -45,7 +44,15 @@ class InterventionService(
   fun getCrsInterventionDetailsByIdAndPdu(interventionCatalogueId: UUID, pduRefId: String): CrsInterventionDetailsDto? {
     val interventionCatalogue =
       interventionCatalogueRepository.findInterventionCatalogueById(interventionCatalogueId) ?: return null
-    val pduRef = pduRefRepository.findPduRefById(pduRefId) ?: return null
-    return interventionCatalogue.toCrsDetailsDto(pduRef)
+    val contractsToPccRegion =
+      interventionCatalogue.interventions.map { intervention ->
+        intervention.dynamicFrameworkContract to intervention.dynamicFrameworkContract.getPduRefsForContract()
+          .map { it.id }
+      }.firstOrNull { pduRef -> pduRef.second.contains(pduRefId) } ?: return null
+
+    val (contract) = contractsToPccRegion
+    val interventionForContract =
+      interventionCatalogue.interventions.find { it.dynamicFrameworkContract.id == contract.id } ?: return null
+    return interventionCatalogue.toCrsDetailsDto(interventionForContract)
   }
 }

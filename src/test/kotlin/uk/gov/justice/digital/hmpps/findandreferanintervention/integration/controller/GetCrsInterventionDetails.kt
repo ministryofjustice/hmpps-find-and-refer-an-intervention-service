@@ -9,35 +9,32 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventi
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
 
 class GetCrsInterventionDetails : IntegrationTestBase() {
-  @Autowired
-  private lateinit var interventionRepository: InterventionCatalogueRepository
 
   @Autowired
-  private lateinit var pduRefRepository: PduRefRepository
+  private lateinit var interventionRepository: InterventionCatalogueRepository
 
   @Test
   fun `getCrsInterventionDetails return 200 when intervention exists`() {
     val interventionId = UUID.fromString("ce0bf924-d5eb-498f-9376-8a01a07510f5")
     val pduId = "redcar-cleveland-and-middlesbrough"
-    val pduRef = pduRefRepository.findPduRefById(pduId)!!
-    val pduDetails =
-      interventionRepository.findInterventionCatalogueById(interventionId)!!.toCrsDetailsDto(pduRef)!!
+    val interventionCatalogue = interventionRepository.findInterventionCatalogueById(interventionId)
+    val crsInterventionDetailsDto =
+      interventionCatalogue!!.toCrsDetailsDto(interventionCatalogue.interventions.first())
 
     webTestClient.get()
       .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
-      .headers(setAuthorisation(roles = listOf(interventionClientRole)))
+      .headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")))
       .exchange()
       .expectStatus()
       .isOk
       .expectHeader()
       .contentType(MediaType.APPLICATION_JSON)
       .expectBody<CrsInterventionDetailsDto>()
-      .isEqualTo(pduDetails)
+      .isEqualTo(crsInterventionDetailsDto)
   }
 
   @Test
@@ -47,7 +44,7 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
 
     webTestClient.get()
       .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
-      .headers(setAuthorisation(roles = listOf(interventionClientRole)))
+      .headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")))
       .exchange()
       .expectStatus()
       .isNotFound
@@ -70,7 +67,7 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
 
     webTestClient.get()
       .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
-      .headers(setAuthorisation(roles = listOf(interventionClientRole)))
+      .headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")))
       .exchange()
       .expectStatus()
       .isNotFound

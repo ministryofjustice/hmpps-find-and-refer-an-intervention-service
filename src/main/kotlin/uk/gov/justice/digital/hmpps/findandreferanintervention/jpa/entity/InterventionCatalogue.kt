@@ -218,15 +218,15 @@ private fun getCommunityLocations(interventionsDtos: List<InterventionDto>): Lis
   return interventionsDtos.map { interventionDto ->
     val contract = interventionDto.dynamicFrameworkContract
     return if (contract.npsRegion != null) {
-      contract.npsRegion!!.pccRegions.map { region ->
+      contract.npsRegion.pccRegions.map { region ->
         CommunityLocation(
           region.name,
-          region.pduRef.map { it.name },
+          region.pduRefs.map { it.name },
         )
       }
     } else if (contract.pccRegion != null) {
-      val pduRefsPerPcc = contract.pccRegion!!.pduRef.map { it.name }
-      pduRefsPerPcc.map { CommunityLocation(contract.pccRegion!!.name, pduRefsPerPcc) }
+      val pduRefsPerPcc = contract.pccRegion.pduRefs.map { it.name }
+      pduRefsPerPcc.map { CommunityLocation(contract.pccRegion.name, pduRefsPerPcc) }
     } else {
       null
     }

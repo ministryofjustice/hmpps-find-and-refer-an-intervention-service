@@ -23,10 +23,9 @@ open class PduRef(
   @Column(name = "name", length = Integer.MAX_VALUE)
   open var name: String,
 
-  @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "pcc_region_id", referencedColumnName = "id")
-  open var pccRegion: PccRegion,
+  @JoinColumn(name = "pcc_region_id")
+  open var pccRegion: PccRegion? = null,
 
   @NotNull
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "pduRef")
@@ -36,6 +35,5 @@ open class PduRef(
 fun PduRef.toDto(): PduRefDto = PduRefDto(
   id = this.id,
   name = this.name,
-  pccRegionDto = this.pccRegion,
-  deliveryLocations = this.deliveryLocations,
+  deliveryLocations = this.deliveryLocations.map { it.toDto() }.toMutableSet(),
 )

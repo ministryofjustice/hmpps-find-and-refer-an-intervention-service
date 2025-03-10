@@ -4,6 +4,8 @@ import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
@@ -27,6 +29,11 @@ open class ServiceCategory(
   open var name: String,
 
   @NotNull
-  @ManyToMany(mappedBy = "serviceCategories")
+  @ManyToMany
+  @JoinTable(
+    name = "contract_type_service_category",
+    joinColumns = [JoinColumn(name = "service_category_id")],
+    inverseJoinColumns = [JoinColumn(name = "contract_type_id")],
+  )
   open var contractTypes: MutableSet<ContractType> = mutableSetOf(),
 )

@@ -59,11 +59,11 @@ open class DynamicFrameworkContract(
 
   @Nullable
   @Column(name = "minimum_age")
-  open var minimumAge: Int? = null,
+  open var minAge: Int? = null,
 
   @Nullable
   @Column(name = "maximum_age")
-  open var maximumAge: Int? = null,
+  open var maxAge: Int? = null,
 
   @Size(max = 30)
   @NotNull
@@ -93,9 +93,25 @@ fun DynamicFrameworkContract.toDto(): DynamicFrameworkContractDto = DynamicFrame
   pccRegion = this.pccRegion?.toDto(),
   allowsFemale = this.allowsFemale,
   allowsMale = this.allowsMale,
-  minimumAge = this.minimumAge,
-  maximumAge = this.maximumAge,
+  minAge = this.minAge,
+  maxAge = this.maxAge,
   contractReference = this.contractReference,
   referralStartDate = this.referralStartDate,
   referralEndAt = this.referralEndAt,
 )
+
+fun DynamicFrameworkContract.getNpsRegion(): NpsRegion = npsRegion ?: pccRegion!!.npsRegion
+
+fun DynamicFrameworkContract.getPccRegions(): List<PccRegion> = if (pccRegion != null) {
+  listOf(pccRegion!!)
+} else {
+  npsRegion!!.pccRegions.toList()
+}
+
+fun DynamicFrameworkContract.getPccRegionNames(): List<String> = getPccRegions().map { it.name }.sorted()
+
+fun DynamicFrameworkContract.getPduRefsForContract(): List<PduRef> = if (this.npsRegion != null) {
+  this.npsRegion!!.pccRegions.flatMap { it.getPduRefsForPccRegion() }
+} else {
+  this.pccRegion!!.pduRefs.toList()
+}
