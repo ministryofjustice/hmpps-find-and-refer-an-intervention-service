@@ -234,7 +234,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json with one VALID and one UNKNOWN value to be extracted as an Array of Criminogenic Need Definition objects to be stored into the database`() {
+  fun `Providing Json with one valid and one unknown value to be extracted as an Array of Criminogenic Need Definition objects to be stored into the database`() {
     val criminogenicNeedDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/criminogenicNeedTestDefinitions/CriminogenicNeedDefinitionUnknownId.json",
@@ -274,7 +274,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json with INVALID PDU Reference to throw an exception when extracting as an Array of Delivery Location Definition objects`() {
+  fun `Providing Json with invalid PDU Reference to throw an exception when extracting as an Array of Delivery Location Definition objects`() {
     val deliveryLocationDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryLocationDefinitionInvalidPduRef.json")
 
@@ -341,7 +341,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json with one VALID and one UNKNOWN Offence Type to be extracted as an Array of Eligible Offence Definition objects to be stored into the database`() {
+  fun `Providing Json with one valid and one unknown Offence Type to be extracted as an Array of Eligible Offence Definition objects to be stored into the database`() {
     val eligibleOffenceDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/eligibleOffenceDefinitions/EligibleOffenceDefinitionUnknownId.json",
@@ -389,7 +389,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json with one VALID and one UNKNOWN Offence Type to be extracted as an Array of Excluded Offence Definition objects to be stored into the database`() {
+  fun `Providing Json with one valid and one unknown Offence Type to be extracted as an Array of Excluded Offence Definition objects to be stored into the database`() {
     val excludedOffenceDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/excludedOffenceDefinitions/ExcludedOffenceDefinitionUnknownId.json")
 

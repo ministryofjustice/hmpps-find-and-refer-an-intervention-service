@@ -79,7 +79,7 @@ data class RiskConsiderationDefinition(
 
 data class SpecialEducationalNeedDefinition(
   @JsonProperty("literacy_level_guide") val literacyLevelGuide: String?,
-  @JsonProperty("learning_disability_catered_for") val learningDisabilityCateredFor: Boolean,
+  @JsonProperty("learning_disability_catered_for") val learningDisabilityCateredFor: String?,
   @JsonProperty("equivalent_non_ldc_programme_guide") val equivalentNonLdcProgrammeGuide: String?,
 )
 

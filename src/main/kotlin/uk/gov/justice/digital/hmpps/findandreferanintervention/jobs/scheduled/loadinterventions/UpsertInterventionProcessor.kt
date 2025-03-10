@@ -456,7 +456,7 @@ class UpsertInterventionProcessor(
     val specialEducationalNeedsRecord = SpecialEducationalNeed(
       id = UUID.randomUUID(),
       literacyLevelGuide = specialEducationalNeed?.literacyLevelGuide,
-      learningDisabilityCateredFor = specialEducationalNeed?.learningDisabilityCateredFor == true,
+      learningDisabilityCateredFor = specialEducationalNeed?.learningDisabilityCateredFor,
       equivalentNonLdcProgrammeGuide = specialEducationalNeed?.equivalentNonLdcProgrammeGuide,
       intervention = catalogue,
     )
