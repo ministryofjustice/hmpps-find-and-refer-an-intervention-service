@@ -74,9 +74,9 @@ class InterventionController(
     @PathVariable pduRefId: String,
   ): CrsInterventionDetailsDto? {
     telemetryClient.logToAppInsights(
-      "CRS InterventionDetails page",
+      "CRS Intervention Details page",
       mapOf(
-        "userMessage" to "User has hit CRS intervention details page",
+        "userMessage" to "User has hit CRS Intervention Details page",
         "interventionCatalogueId" to interventionCatalogueId.toString(),
         "pduRefId" to pduRefId,
       ),
