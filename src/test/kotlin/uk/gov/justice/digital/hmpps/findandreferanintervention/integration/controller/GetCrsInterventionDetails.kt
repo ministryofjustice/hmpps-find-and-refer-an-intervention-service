@@ -2,13 +2,15 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.cont
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
-import org.springframework.test.web.reactive.server.expectBody
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeErrorResponse
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectJsonResponse
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectStatus
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
 
@@ -25,62 +27,56 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
     val crsInterventionDetailsDto =
       interventionCatalogue!!.toCrsDetailsDto(interventionCatalogue.interventions.first())
 
-    webTestClient.get()
-      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
-      .headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")))
-      .exchange()
-      .expectStatus()
-      .isOk
-      .expectHeader()
-      .contentType(MediaType.APPLICATION_JSON)
-      .expectBody<CrsInterventionDetailsDto>()
-      .isEqualTo(crsInterventionDetailsDto)
+    makeRequestAndExpectJsonResponse(
+      testClient = webTestClient,
+      httpMethod = HttpMethod.GET,
+      uri = { it.path("/intervention/$interventionId/pdu/$pduId").build() },
+      requestCustomizer = { headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"))) },
+      expectedStatus = HttpStatus.OK,
+      responseType = CrsInterventionDetailsDto::class.java,
+      expectedResponse = crsInterventionDetailsDto,
+    )
   }
 
   @Test
   fun `getCrsInterventionDetails return 404 when intervention is not found`() {
     val interventionId = UUID.randomUUID()
     val pduId = "redcar-cleveland-and-middlesbrough"
-
-    webTestClient.get()
-      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
-      .headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")))
-      .exchange()
-      .expectStatus()
-      .isNotFound
-      .expectHeader()
-      .contentType(MediaType.APPLICATION_JSON)
-      .expectBody<ErrorResponse>()
-      .isEqualTo(
-        ErrorResponse(
-          status = HttpStatus.NOT_FOUND,
-          userMessage = "Intervention Not Found with ID: $interventionId and PduId $pduId",
-          developerMessage = "404 NOT_FOUND \"Intervention Not Found with ID: $interventionId and PduId $pduId\"",
-        ),
-      )
+    val expectedErrorResponse = makeErrorResponse(
+      status = HttpStatus.NOT_FOUND,
+      userMessage = "Intervention Not Found with ID: $interventionId and PduId $pduId",
+      developerMessage = "404 NOT_FOUND \"Intervention Not Found with ID: $interventionId and PduId $pduId\"",
+    )
+    makeRequestAndExpectJsonResponse(
+      testClient = webTestClient,
+      httpMethod = HttpMethod.GET,
+      uri = { it.path("/intervention/$interventionId/pdu/$pduId").build() },
+      requestCustomizer = { headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"))) },
+      expectedStatus = HttpStatus.NOT_FOUND,
+      responseType = ErrorResponse::class.java,
+      expectedResponse = expectedErrorResponse,
+    )
   }
 
   @Test
   fun `getCrsInterventionDetails return 404 when pdu is not found`() {
     val interventionId = UUID.fromString("3ccb511b-89b2-42f7-803b-304f54d85a24")
     val pduId = "INVALID_PDU"
+    val expectedErrorResponse = makeErrorResponse(
+      status = HttpStatus.NOT_FOUND,
+      userMessage = "Intervention Not Found with ID: $interventionId and PduId $pduId",
+      developerMessage = "404 NOT_FOUND \"Intervention Not Found with ID: $interventionId and PduId $pduId\"",
+    )
 
-    webTestClient.get()
-      .uri { it.path("/intervention/$interventionId/pdu/$pduId").build() }
-      .headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")))
-      .exchange()
-      .expectStatus()
-      .isNotFound
-      .expectHeader()
-      .contentType(MediaType.APPLICATION_JSON)
-      .expectBody<ErrorResponse>()
-      .isEqualTo(
-        ErrorResponse(
-          status = HttpStatus.NOT_FOUND,
-          userMessage = "Intervention Not Found with ID: $interventionId and PduId $pduId",
-          developerMessage = "404 NOT_FOUND \"Intervention Not Found with ID: $interventionId and PduId $pduId\"",
-        ),
-      )
+    makeRequestAndExpectJsonResponse(
+      testClient = webTestClient,
+      httpMethod = HttpMethod.GET,
+      uri = { it.path("/intervention/$interventionId/pdu/$pduId").build() },
+      requestCustomizer = { headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"))) },
+      expectedStatus = HttpStatus.NOT_FOUND,
+      responseType = ErrorResponse::class.java,
+      expectedResponse = expectedErrorResponse,
+    )
   }
 
   @Test
@@ -93,5 +89,13 @@ class GetCrsInterventionDetails : IntegrationTestBase() {
       .exchange()
       .expectStatus()
       .isUnauthorized
+
+    makeRequestAndExpectStatus(
+      testClient = webTestClient,
+      httpMethod = HttpMethod.GET,
+      uri = { it.path("/intervention/$interventionId/pdu/$pduId").build() },
+      requestCustomizer = { },
+      expectedStatus = HttpStatus.UNAUTHORIZED,
+    )
   }
 }
