@@ -20,6 +20,6 @@ data class InterventionCatalogueDto(
   val attendanceType: List<String>,
   val deliveryFormat: List<String>,
   val timeToComplete: String?,
-  val suitableForPeopleWithLearningDifficulties: Boolean?,
+  val suitableForPeopleWithLearningDifficulties: String?,
   val equivalentNonLdcProgramme: String?,
 )

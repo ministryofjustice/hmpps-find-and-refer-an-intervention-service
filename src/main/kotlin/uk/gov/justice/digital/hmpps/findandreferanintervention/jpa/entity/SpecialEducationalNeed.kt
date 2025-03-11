@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
-import org.hibernate.annotations.ColumnDefault
 import java.util.UUID
 
 @Entity
@@ -24,10 +23,9 @@ open class SpecialEducationalNeed(
   @Column(name = "literacy_level_guide", length = Integer.MAX_VALUE)
   open var literacyLevelGuide: String? = null,
 
-  @NotNull
-  @ColumnDefault("false")
+  @Nullable
   @Column(name = "learning_disability_catered_for")
-  open var learningDisabilityCateredFor: Boolean,
+  open var learningDisabilityCateredFor: String? = null,
 
   @Nullable
   @Column(name = "equivalent_non_ldc_programme_guide", length = Integer.MAX_VALUE)

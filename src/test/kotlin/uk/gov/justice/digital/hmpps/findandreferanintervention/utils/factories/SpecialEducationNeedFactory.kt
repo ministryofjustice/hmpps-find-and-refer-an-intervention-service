@@ -10,7 +10,7 @@ class SpecialEducationNeedFactory(em: TestEntityManager? = null) : EntityFactory
 fun SpecialEducationNeedFactory.create(
   id: UUID = UUID.randomUUID(),
   literacyLevelGuide: String? = null,
-  learningDisabilityCateredFor: Boolean = false,
+  learningDisabilityCateredFor: String? = null,
   equivalentNonLdcProgrammeGuide: String? = null,
   intervention: InterventionCatalogue? = null,
 ): SpecialEducationalNeed = save(
