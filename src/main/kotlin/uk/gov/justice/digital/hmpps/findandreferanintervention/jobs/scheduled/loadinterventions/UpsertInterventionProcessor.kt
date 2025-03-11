@@ -31,7 +31,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.El
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EnablingInterventionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExcludedOffenceRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExclusionRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.OffenceTypeRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PersonalEligibilityRepository
@@ -45,7 +45,7 @@ import java.util.UUID
 @Component
 @JobScope
 class UpsertInterventionProcessor(
-  private val interventionRepository: InterventionRepository,
+  private val interventionCatalogueRepository: InterventionCatalogueRepository,
   private val criminogenicNeedRepository: CriminogenicNeedRepository,
   private val criminogenicNeedRefRepository: CriminogenicNeedRefRepository,
   private val deliveryLocationRepository: DeliveryLocationRepository,
@@ -132,7 +132,7 @@ class UpsertInterventionProcessor(
     }
 
     logger.info("Intervention Catalogue Record Inserted for - ${catalogue.name}")
-    return interventionRepository.save(catalogue)
+    return interventionCatalogueRepository.save(catalogue)
   }
 
   fun insertInterventionCatalogueEntry(catalogue: InterventionCatalogueEntryDefinition, catalogueId: UUID): InterventionCatalogue {
@@ -161,7 +161,7 @@ class UpsertInterventionProcessor(
       specialEducationalNeeds = null,
     )
 
-    return interventionRepository.save(catalogueRecord)
+    return interventionCatalogueRepository.save(catalogueRecord)
   }
 
   fun insertCriminogenicNeeds(

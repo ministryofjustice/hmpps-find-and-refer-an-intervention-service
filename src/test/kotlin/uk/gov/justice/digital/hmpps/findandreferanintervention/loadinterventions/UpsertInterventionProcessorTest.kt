@@ -53,7 +53,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.El
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EnablingInterventionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExcludedOffenceRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExclusionRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.OffenceTypeRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PersonalEligibilityRepository
@@ -66,7 +66,7 @@ import java.util.UUID
 
 internal class UpsertInterventionProcessorTest {
 
-  private val interventionRepository = mock<InterventionRepository>()
+  private val interventionCatalogueRepository = mock<InterventionCatalogueRepository>()
   private val criminogenicNeedRepository = mock<CriminogenicNeedRepository>()
   private val criminogenicNeedRefRepository = mock<CriminogenicNeedRefRepository>()
   private val deliveryLocationRepository = mock<DeliveryLocationRepository>()
@@ -87,7 +87,7 @@ internal class UpsertInterventionProcessorTest {
   private val catalogue = interventionCatalogueFactory.create()
 
   private val processor = UpsertInterventionProcessor(
-    interventionRepository,
+    interventionCatalogueRepository,
     criminogenicNeedRepository,
     criminogenicNeedRefRepository,
     deliveryLocationRepository,
@@ -107,7 +107,7 @@ internal class UpsertInterventionProcessorTest {
 
   @BeforeEach
   fun setup() {
-    whenever(interventionRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
+    whenever(interventionCatalogueRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
     whenever(criminogenicNeedRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeed>())
     whenever(criminogenicNeedRefRepository.findByName(any())).thenReturn(CriminogenicNeedRef(id = UUID.randomUUID(), name = "Default Need Type"))
     whenever(criminogenicNeedRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
@@ -146,7 +146,7 @@ internal class UpsertInterventionProcessorTest {
     assertThat(result?.name).isEqualTo("Accommodation")
     assertThat(result?.interventionType).isEqualTo(InterventionType.CRS)
     assertThat(result?.personalEligibility?.minAge).isEqualTo(18)
-    verify(interventionRepository, times(2)).save(any())
+    verify(interventionCatalogueRepository, times(2)).save(any())
   }
 
   @Test
@@ -162,7 +162,7 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.process(interventionCatalogueDefinitions)
 
     assertThat(result).isEqualTo(null)
-    verify(interventionRepository, times(0)).save(any())
+    verify(interventionCatalogueRepository, times(0)).save(any())
   }
 
   @Test
@@ -178,7 +178,7 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.process(interventionCatalogueDefinitions)
 
     assertThat(result).isEqualTo(null)
-    verify(interventionRepository, times(0)).save(any())
+    verify(interventionCatalogueRepository, times(0)).save(any())
   }
 
   @Test
@@ -195,7 +195,7 @@ internal class UpsertInterventionProcessorTest {
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
-    verify(interventionRepository, times(2)).save(any())
+    verify(interventionCatalogueRepository, times(2)).save(any())
   }
 
   @Test
@@ -214,7 +214,7 @@ internal class UpsertInterventionProcessorTest {
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
-    verify(interventionRepository, times(1)).save(any())
+    verify(interventionCatalogueRepository, times(1)).save(any())
   }
 
   @Test

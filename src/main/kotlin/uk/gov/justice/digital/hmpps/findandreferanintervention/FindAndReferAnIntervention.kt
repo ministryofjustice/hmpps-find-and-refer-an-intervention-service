@@ -4,8 +4,8 @@ import mu.KLogging
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication()
-class FindAndReferAnIntervention(args: Array<String>) {
+@SpringBootApplication
+class FindAndReferAnIntervention {
   companion object : KLogging()
 }
 
