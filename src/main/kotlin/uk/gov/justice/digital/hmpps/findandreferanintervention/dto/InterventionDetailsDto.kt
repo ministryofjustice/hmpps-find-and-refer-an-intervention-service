@@ -16,7 +16,7 @@ data class InterventionDetailsDto(
   val minAge: Int?,
   val maxAge: Int?,
   val riskCriteria: List<String>?,
-  val suitableForPeopleWithLearningDifficulties: Boolean?,
+  val suitableForPeopleWithLearningDifficulties: String?,
   val equivalentNonLdcProgramme: String?,
   val timeToComplete: String?,
   val deliveryFormat: List<String>,
