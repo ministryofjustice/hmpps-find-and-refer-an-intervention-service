@@ -64,10 +64,10 @@ open class InterventionCatalogue(
   @Column(name = "created")
   open var created: OffsetDateTime,
 
-  @NotNull
+  @Nullable
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "created_by")
-  open var createdBy: AuthUser,
+  open var createdBy: AuthUser? = null,
 
   @Nullable
   @Column(name = "last_modified")

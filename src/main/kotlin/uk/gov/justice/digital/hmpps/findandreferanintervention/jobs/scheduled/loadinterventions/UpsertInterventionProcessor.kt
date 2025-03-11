@@ -4,7 +4,6 @@ import mu.KLogging
 import org.springframework.batch.core.configuration.annotation.JobScope
 import org.springframework.batch.item.ItemProcessor
 import org.springframework.stereotype.Component
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeedRef
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
@@ -146,7 +145,6 @@ class UpsertInterventionProcessor(
       sessionDetail = catalogue.sessionDetail,
       commencementDate = LocalDate.now(),
       created = OffsetDateTime.now(),
-      createdBy = AuthUser.interventionsServiceUser,
       interventionType = InterventionType.valueOf(catalogue.interventionType),
       timeToComplete = catalogue.timeToComplete,
       reasonForReferral = catalogue.reasonForReferral,
