@@ -8,6 +8,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.getPcc
 import java.util.UUID
 
 data class CrsInterventionDetailsDto(
+  val title: String,
   val interventionCatalogueId: UUID,
   val interventionId: UUID,
   val interventionType: InterventionType,
@@ -27,6 +28,7 @@ fun InterventionCatalogue.toCrsDetailsDto(
 ): CrsInterventionDetailsDto {
   val contract = intervention.dynamicFrameworkContract
   return CrsInterventionDetailsDto(
+    title = intervention.title,
     interventionCatalogueId = id,
     interventionId = intervention.id,
     interventionType = interventionType,
