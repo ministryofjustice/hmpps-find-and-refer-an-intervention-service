@@ -4,7 +4,7 @@ import java.util.UUID
 
 data class OfferingDto(
   val id: UUID,
-  val organisationId: String,
+  val organisation: OrganisationDto,
   val contactEmail: String,
   val secondaryContactEmail: String? = null,
   val withdrawn: Boolean = false,

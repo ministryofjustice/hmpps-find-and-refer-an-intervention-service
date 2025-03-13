@@ -7,10 +7,10 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventi
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.getPduRefsForContract
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import java.util.UUID

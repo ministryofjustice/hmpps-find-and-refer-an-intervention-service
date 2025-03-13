@@ -34,6 +34,5 @@ open class PduRef(
 
 fun PduRef.toDto(): PduRefDto = PduRefDto(
   id = this.id,
-  name = this.name,
-  deliveryLocations = this.deliveryLocations.map { it.toDto() }.toMutableSet(),
+  pduName = this.name,
 )
