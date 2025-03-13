@@ -31,7 +31,7 @@ data class InterventionDetailsDto(
   val communityLocations: List<CommunityLocation>? = null,
   val custodyLocations: List<CustodyLocation>? = null,
 ) {
-  data class CommunityLocation(val pccRegion: String, val pduRefs: MutableSet<PduRefDto>)
+  data class CommunityLocation(val pccRegion: String, val pdus: MutableSet<PduRefDto>)
 
   data class CustodyLocation(val prisonName: String, val category: String?, val county: String?)
 }
