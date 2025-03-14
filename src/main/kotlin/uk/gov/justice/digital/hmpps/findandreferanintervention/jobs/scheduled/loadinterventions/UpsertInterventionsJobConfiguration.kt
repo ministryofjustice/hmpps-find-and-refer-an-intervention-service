@@ -49,8 +49,7 @@ class UpsertInterventionsJobConfiguration(
   }
 
   @Bean
-  fun readInterventionDefinition(): ItemReader<InterventionCatalogueDefinition> =
-    InterventionDefinitionReader("classpath:/db/interventions/*.json")
+  fun readInterventionDefinition(): ItemReader<InterventionCatalogueDefinition> = InterventionDefinitionReader("classpath:/db/interventions/*.json")
 
   @Bean
   fun upsertInterventionsStep(

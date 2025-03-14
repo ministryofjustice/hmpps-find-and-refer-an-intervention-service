@@ -2,7 +2,7 @@
   "uuid": "baa847c4-6a84-45aa-9711-df0bc9095c69",
   "intervention_catalogue":{
     "name":"Accommodation",
-    "int_type":"NO_TYPE",
+    "int_type":"INVALID_TYPE",
     "short_description":"Accommodation pathway provides individuals on a community/suspended sentence order with a RAR or on license/post-sentence supervision with accommodation interventions. These services will also be delivered pre-release for individuals who will be under probation supervision on release.",
     "long_description":null,
     "topic":null,
@@ -24,12 +24,12 @@
   "delivery_methods":[
     {
       "delivery_method_description":"TBC",
-      "delivery_format":"Group",
+      "format":"Group",
       "attendance_type":"In Person"
     },
     {
       "delivery_method_description":"TBC",
-      "delivery_format":"One-to-one",
+      "format":"One-to-one",
       "attendance_type":"TBC"
     }
   ],
@@ -80,7 +80,7 @@
     "rsr_guide":null
   },
   "special_educational_needs":{
-    "literacy_level_guide":"Able to read and understand simple sentences",
+    "exclusion_literacy_level_guide":"Able to read and understand simple sentences",
     "learning_disability_catered_for":true,
     "equivalent_non_ldc_programme_guide":"Becoming New Me Plus"
   },

@@ -3,11 +3,9 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.l
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import mu.KLogging
-import org.springframework.batch.core.configuration.annotation.JobScope
 import org.springframework.batch.item.ItemReader
 import org.springframework.stereotype.Component
 
-@JobScope
 @Component
 class InterventionDefinitionReader(private val resourcePathOverride: String?) : ItemReader<InterventionCatalogueDefinition> {
   companion object : KLogging()

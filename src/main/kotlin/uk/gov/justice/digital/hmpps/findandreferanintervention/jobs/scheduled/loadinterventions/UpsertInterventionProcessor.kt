@@ -4,6 +4,7 @@ import mu.KLogging
 import org.springframework.batch.core.configuration.annotation.JobScope
 import org.springframework.batch.item.ItemProcessor
 import org.springframework.stereotype.Component
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeedRef
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
@@ -88,7 +89,7 @@ class UpsertInterventionProcessor(
 
   fun checkInterventionType(item: InterventionCatalogueDefinition): Boolean {
     val interventionTypes = InterventionType.entries.map(InterventionType::name)
-    return interventionTypes.contains(item.catalogue.interventionType)
+    return interventionTypes.contains(item.catalogue.interventionType.uppercase())
   }
 
   fun createInterventionCatalogue(item: InterventionCatalogueDefinition): InterventionCatalogue {
@@ -145,7 +146,8 @@ class UpsertInterventionProcessor(
       sessionDetail = catalogue.sessionDetail,
       commencementDate = LocalDate.now(),
       created = OffsetDateTime.now(),
-      interventionType = InterventionType.valueOf(catalogue.interventionType),
+      createdBy = AuthUser.interventionsServiceUser,
+      interventionType = InterventionType.valueOf(catalogue.interventionType.uppercase()),
       timeToComplete = catalogue.timeToComplete,
       reasonForReferral = catalogue.reasonForReferral,
       criminogenicNeeds = mutableSetOf(),
@@ -246,10 +248,20 @@ class UpsertInterventionProcessor(
 
   fun hasDeliveryMethodSetting(settingName: String?): SettingType? {
     val settingTypes = SettingType.entries.map(SettingType::name)
-    return if (settingTypes.contains(settingName)) {
-      SettingType.entries[settingTypes.indexOf(settingName)]
-    } else {
-      null
+    var preRelease: String? = null
+
+    if (settingName.equals("PRE-RELEASE")) preRelease = "PRE_RELEASE"
+
+    return when {
+      settingTypes.contains(settingName) -> {
+        SettingType.entries[settingTypes.indexOf(settingName)]
+      }
+      settingTypes.contains(preRelease) -> {
+        SettingType.entries[settingTypes.indexOf(preRelease)]
+      }
+      else -> {
+        null
+      }
     }
   }
 
@@ -275,7 +287,9 @@ class UpsertInterventionProcessor(
           logger.info("Inserted Delivery Method Setting record for Delivery Method Id - $deliveryMethodId")
         }
         else -> {
-          logger.info("Unable to create Delivery Methods Setting record as Setting Type is either null or invalid")
+          logger.info(
+            "Unable to create Delivery Method Setting record for Id - $deliveryMethodId, as Setting Type is null or invalid",
+          )
         }
       }
     }

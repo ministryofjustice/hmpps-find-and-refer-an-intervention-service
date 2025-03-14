@@ -39,7 +39,7 @@ data class DeliveryLocationDefinition(
 
 data class DeliveryMethodDefinition(
   @JsonProperty("delivery_method_description") val deliveryMethodDescription: String?,
-  @JsonProperty("delivery_format") val deliveryFormat: String?,
+  @JsonProperty("format") val deliveryFormat: String?,
   @JsonProperty("attendance_type") val attendanceType: String?,
 )
 
@@ -78,7 +78,7 @@ data class RiskConsiderationDefinition(
 )
 
 data class SpecialEducationalNeedDefinition(
-  @JsonProperty("literacy_level_guide") val literacyLevelGuide: String?,
+  @JsonProperty("exclusion_literacy_level_guide") val literacyLevelGuide: String?,
   @JsonProperty("learning_disability_catered_for") val learningDisabilityCateredFor: String?,
   @JsonProperty("equivalent_non_ldc_programme_guide") val equivalentNonLdcProgrammeGuide: String?,
 )

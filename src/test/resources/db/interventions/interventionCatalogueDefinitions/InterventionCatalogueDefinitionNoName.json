@@ -24,12 +24,12 @@
   "delivery_methods":[
     {
       "delivery_method_description":"TBC",
-      "delivery_format":"Group",
+      "format":"Group",
       "attendance_type":"In Person"
     },
     {
       "delivery_method_description":"TBC",
-      "delivery_format":"One-to-one",
+      "format":"One-to-one",
       "attendance_type":"TBC"
     }
   ],
@@ -80,7 +80,7 @@
     "rsr_guide":null
   },
   "special_educational_needs":{
-    "literacy_level_guide":"Able to read and understand simple sentences",
+    "exclusion_literacy_level_guide":"Able to read and understand simple sentences",
     "learning_disability_catered_for":true,
     "equivalent_non_ldc_programme_guide":"Becoming New Me Plus"
   },

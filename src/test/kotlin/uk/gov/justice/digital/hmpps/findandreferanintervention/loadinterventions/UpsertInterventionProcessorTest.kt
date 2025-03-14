@@ -292,7 +292,9 @@ internal class UpsertInterventionProcessorTest {
   @Test
   fun `Providing Json to be extracted as an Array of Delivery Method Definition objects to be stored into the database`() {
     val deliveryMethodDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryMethodDefinition.json")
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
+      )
 
     val deliveryMethodDefinitions =
       ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
@@ -306,10 +308,14 @@ internal class UpsertInterventionProcessorTest {
   @Test
   fun `Providing Json to be extracted as an Array of Delivery Method Setting Definition objects to be stored into the database`() {
     val deliveryMethodDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryMethodDefinition.json")
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
+      )
 
     val deliveryMethodSettingDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryMethodSettingDefinition.json")
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinition.json",
+      )
 
     val deliveryMethodDefinitions =
       ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
@@ -321,6 +327,31 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.insertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
 
     assertThat(result.count()).isEqualTo(3)
+    verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted as an Array with one invalid Delivery Method Setting Definition object to be stored into the database`() {
+    val deliveryMethodDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
+      )
+
+    val deliveryMethodSettingDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinitionInvalidType.json",
+      )
+
+    val deliveryMethodDefinitions =
+      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
+
+    val deliveryMethodSettingDefinitions =
+      ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
+
+    val deliveryMethods = processor.insertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    val result = processor.insertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
+
+    assertThat(result.count()).isEqualTo(2)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 
