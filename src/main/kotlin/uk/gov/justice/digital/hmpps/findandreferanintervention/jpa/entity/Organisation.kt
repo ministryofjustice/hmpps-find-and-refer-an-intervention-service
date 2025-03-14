@@ -6,6 +6,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.OrganisationDto
 import java.util.UUID
 
 @Entity
@@ -35,4 +36,13 @@ open class Organisation(
   @Nullable
   @Column(name = "county", length = Integer.MAX_VALUE)
   open var county: String? = null,
+)
+
+fun Organisation.toDto() = OrganisationDto(
+  id = this.id,
+  code = this.code,
+  name = this.name,
+  gender = this.gender,
+  category = this.category,
+  county = this.county,
 )

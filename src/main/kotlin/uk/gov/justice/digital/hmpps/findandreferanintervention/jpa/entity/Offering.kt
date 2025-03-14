@@ -22,8 +22,9 @@ open class Offering(
   open var id: UUID,
 
   @NotNull
-  @Column(name = "organisation_id", length = Integer.MAX_VALUE)
-  open var organisationId: String,
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "organisation_id", referencedColumnName = "code")
+  open var organisation: Organisation,
 
   @NotNull
   @Column(name = "contact_email", length = Integer.MAX_VALUE)
@@ -56,7 +57,7 @@ open class Offering(
 
 fun Offering.toDto(): OfferingDto = OfferingDto(
   id = this.id,
-  organisationId = this.organisationId,
+  organisation = this.organisation.toDto(),
   contactEmail = this.contactEmail,
   secondaryContactEmail = this.secondaryContactEmail,
   withdrawn = this.withdrawn,
