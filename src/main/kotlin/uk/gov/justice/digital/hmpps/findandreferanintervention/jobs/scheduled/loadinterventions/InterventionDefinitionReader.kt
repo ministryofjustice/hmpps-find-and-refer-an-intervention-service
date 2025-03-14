@@ -5,10 +5,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import mu.KLogging
 import org.springframework.batch.core.configuration.annotation.JobScope
 import org.springframework.batch.item.ItemReader
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.stereotype.Component
 
 @JobScope
-@EnableAutoConfiguration
+@Component
 class InterventionDefinitionReader(private val resourcePathOverride: String?) : ItemReader<InterventionCatalogueDefinition> {
   companion object : KLogging()
 

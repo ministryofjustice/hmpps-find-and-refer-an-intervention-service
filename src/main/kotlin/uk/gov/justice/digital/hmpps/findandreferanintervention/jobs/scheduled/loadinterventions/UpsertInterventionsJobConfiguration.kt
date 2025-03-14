@@ -8,6 +8,7 @@ import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.launch.support.TaskExecutorJobLauncher
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
+import org.springframework.batch.item.ItemReader
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.CommandLineRunner
@@ -46,6 +47,10 @@ class UpsertInterventionsJobConfiguration(
 
     return job
   }
+
+  @Bean
+  fun readInterventionDefinition(): ItemReader<InterventionCatalogueDefinition> =
+    InterventionDefinitionReader("classpath:/db/interventions/*.json")
 
   @Bean
   fun upsertInterventionsStep(
