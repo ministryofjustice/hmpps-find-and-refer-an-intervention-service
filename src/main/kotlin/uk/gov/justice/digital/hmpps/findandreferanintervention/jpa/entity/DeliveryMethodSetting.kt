@@ -33,4 +33,6 @@ open class DeliveryMethodSetting(
 enum class SettingType {
   COMMUNITY,
   CUSTODY,
+  REMAND,
+  PRE_RELEASE,
 }
