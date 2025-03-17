@@ -273,7 +273,7 @@ class UpsertInterventionProcessor(
     val deliveryMethodSettingList = mutableListOf<DeliveryMethodSetting>()
 
     for (deliveryMethod in deliveryMethods) {
-      for(deliveryMethodSetting in deliveryMethodSettings){
+      for (deliveryMethodSetting in deliveryMethodSettings) {
         val settingType = hasDeliveryMethodSetting(deliveryMethodSetting)
 
         when {
