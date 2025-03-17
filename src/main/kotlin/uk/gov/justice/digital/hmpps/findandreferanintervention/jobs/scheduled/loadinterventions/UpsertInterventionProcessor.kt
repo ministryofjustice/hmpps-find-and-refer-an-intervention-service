@@ -402,8 +402,8 @@ class UpsertInterventionProcessor(
   ): PersonalEligibility {
     val personalEligibilityRecord = PersonalEligibility(
       id = UUID.randomUUID(),
-      minAge = personalEligibility?.minAge,
-      maxAge = personalEligibility?.maxAge,
+      minAge = personalEligibility?.minAge?.toIntOrNull(),
+      maxAge = personalEligibility?.maxAge?.toIntOrNull(),
       males = personalEligibility?.males == true,
       females = personalEligibility?.females == true,
       intervention = catalogue,

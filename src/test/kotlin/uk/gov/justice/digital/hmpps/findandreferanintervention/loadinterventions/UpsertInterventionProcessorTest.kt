@@ -455,7 +455,9 @@ internal class UpsertInterventionProcessorTest {
   @Test
   fun `Providing Json to be extracted as a Personal Eligibility Definition object to be stored into the database`() {
     val personalEligibilityDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/PersonalEligibilityDefinition.json")
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/personalEligibilityDefinitions/PersonalEligibilityDefinition.json",
+      )
 
     val personalEligibilityDefinition =
       ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
@@ -463,6 +465,22 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.insertPersonalEligibility(personalEligibilityDefinition, catalogue)
 
     assertThat(result.minAge).isEqualTo(18)
+    verify(personalEligibilityRepository, times(1)).save(any())
+  }
+
+  @Test
+  fun `Providing Json with invalid Maximum Age value to be extracted as a Personal Eligibility Definition object to be stored into the database`() {
+    val personalEligibilityDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/personalEligibilityDefinitions/PersonalEligibilityDefinitionInvalidMaxAge.json",
+      )
+
+    val personalEligibilityDefinition =
+      ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
+
+    val result = processor.insertPersonalEligibility(personalEligibilityDefinition, catalogue)
+
+    assertThat(result.maxAge).isEqualTo(null)
     verify(personalEligibilityRepository, times(1)).save(any())
   }
 

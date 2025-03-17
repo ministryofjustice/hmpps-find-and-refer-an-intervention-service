@@ -44,8 +44,8 @@ data class DeliveryMethodDefinition(
 )
 
 data class PersonalEligibilityDefinition(
-  @JsonProperty("min_age") val minAge: Int?,
-  @JsonProperty("max_age") val maxAge: Int?,
+  @JsonProperty("min_age") val minAge: String?,
+  @JsonProperty("max_age") val maxAge: String?,
   @JsonProperty("males") val males: Boolean,
   @JsonProperty("females") val females: Boolean,
 )
