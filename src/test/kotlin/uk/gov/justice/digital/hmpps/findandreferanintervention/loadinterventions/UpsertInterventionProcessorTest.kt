@@ -326,7 +326,7 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethods = processor.insertDeliveryMethods(deliveryMethodDefinitions, catalogue)
     val result = processor.insertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
 
-    assertThat(result.count()).isEqualTo(3)
+    assertThat(result.count()).isEqualTo(9)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 
@@ -351,7 +351,7 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethods = processor.insertDeliveryMethods(deliveryMethodDefinitions, catalogue)
     val result = processor.insertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
 
-    assertThat(result.count()).isEqualTo(2)
+    assertThat(result.count()).isEqualTo(6)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 

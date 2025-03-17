@@ -247,13 +247,14 @@ class UpsertInterventionProcessor(
   }
 
   fun hasDeliveryMethodSetting(settingName: String?): SettingType? {
+    val settingNameUppercased = settingName?.uppercase()
     val settingTypes = SettingType.entries.map(SettingType::name)
     var preRelease: String? = null
 
-    if (settingName.equals("PRE-RELEASE")) preRelease = "PRE_RELEASE"
+    if (settingNameUppercased.equals("PRE-RELEASE")) preRelease = "PRE_RELEASE"
 
     return when {
-      settingTypes.contains(settingName) -> {
+      settingTypes.contains(settingNameUppercased) -> {
         SettingType.entries[settingTypes.indexOf(settingName)]
       }
       settingTypes.contains(preRelease) -> {
@@ -271,25 +272,26 @@ class UpsertInterventionProcessor(
   ): MutableSet<DeliveryMethodSetting> {
     val deliveryMethodSettingList = mutableListOf<DeliveryMethodSetting>()
 
-    deliveryMethodSettings.forEachIndexed { index, deliveryMethodSetting ->
-      val settingType = hasDeliveryMethodSetting(deliveryMethodSetting)
-      val deliveryMethodId = deliveryMethods.toList()[index].id
+    for (deliveryMethod in deliveryMethods) {
+      for(deliveryMethodSetting in deliveryMethodSettings){
+        val settingType = hasDeliveryMethodSetting(deliveryMethodSetting)
 
-      when {
-        settingType != null -> {
-          deliveryMethodSettingList.add(
-            DeliveryMethodSetting(
-              id = UUID.randomUUID(),
-              deliveryMethodId = deliveryMethodId,
-              setting = settingType,
-            ),
-          )
-          logger.info("Inserted Delivery Method Setting record for Delivery Method Id - $deliveryMethodId")
-        }
-        else -> {
-          logger.info(
-            "Unable to create Delivery Method Setting record for Id - $deliveryMethodId, as Setting Type is null or invalid",
-          )
+        when {
+          settingType != null -> {
+            deliveryMethodSettingList.add(
+              DeliveryMethodSetting(
+                id = UUID.randomUUID(),
+                deliveryMethodId = deliveryMethod.id,
+                setting = settingType,
+              ),
+            )
+            logger.info("Inserted Delivery Method Setting record for Delivery Method Id - ${deliveryMethod.id}")
+          }
+          else -> {
+            logger.info(
+              "Unable to create Delivery Method Setting record for Id - ${deliveryMethod.id}, as Setting Type is null or invalid",
+            )
+          }
         }
       }
     }
@@ -428,9 +430,10 @@ class UpsertInterventionProcessor(
   }
 
   fun hasRoshLevel(roshLevel: String?): RoshLevel? {
+    val roshLevelUppercased = roshLevel?.uppercase()
     val roshLevels = RoshLevel.entries.map(RoshLevel::name)
-    return if (roshLevels.contains(roshLevel)) {
-      RoshLevel.entries[roshLevels.indexOf(roshLevel)]
+    return if (roshLevels.contains(roshLevelUppercased)) {
+      RoshLevel.entries[roshLevels.indexOf(roshLevelUppercased)]
     } else {
       null
     }
