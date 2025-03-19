@@ -49,7 +49,8 @@
         "osp_score_guide": null,
         "osp_dc_icc_combination_guide": null,
         "ogrs_score_guide": "If OVP not available, 25+ on OGRS3",
-        "ovp_ogp_guide": "OVP: 20+",
+        "ovp_guide": "OVP: 20+",
+        "ogp_guide": null,
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": null
