@@ -14,13 +14,6 @@ import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import javax.sql.DataSource
 
-/*@EnableBatchProcessing(
-  /*dataSourceRef = "mainDataSource",
-  transactionManagerRef = "batchTransactionManager",
-  databaseType = "H2",
-  isolationLevelForCreate = "ISOLATION_READ_COMMITTED",
- */
-)*/
 @Configuration
 @EnableTransactionManagement
 class BatchConfiguration(
@@ -41,12 +34,6 @@ class BatchConfiguration(
     launcher.afterPropertiesSet()
     return launcher
   }
-
-//  @Bean("batchJobBuilder")
-//  fun batchJobBuilder(jobRepository: JobRepository): JobBuilder = JobBuilder("batchJobBuilder", jobRepository)
-
-//  @Bean("batchStepBuilder")
-//  fun batchStepBuilder(jobRepository: JobRepository): StepBuilder = StepBuilder("batchStepBuilder", jobRepository)
 
   @Bean("batchJobExplorer")
   fun jobExplorer(

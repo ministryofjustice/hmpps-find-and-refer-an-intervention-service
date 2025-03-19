@@ -21,16 +21,6 @@ class DataSourceConfig(
     .url(dataSourceUrl)
     .build()
 
-/*  @Bean("memoryDataSource")
-  fun memoryDataSource(): DataSource = EmbeddedDatabaseBuilder()
-    .setType(EmbeddedDatabaseType.H2)
-    .addScript("/org/springframework/batch/core/schema-drop-h2.sql")
-    .addScript("/org/springframework/batch/core/schema-h2.sql")
-    .build()
-
-  @Bean("batchTransactionManager")
-  fun batchTransactionManager(@Qualifier("memoryDataSource") dataSource: DataSource): PlatformTransactionManager = JpaTransactionManager()
-*/
   @Bean("transactionManager")
   @Primary
   fun transactionManager(): PlatformTransactionManager = JpaTransactionManager()
