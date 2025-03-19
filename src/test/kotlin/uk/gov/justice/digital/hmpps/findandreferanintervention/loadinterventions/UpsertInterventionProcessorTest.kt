@@ -191,11 +191,11 @@ internal class UpsertInterventionProcessorTest {
     val interventionCatalogueDefinitions =
       ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
 
-    val result = processor.createInterventionCatalogue(interventionCatalogueDefinitions)
+    val result = processor.createInterventionCatalogue(interventionCatalogueDefinitions, InterventionCatalogueFactory().create(name = "Accommodation"))
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
-    verify(interventionCatalogueRepository, times(2)).save(any())
+    verify(interventionCatalogueRepository, times(1)).save(any())
   }
 
   @Test
@@ -218,7 +218,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json to be extracted as an Array of Criminogenic Need Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Criminogenic Need Definition object from the database`() {
     val criminogenicNeedDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/criminogenicNeedTestDefinitions/CriminogenicNeedDefinition.json",
@@ -227,7 +227,33 @@ internal class UpsertInterventionProcessorTest {
     val criminogenicNeedDefinitions =
       ObjectMapper().readValue(criminogenicNeedDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val result = processor.insertCriminogenicNeeds(criminogenicNeedDefinitions, catalogue)
+    whenever(criminogenicNeedRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        CriminogenicNeed(
+          id = UUID.randomUUID(),
+          need = CriminogenicNeedRef(UUID.randomUUID(), "Drug Use"),
+          intervention = catalogue,
+        ),
+      ),
+    )
+
+    val result = processor.upsertCriminogenicNeeds(criminogenicNeedDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(criminogenicNeedRepository, times(0)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted tp create a new Array of Criminogenic Need Definition objects to be stored into the database`() {
+    val criminogenicNeedDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/criminogenicNeedTestDefinitions/CriminogenicNeedDefinition.json",
+      )
+
+    val criminogenicNeedDefinitions =
+      ObjectMapper().readValue(criminogenicNeedDefinitionJson, object : TypeReference<Array<String>>() {})
+
+    val result = processor.upsertCriminogenicNeeds(criminogenicNeedDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(1)
     verify(criminogenicNeedRepository, times(1)).saveAll(anyList())
@@ -247,14 +273,44 @@ internal class UpsertInterventionProcessorTest {
       .thenReturn(CriminogenicNeedRef(id = UUID.randomUUID(), name = "Accommodation"))
       .thenReturn(null)
 
-    val result = processor.insertCriminogenicNeeds(criminogenicNeedDefinitions, catalogue)
+    val result = processor.upsertCriminogenicNeeds(criminogenicNeedDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(2)
     verify(criminogenicNeedRepository, times(1)).saveAll(anyList())
   }
 
   @Test
-  fun `Providing Json to be extracted as an Array of Delivery Location Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Delivery Location Definition object from the database`() {
+    val deliveryLocationDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryLocationDefinition.json")
+
+    val deliveryLocationDefinitions =
+      ObjectMapper().readValue(deliveryLocationDefinitionJson, object : TypeReference<Array<DeliveryLocationDefinition>>() {})
+
+    val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
+    val defaultPccRegion = PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
+    val defaultPduRef = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
+
+    whenever(deliveryLocationRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        DeliveryLocation(
+          id = UUID.randomUUID(),
+          providerName = deliveryLocationDefinitions[0].providerName,
+          contact = deliveryLocationDefinitions[0].contact,
+          pduRef = defaultPduRef,
+          intervention = catalogue,
+        ),
+      ),
+    )
+
+    val result = processor.upsertDeliveryLocations(deliveryLocationDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(deliveryLocationRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Array of Delivery Location Definition objects to be stored into the database`() {
     val deliveryLocationDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/DeliveryLocationDefinition.json")
 
@@ -267,7 +323,7 @@ internal class UpsertInterventionProcessorTest {
 
     whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef)
 
-    val result = processor.insertDeliveryLocations(deliveryLocationDefinitions, catalogue)
+    val result = processor.upsertDeliveryLocations(deliveryLocationDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
     verify(deliveryLocationRepository, times(3)).save(any())
@@ -282,7 +338,7 @@ internal class UpsertInterventionProcessorTest {
       ObjectMapper().readValue(deliveryLocationDefinitionJson, object : TypeReference<Array<DeliveryLocationDefinition>>() {})
 
     val exception = assertThrows<RuntimeException> {
-      processor.insertDeliveryLocations(deliveryLocationDefinitions, catalogue)
+      processor.upsertDeliveryLocations(deliveryLocationDefinitions, catalogue)
     }
 
     assertThat(exception.message).contains("PDU for Default Provider Name 2 was not found")
@@ -290,7 +346,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json to be extracted as an Array of Delivery Method Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Delivery Method Definition object from the database`() {
     val deliveryMethodDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
@@ -299,7 +355,35 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethodDefinitions =
       ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
 
-    val result = processor.insertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    whenever(deliveryMethodRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        DeliveryMethod(
+          id = UUID.randomUUID(),
+          attendanceType = deliveryMethodDefinitions[0].attendanceType,
+          deliveryFormat = deliveryMethodDefinitions[0].deliveryFormat,
+          deliveryMethodDescription = deliveryMethodDefinitions[0].deliveryMethodDescription,
+          intervention = catalogue,
+        ),
+      ),
+    )
+
+    val result = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(deliveryMethodRepository, times(0)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Array of Delivery Method Definition objects to be stored into the database`() {
+    val deliveryMethodDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
+      )
+
+    val deliveryMethodDefinitions =
+      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
+
+    val result = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
     verify(deliveryMethodRepository, times(1)).saveAll(anyList())
@@ -323,8 +407,8 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethodSettingDefinitions =
       ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val deliveryMethods = processor.insertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-    val result = processor.insertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
+    val deliveryMethods = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
 
     assertThat(result.count()).isEqualTo(9)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
@@ -348,15 +432,15 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethodSettingDefinitions =
       ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val deliveryMethods = processor.insertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-    val result = processor.insertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
+    val deliveryMethods = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
 
     assertThat(result.count()).isEqualTo(6)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 
   @Test
-  fun `Providing Json to be extracted as an Array of Eligible Offence Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Eligible Offence Definition object from the database`() {
     val eligibleOffenceDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/eligibleOffenceDefinitions/EligibleOffenceDefinition.json",
@@ -365,7 +449,35 @@ internal class UpsertInterventionProcessorTest {
     val eligibleOffenceDefinitions =
       ObjectMapper().readValue(eligibleOffenceDefinitionJson, object : TypeReference<Array<EligibleOffenceDefinition>>() {})
 
-    val result = processor.insertEligibleOffences(eligibleOffenceDefinitions, catalogue)
+    whenever(eligibleOffenceRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        EligibleOffence(
+          id = UUID.randomUUID(),
+          offenceType = OffenceTypeRef(UUID.randomUUID(), "Substance-Related offence"),
+          victimType = eligibleOffenceDefinitions[0].victimType,
+          motivation = eligibleOffenceDefinitions[0].motivation,
+          intervention = catalogue,
+        ),
+      ),
+    )
+
+    val result = processor.upsertEligibleOffences(eligibleOffenceDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(eligibleOffenceRepository, times(0)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Array of Eligible Offence Definition objects to be stored into the database`() {
+    val eligibleOffenceDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/eligibleOffenceDefinitions/EligibleOffenceDefinition.json",
+      )
+
+    val eligibleOffenceDefinitions =
+      ObjectMapper().readValue(eligibleOffenceDefinitionJson, object : TypeReference<Array<EligibleOffenceDefinition>>() {})
+
+    val result = processor.upsertEligibleOffences(eligibleOffenceDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(2)
     verify(eligibleOffenceRepository, times(1)).saveAll(anyList())
@@ -385,35 +497,81 @@ internal class UpsertInterventionProcessorTest {
       .thenReturn(OffenceTypeRef(id = UUID.randomUUID(), name = "Extremism offence"))
       .thenReturn(null)
 
-    val result = processor.insertEligibleOffences(eligibleOffenceDefinitions, catalogue)
+    val result = processor.upsertEligibleOffences(eligibleOffenceDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(2)
     verify(eligibleOffenceRepository, times(1)).saveAll(anyList())
   }
 
   @Test
-  fun `Providing Json to be extracted as an Array of Enabling Intervention Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Enabling Intervention Definition object from the database`() {
     val enablingInterventionDefinitionsJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/EnablingInterventionDefinition.json")
 
     val enablingInterventionDefinitions =
       ObjectMapper().readValue(enablingInterventionDefinitionsJson, object : TypeReference<String>() {})
 
-    val result = processor.insertEnablingInterventions(enablingInterventionDefinitions, catalogue)
+    whenever(enablingInterventionRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        EnablingIntervention(id = UUID.randomUUID(), enablingInterventionDetail = "BNM+", intervention = catalogue),
+      ),
+    )
+
+    val result = processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(enablingInterventionRepository, times(0)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Array of Enabling Intervention Definition objects to be stored into the database`() {
+    val enablingInterventionDefinitionsJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/EnablingInterventionDefinition.json")
+
+    val enablingInterventionDefinitions =
+      ObjectMapper().readValue(enablingInterventionDefinitionsJson, object : TypeReference<String>() {})
+
+    val result = processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(4)
     verify(enablingInterventionRepository, times(1)).saveAll(anyList())
   }
 
   @Test
-  fun `Providing Json to be extracted as an Array of Excluded Offence Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Excluded Offence Definition object from the database`() {
     val excludedOffenceDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/excludedOffenceDefinitions/ExcludedOffenceDefinition.json")
 
     val excludedOffenceDefinitions =
       ObjectMapper().readValue(excludedOffenceDefinitionJson, object : TypeReference<Array<ExcludedOffencesDefinition>>() {})
 
-    val result = processor.insertExcludedOffences(excludedOffenceDefinitions, catalogue)
+    whenever(excludedOffenceRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        ExcludedOffence(
+          id = UUID.randomUUID(),
+          offenceType = OffenceTypeRef(UUID.randomUUID(), "Gang or Organised Crime-Related offence"),
+          victimType = excludedOffenceDefinitions[0].victimType,
+          motivation = excludedOffenceDefinitions[0].motivation,
+          intervention = catalogue,
+        ),
+      ),
+    )
+
+    val result = processor.upsertExcludedOffences(excludedOffenceDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(excludedOffenceRepository, times(0)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Array of Excluded Offence Definition objects to be stored into the database`() {
+    val excludedOffenceDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/excludedOffenceDefinitions/ExcludedOffenceDefinition.json")
+
+    val excludedOffenceDefinitions =
+      ObjectMapper().readValue(excludedOffenceDefinitionJson, object : TypeReference<Array<ExcludedOffencesDefinition>>() {})
+
+    val result = processor.upsertExcludedOffences(excludedOffenceDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(2)
     verify(excludedOffenceRepository, times(1)).saveAll(anyList())
@@ -431,21 +589,50 @@ internal class UpsertInterventionProcessorTest {
       .thenReturn(OffenceTypeRef(id = UUID.randomUUID(), name = "Extremism offence"))
       .thenReturn(null)
 
-    val result = processor.insertExcludedOffences(excludedOffenceDefinitions, catalogue)
+    val result = processor.upsertExcludedOffences(excludedOffenceDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(2)
     verify(excludedOffenceRepository, times(1)).saveAll(anyList())
   }
 
   @Test
-  fun `Providing Json to be extracted as an Exclusion Definition object to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Exclusion Definition object from the database`() {
     val exclusionDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/ExclusionDefinition.json")
 
     val exclusionDefinition =
       ObjectMapper().readValue(exclusionDefinitionJson, object : TypeReference<ExclusionDefinition>() {})
 
-    val result = processor.insertExclusion(exclusionDefinition, catalogue)
+    whenever(exclusionRepository.findByIntervention(any())).thenReturn(
+      Exclusion(
+        id = UUID.randomUUID(),
+        minRemainingSentenceDurationGuide = exclusionDefinition?.minRemaingSentenceGuide,
+        remainingLicenseCommunityOrderGuide = exclusionDefinition?.remainingLicenseCommunityOrderGuide,
+        alcoholDrugProblemGuide = exclusionDefinition?.alcoholDrugProblemGuide,
+        mentalHealthProblemGuide = exclusionDefinition?.mentalHealthProblemGuide,
+        otherPreferredMethodGuide = exclusionDefinition?.otherPreferredMethodGuide,
+        sameTypeRuleGuide = exclusionDefinition?.sameTypeRuleGuide,
+        scheduleFrequencyGuide = exclusionDefinition?.scheduleRequencyGuide,
+        intervention = catalogue,
+      ),
+    )
+
+    val result = processor.upsertExclusion(exclusionDefinition, catalogue)
+
+    assertThat(result.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
+    assertThat(result.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
+    verify(exclusionRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Exclusion Definition object to be stored into the database`() {
+    val exclusionDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/ExclusionDefinition.json")
+
+    val exclusionDefinition =
+      ObjectMapper().readValue(exclusionDefinitionJson, object : TypeReference<ExclusionDefinition>() {})
+
+    val result = processor.upsertExclusion(exclusionDefinition, catalogue)
 
     assertThat(result.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
     assertThat(result.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
@@ -453,7 +640,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json to be extracted as a Personal Eligibility Definition object to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Personal Eligibility Definition object from the database`() {
     val personalEligibilityDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/personalEligibilityDefinitions/PersonalEligibilityDefinition.json",
@@ -462,7 +649,34 @@ internal class UpsertInterventionProcessorTest {
     val personalEligibilityDefinition =
       ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
 
-    val result = processor.insertPersonalEligibility(personalEligibilityDefinition, catalogue)
+    whenever(personalEligibilityRepository.findByIntervention(any())).thenReturn(
+      PersonalEligibility(
+        id = UUID.randomUUID(),
+        minAge = personalEligibilityDefinition?.minAge?.toIntOrNull(),
+        maxAge = personalEligibilityDefinition?.maxAge?.toIntOrNull(),
+        males = personalEligibilityDefinition?.males == true,
+        females = personalEligibilityDefinition?.females == true,
+        intervention = catalogue,
+      ),
+    )
+
+    val result = processor.upsertPersonalEligibility(personalEligibilityDefinition, catalogue)
+
+    assertThat(result.minAge).isEqualTo(18)
+    verify(personalEligibilityRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Personal Eligibility Definition object to be stored into the database`() {
+    val personalEligibilityDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/personalEligibilityDefinitions/PersonalEligibilityDefinition.json",
+      )
+
+    val personalEligibilityDefinition =
+      ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
+
+    val result = processor.upsertPersonalEligibility(personalEligibilityDefinition, catalogue)
 
     assertThat(result.minAge).isEqualTo(18)
     verify(personalEligibilityRepository, times(1)).save(any())
@@ -478,7 +692,7 @@ internal class UpsertInterventionProcessorTest {
     val personalEligibilityDefinition =
       ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
 
-    val result = processor.insertPersonalEligibility(personalEligibilityDefinition, catalogue)
+    val result = processor.upsertPersonalEligibility(personalEligibilityDefinition, catalogue)
 
     assertThat(result.maxAge).isEqualTo(null)
     verify(personalEligibilityRepository, times(1)).save(any())
@@ -492,21 +706,54 @@ internal class UpsertInterventionProcessorTest {
     val possibleOutcomeDefinitions =
       ObjectMapper().readValue(possibleOutcomeDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val result = processor.insertPossibleOutcomes(possibleOutcomeDefinitions, catalogue)
+    val result = processor.upsertPossibleOutcomes(possibleOutcomeDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
     verify(possibleOutcomeRepository, times(1)).saveAll(anyList())
   }
 
   @Test
-  fun `Providing Json to be extracted as a Risk Consideration Definition object to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Risk Consideration Definition object from the database`() {
     val riskConsiderationDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/RiskConsiderationDefinition.json")
 
     val riskConsiderationDefinition =
       ObjectMapper().readValue(riskConsiderationDefinitionJson, object : TypeReference<RiskConsiderationDefinition>() {})
 
-    val result = processor.insertRiskConsideration(riskConsiderationDefinition, catalogue)
+    whenever(riskConsiderationRepository.findByIntervention(any())).thenReturn(
+      RiskConsideration(
+        id = UUID.randomUUID(),
+        cnScoreGuide = riskConsiderationDefinition?.cnScoreGuide,
+        extremismRiskGuide = riskConsiderationDefinition?.extremismRiskGuide,
+        saraPartnerScoreGuide = riskConsiderationDefinition?.saraPartnerScoreGuide,
+        saraOtherScoreGuide = riskConsiderationDefinition?.saraOtherScoreGuide,
+        ospScoreGuide = riskConsiderationDefinition?.ospScoreGuide,
+        ospDcIccCombinationGuide = riskConsiderationDefinition?.ospDcIccCombinationGuide,
+        ogrsScoreGuide = riskConsiderationDefinition?.ogrsScoreGuide,
+        ovpGuide = riskConsiderationDefinition?.ovpGuide,
+        ogpGuide = riskConsiderationDefinition?.ogpGuide,
+        pnaGuide = riskConsiderationDefinition?.pnaGuide,
+        rsrGuide = riskConsiderationDefinition?.rsrGuide,
+        roshLevel = null,
+        intervention = catalogue,
+      ),
+    )
+
+    val result = processor.upsertRiskConsideration(riskConsiderationDefinition, catalogue)
+
+    assertThat(result.cnScoreGuide).isEqualTo("11.6 - Problem solving")
+    verify(riskConsiderationRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Risk Consideration Definition object to be stored into the database`() {
+    val riskConsiderationDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/RiskConsiderationDefinition.json")
+
+    val riskConsiderationDefinition =
+      ObjectMapper().readValue(riskConsiderationDefinitionJson, object : TypeReference<RiskConsiderationDefinition>() {})
+
+    val result = processor.upsertRiskConsideration(riskConsiderationDefinition, catalogue)
 
     assertThat(result.cnScoreGuide).isEqualTo("11.6 - Problem solving")
     verify(riskConsiderationRepository, times(1)).save(any())
@@ -525,14 +772,38 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json to be extracted as a Special Educational Need object to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Special Educational Need Definition object from the database`() {
     val specialEducationalNeedJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/SpecialEducationalNeedDefinition.json")
 
     val specialEducationalNeedDefinition =
       ObjectMapper().readValue(specialEducationalNeedJson, object : TypeReference<SpecialEducationalNeedDefinition>() {})
 
-    val result = processor.insertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
+    whenever(specialEducationalNeedRepository.findByIntervention(any())).thenReturn(
+      SpecialEducationalNeed(
+        id = UUID.randomUUID(),
+        literacyLevelGuide = specialEducationalNeedDefinition.literacyLevelGuide,
+        learningDisabilityCateredFor = specialEducationalNeedDefinition.learningDisabilityCateredFor,
+        equivalentNonLdcProgrammeGuide = specialEducationalNeedDefinition.equivalentNonLdcProgrammeGuide,
+        intervention = null,
+      ),
+    )
+
+    val result = processor.upsertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
+
+    assertThat(result.equivalentNonLdcProgrammeGuide).isEqualTo("Becoming New Me Plus")
+    verify(specialEducationalNeedRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Special Educational Need Definition object to be stored into the database`() {
+    val specialEducationalNeedJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/SpecialEducationalNeedDefinition.json")
+
+    val specialEducationalNeedDefinition =
+      ObjectMapper().readValue(specialEducationalNeedJson, object : TypeReference<SpecialEducationalNeedDefinition>() {})
+
+    val result = processor.upsertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
 
     assertThat(result.literacyLevelGuide).isEqualTo("Able to read and understand simple sentences")
     verify(specialEducationalNeedRepository, times(1)).save(any())
