@@ -71,7 +71,7 @@ data class RiskConsiderationDefinition(
   @JsonProperty("osp_dc_icc_combination_guide") val ospDcIccCombinationGuide: String?,
   @JsonProperty("ogrs_score_guide") val ogrsScoreGuide: String?,
   @JsonProperty("ovp_guide") val ovpGuide: String?,
-  @JsonProperty("ovp_ogp_guide") val ogpGuide: String?,
+  @JsonProperty("ogp_guide") val ogpGuide: String?,
   @JsonProperty("pna_guide") val pnaGuide: String?,
   @JsonProperty("rosh_level") val roshLevel: String?,
   @JsonProperty("rsr_guide") val rsrGuide: String?,
