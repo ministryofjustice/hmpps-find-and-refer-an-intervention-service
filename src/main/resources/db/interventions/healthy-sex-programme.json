@@ -1,0 +1,56 @@
+{
+    "uuid": "2DD44B43-46F2-4C91-968F-77A00F33EF35",
+    "intervention_catalogue": {
+        "name": "Healthy Sex Programme",
+        "int_type": "AcP",
+        "short_description": "Healthy Sex Programme (HSP) is a follow-up programme for men who have completed Kaizen, Becoming New Me Plus, Horizon, or New Me Strengths. It uses cognitive behavioural therapy and is aimed at men convicted of a sexual offence, or an offence with a sexual element.",
+        "long_description": "Healthy Sex Programme (HSP) is a follow-up programme for men who have completed Kaizen, Becoming New Me Plus, Horizon, or New Me Strengths. It uses cognitive behavioural therapy and is aimed at men convicted of a sexual offence, or an offence with a sexual element.",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [
+        "Thinking and Behaviour"
+    ],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": "Medium, high or very high OSP (OASys Sexual Reconviction Predictor)",
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

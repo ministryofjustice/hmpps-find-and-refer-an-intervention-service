@@ -1,0 +1,37 @@
+{
+    "uuid": "162F3AEB-2210-4567-95F5-25C270D5E75F",
+    "intervention_catalogue": {
+        "name": "Womens Services (PWB): ",
+        "int_type": "CRS",
+        "short_description": "",
+        "long_description": "This further subdivides as PWB",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "PRE-RELEASE"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

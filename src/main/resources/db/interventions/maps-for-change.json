@@ -1,0 +1,50 @@
+{
+    "uuid": "BFBBE2A9-E1D1-453D-88A6-3589F4BDA870",
+    "intervention_catalogue": {
+        "name": "Maps for Change",
+        "int_type": "Toolkits",
+        "short_description": "Developed for use with adult males convicted of sexual/sexuality motivated offences. ",
+        "long_description": "Developed for use with adult males convicted of sexual/sexuality motivated offences. It does not replace an accredited programme and is aimed to suit those whose risk assessment scores are likely to be in the Low OSP/C and Low OSP/I category, however, the toolkit can be used for individuals who are unable to access an accredited programme e.g. for health or language reasons.\n\nEach MAP focuses on different areas of need and is underpinned by a strengths-based approach to help the individual develop strengths and capabilities to overcome risk factors.",
+        "session_detail": "Variable ",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": "",
+            "motivation": "Sexual"
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": "Low \nBut if Medium+  then non suitability for AP route applies",
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

@@ -1,0 +1,45 @@
+{
+    "uuid": "CB932F7F-D6BD-4CDA-9787-670DA3E0BB9A",
+    "intervention_catalogue": {
+        "name": "Building Choices: high intensity",
+        "int_type": "AcP",
+        "short_description": "Building Choices helps people to develop skills for change and future-focused goals. It is a cognitive-behavioural programme, combining group and one-to-one sessions. It develops skills such as emotion management, healthy thinking, healthy relationships, sense of purpose and healthy sex. This is the high intensity pathway, including Getting Ready.",
+        "long_description": "Building Choices helps people to develop skills for change and future-focused goals. It is a cognitive-behavioural programme, combining group and one-to-one sessions. It develops skills such as emotion management, healthy thinking, healthy relationships, sense of purpose and healthy sex. This is the high intensity pathway, including Getting Ready.",
+        "session_detail": "6 x One-to-one sessions 21 x Group Sessions ",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": "SARA (Spousal Assault Risk Assessment)",
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": "OSP-DC or OSP-IIC (OASys Sexual Reconviction Predictor \u2013 Contact or Indecent Imagery)",
+        "ogrs_score_guide": "OGRS3 (Offender Group Reconviction Scale 3)",
+        "ovp_ogp_guide": "OVP (OASys Violence Predictor)",
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": "RSR (Risk of Serious Recidivism)"
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

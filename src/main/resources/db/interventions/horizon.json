@@ -1,0 +1,65 @@
+{
+    "uuid": "C5363BAE-BD0C-45BE-816F-01863CF6396D",
+    "intervention_catalogue": {
+        "name": "Horizon",
+        "int_type": "AcP",
+        "short_description": "Horizon is for men convicted of a sexual or sexually-motivated offence who are medium risk or above. It helps address problematic factors and how they contribute to behaviour.",
+        "long_description": "Horizon is for men convicted of a sexual or sexually-motivated offence who are medium risk or above. It helps address problematic factors and how they contribute to behaviour.",
+        "session_detail": "3 x One-to-one sessions; 31 x group sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [
+        "Thinking and Behaviour"
+    ],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": "Any",
+            "motivation": "Or sexually motivated offence"
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": "Medium, high or very high OSP (OASys Sexual Reconviction Predictor)",
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "No",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": null,
+        "alcohol_drug_problem_guide": null,
+        "mental_health_problem_guide": null,
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": "Only 1",
+        "schedule_frequency_guide": "Over-ride if exception"
+    }
+}

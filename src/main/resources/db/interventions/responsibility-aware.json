@@ -1,0 +1,40 @@
+{
+    "uuid": "173FA9DA-8CB4-4F37-8CE4-CEF21801CFC4",
+    "intervention_catalogue": {
+        "name": "Responsibility Aware",
+        "int_type": "Toolkits",
+        "short_description": "To provide individuals with the opportunity to reflect on their substance use and develop skills/techniques to support them in making positive change.",
+        "long_description": " Responsibly Aware has been developed as an early intervention toolkit for individuals\nwho have started to experience problems related to their substance use. These\nindividuals have not reached the point of addiction or where a more intensive treatment\npath would be deemed appropriate.\nResponsibly Aware takes a harm reduction\napproach and aims to support and guide\npeople on probation to develop safe and\nresponsible substance use. \u2018Safe and\nresponsible\u2019 refers to behaviours on several\nlevels, considering the impact on; physical\nand emotional well-being, financial, lifestyle,\nrelationships as well as the impact on others. \n\n! NOT ELIGIBLE !\n\nNot eligible for those with a Alcohol Treatment Requirement or Drug Rehabilitation Requirement \n\nIndividuals that self-report or are assessed as dependent on any substance are not suitable.",
+        "session_detail": "5-6 weekly sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": null,
+        "alcohol_drug_problem_guide": "Not eligible for those with a Alcohol Treatment Requirement or Drug Rehabilitation Requirement - Individuals that self-report or are assessed as dependent on any substance are not suitable.",
+        "mental_health_problem_guide": null,
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

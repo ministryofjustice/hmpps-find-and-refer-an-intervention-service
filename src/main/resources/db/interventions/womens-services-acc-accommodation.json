@@ -1,0 +1,49 @@
+{
+    "uuid": "2E7C87BA-823C-4945-969F-230AD1C768AF",
+    "intervention_catalogue": {
+        "name": "Womens Services (ACC): Accommodation",
+        "int_type": "CRS",
+        "short_description": "Womens Services - Accommodation",
+        "long_description": "The Women's Services Accomodation pathway provides female individuals on a community/suspended sentence order with a RAR or on license/post-sentence supervision with accommodation interventions. These services will also be delivered pre-release for individuals who will be under probation supervision on release. The accommodation service provides a variety of interventions based upon the individual\u2019s risk category (low / medium / high).",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "PRE-RELEASE"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": "NA",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

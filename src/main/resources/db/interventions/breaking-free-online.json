@@ -1,0 +1,27 @@
+{
+    "uuid": "D29F700D-5CC7-4E21-BC9C-565514661F24",
+    "intervention_catalogue": {
+        "name": "Breaking Free Online",
+        "int_type": "AcP",
+        "short_description": "Breaking Free: Health and Justice Package....\n\nProvided by Breaking Free Online Ltd ",
+        "long_description": "This comprises two accredited programmes: \n\nBreaking Free Online. An 8-session digital behaviour change programme which addresses the underlying psychological and lifestyle difficulties behind alcohol/drug use and offending behaviour. The programme targets 70 problem substances including illegal substances, New Psychoactive Substances (NPS), and prescribed medications. \n\n",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [],
+    "delivery_method_settings": [
+        "COMMUNITY AND CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

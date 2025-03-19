@@ -1,0 +1,52 @@
+{
+    "uuid": "C5458E4A-02EE-4E2C-A927-5C96DF19FB68",
+    "intervention_catalogue": {
+        "name": "Living as New Me",
+        "int_type": "AcP",
+        "short_description": "Living as New Me (LNM) is a booster or maintenance programme for men who have completed New Me Strengths or Becoming New Me Plus and may need extra support. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only.",
+        "long_description": "Living as New Me (LNM) is a booster or maintenance programme for men who have completed New Me Strengths or Becoming New Me Plus and may need extra support. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only.",
+        "session_detail": "Minimum 5 x group sessions\n\n(Depends on group size and the needs of each individual)",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "All offences (custody)",
+            "victim_type": "",
+            "motivation": ""
+        },
+        {
+            "offence_type_id": "Sexual offence (community)",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

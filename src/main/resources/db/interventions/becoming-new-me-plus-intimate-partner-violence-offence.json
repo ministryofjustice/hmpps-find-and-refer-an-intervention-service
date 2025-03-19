@@ -1,0 +1,58 @@
+{
+    "uuid": "81EA44B3-1808-4F65-94C2-A4BFA3137162",
+    "intervention_catalogue": {
+        "name": "Becoming New Me Plus: intimate partner violence offence",
+        "int_type": "AcP",
+        "short_description": "Becoming New Me Plus (BNM+) uses cognitive behavioural therapy. It is for men who are at high or very high risk of reoffending. This strand is for men convicted of an intimate partner violence offence.",
+        "long_description": "Becoming New Me Plus (BNM+) uses cognitive behavioural therapy. It is for men who are at high or very high risk of reoffending. This strand is for men convicted of an intimate partner violence offence.",
+        "session_detail": "Group and One-to-one in person \n\n85 group sessions + 7 individual sessions\n\n\nOR exclusively One-to-one \nMinimum 20 sessions long\nDepends on the needs of the individual",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": "High SARA (Spousal Assault Risk Assessment) against partners",
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

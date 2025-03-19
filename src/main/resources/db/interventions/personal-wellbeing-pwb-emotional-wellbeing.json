@@ -1,0 +1,36 @@
+{
+    "uuid": "89849559-7D02-4D1A-9813-D6E3B52FA267",
+    "intervention_catalogue": {
+        "name": "Personal Wellbeing (PWB): Emotional Wellbeing",
+        "int_type": "CRS",
+        "short_description": "Personal Wellbeing (PWB): Emotional Wellbeing",
+        "long_description": "a) Support and Empowerment to develop strategies to manage emotions including those linked to offending such as shame, guilt, embarrassment, despair. \nb) Delivery of skills training to foster confidence, belief and hope in oneself (i.e. guarding against anxiety, isolation, overcoming stigma by knowing how and from whom to access appropriate support). \nc) Support and Empowerment to increase capacity to undertake activities which support daily living. \nd) Support and Advocacy in conjunction with partners to consistently engage with treatment. \ne) Support and Advocacy to engage with other professionals or service providers, where necessary including, but not limited to community mental health teams and support groups. \n",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

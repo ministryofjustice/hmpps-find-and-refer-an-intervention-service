@@ -1,0 +1,36 @@
+{
+    "uuid": "85FCC379-6523-4AEE-B354-367B28D4BB9C",
+    "intervention_catalogue": {
+        "name": "Greater Manchester - ETE",
+        "int_type": "CRS",
+        "short_description": "",
+        "long_description": "",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

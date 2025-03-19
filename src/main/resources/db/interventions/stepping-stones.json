@@ -1,0 +1,37 @@
+{
+    "uuid": "735E4A9A-01E6-40F3-898A-F52C771A87F2",
+    "intervention_catalogue": {
+        "name": "Stepping Stones",
+        "int_type": "Toolkits",
+        "short_description": "Stepping Stones can be used to support PPs to hold discussions and to complete exercises which seek to support the individual to lead an offence-free life. The material can be used in a flexible way and tailored to meet the needs of each participant.",
+        "long_description": "A resource which offers offender managers practical exercises to use in supervision with people on licence or a community order. The primary focus is on strengthening and developing the protective factors identified in the Risk of Serious Harm (RoSH) guidance 2021 to support rehabilitation and reduce re-offending: \n\nStrengths (internal protective factors) \n\nResources (external protective factors)\n\nCapacity and motivation",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": ""
+        }
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

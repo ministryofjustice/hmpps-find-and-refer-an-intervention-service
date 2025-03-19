@@ -1,0 +1,53 @@
+{
+    "uuid": "98A4C2E4-D399-4A35-B3FC-C729FBBD78AB",
+    "intervention_catalogue": {
+        "name": "Let's Talk",
+        "int_type": "SI",
+        "short_description": "",
+        "long_description": "Let\u2019s Talk Men is aimed at male service users who have been exposed to or demonstrate entitled masculinity beliefs and behaviours. Participants will develop an understanding about their emotions and how to express these in our modern society. They will work on developing an understanding of how previous trauma links to their current behaviour, their self-esteem and general well-being. It is not suitable for female service users. This RAR will look at ways their self-esteem is shaped and how society or personal circumstances influence this. It looks at how they understand and express emotions within relationships/families and explores support networks, role models and goal setting. The programme will also look at different thinking styles and communications skills.\n",
+        "session_detail": "1 x pre-group session\n7 x group sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": ""
+        },
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": ""
+        }
+    ],
+    "risk_consideration": {
+        "cn_score_guide": "Need is evidenced by at least one of the following OASys criteria being satisfied: \n- 11.3 = 2\n- Thinking & behaviour related RoSH\n- Attitudes related RoSH",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "If OVP is not available, OGRS3 (over 2 years):\nscore of 25+",
+        "ovp_ogp_guide": "OVP (over 2 years): Score above 20+",
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

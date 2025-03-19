@@ -1,0 +1,37 @@
+{
+    "uuid": "C7AF63B6-E46C-4D6B-94AB-47F3107A2F82",
+    "intervention_catalogue": {
+        "name": "Womens Services ",
+        "int_type": "CRS",
+        "short_description": "",
+        "long_description": "The Women\u2019s CRS are a holistic service which is made up of the following services which are tailored to specific needs and characteristics of females on probation:\n - Accommodation \n - Education, Training and Employment \n- Family and significant others \n- Personal Well Being\n - Finance, Benefits and Debt \n - Dependency & Recovery \n \n Women\u2019s CRS are available for women on probation on a community/suspended sentence order with a RAR or on licence/post-sentence supervision. The accommodation and social inclusion \u2018mentoring\u2019 service will also be delivered pre-release for those released on licence.",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "PRE-RELEASE"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

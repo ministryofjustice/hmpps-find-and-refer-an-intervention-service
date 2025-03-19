@@ -1,0 +1,49 @@
+{
+    "uuid": "D7DAA5BC-50DF-4A03-80BA-89919FB891FB",
+    "intervention_catalogue": {
+        "name": "Thinking Skills Programme (TSP)",
+        "int_type": "AcP",
+        "short_description": "TSP is designed for adult men and women with a medium/high risk of reoffending. TSP supports participants to develop thinking (cognitive) skills to manage risk factors, develop protective factors, and achieve pro-social goals.  ",
+        "long_description": "An accredited cognitive skills offending behaviour programme delivered across HMPPS. It provides continuity of provision across community and custody, and it is the most attended of all accredited programmes.\n\nFocuses on developing people\u2019s ability to manage their emotions, make decisions, solve problems, achieve their goals, manage the influence of anti-social relationships, and use pro-social interpersonal skills in their interactions with others.",
+        "session_detail": "19",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": "total score of 5+  OASys items \n2.6 - Recognises the impact and consequences of offending \n7.2 - Regular activities encourage offending \n11.4 - Temper control \n11.6 - Problem solving \n11.7 - Awareness of consequences \n11.9 - Understands other people's point of view \n12.1 - Pro-criminal attitudes",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "50+",
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

@@ -1,0 +1,53 @@
+{
+    "uuid": "74F348FD-D46B-4419-B5F6-13DB825D5465",
+    "intervention_catalogue": {
+        "name": "New Me Strengths: sexual offence",
+        "int_type": "AcP",
+        "short_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
+        "long_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
+        "session_detail": "Group and One-to-one, In Person, and One-to-one only\n\n32-34 group sessions +  4 individual sessions\n\nOR. 15+ Individual Sessions ",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": "Medium OSP (OASys Sexual Reconviction Predictor)",
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

@@ -1,0 +1,27 @@
+{
+    "uuid": "B5044A5A-D7DA-4064-89ED-69A1934CE371",
+    "intervention_catalogue": {
+        "name": "Pillars of Recovery",
+        "int_type": "AcP",
+        "short_description": "Breaking Free: Health and Justice Package....\n\nProvided by Breaking Free Online Ltd ",
+        "long_description": "Pillars of Recovery. A 12-session behaviour change programme that targets the underlying psychological and lifestyle difficulties behind alcohol/drug use and offending behaviour. ",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [],
+    "delivery_method_settings": [
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}
