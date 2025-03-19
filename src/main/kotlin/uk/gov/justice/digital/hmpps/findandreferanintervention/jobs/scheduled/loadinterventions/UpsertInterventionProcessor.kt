@@ -98,8 +98,20 @@ class UpsertInterventionProcessor(
     when {
       catalogueEntry != null -> {
         logger.info("Retrieved Intervention Catalogue Entry record - ${item.catalogue.name}, id = ${item.uuid}")
-        createInterventionCatalogue(item, catalogueEntry)
-        return catalogueEntry
+
+        catalogueEntry.name = item.catalogue.name
+        catalogueEntry.shortDescription = item.catalogue.shortDescription
+        catalogueEntry.longDescription = item.catalogue.longDescription
+        catalogueEntry.topic = item.catalogue.topic
+        catalogueEntry.sessionDetail = item.catalogue.sessionDetail
+        catalogueEntry.commencementDate = LocalDate.now()
+        catalogueEntry.created = OffsetDateTime.now()
+        catalogueEntry.createdBy = AuthUser.interventionsServiceUser
+        catalogueEntry.interventionType = InterventionType.valueOf(item.catalogue.interventionType.uppercase())
+        catalogueEntry.timeToComplete = item.catalogue.timeToComplete
+        catalogueEntry.reasonForReferral = item.catalogue.reasonForReferral
+
+        return createInterventionCatalogue(item, catalogueEntry)
       }
       else -> {
         logger.info("Inserting Intervention Catalogue Entry - ${item.catalogue.name}")
@@ -109,7 +121,10 @@ class UpsertInterventionProcessor(
     }
   }
 
-  fun insertInterventionCatalogueEntry(catalogue: InterventionCatalogueEntryDefinition, catalogueId: UUID): InterventionCatalogue {
+  fun insertInterventionCatalogueEntry(
+    catalogue: InterventionCatalogueEntryDefinition,
+    catalogueId: UUID,
+  ): InterventionCatalogue {
     val newCatalogueRecord = InterventionCatalogue(
       id = catalogueId,
       name = catalogue.name,
@@ -140,7 +155,10 @@ class UpsertInterventionProcessor(
     return interventionCatalogueRepository.save(newCatalogueRecord)
   }
 
-  fun createInterventionCatalogue(item: InterventionCatalogueDefinition, catalogue: InterventionCatalogue): InterventionCatalogue {
+  fun createInterventionCatalogue(
+    item: InterventionCatalogueDefinition,
+    catalogue: InterventionCatalogue,
+  ): InterventionCatalogue {
     if (item.criminogenicNeed.toString().isNotEmpty()) {
       catalogue.criminogenicNeeds = upsertCriminogenicNeeds(item.criminogenicNeed, catalogue)
     }
@@ -413,7 +431,11 @@ class UpsertInterventionProcessor(
 
     when {
       enablingInterventionRecords?.isNotEmpty() == true -> {
-        logger.info("Retrieved ${enablingInterventionRecords.size} Enabling Intervention records from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+        logger.info(
+          "Retrieved ${enablingInterventionRecords.size} Enabling Intervention records from Database for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
+
         return enablingInterventionRecords.toMutableSet()
       }
       else -> {
@@ -478,6 +500,20 @@ class UpsertInterventionProcessor(
     when {
       exclusionRecord != null -> {
         logger.info("Retrieved Exclusion record from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+
+        exclusionRecord.minRemainingSentenceDurationGuide = exclusion?.minRemaingSentenceGuide
+        exclusionRecord.remainingLicenseCommunityOrderGuide = exclusion?.remainingLicenseCommunityOrderGuide
+        exclusionRecord.alcoholDrugProblemGuide = exclusion?.alcoholDrugProblemGuide
+        exclusionRecord.mentalHealthProblemGuide = exclusion?.mentalHealthProblemGuide
+        exclusionRecord.otherPreferredMethodGuide = exclusion?.otherPreferredMethodGuide
+        exclusionRecord.sameTypeRuleGuide = exclusion?.sameTypeRuleGuide
+        exclusionRecord.scheduleFrequencyGuide = exclusion?.scheduleRequencyGuide
+        exclusionRecord.intervention = catalogue
+
+        logger.info(
+          "Exclusion record have now been upserted for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+        )
+
         return exclusionRecord
       }
       else -> {
@@ -511,6 +547,17 @@ class UpsertInterventionProcessor(
         logger.info(
           "Retrieved Personal Eligibility record from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
         )
+
+        personalEligibilityRecord.minAge = personalEligibility?.minAge?.toIntOrNull()
+        personalEligibilityRecord.maxAge = personalEligibility?.maxAge?.toIntOrNull()
+        personalEligibilityRecord.males = personalEligibility?.males == true
+        personalEligibilityRecord.females = personalEligibility?.females == true
+        personalEligibilityRecord.intervention = catalogue
+
+        logger.info(
+          "Personal Eligibility record have now been upserted for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+        )
+
         return personalEligibilityRecord
       }
       else -> {
@@ -567,6 +614,25 @@ class UpsertInterventionProcessor(
         logger.info(
           "Retrieved Risk Consideration record from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
         )
+
+        riskConsiderationRecord.cnScoreGuide = riskConsideration?.cnScoreGuide
+        riskConsiderationRecord.extremismRiskGuide = riskConsideration?.extremismRiskGuide
+        riskConsiderationRecord.saraPartnerScoreGuide = riskConsideration?.saraPartnerScoreGuide
+        riskConsiderationRecord.saraOtherScoreGuide = riskConsideration?.saraOtherScoreGuide
+        riskConsiderationRecord.ospScoreGuide = riskConsideration?.ospScoreGuide
+        riskConsiderationRecord.ospDcIccCombinationGuide = riskConsideration?.ospDcIccCombinationGuide
+        riskConsiderationRecord.ogrsScoreGuide = riskConsideration?.ogrsScoreGuide
+        riskConsiderationRecord.ovpGuide = riskConsideration?.ovpGuide
+        riskConsiderationRecord.ogpGuide = riskConsideration?.ogpGuide
+        riskConsiderationRecord.pnaGuide = riskConsideration?.pnaGuide
+        riskConsiderationRecord.rsrGuide = riskConsideration?.rsrGuide
+        riskConsiderationRecord.roshLevel = hasRoshLevel(riskConsideration?.roshLevel)
+        riskConsiderationRecord.intervention = catalogue
+
+        logger.info(
+          "Risk Consideration record have now been upserted for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+        )
+
         return riskConsiderationRecord
       }
       else -> {
@@ -605,6 +671,15 @@ class UpsertInterventionProcessor(
         logger.info(
           "Retrieved Special Educational Need record from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
         )
+        specialEducationalNeedRecord.intervention = catalogue
+        specialEducationalNeedRecord.literacyLevelGuide = specialEducationalNeed?.literacyLevelGuide
+        specialEducationalNeedRecord.learningDisabilityCateredFor = specialEducationalNeed?.learningDisabilityCateredFor
+        specialEducationalNeedRecord.equivalentNonLdcProgrammeGuide = specialEducationalNeed?.equivalentNonLdcProgrammeGuide
+
+        logger.info(
+          "Special Educational Need record have now been upserted for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+        )
+
         return specialEducationalNeedRecord
       }
       else -> {
