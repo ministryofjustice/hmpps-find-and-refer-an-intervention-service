@@ -8,6 +8,9 @@
 .kotlin/
 build/
 
+# macOS system file
+.DS_Store
+
 # CMake
 cmake-build-debug/
 
