@@ -1,0 +1,67 @@
+{
+    "uuid": "9D44D6F0-B0F8-40D4-A851-92E92EB8D609",
+    "intervention_catalogue": {
+        "name": "Positive Pathways Plus",
+        "int_type": "SI",
+        "short_description": "Structured Intervention: Domestic Abuse",
+        "long_description": "Postive pathways plus is a specifically adapted and extended version of Positive Pathways which addresses a range of domestic abuse and problematic relationship issues,  from a personal agency, self-management basis. \n Positive Pathways plus offers a separate intervention in the absence of a specifically targeted Accredited Programme requirement, such as Building Better Relationships, which is used where there is evidence of more serious and entrenched harmful behaviour.",
+        "session_detail": "1 x pre-group session;\n 9 x group sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": "At least one of three OASys criteria to be satisfied:\n- Score of 2 on item 11.3 aggressive behaviour\n- \u201cYes\u201d answer to thinking &amp; behaviour being related to risk\nof serious harm to self or others\n- \u201cYes\u201d answer to attitudes being related to risk of serious\nharm to self or others",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": "Low risk on SARA",
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "If OVP not available, 25+ on OGRS3",
+        "ovp_guide": "OVP: 20+",
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "Participants should be sufficiently literate (able to read and understand simple sentences",
+        "learning_disability_catered_for": null,
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "Check with Treatment Manager if less than 9 months",
+        "alcohol_drug_problem_guide": "Alcohol / drug problems need to be stable before attendance.",
+        "mental_health_problem_guide": "Those with mental health problems should only be excluded from the programme if the issues are acute and damage the individual\u2019s ability to relate to others or concentrate",
+        "other_preferred_method_guide": "Must not be suitable for or not able to access an Accredited Programme",
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

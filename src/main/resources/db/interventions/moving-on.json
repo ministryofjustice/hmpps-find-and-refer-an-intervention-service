@@ -1,0 +1,32 @@
+{
+    "uuid": "D97A7462-4035-473E-ABE0-AFDA8C28D1FC",
+    "intervention_catalogue": {
+        "name": "Moving On",
+        "int_type": "Toolkits",
+        "short_description": "Aimed at People on Probation who are experiencing negative thoughts and feelings about themselves, which are associated with their conviction/offending and its consequences. ",
+        "long_description": "Aimed at People on Probation who are experiencing negative thoughts and feelings about themselves, which are associated with their conviction/offending and its consequences. These thoughts and feelings (which may include conviction-related feelings of shame) will be blocking the individual, emotionally or psychologically, from moving forward positively with their life, potentially obstructing desistance",
+        "session_detail": "8 x One-to-one sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY OR PSS"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

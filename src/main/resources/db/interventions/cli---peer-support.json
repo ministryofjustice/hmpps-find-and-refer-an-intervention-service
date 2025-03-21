@@ -1,0 +1,32 @@
+{
+    "uuid": "A709CCFB-744A-4185-8D04-6416DB13BBBA",
+    "intervention_catalogue": {
+        "name": "CLI - Peer Support",
+        "int_type": "CRS",
+        "short_description": "",
+        "long_description": "",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

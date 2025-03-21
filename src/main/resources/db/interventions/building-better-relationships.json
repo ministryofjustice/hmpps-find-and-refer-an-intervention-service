@@ -1,0 +1,70 @@
+{
+    "uuid": "554B9FD0-6E66-4F1A-AD67-4F47503D3270",
+    "intervention_catalogue": {
+        "name": "Building Better Relationships",
+        "int_type": "AcP",
+        "short_description": "Building Better Relationships (BBR) uses cognitive behavioural therapy. It is for men convicted of an intimate partner violence-related (IPV) offence against a female partner.",
+        "long_description": "Building Better Relationships (BBR) uses cognitive behavioural therapy. It is for men convicted of an intimate partner violence-related (IPV) offence against a female partner.",
+        "session_detail": "5 x One-to-one sessions and 25 group sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [
+        "Relationships & Family"
+    ],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": "Partner, \nor NON-PARTNER OFFENCES which arise out of intimate partner conflict against a non-partner",
+            "motivation": "Domestic Abuse, \nOr  \nsexual jealousy"
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": "total score of 5+  OASys items \n2.6 - Recognises the impact and consequences of offending \n7.2 - Regular activities encourage offending \n11.4 - Temper control \n11.6 - Problem solving \n11.7 - Awareness of consequences \n11.9 - Understands other people's point of view \n12.1 - Pro-criminal attitudes",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": "Medium or high SARA (Spousal Assault Risk Assessment)",
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "able to read and understand simple sentences",
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "12 months on licence or at least 18 months on community order",
+        "alcohol_drug_problem_guide": null,
+        "mental_health_problem_guide": "identified mental illness, or personality disorder",
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

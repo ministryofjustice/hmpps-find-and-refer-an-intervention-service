@@ -1,0 +1,51 @@
+{
+    "uuid": "E643606F-FEA5-4C86-AA45-0EB7758CFE6C",
+    "intervention_catalogue": {
+        "name": "Skills for Relationships",
+        "int_type": "Toolkits",
+        "short_description": "Aims to support desistance in people who have exhibited intimate partner violence (IPV)",
+        "long_description": "Aims to support desistance in people who have exhibited intimate partner violence (IPV). The key focus of the Skills for Relationships Toolkit is helping people cope with the complexities and pressures of their relationships without getting into conflict. It supports participants to decide how they want their relationships to be, recognise their strengths and develop new relationship skills.",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": "Partner",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": "< Medium for SI\nOR if Medium = BBR unless insufficient time or other ineligibility reason",
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

@@ -1,0 +1,57 @@
+{
+    "uuid": "1BCA8FB6-2E94-4680-B211-847FFBD9A294",
+    "intervention_catalogue": {
+        "name": "SMART Inside Out",
+        "int_type": "SI",
+        "short_description": "The SMART Inside Out program is designed specifically to help people currently involved in the criminal justice system. SMART recovery helps participants identify whether their substnce/alcohol use is a problematic behaviour for them, it builds up their motivation to make changes and offers a set of toll and techniques to support change.",
+        "long_description": "",
+        "session_detail": "10 x group sessions (Closed group) 2hrs long",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Racially aggregated offences",
+            "victim_type": ""
+        },
+        {
+            "offence_type_id": "Domestic abuse",
+            "victim_type": ""
+        },
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": ""
+        }
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "Participants should be sufficiently literate (able to read and understand simple sentences)",
+        "learning_disability_catered_for": "Support can be provided for service users that present with Learning Difficulties and Challenges (Case by case basis)",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "Minimum 12 weeks",
+        "alcohol_drug_problem_guide": "Low to moderate substance or alcohol use need. Support with Abstinence",
+        "mental_health_problem_guide": "Those with mental health problems should only be excluded from the programme if the issues are acute and damage the individual\u2019s ability to relate to others or concentrate",
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": "Yes",
+        "schedule_frequency_guide": "Yes"
+    }
+}

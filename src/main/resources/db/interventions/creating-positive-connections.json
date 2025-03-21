@@ -1,0 +1,32 @@
+{
+    "uuid": "E433436A-04CD-48CD-BF70-FEACD9109DAD",
+    "intervention_catalogue": {
+        "name": "Creating positive connections",
+        "int_type": "Toolkits",
+        "short_description": "Designed to support desistance by enabling conversations in supervision that will help the person on probation.",
+        "long_description": "Designed to support desistance by enabling conversations in supervision that will help the person on probation: \n\nUnderstand social capital and its benefits.\n\nIdentify their networks.\n\nDevelop their confidence and feel a sense of connection.",
+        "session_detail": "8 x One-to-one sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY OR PSS"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

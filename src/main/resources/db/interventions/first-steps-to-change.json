@@ -1,0 +1,37 @@
+{
+    "uuid": "B8A62E38-89E5-4E28-807B-5459D686A13C",
+    "intervention_catalogue": {
+        "name": "First Steps to Change",
+        "int_type": "Toolkits",
+        "short_description": "\nProvide structure when working with women\n\nImprove engagement throughout Community Orders and periods of licence supervision.\n\nIncrease self-esteem and well-being. \n\nFacilitate a therapeutic alliance between practitioner and the person supervised.",
+        "long_description": "Support engagement and Compliance throughout a Community Order or period of licence supervision by providing Practical activities focused on building skills, strengths and strategies to encourage women To desist from offending and have a positive future, taking into account that for a woman To be motivated, they need to feel safe and supported by someone with a genuine interest In their story. ",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": ""
+        }
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

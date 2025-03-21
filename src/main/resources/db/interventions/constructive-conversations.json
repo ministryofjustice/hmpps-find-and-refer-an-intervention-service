@@ -1,0 +1,27 @@
+{
+    "uuid": "94FBABAF-DE29-4AD5-B289-1A730548E1E7",
+    "intervention_catalogue": {
+        "name": "Constructive Conversations",
+        "int_type": "Toolkits",
+        "short_description": "In Pilot",
+        "long_description": "Series of three resource packs design to assist staff in structuring exploratory conversations with \u2018terrorist risk' cases.\n\nIt is structured in 3 stages:\nStage 1 - Commencing conversations\nStage 2 - Continuing conversations\nStage 3 - Changing conversations\n\nStage 1 and 2 can be delivered by Probation Practitioners, Counter Terrorism Specialist Probation Practitioners and Prison Prevent Leads.\n\nStage 3 can only be delivered by Counter Terrorism Specialist Probation Practitioners.",
+        "session_detail": "",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

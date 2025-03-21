@@ -1,0 +1,76 @@
+{
+    "uuid": "43B7EB14-8CB0-4AE4-BB62-A4810416A1C6",
+    "intervention_catalogue": {
+        "name": "Managing My Emotions",
+        "int_type": "SI",
+        "short_description": "Structured Intervention: Emotion Management",
+        "long_description": "Learning to manage emotions is key to positive, offence-free lifestyles\nand healthy relationships. This intervention aims to improve the\nindividuals ability to understand and manage their emotions in order to\navoid offending in the future.",
+        "session_detail": "1 x pre-group session; \n 6 x group sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "General Violence (GV)",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": ""
+        },
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": ""
+        }
+    ],
+    "risk_consideration": {
+        "cn_score_guide": "Need is evidenced by at least one\nof the following OASys criteria\nbeing satisfied:\n- 11.3 = 2\n- Thinking &amp; beh related RoSH\n- Attitudes related RoSH",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "If OVP is not available, OGRS3 (over 2 years):\nscore of 25+",
+        "ovp_guide": "OVP (over 2 years): Score above 20+",
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "Participants should be sufficiently literate (able to read and understand simple sentences)",
+        "learning_disability_catered_for": null,
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "Check with Treatment Manager if less than 9 months",
+        "alcohol_drug_problem_guide": "Alcohol / drug problems need to be stable before attendance.",
+        "mental_health_problem_guide": "Those with mental health problems should only be excluded from the programme if the issues are acute and damage the individual\u2019s ability to relate to others or concentrate",
+        "other_preferred_method_guide": "Must not be suitable for or not able to access an Accredited Programme",
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

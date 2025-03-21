@@ -1,0 +1,9 @@
+{
+  "name": "Accommodation",
+  "int_type": "CRS",
+  "short_description": "Accommodation pathway provides individuals on a community/suspended sentence order with a RAR or on license/post-sentence supervision with accommodation interventions. These services will also be delivered pre-release for individuals who will be under probation supervision on release.",
+  "long_description": null,
+  "topic": null,
+  "session_detail": null,
+  "reason_for_referral": "Accommodation need"
+}

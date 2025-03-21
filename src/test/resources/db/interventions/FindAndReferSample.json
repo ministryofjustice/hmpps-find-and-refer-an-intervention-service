@@ -1,0 +1,98 @@
+{
+    "intervention catalogue": {
+      "name": "Accommodation",
+      "int type": "CRS",
+      "short description": "Accommodation pathway provides individuals on a community/suspended sentence order with a RAR or on license/post-sentence supervision with accommodation interventions. These services will also be delivered pre-release for individuals who will be under probation supervision on release.",
+      "long description": "",
+      "topic": "",
+      "session detail": "",
+      "reason for referral": "Accommodation need"
+    },
+    "delivery location": [
+      {
+        "provider name": "",
+        "contact": "",
+        "pdu establishments": ""
+      },
+      {
+        "provider name": "",
+        "contact": "",
+        "pdu establishments": ""
+      }
+    ],
+    "delivery method": [
+      {
+        "delivery method description": "desc",
+        "delivery format": "Group",
+        "attendance type": "In Person"
+      },
+      {
+        "delivery method description": "desc",
+        "delivery format": "One-to-one",
+        "attendance type": "Over The Phone"
+      }
+    ],
+    "delivery method setting": [
+      {
+        "setting": "COMMUNITY"
+      },
+      {
+        "setting": "CUSTODY"
+      }
+    ],
+    "enabling intervention": {
+      "enabling intervention detail": "'Kaizen, Horizon, BNM+ or NMS'"
+    },
+    "criminogenic need": {
+      "need_id": "Accommodation"
+    },
+    "personal eligibility": {
+      "min age": 18,
+      "max age": 120,
+      "males": true,
+      "females": false
+    },
+    "eligibility offences": {
+      "offence_type_id": "Driving offence",
+      "victim_type": "",
+      "motivation": ""
+    },
+    "excluded offences": {
+      "offence_type_id": "Acquisitive offence",
+      "victim_type": "",
+      "motivation": ""
+    },
+    "possible outcome": [
+      {
+        "outcome": "Obtain or maintain suitable accommodation Overcome barriers to obtaining/maintaining suitable accommodation Prevented from becoming homeless."
+      }
+    ],
+    "risk consideration": {
+      "cn score guide": null,
+      "extremism risk guide": null,
+      "sara partner score guide": null,
+      "sara other score guide": null,
+      "osp score guide": null,
+      "osp dc icc combination guide": null,
+      "ogrs score guide": null,
+      "ovp guide": null,
+      "ogp guide": null,
+      "pna guide": null,
+      "rosh level": null,
+      "rsr guide": null
+    },
+    "special educational need": {
+      "literacy level guide": "Able to read and understand simple sentences",
+      "learning disability catered for": true,
+      "equivalent non ldc programme guide": "Becoming New Me Plus"
+    },
+    "exclusion": {
+      "min remaining sentence duration guide": "",
+      "remaining license community order guide": "12 months on licence or at least 18 months on community order.",
+      "alcohol drug problem guide": "",
+      "mental health problem guide": "Identified mental illness, or personality disorder",
+      "other preferred method guide": "",
+      "same type rule guide": "",
+      "schedule frequency guide": ""
+    }
+  }

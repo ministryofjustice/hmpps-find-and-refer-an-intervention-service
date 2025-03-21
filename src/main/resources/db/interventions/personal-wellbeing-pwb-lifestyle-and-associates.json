@@ -1,0 +1,36 @@
+{
+    "uuid": "0F42563F-D590-42A2-9E2B-1ECA9A45DAF0",
+    "intervention_catalogue": {
+        "name": "Personal Wellbeing (PWB): Lifestyle and Associates",
+        "int_type": "CRS",
+        "short_description": "Personal Wellbeing (PWB): Lifestyle and Associates",
+        "long_description": "a) Support to develop healthy self-image, pro-social attitudes and ability to manage feelings/situations which create triggers to offending behaviour. \nb) Activities which build skills to develop positive friendships and peer relationships. \nc) Activities that enable Service Users to recognise activities and behaviour that puts them at risk of reoffending or in situations which impact on their ability to make good decisions. \nd) Support to enable access to/ maintain engagement with activities that develop positive social integration and reduce social isolation. e) Support to develop new positive social bonds, unrelated to offending. \nf) Support to develop positive interests, such as sports, hobbies, volunteering -this could include accompanying to first meeting. \ng) Encourage, Support and enable Service Users to recognise how belonging to pro-social support groups can benefit them. \nh) Encourage and Support Service User to reduce the amount of time they spend engaging in anti-social behaviours including) drug use, regular and problematic alcohol use, problematic gambling \n",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

@@ -1,0 +1,38 @@
+{
+    "uuid": "02BB45CC-8070-4BF6-A924-00CDB705550D",
+    "intervention_catalogue": {
+        "name": "Pathways to Change",
+        "int_type": "Toolkits",
+        "short_description": "The toolkit for Women convicted of sexual offences",
+        "long_description": "The toolkit was created to fill the existing gap in provision for work with Women convicted of sexual offences. It is gender specific and trauma-informed, underpinned by strengths based approaches and Bio-psycho-social model, and is designed to be delivered flexibly to best address the needs of the woman on probation.",
+        "session_detail": "\nVariable ",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

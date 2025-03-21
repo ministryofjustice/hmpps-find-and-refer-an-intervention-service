@@ -1,0 +1,61 @@
+{
+    "uuid": "22154600-016E-4659-9849-B9E4560081BA",
+    "intervention_catalogue": {
+        "name": "Positive Pathways",
+        "int_type": "SI",
+        "short_description": "Structured Intervention: Attitudes, Thinking & Behaviour",
+        "long_description": "This strengths based programme is used as a core programme and is a suitable early intervention for all service users. Each programme session follows the CRISS model of delivery (Check In, Review, Intervention, Summarise, Set Task) which was introduced within SEEDS. All practitioners are SEEDS trained and adopt motivational approaches to engagement with participants including a flexible approach to programme delivery in order to match with different learning preferences.",
+        "session_detail": "1 x pre-group session;\n 6 x group sessions",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": "Need is evidenced by a total score of 5+\n\u25cf 2.6 - Recognises the impact and consequences of offending\non victim, community / wider society\n\u25cf 7.2 - Regular activities encourage offending\n\u25cf 11.4 - Temper control\n\u25cf 11.6 - Problem solving\n\u25cf 11.7 - Awareness of consequences\n\u25cf 11.9 - Understands other people\u2019s point of view\n\u25cf 12.1 - Pro-criminal attitudes",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "OGRS3 (Over 2 years): score 25+",
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "Participants should be sufficiently literate (able to read and understand simple sentences",
+        "learning_disability_catered_for": null,
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "Check with Treatment Manager if less than 9 months",
+        "alcohol_drug_problem_guide": "Alcohol / drug problems need to be stable before attendance.",
+        "mental_health_problem_guide": "Those with mental health problems should only be excluded from the programme if the issues are acute and damage the individual\u2019s ability to relate to others or concentrate",
+        "other_preferred_method_guide": "Must not be suitable for or not able to access an Accredited Programme",
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

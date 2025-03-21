@@ -1,0 +1,36 @@
+{
+    "uuid": "8E270494-E630-4B52-8733-40E1129F392D",
+    "intervention_catalogue": {
+        "name": "PWB Cohort",
+        "int_type": "CRS",
+        "short_description": "The Personal Wellbeing service is a holistic service that looks to address the following rehabilitative needs:\n - Emotional Wellbeing \n - Family and Significant Other\n - Lifestyle and Associates \n - Social Inclusion ",
+        "long_description": "The Personal Wellbeing service is a holistic service that looks to address the following rehabilitative needs:\n - Emotional Wellbeing \n - Family and Significant Other\n - Lifestyle and Associates \n - Social Inclusion \n The Personal Wellbeing service is aimed at male individuals on a community or suspended sentence order with a RAR or on license/post-sentence supervision. \n The Social Inclusion \u2018mentoring\u2019 service will be delivered pre-release for individuals who will be on license. \n The Personal Wellbeing service provides a variety of interventions and outcomes based upon the individual\u2019s risk category (low / medium / high).",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

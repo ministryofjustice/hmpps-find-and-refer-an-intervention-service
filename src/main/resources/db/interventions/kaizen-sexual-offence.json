@@ -1,0 +1,73 @@
+{
+    "uuid": "73A94EF0-1040-4FBD-BB3B-6AA78C341172",
+    "intervention_catalogue": {
+        "name": "Kaizen: sexual offence",
+        "int_type": "AcP",
+        "short_description": "Kaizen uses a unified approach, focusing on the needs of participants. It is inclusive and effective for a range of responsivity needs, including difficulties with engagement, therapeutic relationships and denial. This strand is for men convicted of a sexual offence.",
+        "long_description": "Kaizen uses a unified approach, focusing on the needs of participants. It is inclusive and effective for a range of responsivity needs, including difficulties with engagement, therapeutic relationships and denial. This strand is for men convicted of a sexual offence.",
+        "session_detail": "68 core curriculum sessions\n\n11 supported learning sessions (One to one or small group basis",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        }
+    ],
+    "delivery_method_settings": [
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual offence",
+            "victim_type": "",
+            "motivation": ""
+        },
+        {
+            "offence_type_id": "General Violence (GV)",
+            "victim_type": "",
+            "motivation": ""
+        },
+        {
+            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": null,
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": "High or very high OSP (OASys Sexual Reconviction Predictor)",
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "No",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": null,
+        "alcohol_drug_problem_guide": null,
+        "mental_health_problem_guide": null,
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": "No previous iHorizon",
+        "schedule_frequency_guide": "Over-ride if exception"
+    }
+}

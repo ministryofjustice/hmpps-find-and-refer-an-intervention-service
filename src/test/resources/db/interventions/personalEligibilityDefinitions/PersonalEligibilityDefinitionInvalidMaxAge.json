@@ -1,0 +1,6 @@
+{
+  "min_age": 18,
+  "max_age": "Any",
+  "males": true,
+  "females": false
+}

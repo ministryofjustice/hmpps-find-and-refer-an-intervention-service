@@ -1,0 +1,37 @@
+{
+    "uuid": "9D111652-059F-4A37-A70F-39636F89D004",
+    "intervention_catalogue": {
+        "name": "Personal Wellbeing (PWB): Social Inclusion",
+        "int_type": "CRS",
+        "short_description": "Personal Wellbeing (PWB): Social Inclusiuon",
+        "long_description": "a) Support to enable Service Users to access community-based services by supporting attendance at appointments, preparing for the session and having follow up sessions to build on the activity.\nb) Support Service Users with a fear of release by providing practical and emotional support. \nc) Structured Mentoring and coaching sessions to develop confidence and self-management. \nd) Sessions which focus on building social skills and utilising pro-social modelling.\ne) Encourage compliance with Licence appointments. \n",
+        "session_detail": "Variable",
+        "reason_for_referral": ""
+    },
+    "delivery_methods": [
+        {
+            "format": "Group",
+            "attendance_type": "In Person"
+        },
+        {
+            "format": "One-to-one",
+            "attendance_type": null
+        }
+    ],
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "PRE-RELEASE"
+    ],
+    "enabling_intervention_detail": "",
+    "criminogenic_needs": [],
+    "personal_eligibility": {
+        "max_age": "",
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}
