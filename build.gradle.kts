@@ -1,7 +1,7 @@
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "7.1.4"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.1.10"
-  kotlin("plugin.spring") version "2.1.10"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.1.20"
+  kotlin("plugin.spring") version "2.1.20"
 }
 
 configurations {
@@ -9,7 +9,7 @@ configurations {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.0")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.1")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
@@ -18,8 +18,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter:8.4.0")
-  implementation("io.sentry:sentry-logback:8.4.0")
+  implementation("io.sentry:sentry-spring-boot-starter:8.5.0")
+  implementation("io.sentry:sentry-logback:8.5.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.0")
 
@@ -59,7 +59,7 @@ dependencies {
 
   // json and csv
   implementation("com.github.java-json-tools:json-patch:1.13")
-  implementation("org.apache.commons:commons-csv:1.13.0")
+  implementation("org.apache.commons:commons-csv:1.14.0")
 
   testImplementation("au.com.dius.pact.provider:junit5spring:4.6.17")
   testImplementation("com.squareup.okhttp3:okhttp:4.12.0")
@@ -68,7 +68,7 @@ dependencies {
   testImplementation("org.springframework.batch:spring-batch-test")
   // testImplementation("com.github.tomakehurst:wiremock-jre8:3.0.1")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.0")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.2")
   testImplementation("org.wiremock:wiremock-standalone:3.12.1")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.25") {
     exclude(group = "io.swagger.core.v3")
