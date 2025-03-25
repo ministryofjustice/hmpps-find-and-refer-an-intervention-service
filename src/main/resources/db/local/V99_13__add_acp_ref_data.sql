@@ -1139,16 +1139,3 @@ VALUES ('83053573-4a44-43d6-9090-79875c7512c5', '79f843a4-d14c-49f4-8e37-a6f2de5
         'Dovegate.OBFacilitators@serco.com', 'Dovegate-tpreferrals@serco.com', false, true, 0),
        ('b1a64f58-b835-4a39-846a-6facbbbdc937', 'ee15fc84-a7a1-4e0b-94aa-f353828d246d', 'DGI',
         'Dovegate.OBFacilitators@serco.com', 'Dovegate-tpreferrals@serco.com', false, true, 0);
-
-INSERT INTO intervention_catalogue_to_course_map(intervention_catalogue_id, course_id)
-VALUES
-    -- Building Better Relationships
-    ('4902a268-9907-4070-ba48-7c2870a3b77e', '8bdf26a2-c394-470e-a6d3-6d64c79eddd0'),
-    -- Healthy Identity Intervention
-    ('d61fc961-243e-4321-bafb-5d71e1fd13a4', '65c8d904-5be1-4a7e-9b19-de7b217467fd'),
-    -- Healthy Sex Programme
-    ('432b2353-b794-4b12-8018-6c7ede6a1ed6', '49de3ece-aaed-4309-976f-d2b223099d67'),
-    -- Horizon
-    ('a6c18ff3-83bd-4ad2-bcbe-1db3fb55a341', 'cfe356ed-788c-49a3-bb3c-f1ee1a8012da'),
-    -- Thinking Skills Programme
-    ('94af0e1f-f55f-4422-afc5-536178c63b5f', 'f82bad35-33ae-46b8-93d0-4ffbeb9a2bed');
