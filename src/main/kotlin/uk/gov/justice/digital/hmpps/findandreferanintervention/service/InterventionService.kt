@@ -8,18 +8,18 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionC
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.getPduRefsForContract
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.specification.getInterventionCatalogueSpecification
 import java.util.UUID
 
 @Service
 class InterventionService(
   val interventionCatalogueRepository: InterventionCatalogueRepository,
 ) {
-
   fun getInterventionsCatalogueByCriteria(
     pageable: Pageable,
     interventionTypes: List<InterventionType>?,
@@ -27,16 +27,16 @@ class InterventionService(
     allowsMales: Boolean?,
     allowsFemales: Boolean?,
     programmeName: String?,
-  ): Page<InterventionCatalogueDto> = interventionCatalogueRepository
-    .findAllInterventionCatalogueByCriteria(
-      pageable,
-      allowsFemales,
-      allowsMales,
+  ): Page<InterventionCatalogueDto> {
+    val specification = getInterventionCatalogueSpecification(
       interventionTypes,
       settingType,
+      allowsMales,
+      allowsFemales,
       programmeName,
     )
-    .map { it.toDto() }
+    return interventionCatalogueRepository.findAll(specification, pageable).map { it.toDto() }
+  }
 
   fun getInterventionDetailsById(interventionCatalogueId: UUID): InterventionDetailsDto? = interventionCatalogueRepository
     .findInterventionCatalogueById(interventionCatalogueId)?.toDetailsDto()

@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
@@ -17,7 +18,6 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Person
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PossibleOutcome
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.toDto
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.OffsetDateTime

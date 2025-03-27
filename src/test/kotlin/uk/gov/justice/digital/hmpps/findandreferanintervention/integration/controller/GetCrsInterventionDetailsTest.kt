@@ -14,7 +14,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequest
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
 
-class GetCrsInterventionDetails : IntegrationTestBase() {
+class GetCrsInterventionDetailsTest : IntegrationTestBase() {
 
   @Autowired
   private lateinit var interventionRepository: InterventionCatalogueRepository
