@@ -1,11 +1,11 @@
 {
-    "uuid": "B5935AEC-7E8C-4EC8-BF25-2EAB95BF3BBE",
+    "uuid": "47B0048C-CAB2-4509-A64A-29A4218712C9",
     "intervention_catalogue": {
-        "name": "Womens Services (FSO): family & friends",
+        "name": "Accommodation services",
         "int_type": "CRS",
-        "short_description": "Womens Services - Family and Significant Other",
-        "long_description": "",
-        "session_detail": "Variable",
+        "short_description": "Accommodation services provide short-term housing and support to help men on probation find stable, long-term accommodation.",
+        "long_description": "Accommodation services provide short-term housing and support to help men on probation find stable, long-term accommodation.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,14 +19,15 @@
         }
     ],
     "delivery_method_settings": [
-        "COMMUNITY"
+        "COMMUNITY",
+        "CUSTODY"
     ],
     "enabling_intervention_detail": "",
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
-        "males": false,
-        "females": true
+        "males": true,
+        "females": false
     },
     "eligibility_offence": [],
     "exclude_offence": null,

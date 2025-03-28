@@ -1,11 +1,11 @@
 {
     "uuid": "A709CCFB-744A-4185-8D04-6416DB13BBBA",
     "intervention_catalogue": {
-        "name": "CLI - Peer Support",
+        "name": "Community Led Initiatives (CLI) - peer support ",
         "int_type": "CRS",
-        "short_description": "",
-        "long_description": "",
-        "session_detail": "",
+        "short_description": "CLI provide intensive peer support to people on probation, offering emotional and practical support to help with recovery and reduce the risk of reoffending.",
+        "long_description": "CLI provide intensive peer support to people on probation, offering emotional and practical support to help with recovery and reduce the risk of reoffending.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location. ",
         "reason_for_referral": ""
     },
     "delivery_methods": [

@@ -30,7 +30,7 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": "",
             "motivation": ""
         }
