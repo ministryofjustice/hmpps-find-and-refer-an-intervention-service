@@ -1,9 +1,13 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.controller
 
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.ResourceLoader
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.jdbc.datasource.init.ScriptUtils
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CrsInterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toCrsDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
@@ -13,15 +17,38 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequest
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectStatus
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
+import javax.sql.DataSource
 
 class GetCrsInterventionDetailsTest : IntegrationTestBase() {
 
   @Autowired
   private lateinit var interventionRepository: InterventionCatalogueRepository
 
+  @Autowired
+  private lateinit var dataSource: DataSource
+
+  @Autowired
+  private lateinit var resourceLoader: ResourceLoader
+
+  @BeforeEach
+  fun beforeEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/setup.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
+  @AfterEach
+  fun afterEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/teardown.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
   @Test
   fun `getCrsInterventionDetails return 200 when intervention exists`() {
-    val interventionId = UUID.fromString("ce0bf924-d5eb-498f-9376-8a01a07510f5")
+    val interventionId = UUID.fromString("c5d53fbd-b7e3-40bd-9096-6720a01a53bf")
     val pduId = "redcar-cleveland-and-middlesbrough"
     val interventionCatalogue = interventionRepository.findInterventionCatalogueById(interventionId)
     val crsInterventionDetailsDto =

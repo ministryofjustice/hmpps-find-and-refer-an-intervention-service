@@ -27,11 +27,13 @@ import kotlin.reflect.full.memberProperties
 @DataJpaTest
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class InterventionCatalogueFilterRepositoryTest @Autowired
-constructor(
-  private val interventionCatalogueRepository: InterventionCatalogueRepository,
-  private val dataSource: DataSource,
-) {
+class InterventionCatalogueFilterRepositoryTest {
+  @Autowired
+  private lateinit var interventionCatalogueRepository: InterventionCatalogueRepository
+
+  @Autowired
+  private lateinit var dataSource: DataSource
+
   @Autowired
   private lateinit var resourceLoader: ResourceLoader
   val defaultPageRequest: PageRequest = PageRequest.of(0, 10, Sort.by("name"))

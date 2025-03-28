@@ -275,9 +275,9 @@ VALUES -- ACP Interventions
 
 INSERT INTO eligible_offence (id, offence_type_id, intervention_id, victim_type, motivation)
 VALUES -- SI Interventions
-       ('f07dce8c-00e1-4bfb-9685-46f2eae98460', 'c36b1c38-8414-4279-9764-20df8236ce3b',
+       ('b0517921-0d72-4f10-bea3-be10d6036e4f', 'b0517921-0d72-4f10-bea3-be10d6036e4f',
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', ''),
-       ('d6f61a7c-3c75-46ee-a62c-0ba63c790c85', '0d9c7912-cb9c-4b90-bb6d-b692a50965ec',
+       ('c19708f5-85ac-43f6-bd46-fbac6f9dae2b', 'c19708f5-85ac-43f6-bd46-fbac6f9dae2b',
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', ''),
        -- TOOLKITS Interventions
        ('6a6d601f-d79c-4584-a910-92f572232a1a', 'cdca173d-8189-4c3d-9618-4b40bda56274',
@@ -295,6 +295,9 @@ VALUES -- SI Interventions
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', null),
        ('7ff3b221-d2b5-4b7a-8424-2efcb950eef2', '1585e943-d552-4e2c-bd5d-08229646f99c',
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', null);
+
+INSERT INTO intervention_catalogue_map(intervention_catalogue_id, intervention_id)
+VALUES ('c5d53fbd-b7e3-40bd-9096-6720a01a53bf', '65301f01-2e52-474a-a8ec-df94c7e6fced');
 
 
 

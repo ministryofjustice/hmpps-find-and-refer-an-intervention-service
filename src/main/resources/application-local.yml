@@ -8,6 +8,6 @@ spring:
         format_sql: false
     show-sql: false
   flyway:
-    locations: classpath:db/migration
+    locations: classpath:db/migration,classpath:db/local
     clean-on-validation-error: true
     clean-disabled: false
