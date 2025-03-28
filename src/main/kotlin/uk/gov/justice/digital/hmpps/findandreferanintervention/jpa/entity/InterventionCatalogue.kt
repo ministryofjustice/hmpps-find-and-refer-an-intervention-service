@@ -17,6 +17,10 @@ import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.JdbcType
 import org.hibernate.dialect.PostgreSQLEnumJdbcType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CriminogenicNeedDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryMethodDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.RiskConsiderationDto
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
@@ -139,6 +143,37 @@ open class InterventionCatalogue(
   )
   open var courses: MutableSet<Course> = mutableSetOf(),
 )
+
+fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
+  val deliveryMethodDtos =
+    this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
+  val deliveryMethodSettingList =
+    deliveryMethodDtos.flatMap { methodDto ->
+      methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting }
+    }
+  return InterventionCatalogueDto(
+    id = this.id,
+    criminogenicNeeds =
+    this.criminogenicNeeds.map {
+      CriminogenicNeedDto.fromEntity(it).need
+    }.sorted(),
+    title = this.name,
+    description = this.shortDescription,
+    interventionType = this.interventionType,
+    setting = deliveryMethodSettingList,
+    allowsMales = this.personalEligibility?.males!!,
+    allowsFemales = this.personalEligibility?.females!!,
+    riskCriteria =
+    this.riskConsideration?.let {
+      RiskConsiderationDto.fromEntity(it).listOfRisks()
+    },
+    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.sorted(),
+    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.sorted(),
+    timeToComplete = this.timeToComplete,
+    suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
+    equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
+  )
+}
 
 enum class InterventionType {
   SI,

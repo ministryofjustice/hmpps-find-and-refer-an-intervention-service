@@ -9,7 +9,6 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryLocationDto
-import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import java.util.UUID
 
 @Entity

@@ -54,7 +54,7 @@ class GetInterventionsCatalogueTest : IntegrationTestBase() {
       .contentType(MediaType.APPLICATION_JSON)
       .expectBody()
       .jsonPath("$.content").exists()
-      .jsonPath("$.page.totalElements").isEqualTo(11)
+      .jsonPath("$.totalElements").isEqualTo(11)
   }
 
   @Test
@@ -71,7 +71,7 @@ class GetInterventionsCatalogueTest : IntegrationTestBase() {
       .contentType(MediaType.APPLICATION_JSON)
       .expectBody()
       .jsonPath("$.content").exists()
-      .jsonPath("$.page.totalElements").isEqualTo(4)
+      .jsonPath("$.totalElements").isEqualTo(4)
   }
 
   @Test
@@ -88,7 +88,7 @@ class GetInterventionsCatalogueTest : IntegrationTestBase() {
       .contentType(MediaType.APPLICATION_JSON)
       .expectBody()
       .jsonPath("$.content").exists()
-      .jsonPath("$.page.totalElements").isEqualTo(1)
+      .jsonPath("$.totalElements").isEqualTo(1)
   }
 
   @Test

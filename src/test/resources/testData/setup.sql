@@ -275,9 +275,9 @@ VALUES -- ACP Interventions
 
 INSERT INTO eligible_offence (id, offence_type_id, intervention_id, victim_type, motivation)
 VALUES -- SI Interventions
-       ('599975a9-c91d-4c62-b2a9-a9e2f679739e', '72ccf0b2-8f8e-4758-b0ec-09f57240ca08',
+       ('f07dce8c-00e1-4bfb-9685-46f2eae98460', 'c36b1c38-8414-4279-9764-20df8236ce3b',
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', ''),
-       ('9e570b97-3c4a-4661-a337-02d99c833288', '2494ca80-205c-4020-9941-bfdb8f50f3ab',
+       ('d6f61a7c-3c75-46ee-a62c-0ba63c790c85', '0d9c7912-cb9c-4b90-bb6d-b692a50965ec',
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', ''),
        -- TOOLKITS Interventions
        ('6a6d601f-d79c-4584-a910-92f572232a1a', 'cdca173d-8189-4c3d-9618-4b40bda56274',
@@ -291,12 +291,6 @@ VALUES -- SI Interventions
         '7822b08d-1780-4866-8303-76f1632315ff', '', null),
        ('6b2992af-6339-40dd-97cb-f0ec68ec1ba8', '1585e943-d552-4e2c-bd5d-08229646f99c',
         '7822b08d-1780-4866-8303-76f1632315ff', '', null),
-       ('dea15ce1-6e8b-4a3e-a095-196902b71719', '1c69716a-db01-455f-8523-28574c61d380',
-        '1bca8fb6-2e94-4680-b211-847ffbd9a294', '', null),
-       ('d19c1732-18c2-4856-8ec3-8b779a83d6eb', 'e16705df-5071-488d-b1f9-0c85f6565929',
-        '1bca8fb6-2e94-4680-b211-847ffbd9a294', '', null),
-       ('3081272f-5b7c-4607-87bf-3f5c9d6eeb3e', 'cdca173d-8189-4c3d-9618-4b40bda56274',
-        '1bca8fb6-2e94-4680-b211-847ffbd9a294', '', null),
        ('6365ecd8-c4c4-45b8-a414-0b78509e95de', 'cdca173d-8189-4c3d-9618-4b40bda56274',
         '9c697406-e6ab-46c4-9420-1bddaac3193c', '', null),
        ('7ff3b221-d2b5-4b7a-8424-2efcb950eef2', '1585e943-d552-4e2c-bd5d-08229646f99c',
