@@ -25,7 +25,7 @@ open class PduRef(
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "pcc_region_id")
-  open var pccRegion: PccRegion? = null,
+  open var pccRegion: PccRegion,
 
   @NotNull
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "pduRef")
@@ -35,4 +35,5 @@ open class PduRef(
 fun PduRef.toDto(): PduRefDto = PduRefDto(
   id = this.id,
   pduName = this.name,
+  pccRegion = this.pccRegion.toDto()
 )

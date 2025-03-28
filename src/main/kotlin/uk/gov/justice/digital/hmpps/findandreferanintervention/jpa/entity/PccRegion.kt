@@ -37,7 +37,7 @@ open class PccRegion(
 fun PccRegion.toDto(): PccRegionDto = PccRegionDto(
   id = this.id,
   name = this.name,
-  pduRefs = this.pduRefs.map { it.toDto() }.toMutableSet(),
+  npsRegion = this.npsRegion.toDto(),
 )
 
 fun PccRegion.getPduRefsForPccRegion(): List<PduRef> = pduRefs.map { it }

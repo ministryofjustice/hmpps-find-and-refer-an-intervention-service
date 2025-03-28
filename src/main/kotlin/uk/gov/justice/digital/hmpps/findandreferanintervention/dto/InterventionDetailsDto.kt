@@ -40,6 +40,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   val deliveryMethodDtos =
     this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
   val interventionsDtos = this.interventions.map { it.toDto() }
+  val deliverylocationDtos= this.deliveryLocations.map { it.toDto() }
   val courseDtos = this.courses.map { it.toDto() }
 
   return InterventionDetailsDto(
@@ -66,29 +67,17 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     maxAge = this.personalEligibility?.maxAge,
     expectedOutcomes = this.possibleOutcomes.map { it.outcome }.sorted().ifEmpty { null },
     sessionDetails = this.sessionDetail,
-    communityLocations = getCommunityLocations(interventionsDtos)?.sortedBy { it.pccRegion },
+    communityLocations = getCommunityLocations(deliverylocationDtos)?.sortedBy { it.pccRegion },
     custodyLocations = getCustodyLocations(courseDtos)?.sortedBy { it.prisonName },
   )
 }
 
-private fun getCommunityLocations(interventionsDtos: List<InterventionDto>): List<CommunityLocation>? {
-  return interventionsDtos.map { interventionDto ->
-    val contract = interventionDto.dynamicFrameworkContract
-    return if (contract.npsRegion != null) {
-      contract.npsRegion.pccRegions.map { region ->
-        CommunityLocation(
-          region.name,
-          region.pduRefs,
-        )
-      }
-    } else if (contract.pccRegion != null) {
-      val pduRefsPerPcc = contract.pccRegion.pduRefs
-      pduRefsPerPcc.map { CommunityLocation(contract.pccRegion.name, pduRefsPerPcc) }
-    } else {
-      null
-    }
-  }.ifEmpty { null }
+private fun getCommunityLocations(deliveryLocations: List<DeliveryLocationDto>): List<CommunityLocation>? {
+  return deliveryLocations.groupBy { it.pduRef.pccRegion }.map { pccRegion -> CommunityLocation(pccRegion.key.name,
+    pccRegion.value.map { it.pduRef }.toMutableSet()) }.ifEmpty { null }
 }
+
+
 
 private fun getCustodyLocations(courseDtos: List<CourseDto>): List<CustodyLocation>? = courseDtos.flatMap { courseDto ->
   val offerings = courseDto.offering
