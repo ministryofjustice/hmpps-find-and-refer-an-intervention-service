@@ -21,7 +21,7 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "General Violence (GV)",
+            "offence_type_id": "General Violence",
             "victim_type": "",
             "motivation": ""
         }

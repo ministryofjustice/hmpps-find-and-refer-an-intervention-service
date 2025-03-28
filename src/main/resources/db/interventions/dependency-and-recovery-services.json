@@ -1,11 +1,11 @@
 {
-    "uuid": "85FCC379-6523-4AEE-B354-367B28D4BB9C",
+    "uuid": "C5D53FBD-B7E3-40BD-9096-6720A01A53BF",
     "intervention_catalogue": {
-        "name": "Greater Manchester - ETE",
+        "name": "Dependency and recovery services",
         "int_type": "CRS",
-        "short_description": "",
-        "long_description": "",
-        "session_detail": "",
+        "short_description": "Dependency and recovery services offer men support with recovery from substance abuse, including drug and alcohol addiction.",
+        "long_description": "Dependency and recovery services offer men support with recovery from substance abuse, including drug and alcohol addiction.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -24,9 +24,9 @@
     "enabling_intervention_detail": "",
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "max_age": "Any ",
         "males": true,
-        "females": true
+        "females": false
     },
     "eligibility_offence": [],
     "exclude_offence": null,

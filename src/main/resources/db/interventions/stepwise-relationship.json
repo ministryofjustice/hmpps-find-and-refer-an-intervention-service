@@ -30,12 +30,12 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": "",
             "motivation": ""
         },
         {
-            "offence_type_id": "Domestic abuse",
+            "offence_type_id": "Domestic Abuse",
             "victim_type": "",
             "motivation": ""
         }
@@ -50,7 +50,7 @@
         "osp_dc_icc_combination_guide": null,
         "ogrs_score_guide": "If OVP not available, 25+ on OGRS3",
         "ovp_guide": "OVP: 20+",
-        "ogp_guide": null,
+        "ogp_guide": "OVP: 20+",
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": null

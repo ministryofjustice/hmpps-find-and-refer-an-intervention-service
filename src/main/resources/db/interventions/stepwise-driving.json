@@ -42,11 +42,11 @@
     ],
     "exclude_offence": [
         {
-            "offence_type_id": "Sexual offence",
+            "offence_type_id": "Sexual",
             "victim_type": ""
         },
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": ""
         }
     ],

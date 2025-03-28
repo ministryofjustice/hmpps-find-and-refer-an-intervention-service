@@ -31,11 +31,11 @@
     "eligibility_offence": [],
     "exclude_offence": [
         {
-            "offence_type_id": "Sexual offence",
+            "offence_type_id": "Sexual",
             "victim_type": ""
         },
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": ""
         }
     ],
@@ -48,7 +48,7 @@
         "osp_dc_icc_combination_guide": null,
         "ogrs_score_guide": "If OVP is not available, OGRS3 (over 2 years):\nscore of 25+",
         "ovp_guide": "OVP (over 2 years): Score above 20+",
-        "ogp_guide": null,
+        "ogp_guide": "OVP (over 2 years): Score above 20+",
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": null
