@@ -1,272 +1,269 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.repository
 
-import au.com.dius.pact.core.support.contains
-import au.com.dius.pact.core.support.hasProperty
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.core.io.ResourceLoader
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
+import org.springframework.jdbc.datasource.init.ScriptUtils
 import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepositoryImpl
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.specification.getInterventionCatalogueSpecification
+import java.util.UUID
+import javax.sql.DataSource
+import kotlin.reflect.full.memberProperties
 
 @DataJpaTest
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class InterventionCatalogueFilterRepositoryTest
-@Autowired
-constructor(
-  private val interventionCatalogueRepositoryImpl: InterventionCatalogueRepositoryImpl,
-) {
+class InterventionCatalogueFilterRepositoryTest {
+  @Autowired
+  private lateinit var interventionCatalogueRepository: InterventionCatalogueRepository
+
+  @Autowired
+  private lateinit var dataSource: DataSource
+
+  @Autowired
+  private lateinit var resourceLoader: ResourceLoader
+  val defaultPageRequest: PageRequest = PageRequest.of(0, 10, Sort.by("name"))
+
+  @BeforeEach
+  fun beforeEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/setup.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
+  @AfterEach
+  fun afterEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/teardown.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
 
   @Nested
   @DisplayName("Filter Interventions by Intervention Type")
   inner class FilterByInterventionType {
     @Test
-    fun `findAllInterventionCatalogueByCriteria by interventionType = 'ACP' and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = null,
-          interventionTypes = listOf(InterventionType.ACP),
-          settingType = null,
-          programmeName = null,
-        )
+    fun `findAllInterventionsBy by interventionType = 'ACP' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.ACP))
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(5)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
+      assertThat(interventions.totalElements).isEqualTo(3)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
     }
 
     @Test
-    fun `findAllInterventionCatalogueByCriteria by interventionType = 'SI' and there are no interventions return an empty page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = null,
-          interventionTypes = listOf(InterventionType.SI),
-          settingType = null,
-          programmeName = null,
-        )
+    fun `findAllInterventionsBy by interventionType = 'CRS' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.CRS))
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(3)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Accommodation")
+    }
+
+    @Test
+    fun `findAllInterventionsBy by interventionType = 'SI' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.SI))
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(3)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Better Solutions")
+    }
+
+    @Test
+    fun `findAllInterventionsBy by interventionType = 'TOOLKITS' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.TOOLKITS))
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(3)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Maps for Change")
+    }
+
+    @Test
+    fun `findAllInterventionsBy by interventionType = 'TOOLKITS' OR 'ACP' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(
+        interventionTypes = listOf(
+          InterventionType.TOOLKITS,
+          InterventionType.ACP,
+        ),
+      )
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(6)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
+    }
+  }
+
+  @Nested
+  @DisplayName("Filter Interventions by Setting")
+  inner class FilterBySetting {
+    @Test
+    fun `findAllInterventionsBy by setting = 'COMMUNITY' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(settingType = SettingType.COMMUNITY)
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(11)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Accommodation")
+    }
+
+    @Test
+    fun `findAllInterventionsBy by setting = 'CUSTODY' and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(settingType = SettingType.CUSTODY)
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(4)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
+    }
+  }
+
+  @Nested
+  @DisplayName("Filter Interventions by Gender")
+  inner class FilterByGender {
+    @Test
+    fun `findAllInterventionsBy by allowsMales = TRUE and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(allowsMales = true)
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(11)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Accommodation")
+    }
+
+    @Test
+    fun `findAllInterventionsBy by allowsFemales = TRUE and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(allowsFemales = true)
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(5)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Better Solutions")
+    }
+
+    @Test
+    fun `findAllInterventionsBy by allowsMales and Females = TRUE and there are interventions return a page of interventions`() {
+      val specification = getInterventionCatalogueSpecification(allowsFemales = true, allowsMales = true)
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(4)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Better Solutions")
+    }
+  }
+
+  @Nested
+  @DisplayName("Filter Interventions by Programme Name")
+  inner class FilterByProgrammeName {
+    @Test
+    fun `findAllInterventionsBy by programmeName = 'Dependency and Recovery' and there are interventions return a page of interventions`() {
+      val specification =
+        getInterventionCatalogueSpecification(programmeName = "Dependency and Recovery")
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
+
+      assertThat(interventions.totalElements).isEqualTo(1)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Dependency and Recovery")
+      assertThat(interventions.content[0].id).isEqualTo(UUID.fromString("c5d53fbd-b7e3-40bd-9096-6720a01a53bf"))
+    }
+
+    @Test
+    fun `findAllInterventionsBy by programmeName = 'INVALID NAME' and there are no interventions return empty page of interventions`() {
+      val specification =
+        getInterventionCatalogueSpecification(programmeName = "INVALID NAME")
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
       assertThat(interventions.totalElements).isEqualTo(0)
       assertThat(interventions.content).isEmpty()
     }
-
-    @Test
-    fun `findAllInterventionCatalogueByCriteria by interventionType = 'ACP' AND interventionType = 'CRS' and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = null,
-          interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
-          settingType = null,
-          programmeName = null,
-        )
-
-      assertThat(interventions.totalElements).isEqualTo(9)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
-      assertThat(assertThat(interventions.content[0].interventionType).isEqualTo(InterventionType.ACP))
-      assertThat(interventions.content[5].name).isEqualTo("Accommodation")
-      assertThat(assertThat(interventions.content[5].interventionType).isEqualTo(InterventionType.CRS))
-    }
   }
 
   @Nested
-  @DisplayName("Filter Interventions by setting")
-  inner class FilterBySetting {
+  @DisplayName("Filter Interventions by multiple filters")
+  inner class FilterByMultipleFilters {
     @Test
-    fun `findAllInterventionCatalogueByCriteria by settingType = 'COMMUNITY' and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = null,
-          interventionTypes = listOf(InterventionType.ACP, InterventionType.CRS),
+    fun `findAllInterventionsBy by interventionType = 'CRS' AND setting = 'COMMUNITY' AND allowsMales = TRUE and there are interventions return a page of interventions`() {
+      val specification =
+        getInterventionCatalogueSpecification(
+          interventionTypes = listOf(InterventionType.CRS),
           settingType = SettingType.COMMUNITY,
-          programmeName = null,
-        )
-
-      assertThat(interventions.totalElements).isEqualTo(5)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
-      assertThat(assertThat(interventions.content[0].interventionType).isEqualTo(InterventionType.ACP))
-    }
-  }
-
-  @Nested
-  @DisplayName("Filter Interventions by gender")
-  inner class FilterByGender {
-    @Test
-    fun `findInterventionByGender = 'allow males' and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
           allowsMales = true,
-          interventionTypes = null,
-          settingType = null,
-          programmeName = null,
         )
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(9)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
+      assertThat(interventions.totalElements).isEqualTo(3)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Accommodation")
     }
 
     @Test
-    fun `findInterventionByGender = 'allow females' and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = true,
-          allowsMales = null,
-          interventionTypes = null,
-          settingType = null,
-          programmeName = null,
-        )
-
-      assertThat(interventions.totalElements).isEqualTo(2)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content.all { it.personalEligibility!!.females }).isTrue()
-    }
-
-    @Test
-    fun `findInterventionByGender = 'allow females' & 'allow males' and there are interventions return a page of interventions allowing both genders`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = true,
-          allowsMales = true,
-          interventionTypes = null,
-          settingType = null,
-          programmeName = null,
-        )
-
-      assertThat(interventions.totalElements).isEqualTo(2)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content.all { it.personalEligibility!!.females }).isTrue()
-      assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
-    }
-  }
-
-  @Nested
-  @DisplayName("Filter Interventions by programme name")
-  inner class FilterByProgrammeName {
-    @Test
-    fun `FilterByProgrammeName = 'programme name' and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = true,
-          interventionTypes = null,
-          settingType = null,
-          programmeName = "bEtTer",
-        )
-
-      assertThat(interventions.totalElements).isEqualTo(1)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content.all { it.name.contains("Better") }).isTrue()
-    }
-  }
-
-  @Nested
-  @DisplayName("Multiple filters")
-  inner class FilterByMultiple {
-    @Test
-    fun `findInterventionByTypeSettingGenderAndProgrammeName and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = true,
+    fun `findAllInterventionsBy by interventionType = 'ACP' and setting = 'CUSTODY' and there are interventions return a page of interventions`() {
+      val specification =
+        getInterventionCatalogueSpecification(
           interventionTypes = listOf(InterventionType.ACP),
           settingType = SettingType.CUSTODY,
-          programmeName = "Healthy",
         )
+      val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(1)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
-      assertThat(interventions.content.all { it.interventionType == InterventionType.ACP })
-      assertThat(interventions.content.all { it.name.contains("Healthy") })
-    }
-
-    @Test
-    fun `findInterventionByTypeSettingGenderButNotProgrammeName and there are interventions return a page of interventions`() {
-      val pageRequest = PageRequest.of(0, 10)
-      val interventions =
-        interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-          pageable = pageRequest,
-          allowsFemales = null,
-          allowsMales = true,
-          interventionTypes = listOf(InterventionType.ACP),
-          settingType = SettingType.CUSTODY,
-          programmeName = null,
-        )
-
-      assertThat(interventions.totalElements).isEqualTo(2)
-      assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-      assertThat(interventions.content.all { it.personalEligibility!!.males }).isTrue()
-      assertThat(interventions.content.all { it.interventionType == InterventionType.ACP })
+      assertThat(interventions.totalElements).isEqualTo(3)
+      assertThat(hasAllCatalogueProperties(interventions))
+      assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
     }
   }
 
-  @Test
-  fun `findAllInterventionCatalogueByCriteria with no criteria and there are interventions return a page of all interventions`() {
-    val pageRequest = PageRequest.of(0, 10)
-    val interventions =
-      interventionCatalogueRepositoryImpl.findAllInterventionCatalogueByCriteria(
-        pageable = pageRequest,
-        allowsFemales = null,
-        allowsMales = null,
-        interventionTypes = null,
-        settingType = null,
-        programmeName = null,
-      )
-
-    assertThat(interventions.totalElements).isEqualTo(9)
-    assertThat(hasAllCatalogueProperties(interventions)).isTrue()
-    assertThat(interventions.content[0].name).isEqualTo("Building Better Relationships")
-  }
-
-  private fun hasAllCatalogueProperties(interventionCatalogue: Page<InterventionCatalogue>): Boolean = interventionCatalogue.content.all {
-    it.hasProperty("name")
-    it.hasProperty("shortDescription")
-    it.hasProperty("intType")
-    it.hasProperty("criminogenicNeeds")
-    it.hasProperty("deliveryLocations")
-    it.hasProperty("deliveryMethods")
-    it.hasProperty("eligibleOffences")
-    it.hasProperty("enablingInterventions")
-    it.hasProperty("excludedOffences")
-    it.hasProperty("exclusion")
-    it.hasProperty("personalEligibility")
-    it.hasProperty("possibleOutcomes")
-    it.hasProperty("riskConsideration")
-    it.hasProperty("specialEducationalNeeds")
-    it.hasProperty("reasonsForReferral")
-    it.hasProperty("timeToComplete")
+  private fun hasAllCatalogueProperties(interventionCatalogue: Page<InterventionCatalogue>) {
+    val expectedProperties = setOf(
+      "id",
+      "name",
+      "shortDescription",
+      "longDescription",
+      "topic",
+      "sessionDetail",
+      "commencementDate",
+      "terminationDate",
+      "created",
+      "createdBy",
+      "lastModified",
+      "lastModifiedBy",
+      "interventionType",
+      "timeToComplete",
+      "reasonForReferral",
+      "criminogenicNeeds",
+      "deliveryLocations",
+      "deliveryMethods",
+      "eligibleOffences",
+      "enablingInterventions",
+      "excludedOffences",
+      "exclusion",
+      "interventions",
+      "personalEligibility",
+      "possibleOutcomes",
+      "riskConsideration",
+      "specialEducationalNeeds",
+      "courses",
+    )
+    interventionCatalogue.content.forEach {
+      val actualProperties = it::class.memberProperties.map { member -> member.name }.toSet()
+      assertThat(actualProperties).isEqualTo(expectedProperties)
+    }
   }
 }

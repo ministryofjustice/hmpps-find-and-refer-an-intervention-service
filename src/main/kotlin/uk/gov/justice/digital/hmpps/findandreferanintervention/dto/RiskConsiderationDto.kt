@@ -35,7 +35,7 @@ data class RiskConsiderationDto(
         pnaGuide,
         rsrGuide,
         roshLevel?.toString(),
-      )
+      ).sorted()
     }
 
   companion object {

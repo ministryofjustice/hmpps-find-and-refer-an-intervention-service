@@ -1,9 +1,13 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.controller
 
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.ResourceLoader
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.jdbc.datasource.init.ScriptUtils
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
@@ -13,14 +17,37 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequest
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectStatus
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.util.UUID
+import javax.sql.DataSource
 
 class GetInterventionsDetailsTest : IntegrationTestBase() {
   @Autowired
   private lateinit var interventionRepository: InterventionCatalogueRepository
 
+  @Autowired
+  private lateinit var dataSource: DataSource
+
+  @Autowired
+  private lateinit var resourceLoader: ResourceLoader
+
+  @BeforeEach
+  fun beforeEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/setup.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
+  @AfterEach
+  fun afterEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/teardown.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
   @Test
-  fun `getInterventionsDetails for ACP Building Better Relationships return 200 OK and InterventionDetailsDto`() {
-    val interventionId = UUID.fromString("4902a268-9907-4070-ba48-7c2870a3b77e")
+  fun `getInterventionsDetails for ACP Healthy Identity Intervention return 200 OK and InterventionDetailsDto`() {
+    val interventionId = UUID.fromString("7ce8b4ef-1429-4fc9-a7fe-706aab4dde78")
     val acpBbr =
       interventionRepository.findInterventionCatalogueById(interventionId)!!.toDetailsDto()
 
@@ -37,7 +64,7 @@ class GetInterventionsDetailsTest : IntegrationTestBase() {
 
   @Test
   fun `getInterventionsDetails for CRS Dependency & Recovery return 200 OK and InterventionDetailsDto`() {
-    val interventionId = UUID.fromString("dd746a25-09b0-4d86-96ab-79e3539593a2")
+    val interventionId = UUID.fromString("c5d53fbd-b7e3-40bd-9096-6720a01a53bf")
     val crsDependenceAndRecovery =
       interventionRepository.findInterventionCatalogueById(interventionId)!!.toDetailsDto()
 

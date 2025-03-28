@@ -3,10 +3,21 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.utils
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.test.web.reactive.server.HeaderAssertions
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.util.UriBuilder
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 import java.net.URI
+
+fun makeRequest(
+  testClient: WebTestClient,
+  httpMethod: HttpMethod,
+  uri: (UriBuilder) -> URI,
+  requestCustomizer: WebTestClient.RequestHeadersSpec<*>.() -> Unit,
+): WebTestClient.ResponseSpec = testClient.method(httpMethod)
+  .uri(uri)
+  .apply(requestCustomizer)
+  .exchange()
 
 fun <T> makeRequestAndExpectJsonResponse(
   testClient: WebTestClient,
@@ -16,18 +27,16 @@ fun <T> makeRequestAndExpectJsonResponse(
   expectedStatus: HttpStatus,
   responseType: Class<T>,
   expectedResponse: T & Any,
-) {
-  testClient.method(httpMethod)
-    .uri(uri)
-    .apply(requestCustomizer)
-    .exchange()
-    .expectStatus()
-    .isEqualTo(expectedStatus)
-    .expectHeader()
-    .contentType(MediaType.APPLICATION_JSON)
-    .expectBody(responseType)
-    .isEqualTo(expectedResponse)
-}
+): WebTestClient.BodySpec<*, *> = testClient.method(httpMethod)
+  .uri(uri)
+  .apply(requestCustomizer)
+  .exchange()
+  .expectStatus()
+  .isEqualTo(expectedStatus)
+  .expectHeader()
+  .contentType(MediaType.APPLICATION_JSON)
+  .expectBody(responseType)
+  .isEqualTo(expectedResponse)
 
 fun makeRequestAndExpectStatus(
   testClient: WebTestClient,
@@ -35,15 +44,13 @@ fun makeRequestAndExpectStatus(
   uri: (UriBuilder) -> URI,
   requestCustomizer: WebTestClient.RequestHeadersSpec<*>.() -> Unit,
   expectedStatus: HttpStatus,
-) {
-  testClient.method(httpMethod)
-    .uri(uri)
-    .apply(requestCustomizer)
-    .exchange()
-    .expectStatus()
-    .isEqualTo(expectedStatus)
-    .expectHeader()
-}
+): HeaderAssertions = testClient.method(httpMethod)
+  .uri(uri)
+  .apply(requestCustomizer)
+  .exchange()
+  .expectStatus()
+  .isEqualTo(expectedStatus)
+  .expectHeader()
 
 fun makeErrorResponse(
   status: HttpStatus,

@@ -2,6 +2,11 @@ hmpps-auth:
   url: "http://hmpps-auth:9090/auth"
 
 spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
   flyway:
     locations: classpath:db/migration,classpath:db/local
     clean-on-validation-error: true

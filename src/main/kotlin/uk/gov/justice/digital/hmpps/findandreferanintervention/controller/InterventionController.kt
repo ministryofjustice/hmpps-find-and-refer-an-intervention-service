@@ -29,7 +29,7 @@ class InterventionController(
 ) {
   @GetMapping("/interventions/{setting}", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getInterventionsCatalogue(
-    @PageableDefault(page = 0, size = 10) pageable: Pageable,
+    @PageableDefault(page = 0, size = 10, sort = ["name"]) pageable: Pageable,
     @RequestParam(name = "allowsFemales", required = false)
     allowsFemales: Boolean?,
     @RequestParam(name = "allowsMales", required = false)
