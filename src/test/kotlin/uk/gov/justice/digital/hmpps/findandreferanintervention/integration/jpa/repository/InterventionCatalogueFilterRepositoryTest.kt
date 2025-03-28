@@ -1,26 +1,56 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.repository
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.core.io.ResourceLoader
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
-import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
+import org.springframework.jdbc.datasource.init.ScriptUtils
+import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.specification.getInterventionCatalogueSpecification
 import java.util.UUID
+import javax.sql.DataSource
 import kotlin.reflect.full.memberProperties
 
-class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
+@DataJpaTest
+@ActiveProfiles("local")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class InterventionCatalogueFilterRepositoryTest @Autowired
+constructor(
+  private val interventionCatalogueRepository: InterventionCatalogueRepository,
+  private val dataSource: DataSource,
+) {
   @Autowired
-  private lateinit var interventionCatalogueRepository: InterventionCatalogueRepository
+  private lateinit var resourceLoader: ResourceLoader
   val defaultPageRequest: PageRequest = PageRequest.of(0, 10, Sort.by("name"))
+
+  @BeforeEach
+  fun beforeEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/setup.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
+  @AfterEach
+  fun afterEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/teardown.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
 
   @Nested
   @DisplayName("Filter Interventions by Intervention Type")
@@ -30,7 +60,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.ACP))
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(28)
+      assertThat(interventions.totalElements).isEqualTo(3)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
     }
@@ -40,7 +70,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.CRS))
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(20)
+      assertThat(interventions.totalElements).isEqualTo(3)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Accommodation")
     }
@@ -50,7 +80,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.SI))
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(15)
+      assertThat(interventions.totalElements).isEqualTo(3)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Better Solutions")
     }
@@ -60,9 +90,9 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(interventionTypes = listOf(InterventionType.TOOLKITS))
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(11)
+      assertThat(interventions.totalElements).isEqualTo(3)
       assertThat(hasAllCatalogueProperties(interventions))
-      assertThat(interventions.content[0].name).isEqualTo("Choices and Changes")
+      assertThat(interventions.content[0].name).isEqualTo("Maps for Change")
     }
 
     @Test
@@ -75,7 +105,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       )
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(39)
+      assertThat(interventions.totalElements).isEqualTo(6)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
     }
@@ -89,7 +119,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(settingType = SettingType.COMMUNITY)
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(52)
+      assertThat(interventions.totalElements).isEqualTo(11)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Accommodation")
     }
@@ -99,7 +129,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(settingType = SettingType.CUSTODY)
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(22)
+      assertThat(interventions.totalElements).isEqualTo(4)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
     }
@@ -113,7 +143,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(allowsMales = true)
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(61)
+      assertThat(interventions.totalElements).isEqualTo(11)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Accommodation")
     }
@@ -123,7 +153,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(allowsFemales = true)
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(37)
+      assertThat(interventions.totalElements).isEqualTo(5)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Better Solutions")
     }
@@ -133,7 +163,7 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
       val specification = getInterventionCatalogueSpecification(allowsFemales = true, allowsMales = true)
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(24)
+      assertThat(interventions.totalElements).isEqualTo(4)
       assertThat(hasAllCatalogueProperties(interventions))
       assertThat(interventions.content[0].name).isEqualTo("Better Solutions")
     }
@@ -143,27 +173,25 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
   @DisplayName("Filter Interventions by Programme Name")
   inner class FilterByProgrammeName {
     @Test
-    fun `findAllInterventionsBy by programmeName = 'Personal Wellbeing Services' and there are interventions return a page of interventions`() {
+    fun `findAllInterventionsBy by programmeName = 'Dependency and Recovery' and there are interventions return a page of interventions`() {
       val specification =
-        getInterventionCatalogueSpecification(programmeName = "Personal Wellbeing Services")
+        getInterventionCatalogueSpecification(programmeName = "Dependency and Recovery")
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
       assertThat(interventions.totalElements).isEqualTo(1)
       assertThat(hasAllCatalogueProperties(interventions))
-      assertThat(interventions.content[0].name).isEqualTo("Personal Wellbeing Services")
-      assertThat(interventions.content[0].id).isEqualTo(UUID.fromString("7c479daa-9dd2-4307-a7e7-2e2ff4c3ced1"))
+      assertThat(interventions.content[0].name).isEqualTo("Dependency and Recovery")
+      assertThat(interventions.content[0].id).isEqualTo(UUID.fromString("c5d53fbd-b7e3-40bd-9096-6720a01a53bf"))
     }
 
     @Test
-    fun `findAllInterventionsBy by programmeName = 'Personal Wellbeing' and there are interventions return a page of interventions`() {
+    fun `findAllInterventionsBy by programmeName = 'INVALID NAME' and there are no interventions return empty page of interventions`() {
       val specification =
-        getInterventionCatalogueSpecification(programmeName = "Personal Wellbeing")
+        getInterventionCatalogueSpecification(programmeName = "INVALID NAME")
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(5)
-      assertThat(hasAllCatalogueProperties(interventions))
-      assertThat(interventions.content[0].name).isEqualTo("Personal Wellbeing (PWB): Emotional Wellbeing")
-      assertThat(interventions.content[0].id).isEqualTo(UUID.fromString("89849559-7d02-4d1a-9813-d6e3b52fa267"))
+      assertThat(interventions.totalElements).isEqualTo(0)
+      assertThat(interventions.content).isEmpty()
     }
   }
 
@@ -171,33 +199,32 @@ class InterventionCatalogueFilterRepositoryTest : IntegrationTestBase() {
   @DisplayName("Filter Interventions by multiple filters")
   inner class FilterByMultipleFilters {
     @Test
-    fun `findAllInterventionsBy by interventionType = 'CRS' AND setting = 'COMMUNITY' AND allowsFemales = TRUE and there are interventions return a page of interventions`() {
+    fun `findAllInterventionsBy by interventionType = 'CRS' AND setting = 'COMMUNITY' AND allowsMales = TRUE and there are interventions return a page of interventions`() {
       val specification =
         getInterventionCatalogueSpecification(
           interventionTypes = listOf(InterventionType.CRS),
           settingType = SettingType.COMMUNITY,
-          allowsFemales = true,
+          allowsMales = true,
         )
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(11)
+      assertThat(interventions.totalElements).isEqualTo(3)
       assertThat(hasAllCatalogueProperties(interventions))
-      assertThat(interventions.content[0].name).isEqualTo("CLI - Peer Support")
+      assertThat(interventions.content[0].name).isEqualTo("Accommodation")
     }
 
     @Test
-    fun `findAllInterventionsBy by  and there are interventions return a page of interventions`() {
+    fun `findAllInterventionsBy by interventionType = 'ACP' and setting = 'CUSTODY' and there are interventions return a page of interventions`() {
       val specification =
         getInterventionCatalogueSpecification(
           interventionTypes = listOf(InterventionType.ACP),
           settingType = SettingType.CUSTODY,
-          allowsFemales = true,
         )
       val interventions = interventionCatalogueRepository.findAll(specification, defaultPageRequest)
 
-      assertThat(interventions.totalElements).isEqualTo(5)
+      assertThat(interventions.totalElements).isEqualTo(3)
       assertThat(hasAllCatalogueProperties(interventions))
-      assertThat(interventions.content[0].name).isEqualTo("Building Choices: high intensity")
+      assertThat(interventions.content[0].name).isEqualTo("Becoming New Me Plus: general violence offence")
     }
   }
 

@@ -2,12 +2,11 @@ hmpps-auth:
   url: "http://hmpps-auth:9090/auth"
 
 spring:
-  # Uncomment for debugging generated queries
-  #  jpa:
-  #    properties:
-  #      hibernate:
-  #        format_sql: true
-  #    show-sql: true
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
   flyway:
     locations: classpath:db/migration
     clean-on-validation-error: true

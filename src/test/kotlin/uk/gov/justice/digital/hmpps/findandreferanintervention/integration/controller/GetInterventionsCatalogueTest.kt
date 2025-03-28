@@ -1,17 +1,45 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.controller
 
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.ResourceLoader
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.jdbc.datasource.init.ScriptUtils
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeErrorResponse
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequest
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectJsonResponse
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectStatus
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
+import javax.sql.DataSource
 
 class GetInterventionsCatalogueTest : IntegrationTestBase() {
+  @Autowired
+  private lateinit var dataSource: DataSource
+
+  @Autowired
+  private lateinit var resourceLoader: ResourceLoader
+
+  @BeforeEach
+  fun beforeEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/setup.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
+  @AfterEach
+  fun afterEach() {
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/teardown.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
+  }
+
   @Test
   fun `getInterventionsCatalogue for COMMUNITY Interventions return 200 and a paged list of Interventions`() {
     makeRequest(
@@ -26,7 +54,7 @@ class GetInterventionsCatalogueTest : IntegrationTestBase() {
       .contentType(MediaType.APPLICATION_JSON)
       .expectBody()
       .jsonPath("$.content").exists()
-      .jsonPath("$.page.totalElements").isEqualTo(52)
+      .jsonPath("$.page.totalElements").isEqualTo(11)
   }
 
   @Test
@@ -43,15 +71,15 @@ class GetInterventionsCatalogueTest : IntegrationTestBase() {
       .contentType(MediaType.APPLICATION_JSON)
       .expectBody()
       .jsonPath("$.content").exists()
-      .jsonPath("$.page.totalElements").isEqualTo(22)
+      .jsonPath("$.page.totalElements").isEqualTo(4)
   }
 
   @Test
-  fun `getInterventionsCatalogue for CUSTODY and programmeName = 'Personal Wellbeing Services' Interventions return 200 and a paged list of Interventions`() {
+  fun `getInterventionsCatalogue for COMMUNITY and programmeName = 'Dependency and Recovery' return 200 and a paged list of Interventions`() {
     makeRequest(
       testClient = webTestClient,
       httpMethod = HttpMethod.GET,
-      uri = { it.path("/interventions/CUSTODY").queryParam("programmeName", "Personal Wellbeing Services").build() },
+      uri = { it.path("/interventions/COMMUNITY").queryParam("programmeName", "Dependency and Recovery").build() },
       requestCustomizer = { headers(setAuthorisation(roles = listOf("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"))) },
     )
       .expectStatus()
