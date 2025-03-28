@@ -49,7 +49,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
       CriminogenicNeedDto.fromEntity(it).need
     },
     title = this.name,
-    description = this.shortDescription,
+    description = this.longDescription ?: this.shortDescription,
     interventionType = this.interventionType,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,
