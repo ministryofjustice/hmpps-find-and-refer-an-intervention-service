@@ -26,14 +26,14 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Internet-only sexual offence",
+            "offence_type_id": "Internet Sexual",
             "victim_type": "children - no contact",
             "motivation": ""
         }
     ],
     "exclude_offence": [
         {
-            "offence_type_id": "Non-internet sexual offence",
+            "offence_type_id": "Non-internet Sexual",
             "victim_type": "Contact"
         }
     ],

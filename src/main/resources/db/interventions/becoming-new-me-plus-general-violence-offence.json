@@ -30,7 +30,7 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "General Violence (GV)",
+            "offence_type_id": "General Violence",
             "victim_type": "",
             "motivation": ""
         }
@@ -45,7 +45,7 @@
         "osp_dc_icc_combination_guide": null,
         "ogrs_score_guide": "High OGRS (Offender Group Reconviction Scale)",
         "ovp_guide": "High OVP (OASys Violence Predictor)",
-        "ogp_guide": null,
+        "ogp_guide": "High OVP (OASys Violence Predictor)",
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": null

@@ -33,7 +33,7 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": "Partner, \nor NON-PARTNER OFFENCES which arise out of intimate partner conflict against a non-partner",
             "motivation": "Domestic Abuse, \nOr  \nsexual jealousy"
         }

@@ -1,21 +1,17 @@
 {
-    "uuid": "0C95DDBC-2F75-483B-9693-34AB8B931A4C",
+    "uuid": "AB6C6C16-8AC3-45E0-87FF-4DEBF3EC7A3D",
     "intervention_catalogue": {
         "name": "New Me MOT",
-        "int_type": "Toolkits",
-        "short_description": "",
-        "long_description": "A toolkit of short exercises that enable the probation practitioner to support the graduates of ALIGNED ACCREDITED programmes generalise their learning to new circumstances and contexts as they progress through the sentence.",
-        "session_detail": "\nVariable ",
+        "int_type": "AcP",
+        "short_description": "New Me MOT (NMMOT) is not an Accredited Programme, but is for men who have already completed Becoming New Me Plus, Kaizen, Healthy Sex Programme, Horizon, iHorizon, New Me Strengths, the Cognitive Self-Change Programme or the Self-Change Programme. It offers support throughout a person\u2019s sentence, set out as a series of short exercises. These are completed with support from the person\u2019s Prison Offender Manager in custody or their Probation Practitioner in the community. This gives them the chance to practise skills in different contexts, generalising and maintaining their learning from the Accredited Programme.",
+        "long_description": "New Me MOT (NMMOT) is not an Accredited Programme, but is for men who have already completed Becoming New Me Plus, Kaizen, Healthy Sex Programme, Horizon, iHorizon, New Me Strengths, the Cognitive Self-Change Programme or the Self-Change Programme. It offers support throughout a person\u2019s sentence, set out as a series of short exercises. These are completed with support from the person\u2019s Prison Offender Manager in custody or their Probation Practitioner in the community. This gives them the chance to practise skills in different contexts, generalising and maintaining their learning from the Accredited Programme.",
+        "session_detail": "Number of sessions is at the discretion of the practitioner and depends on the risk, need and responsivity profile of the individual. Has a 30-day Rehabilitation Activity Requirement (RAR) in the community.",
         "reason_for_referral": ""
     },
-    "delivery_methods": [
-        {
-            "format": "One-to-one",
-            "attendance_type": null
-        }
-    ],
+    "delivery_methods": [],
     "delivery_method_settings": [
-        "CUSTODY AND COMMUNITY"
+        "COMMUNITY",
+        "CUSTODY"
     ],
     "enabling_intervention_detail": "",
     "criminogenic_needs": [],
@@ -24,68 +20,13 @@
         "males": true,
         "females": false
     },
-    "eligibility_offence": [
-        {
-            "offence_type_id": "Aquisitive offence",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Substance-Related offence",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Domestic abuse",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Driving offence",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Other",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Robbery",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Sexual offence",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "General Violence",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Community Order",
-            "victim_type": "",
-            "motivation": ""
-        }
-    ],
+    "eligibility_offence": [],
     "exclude_offence": null,
-    "risk_consideration": {
-        "cn_score_guide": null,
-        "extremism_risk_guide": null,
-        "sara_partner_score_guide": null,
-        "sara_other_score_guide": null,
-        "osp_score_guide": "Missing!",
-        "osp_dc_icc_combination_guide": null,
-        "ogrs_score_guide": null,
-        "ovp_guide": null,
-        "ogp_guide": null,
-        "pna_guide": null,
-        "rosh_level": null,
-        "rsr_guide": null
+    "risk_consideration": null,
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
     },
-    "special_educational_needs": null,
     "exclusion": null
 }
