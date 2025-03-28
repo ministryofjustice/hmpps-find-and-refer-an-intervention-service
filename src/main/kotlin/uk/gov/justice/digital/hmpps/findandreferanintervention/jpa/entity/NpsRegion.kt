@@ -30,5 +30,4 @@ open class NpsRegion(
 fun NpsRegion.toDto(): NpsRegionDto = NpsRegionDto(
   id = this.id,
   name = this.name,
-  pccRegions = this.pccRegions.map { it.toDto() }.toMutableSet(),
 )
