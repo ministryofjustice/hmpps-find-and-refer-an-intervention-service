@@ -47,7 +47,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     criminogenicNeeds =
     this.criminogenicNeeds.map {
       CriminogenicNeedDto.fromEntity(it).need
-    },
+    }.sorted(),
     title = this.name,
     description = this.longDescription ?: this.shortDescription,
     interventionType = this.interventionType,
@@ -57,14 +57,14 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     this.riskConsideration?.let {
       RiskConsiderationDto.fromEntity(it).listOfRisks()
     },
-    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.ifEmpty { null },
-    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.ifEmpty { null },
+    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.sorted().ifEmpty { null },
+    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.sorted().ifEmpty { null },
     timeToComplete = this.timeToComplete,
     suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
     equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
     minAge = this.personalEligibility?.minAge,
     maxAge = this.personalEligibility?.maxAge,
-    expectedOutcomes = this.possibleOutcomes.map { it.outcome }.ifEmpty { null },
+    expectedOutcomes = this.possibleOutcomes.map { it.outcome }.sorted().ifEmpty { null },
     sessionDetails = this.sessionDetail,
     communityLocations = getCommunityLocations(interventionsDtos)?.sortedBy { it.pccRegion },
     custodyLocations = getCustodyLocations(courseDtos)?.sortedBy { it.prisonName },

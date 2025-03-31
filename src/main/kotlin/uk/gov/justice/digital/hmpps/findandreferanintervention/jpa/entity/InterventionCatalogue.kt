@@ -156,7 +156,7 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
     criminogenicNeeds =
     this.criminogenicNeeds.map {
       CriminogenicNeedDto.fromEntity(it).need
-    },
+    }.sorted(),
     title = this.name,
     description = this.shortDescription,
     interventionType = this.interventionType,
@@ -167,8 +167,8 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
     this.riskConsideration?.let {
       RiskConsiderationDto.fromEntity(it).listOfRisks()
     },
-    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType },
-    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat },
+    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.sorted(),
+    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.sorted(),
     timeToComplete = this.timeToComplete,
     suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
     equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
