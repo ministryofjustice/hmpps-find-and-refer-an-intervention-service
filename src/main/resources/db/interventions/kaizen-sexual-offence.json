@@ -26,17 +26,17 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Sexual offence",
+            "offence_type_id": "Sexual",
             "victim_type": "",
             "motivation": ""
         },
         {
-            "offence_type_id": "General Violence (GV)",
+            "offence_type_id": "General Violence",
             "victim_type": "",
             "motivation": ""
         },
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": "",
             "motivation": ""
         }

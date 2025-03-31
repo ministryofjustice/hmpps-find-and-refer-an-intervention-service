@@ -26,24 +26,24 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Sexual offence",
+            "offence_type_id": "Sexual",
             "victim_type": "children - no contact",
             "motivation": ""
         },
         {
-            "offence_type_id": "General Violence (GV)",
+            "offence_type_id": "General Violence",
             "victim_type": "children - no contact",
             "motivation": ""
         },
         {
-            "offence_type_id": "Intimate Partner Violence (IPV)",
+            "offence_type_id": "IPV",
             "victim_type": "children - no contact",
             "motivation": ""
         }
     ],
     "exclude_offence": [
         {
-            "offence_type_id": "Non-internet sexual offence",
+            "offence_type_id": "Non-internet Sexual",
             "victim_type": "Contact"
         }
     ],
@@ -56,7 +56,7 @@
         "osp_dc_icc_combination_guide": null,
         "ogrs_score_guide": null,
         "ovp_guide": "High OVP (OASys Violence Predictor)",
-        "ogp_guide": null,
+        "ogp_guide": "High OVP (OASys Violence Predictor)",
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": null

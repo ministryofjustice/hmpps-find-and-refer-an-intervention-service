@@ -31,12 +31,12 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "All offences (custody)",
+            "offence_type_id": "Custody: Any",
             "victim_type": "",
             "motivation": ""
         },
         {
-            "offence_type_id": "Sexual offence (community)",
+            "offence_type_id": "Community: Sexual",
             "victim_type": "",
             "motivation": ""
         }

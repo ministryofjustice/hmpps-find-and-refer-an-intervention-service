@@ -15,12 +15,13 @@
         }
     ],
     "delivery_method_settings": [
-        "CUSTODY AND COMMUNITY"
+        "COMMUNITY",
+        "CUSTODY"
     ],
     "enabling_intervention_detail": "",
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "30",
+        "max_age": 30.0,
         "males": true,
         "females": false
     },

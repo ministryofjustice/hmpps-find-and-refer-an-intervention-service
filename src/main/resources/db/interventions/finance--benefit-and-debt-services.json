@@ -1,11 +1,11 @@
 {
     "uuid": "1E2370D7-BE74-4FAF-B973-68D258FEA015",
     "intervention_catalogue": {
-        "name": "Finance, Benefit & Debt (FBD)",
+        "name": "Finance, benefit and debt services",
         "int_type": "CRS",
-        "short_description": "Service to addresss immediate financial needs -",
-        "long_description": "In custody FBD services focus on addressing immediate financial needs that arise from being in custody such as freezing debts and stopping benefits.  \nPre-release activity in relation to benefit eligibility and obtaining identification documents or bank accounts\nIn community, supports individuals in managing their debt, managing their finances and provide advice on where to go for further support. \n The referral route for individuals in custody is through the resettlement teams and service providers on the wings.",
-        "session_detail": "Variable",
+        "short_description": "Finance, benefit and debt services help men on probation manage their money effectively, reducing financial stress that could lead to reoffending.",
+        "long_description": "Finance, benefit and debt services help men on probation manage their money effectively, reducing financial stress that could lead to reoffending.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -20,8 +20,6 @@
     ],
     "delivery_method_settings": [
         "COMMUNITY",
-        "REMAND",
-        "PRE-RELEASE",
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",

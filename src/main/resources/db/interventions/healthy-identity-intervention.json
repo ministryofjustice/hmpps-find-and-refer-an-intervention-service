@@ -30,7 +30,7 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Terrorism Act Case",
+            "offence_type_id": "Terrorism Act Cast",
             "victim_type": "",
             "motivation": "or under other legislation where extremism is identified as a motivation by the Court."
         }

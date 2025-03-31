@@ -29,7 +29,7 @@
     },
     "eligibility_offence": [
         {
-            "offence_type_id": "Sexual offence",
+            "offence_type_id": "Sexual",
             "victim_type": "Any",
             "motivation": "Or sexually motivated offence"
         }
