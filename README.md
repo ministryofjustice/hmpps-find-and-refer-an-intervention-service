@@ -34,13 +34,13 @@ Run the following command to pull the relevant dependencies for the project.
 and then the following command to run the containers.
 
 ```bash
-  docker-compose -f docker-compose-local.yml up
+  docker-compose up
 ```
 
 can optionally be run in detached mode in order to retain terminal use
 
 ```bash
-  docker-compose -f docker-compose-local.yml up -d
+  docker-compose up -d
 ```
 
 ### Connecting to local database
@@ -63,15 +63,16 @@ Create new connection using local database credentials;
 The service uses an Oauth 2.0 setup managed through the Hmpps Auth project. To call any endpoints locally a bearer token
 must be generated. This can be done through calling the auth endpoint in the Hmpps-auth service.
 
-| Variable         | Value                                   |
-|------------------|-----------------------------------------|
-| Grant type       | Client credentials                      |
-| Access token URL | http://hmpps-auth:9090/auth/oauth/token |
-| Client ID        | -----                                   |
-| Client Secret    | -----                                   |
-| Scope            | Read                                    |
+| Variable         | Value                                          |
+|------------------|------------------------------------------------|
+| Grant type       | Client credentials                             |
+| Access token URL | http://hmpps-auth:9090/auth/oauth/token        |
+| Client ID        | hmpps-find-and-refer-an-intervention-ui-client |
+| Client Secret    | clientsecret                                   |
+| Scope            | Read                                           |
 
-For Client ID and Secret refer to the relevant credentials for the Find and Refer Project.
+The values for `ClientId` and `Client Secret` are the local values. These are the same credentials that the UI uses to
+call this service.
 
 ## Branch naming validator
 
@@ -92,6 +93,42 @@ Run the following command to add a pre-commit hook to ensure your code is format
 
 ```bash
 ./gradlew addKtlintFormatGitPreCommitHook
+```
+
+## Interventions Data
+
+For loading the Intervention Catalogue data both locally and in a higher environment, a Spring Batch job is utilised.
+This reads all the .json files in a directory [here](src/main/resources/db/interventions) and maps these to the
+corresponding db tables.
+
+The job can be run manually using the following command to load the data locally
+
+```zsh
+SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=upsertInterventionsJob’
+```
+
+## Deployments
+
+All deployments and environments are managed through Kubernetes. For information on how to connect to the Cloud
+Platform's Kubernetes cluster follow the setup
+guide [here](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/kubectl-config.html#connecting-to-the-cloud-platform-39-s-kubernetes-cluster).
+
+For further Kubernetes commands a useful cheat sheet is
+provided [here](https://kubernetes.io/docs/reference/kubectl/quick-reference/).
+
+To monitor a deployment in the service you can run the following commands;
+
+```zsh
+kubectl get deployment -n $NAMESPACE
+```
+
+This will give you the name of the current deployments and their current status.
+
+If you wish to scale down the currently running service in any environment. You can run the following command with the
+`--replicas=0` flag to stop the currently running pods.
+
+```zsh
+kubectl scale deployment $DEPLOYMENT_NAME -n $NAMESPACE --replicas=0
 ```
 
 ## Troubleshooting
