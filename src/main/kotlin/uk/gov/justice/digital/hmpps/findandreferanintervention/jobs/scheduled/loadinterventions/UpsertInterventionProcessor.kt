@@ -81,6 +81,10 @@ class UpsertInterventionProcessor(
         logger.info("Unable to create an Intervention Catalogue Entry as Type is invalid or was not provided")
         return null
       }
+      item.deliveryMethodSetting.isEmpty() -> {
+        logger.info("Unable to create an Intervention Catalogue Entry as SettingTypes was not provided")
+        return null
+      }
       else -> logger.info("Creating Intervention Catalogue Record - ${item.catalogue.name}")
     }
 
@@ -165,10 +169,10 @@ class UpsertInterventionProcessor(
     if (item.deliveryLocation?.isNotEmpty() == true) {
       catalogue.deliveryLocations = upsertDeliveryLocations(item.deliveryLocation, catalogue)
     }
-    if (item.deliveryMethod?.isNotEmpty() == true) {
-      catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
-    }
-    if (item.deliveryMethod?.isNotEmpty() == true && item.deliveryMethodSetting?.isNotEmpty() == true) {
+
+    catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
+
+    if (catalogue.deliveryMethods.isNotEmpty() && item.deliveryMethodSetting?.isNotEmpty() == true) {
       upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue.deliveryMethods)
     }
     if (item.eligibleOffence?.isNotEmpty() == true) {
@@ -282,7 +286,7 @@ class UpsertInterventionProcessor(
   }
 
   fun upsertDeliveryMethods(
-    deliveryMethods: Array<DeliveryMethodDefinition>,
+    deliveryMethods: Array<DeliveryMethodDefinition>?,
     catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethod> {
     val deliveryMethodRecords = deliveryMethodRepository.findByIntervention(catalogue)?.toMutableList()
@@ -296,13 +300,25 @@ class UpsertInterventionProcessor(
         return deliveryMethodRecords.toMutableSet()
       }
       else -> {
-        for (deliveryMethod in deliveryMethods) {
+        if (deliveryMethods?.isNotEmpty() == true) {
+          for (deliveryMethod in deliveryMethods) {
+            deliveryMethodRecords?.add(
+              DeliveryMethod(
+                id = UUID.randomUUID(),
+                attendanceType = deliveryMethod.attendanceType,
+                deliveryFormat = deliveryMethod.deliveryFormat,
+                deliveryMethodDescription = deliveryMethod.deliveryMethodDescription,
+                intervention = catalogue,
+              ),
+            )
+          }
+        } else {
           deliveryMethodRecords?.add(
             DeliveryMethod(
               id = UUID.randomUUID(),
-              attendanceType = deliveryMethod.attendanceType,
-              deliveryFormat = deliveryMethod.deliveryFormat,
-              deliveryMethodDescription = deliveryMethod.deliveryMethodDescription,
+              attendanceType = null,
+              deliveryFormat = null,
+              deliveryMethodDescription = null,
               intervention = catalogue,
             ),
           )
@@ -359,7 +375,6 @@ class UpsertInterventionProcessor(
         )
         return deliveryMethodSettingRecords.toMutableSet()
       }
-
       else -> {
         for (deliveryMethod in deliveryMethods) {
           for (deliveryMethodSetting in deliveryMethodSettings) {
@@ -371,7 +386,6 @@ class UpsertInterventionProcessor(
                   DeliveryMethodSetting(id = UUID.randomUUID(), deliveryMethodId = deliveryMethod.id, setting = settingType),
                 )
               }
-
               else -> {
                 logger.info(
                   "Unable to create Delivery Method Setting record for Id - ${deliveryMethod.id}, as Setting Type is null or invalid",
