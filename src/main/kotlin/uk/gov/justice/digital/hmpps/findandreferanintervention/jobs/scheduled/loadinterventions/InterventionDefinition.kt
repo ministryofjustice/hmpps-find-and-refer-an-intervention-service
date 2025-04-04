@@ -8,7 +8,7 @@ data class InterventionCatalogueDefinition(
   @JsonProperty("intervention_catalogue") val catalogue: InterventionCatalogueEntryDefinition,
   @JsonProperty("delivery_location") val deliveryLocation: Array<DeliveryLocationDefinition>?,
   @JsonProperty("delivery_methods") val deliveryMethod: Array<DeliveryMethodDefinition>?,
-  @JsonProperty("delivery_method_settings") val deliveryMethodSetting: Array<String>?,
+  @JsonProperty("delivery_method_settings") val deliveryMethodSetting: Array<String>,
   @JsonProperty("enabling_intervention_detail") val enablingIntervention: String?,
   @JsonProperty("criminogenic_needs") val criminogenicNeed: Array<String>,
   @JsonProperty("personal_eligibility") val personalEligibility: PersonalEligibilityDefinition?,
