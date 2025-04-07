@@ -22,7 +22,13 @@
         "COMMUNITY"
     ],
     "enabling_intervention_detail": "",
-    "criminogenic_needs": [],
+    "criminogenic_needs": [
+        "Relationships and Family",
+        "Lifestyle and Associates",
+        "Emotional Wellbeing",
+        "Thinking and Behaviour",
+        "Attitudes"
+    ],
     "personal_eligibility": {
         "max_age": "",
         "males": true,

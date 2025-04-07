@@ -21,7 +21,7 @@
     "enabling_intervention_detail": "",
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": 30.0,
+        "max_age": "30",
         "males": true,
         "females": false
     },

@@ -23,7 +23,17 @@
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",
-    "criminogenic_needs": [],
+    "criminogenic_needs": [
+        "Accommodation",
+        "Finance and Debt",
+        "Relationships and Family",
+        "Lifestyle and Associates",
+        "Drug Misuse",
+        "Alcohol Misuse",
+        "Emotional Wellbeing",
+        "Thinking and Behaviour",
+        "Attitudes"
+    ],
     "personal_eligibility": {
         "max_age": "",
         "males": false,
