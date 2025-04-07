@@ -1,0 +1,94 @@
+{
+  "uuid": "baa847c4-6a84-45aa-9711-df0bc9095c69",
+  "intervention_catalogue":{
+    "name":"Accommodation",
+    "int_type":"CRS",
+    "short_description":"Accommodation pathway provides individuals on a community/suspended sentence order with a RAR or on license/post-sentence supervision with accommodation interventions. These services will also be delivered pre-release for individuals who will be under probation supervision on release.",
+    "long_description":null,
+    "topic":null,
+    "session_detail":null,
+    "reason_for_referral":"Accommodation need"
+  },
+  "delivery_location":[
+    {
+      "provider_name": "Default Provider Name 1",
+      "contact": "Group",
+      "pdu_establishments": ["Default PDU Ref1"]
+    },
+    {
+      "provider_name": "Default Provider Name 2",
+      "contact": "One-to-one",
+      "pdu_establishments": ["Default PDU Ref2"]
+    }
+  ],
+  "delivery_methods":[
+    {
+      "delivery_method_description":"TBC",
+      "format":"Group",
+      "attendance_type":"In Person"
+    },
+    {
+      "delivery_method_description":"TBC",
+      "format":"One-to-one",
+      "attendance_type":"TBC"
+    }
+  ],
+  "delivery_method_settings":[],
+  "enabling_intervention_detail": "Kaizen, Horizon, BNM+, NMS",
+  "criminogenic_needs":[
+    "Accommodation"
+  ],
+  "personal_eligibility":{
+      "min_age":18,
+      "max_age":120,
+      "males":true,
+      "females":false
+  },
+  "eligibility_offence":[
+    {
+      "offence_type_id":"Driving offence",
+      "victim_type":null,
+      "motivation":null
+    }
+  ],
+  "exclude_offence":[
+    {
+      "offence_type_id":"Acquisitive offence",
+      "victim_type":null,
+      "motivation":null
+    }
+  ],
+  "possible_outcome":[
+    "Obtain or maintain suitable accommodation",
+    "Overcome barriers to obtaining/maintaining suitable accommodation",
+    "Prevent users from becoming homeless"
+  ],
+  "risk_consideration":{
+    "cn_score_guide":null,
+    "extremism_risk_guide":null,
+    "sara_partner_score_guide":null,
+    "sara_other_score_guide":null,
+    "osp_score_guide":null,
+    "osp_dc_icc_combination_guide":null,
+    "ogrs_score_guide":null,
+    "ovp_guide":null,
+    "ogp_guide":null,
+    "pna_guide":null,
+    "rosh_level":null,
+    "rsr_guide":null
+  },
+  "special_educational_needs":{
+    "exclusion_literacy_level_guide":"Able to read and understand simple sentences",
+    "learning_disability_catered_for":true,
+    "equivalent_non_ldc_programme_guide":"Becoming New Me Plus"
+  },
+  "exclusion":{
+    "min_remaining_sentence_duration_guide":null,
+    "remaining_license_community_order_guide":"12 months on licence or at least 18 months on community order.",
+    "alcohol_drug_problem_guide":null,
+    "mental_health_problem_guide":"Identified mental illness, or personality disorder",
+    "other_preferred_method_guide":null,
+    "same_type_rule_guide":null,
+    "schedule_frequency_guide":null
+  }
+}

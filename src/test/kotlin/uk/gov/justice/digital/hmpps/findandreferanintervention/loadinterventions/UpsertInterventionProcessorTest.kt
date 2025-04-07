@@ -150,7 +150,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json with blank Catalogue Name to be extracted as an Intervention Catalogue Definition object to be stored into the database`() {
+  fun `Providing Json with blank Catalogue Name to be extracted as an Intervention Catalogue Definition object, would return null`() {
     val interventionCatalogueDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/interventionCatalogueDefinitions/InterventionCatalogueDefinitionNoName.json",
@@ -166,10 +166,26 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json with invalid InterventionType to be extracted as an Intervention Catalogue Definition object to be stored into the database`() {
+  fun `Providing Json with invalid InterventionType to be extracted as an Intervention Catalogue Definition object, would return null`() {
     val interventionCatalogueDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/interventionCatalogueDefinitions/InterventionCatalogueDefinitionInvalidType.json",
+      )
+
+    val interventionCatalogueDefinitions =
+      ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
+
+    val result = processor.process(interventionCatalogueDefinitions)
+
+    assertThat(result).isEqualTo(null)
+    verify(interventionCatalogueRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json without a SettingType to be extracted as an Intervention Catalogue Definition object, would return null`() {
+    val interventionCatalogueDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/interventionCatalogueDefinitions/InterventionCatalogueDefinitionNoSettingType.json",
       )
 
     val interventionCatalogueDefinitions =
@@ -244,7 +260,7 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json to be extracted tp create a new Array of Criminogenic Need Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted to create a new Array of Criminogenic Need Definition objects to be stored into the database`() {
     val criminogenicNeedDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/criminogenicNeedTestDefinitions/CriminogenicNeedDefinition.json",
@@ -390,6 +406,16 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
+  fun `Providing no Json object to a new Delivery Method Definition object to be stored into the database`() {
+    val deliveryMethodDefinitions = emptyArray<DeliveryMethodDefinition>()
+
+    val result = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(deliveryMethodRepository, times(1)).saveAll(anyList())
+  }
+
+  @Test
   fun `Providing Json to be extracted as an Array of Delivery Method Setting Definition objects to be stored into the database`() {
     val deliveryMethodDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
@@ -411,6 +437,25 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
 
     assertThat(result.count()).isEqualTo(9)
+    verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Created Delivery Method object from no Json, and extract Provided json as an Array of Delivery Method Setting Definition objects to be stored into the database`() {
+    val deliveryMethodSettingDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinition.json",
+      )
+
+    val deliveryMethodDefinitions = null
+
+    val deliveryMethodSettingDefinitions =
+      ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
+
+    val deliveryMethods = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
+
+    assertThat(result.count()).isEqualTo(3)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 
