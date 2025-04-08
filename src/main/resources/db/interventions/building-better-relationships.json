@@ -23,9 +23,7 @@
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",
-    "criminogenic_needs": [
-        "Relationships & Family"
-    ],
+    "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
         "males": true,

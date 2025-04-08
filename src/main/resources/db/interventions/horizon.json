@@ -19,9 +19,7 @@
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",
-    "criminogenic_needs": [
-        "Thinking and Behaviour"
-    ],
+    "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
         "males": true,

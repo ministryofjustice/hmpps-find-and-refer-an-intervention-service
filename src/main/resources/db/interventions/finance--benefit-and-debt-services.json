@@ -23,7 +23,9 @@
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",
-    "criminogenic_needs": [],
+    "criminogenic_needs": [
+        "Finance and Debt"
+    ],
     "personal_eligibility": {
         "max_age": "Any ",
         "males": true,

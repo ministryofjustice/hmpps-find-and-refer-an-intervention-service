@@ -23,7 +23,9 @@
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",
-    "criminogenic_needs": [],
+    "criminogenic_needs": [
+        "Accommodation"
+    ],
     "personal_eligibility": {
         "max_age": "",
         "males": true,
