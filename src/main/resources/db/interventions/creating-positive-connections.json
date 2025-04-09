@@ -10,8 +10,7 @@
     },
     "delivery_methods": [
         {
-            "format": "One-to-one",
-            "attendance_type": null
+            "format": "One-to-one"
         }
     ],
     "delivery_method_settings": [

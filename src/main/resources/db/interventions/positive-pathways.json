@@ -10,12 +10,8 @@
     },
     "delivery_methods": [
         {
-            "format": "Group",
-            "attendance_type": "In Person"
-        },
-        {
-            "format": "One-to-one",
-            "attendance_type": null
+            "format": "Group or One-to-one",
+            "attendance_type": "In Person and Online"
         }
     ],
     "delivery_method_settings": [
