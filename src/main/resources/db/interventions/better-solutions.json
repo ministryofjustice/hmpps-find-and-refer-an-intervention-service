@@ -11,7 +11,7 @@
     "delivery_methods": [
         {
             "format": "Group",
-            "attendance_type": "In Person"
+            "attendance_type": "In Person and Online"
         }
     ],
     "delivery_method_settings": [

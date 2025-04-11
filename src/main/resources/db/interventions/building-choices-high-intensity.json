@@ -10,12 +10,10 @@
     },
     "delivery_methods": [
         {
-            "format": "Group",
-            "attendance_type": "In Person"
+            "format": "Group"
         }
     ],
     "delivery_method_settings": [
-        "COMMUNITY",
         "CUSTODY"
     ],
     "enabling_intervention_detail": "",

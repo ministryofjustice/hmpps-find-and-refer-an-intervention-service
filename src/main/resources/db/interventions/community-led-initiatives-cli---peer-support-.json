@@ -11,7 +11,7 @@
     "delivery_methods": [
         {
             "format": "One-to-one",
-            "attendance_type": null
+            "attendance_type": "In person or Online"
         }
     ],
     "delivery_method_settings": [
