@@ -5,7 +5,8 @@ import org.springframework.batch.core.Job
 import org.springframework.batch.core.JobParameters
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.job.builder.JobBuilder
-import org.springframework.batch.core.launch.support.TaskExecutorJobLauncher
+import org.springframework.batch.core.launch.JobLauncher
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
 import org.springframework.batch.item.ItemReader
@@ -32,7 +33,18 @@ class UpsertInterventionsJobConfiguration(
   fun upsertInterventionsJobLauncher(upsertInterventionsJob: Job): ApplicationRunner = onStartupJobLauncherFactory.makeBatchLauncher(upsertInterventionsJob)
 
   @Bean
-  fun jobLauncherCommandlineRunner(jobLauncher: TaskExecutorJobLauncher, upsertInterventionsJob: Job): CommandLineRunner = CommandLineRunner { jobLauncher.run(upsertInterventionsJob, JobParameters()) }
+  fun jobLauncherCommandlineRunner(jobLauncher: JobLauncher, upsertInterventionsJob: Job): CommandLineRunner = CommandLineRunner {
+    try {
+      jobLauncher.run(upsertInterventionsJob, JobParameters())
+    } catch (e: JobExecutionAlreadyRunningException) {
+      // TODO: Better handle this use case, by cancelling the job that's running (if it's long-lived)
+      logger.error("Job already running, skipping execution", e)
+    } catch (e: Exception) {
+      logger.error("Error running job: ${e.message}", e)
+    } finally {
+      logger.info("Job completed")
+    }
+  }
 
   @Bean
   fun upsertInterventionsJob(upsertInterventionsStep: Step, jobRepository: JobRepository): Job {
