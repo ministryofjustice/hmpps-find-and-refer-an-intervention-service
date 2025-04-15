@@ -109,27 +109,119 @@ SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=upsertInterve
 
 ## Deployments
 
-All deployments and environments are managed through Kubernetes. For information on how to connect to the Cloud
-Platform's Kubernetes cluster follow the setup
+Deployments are part of our CI process, on the `main` branch using the `build-test-and-deploy` Workflow.
+
+[This is a link](https://app.circleci.com/pipelines/github/ministryofjustice/hmpps-find-and-refer-an-intervention-service?branch=main) to the most recent runs of that Workflow.
+
+Deployments require a manual approval step.
+
+### Testing a Deployment
+
+The Find & Refer an Intervention Service is not presently live.  We therefore do not have a Production environment available.
+
+It is only possible to do User Acceptance Testing (UAT), i.e. click around a browser, on our Dev environment.
+
+To test a deployment to production, we have to examine the logs of a pod, to assert if it has spun up successfully or not.  This is obviously not ideal.
+
+### Kubernetes
+
+All deployments and environments are managed through Kubernetes.
+
+For information on how to connect to the Cloud Platform's Kubernetes cluster follow the setup
 guide [here](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/kubectl-config.html#connecting-to-the-cloud-platform-39-s-kubernetes-cluster).
 
 For further Kubernetes commands a useful cheat sheet is
-provided [here](https://kubernetes.io/docs/reference/kubectl/quick-reference/).
+provided [here](https://kubernetes.io/docs/reference/kubectl/quick-reference/).  Similarly, the `--help` flag on any `kubectl` command will give you more information.
 
-To monitor a deployment in the service you can run the following commands;
+### Testing a Deployment
 
-```zsh
-kubectl get deployment -n $NAMESPACE
-```
-
-This will give you the name of the current deployments and their current status.
-
-If you wish to scale down the currently running service in any environment. You can run the following command with the
-`--replicas=0` flag to stop the currently running pods.
+#### tl;dr
 
 ```zsh
-kubectl scale deployment $DEPLOYMENT_NAME -n $NAMESPACE --replicas=0
+kubectl get deployments -n hmpps-find-and-refer-an-intervention-prod
 ```
+
+```zsh
+kubectl get pods -n hmpps-find-and-refer-an-intervention-prod
+```
+
+```zsh
+kubectl logs $POD_NAME --namespace hmpps-find-and-refer-an-intervention-prod
+```
+
+```zsh
+kubectl scale deployment hmpps-find-and-refer-an-intervention-service --namespace hmpps-find-and-refer-an-intervention-prod --replicas=0
+```
+
+#### 1. Find the deployments in the `hmpps-find-and-refer-an-intervention-prod` namespace:
+
+```zsh
+$ kubectl get deployments -n hmpps-find-and-refer-an-intervention-prod
+
+NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
+hmpps-find-and-refer-an-intervention-service   0/0     0            0           41d
+hmpps-find-and-refer-an-intervention-ui        2/2     2            2           41d
+```
+
+If you have done a deployment of UI, there should be more than 0 Pods marked as `READY` in that response, indicating that they have, indeed, been spun up.
+
+#### 2. Double-check the Pod(s) associated with the Deployment:
+
+Per [Kubernete's docs](https://kubernetes.io/docs/concepts/workloads/pods/):
+
+> A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
+
+View the Pods in the namespace, these are what the `READY` column in the `get deployments` refer to:
+
+```zsh
+$ kubectl get pods -n hmpps-find-and-refer-an-intervention-prod
+
+
+NAME                                                            READY   STATUS    RESTARTS   AGE
+hmpps-find-and-refer-an-intervention-service-58bb6f56b4-7q566   1/1     Running   0          35m
+hmpps-find-and-refer-an-intervention-service-58bb6f56b4-kzqsn   1/1     Running   0          35m
+```
+
+#### 3. Check the logs of a Pod
+
+It is possible to read the logs of a given Pod to check that the build and spin-up process for the Pod has been successful.
+
+To view the logs from any of the Pods whose name is given in the previous responses:
+
+
+```zsh
+$ kubectl logs $POD_NAME --namespace hmpps-find-and-refer-an-intervention-prod
+
+# ...
+Application Insights 2.X SDK. []
+14:25:13.500Z  INFO HMPPS Find And Refer An Intervention Ui: Server listening on port 3000
+```
+
+Where `$POD_NAME` is the full string Pod name given in the `get pods` response.
+
+#### 4. Scale down the Pods
+
+While we are in pre-release, it's important not to leave the pods running.
+
+We scale down the number of running Pods in the Kubernetes deployment with the following:
+
+```zsh
+$ kubectl scale deployment hmpps-find-and-refer-an-intervention-service --namespace hmpps-find-and-refer-an-intervention-prod --replicas=0
+
+deployment.apps/hmpps-find-and-refer-an-intervention-ui scaled
+```
+
+And then double-check this has taken effect:
+
+```zsh
+$ kubectl get deployments --namespace=hmpps-find-and-refer-an-intervention-prod
+
+NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
+hmpps-find-and-refer-an-intervention-service   0/0     0            0           41d
+hmpps-find-and-refer-an-intervention-ui        0/0     0            0           41d
+```
+
+By checking for the `0` in the `READY` column.
 
 ## Troubleshooting
 
