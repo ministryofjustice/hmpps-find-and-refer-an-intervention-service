@@ -26,6 +26,14 @@
     },
     "eligibility_offence": [],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Develop self-sufficiency and independence",
+        "Build resistance to peer influence",
+        "Develop a stable, pro-social identity",
+        "Enhance family support",
+        "Increase future orientation",
+        "Build skills to manage emotions and impulses"
+    ],
     "risk_consideration": null,
     "special_educational_needs": null,
     "exclusion": null

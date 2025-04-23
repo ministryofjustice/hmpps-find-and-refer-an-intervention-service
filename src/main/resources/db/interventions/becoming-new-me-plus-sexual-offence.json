@@ -32,6 +32,7 @@
         }
     ],
     "exclude_offence": null,
+    "possible_outcomes": [],
     "risk_consideration": {
         "cn_score_guide": null,
         "extremism_risk_guide": null,

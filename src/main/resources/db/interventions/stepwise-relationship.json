@@ -40,6 +40,10 @@
         }
     ],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Enables participants to overcome challenges such as: relationship problems; social skills deficits; attitudes that support relationship violence; aggression and anger; and, emotional mismanagement / self-regulation",
+        ""
+    ],
     "risk_consideration": {
         "cn_score_guide": "At least one of three OASys criteria to be satisfied:\n- Score of 2 on item 11.3 aggressive behaviour\n- \u201cYes\u201d answer to thinking &amp; behaviour being related to risk\nof serious harm to self or others\n- \u201cYes\u201d answer to attitudes being related to risk of serious\nharm to self or others",
         "extremism_risk_guide": null,

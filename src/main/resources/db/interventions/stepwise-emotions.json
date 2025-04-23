@@ -44,6 +44,7 @@
             "victim_type": ""
         }
     ],
+    "possible_outcomes": [],
     "risk_consideration": {
         "cn_score_guide": "Need is evidenced by at least one of the following OASys criteria being satisfied: \n- 11.3 = 2\n- Thinking & behaviour related RoSH\n- Attitudes related RoSH",
         "extremism_risk_guide": null,

@@ -22,6 +22,7 @@
     },
     "eligibility_offence": [],
     "exclude_offence": null,
+    "possible_outcomes": [],
     "risk_consideration": null,
     "special_educational_needs": {
         "exclusion_literacy_level_guide": null,

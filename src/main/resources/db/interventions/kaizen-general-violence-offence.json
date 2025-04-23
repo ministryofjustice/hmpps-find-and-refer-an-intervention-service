@@ -46,6 +46,17 @@
             "victim_type": "Contact"
         }
     ],
+    "possible_outcomes": [
+        "It aims to",
+        "",
+        "increase psychologicalPositive relationships to address needs relating to a lack of pro-social support/ relationships",
+        "",
+        "Managing life\u2019s problems to address needs relating to impulsivity and low self-control",
+        "",
+        "Healthy Thinking to address needs relating to offence supportive attitudes",
+        "",
+        "Healthy Sex to address needs associated with unhealthy sexual interest"
+    ],
     "risk_consideration": {
         "cn_score_guide": null,
         "extremism_risk_guide": null,

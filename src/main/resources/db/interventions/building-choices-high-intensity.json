@@ -25,6 +25,10 @@
     },
     "eligibility_offence": [],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "The aim is that this reduces the burden of \u2018automatic demand\u2019 on delivery teams and presents them with a more resource effective",
+        "way of ensuring those who are eligible and those who are the highest priority get the opportunity"
+    ],
     "risk_consideration": {
         "cn_score_guide": null,
         "extremism_risk_guide": null,

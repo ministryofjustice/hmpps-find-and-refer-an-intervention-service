@@ -28,6 +28,12 @@
     },
     "eligibility_offence": [],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Education, training and employment services aim to achieve the following outcomes:",
+        "",
+        "\u2022 finding and maintaining suitable training, education and employment, overcoming any potential barriers",
+        "\u2022 improving the skills and attitude needed to enable self-development and increase employability"
+    ],
     "risk_consideration": null,
     "special_educational_needs": null,
     "exclusion": null

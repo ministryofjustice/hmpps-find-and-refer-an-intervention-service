@@ -35,6 +35,9 @@
         }
     ],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Enables women to start managing challenges such as: relationship problems; social skills and emotional mismanagement / self-regulation through increasing awareness of needs and wants and how to communicate these appropriately without violence or aggression."
+    ],
     "risk_consideration": {
         "cn_score_guide": "IPV related offence this can be index (e.g. indicated by OASys 2.3d) or historical (e.g. indicated by OASys 6.7)\n Relationship problems\n Social skills deficits\n Attitudes that support relationship violence\n Aggression and anger\n Emotional mismanagement / self-regulation",
         "extremism_risk_guide": null,

@@ -38,6 +38,9 @@
             "victim_type": ""
         }
     ],
+    "possible_outcomes": [
+        "Developed thinking skills"
+    ],
     "risk_consideration": {
         "cn_score_guide": "Need is evidenced by a total score of 5+\n\u25cf 2.6 - Recognises the impact and consequences of offending\non victim, community / wider society\n\u25cf 7.2 - Regular activities encourage offending\n\u25cf 11.4 - Temper control\n\u25cf 11.6 - Problem solving\n\u25cf 11.7 - Awareness of consequences\n\u25cf 11.9 - Understands other people\u2019s point of view\n\u25cf 12.1 - Pro-criminal attitudes",
         "extremism_risk_guide": null,
