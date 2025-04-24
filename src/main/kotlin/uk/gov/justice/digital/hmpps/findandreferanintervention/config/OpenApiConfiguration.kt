@@ -15,7 +15,8 @@ class OpenApiConfiguration(buildProperties: BuildProperties) {
   @Bean
   fun customOpenAPI(): OpenAPI = OpenAPI()
     .info(
-      Info().title("HMPPS Template Kotlin").version(version)
+      Info()
+        .title("HMPPS Find and Refer an Interventions Service API").version(version)
         .contact(Contact().name("HMPPS Digital Studio").email("feedback@digital.justice.gov.uk")),
     )
 }
