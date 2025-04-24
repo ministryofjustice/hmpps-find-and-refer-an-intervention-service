@@ -1,6 +1,8 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.controller
 
 import com.microsoft.applicationinsights.TelemetryClient
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -27,7 +29,16 @@ class InterventionController(
   private val interventionService: InterventionService,
   private val telemetryClient: TelemetryClient,
 ) {
-  @GetMapping("/interventions/{setting}", produces = [MediaType.APPLICATION_JSON_VALUE])
+  @GetMapping(
+    "/interventions/{setting}",
+    produces = [MediaType.APPLICATION_JSON_VALUE],
+    name = "Get Interventions for a Setting.",
+  )
+  @ApiResponses(
+    value = [
+      ApiResponse(responseCode = "200", description = "OK"),
+    ],
+  )
   fun getInterventionsCatalogue(
     @PageableDefault(page = 0, size = 10, sort = ["name"]) pageable: Pageable,
     @RequestParam(name = "allowsFemales", required = false)
