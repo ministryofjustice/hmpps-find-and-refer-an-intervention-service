@@ -73,7 +73,7 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      log.error("Unexpected exception", e)
+      log.debug("Enum Mismatch exception: {}", e.message)
     }
 
   @ExceptionHandler(ResponseStatusException::class)
@@ -81,7 +81,7 @@ class GlobalExceptionHandler {
   fun handleResponseException(e: ResponseStatusException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = e.reason, developerMessage = e.message),
-    ).also { log.error("Unexpected exception", e) }
+    ).also { log.error("Response Status exception: {}", e.message) }
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
