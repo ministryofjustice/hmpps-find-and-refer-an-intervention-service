@@ -257,7 +257,8 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.upsertCriminogenicNeeds(criminogenicNeedDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(1)
-    verify(criminogenicNeedRepository, times(0)).saveAll(anyList())
+    verify(criminogenicNeedRepository, times(1)).deleteAllByIntervention(any())
+    verify(criminogenicNeedRepository, times(1)).saveAll(anyList())
   }
 
   @Test

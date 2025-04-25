@@ -208,40 +208,47 @@ class UpsertInterventionProcessor(
     criminogenicNeeds: Array<String>,
     catalogue: InterventionCatalogue,
   ): MutableSet<CriminogenicNeed> {
-    val criminogenicNeedRecords =
-      criminogenicNeedRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
+    val criminogenicNeedRecords = criminogenicNeedRepository.findByIntervention(catalogue)?.toMutableList()
+
+    fun createCriminogenicNeeds() {
+      criminogenicNeeds.forEach { needReference ->
+        val criminogenicReference = criminogenicNeedRefRepository.findByName(needReference)
+
+        criminogenicNeedRecords?.add(
+          CriminogenicNeed(
+            id = UUID.randomUUID(),
+            need = criminogenicReference ?: criminogenicNeedRefRepository.save(CriminogenicNeedRef(UUID.randomUUID(), needReference)),
+            intervention = catalogue,
+          ),
+        )
+      }
+    }
 
     when {
-      criminogenicNeedRecords.isNotEmpty() -> {
+      criminogenicNeedRecords?.isNotEmpty() == true -> {
+        criminogenicNeedRepository.deleteAllByIntervention(catalogue)
+        criminogenicNeedRecords.removeAll(criminogenicNeedRecords)
+
         logger.info(
-          "Retrieved ${criminogenicNeedRecords.size} Criminogenic Need records from Database for Intervention Catalogue Entry - " +
+          "Retrieved and removed ${criminogenicNeedRecords.size} Criminogenic Needs for Intervention Catalogue Entry - " +
             "${catalogue.name}, id = ${catalogue.id}",
         )
-        return criminogenicNeedRecords.toMutableSet()
+
+        createCriminogenicNeeds()
       }
       else -> {
-        criminogenicNeeds.forEach { needReference ->
-          val criminogenicReference = criminogenicNeedRefRepository.findByName(needReference)
-
-          criminogenicNeedRecords.add(
-            CriminogenicNeed(
-              id = UUID.randomUUID(),
-              need = criminogenicReference ?: criminogenicNeedRefRepository.save(CriminogenicNeedRef(UUID.randomUUID(), needReference)),
-              intervention = catalogue,
-            ),
-          )
-        }
-
-        return if (criminogenicNeedRecords.isNotEmpty()) {
-          logger.info(
-            "Inserted ${criminogenicNeedRecords.size} Criminogenic Need records from Database for Intervention Catalogue Entry - " +
-              "${catalogue.name}, id = ${catalogue.id}",
-          )
-          return criminogenicNeedRepository.saveAll(criminogenicNeedRecords).toMutableSet()
-        } else {
-          mutableSetOf()
-        }
+        createCriminogenicNeeds()
       }
+    }
+
+    return if (criminogenicNeedRecords?.isNotEmpty() == true) {
+      logger.info(
+        "Inserted ${criminogenicNeedRecords.size} Criminogenic Need records into the Database for Intervention Catalogue Entry - " +
+          "${catalogue.name}, id = ${catalogue.id}",
+      )
+      criminogenicNeedRepository.saveAll(criminogenicNeedRecords).toMutableSet()
+    } else {
+      mutableSetOf()
     }
   }
 
