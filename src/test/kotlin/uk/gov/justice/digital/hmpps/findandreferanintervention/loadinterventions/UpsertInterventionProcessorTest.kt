@@ -744,6 +744,28 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
+  fun `Providing Json to be extracted and retrieve existing Possible Outcome Definition object from the database`() {
+    val possibleOutcomeDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/PossibleOutcomeDefinition.json")
+
+    val possibleOutcomeDefinitions =
+      ObjectMapper().readValue(possibleOutcomeDefinitionJson, object : TypeReference<Array<String>>() {})
+
+    whenever(possibleOutcomeRepository.findByIntervention(any())).thenReturn(
+      PossibleOutcome(
+        id = UUID.randomUUID(),
+        outcome = "Prevent users from becoming homeless",
+        intervention = catalogue,
+      ),
+    )
+
+    val result = processor.upsertPossibleOutcomes(possibleOutcomeDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(1)
+    verify(possibleOutcomeRepository, times(0)).saveAll(anyList())
+  }
+
+  @Test
   fun `Providing Json to be extracted as an Array of Possible Outcome Definition objects to be stored into the database`() {
     val possibleOutcomeDefinitionJson =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/PossibleOutcomeDefinition.json")

@@ -28,6 +28,17 @@
     },
     "eligibility_offence": [],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Dependency and recovery services aim to achieve one or more of the following outcomes:",
+        "",
+        "\u2022 stopping the use of harmful and addictive substances like drugs and alcohol",
+        "\u2022 developing skills to avoid or manage situations that may encourage the use of harmful substances",
+        "\u2022 strengthening self-belief to manage or prevent using addictive substances",
+        "\u2022 improving physical health and mental resilience",
+        "\u2022 establishing plans to manage addictive behaviours, including support from other treatment providers and detox programmes",
+        "\u2022 better understanding of addiction, what causes it and options to reduce dependency",
+        ""
+    ],
     "risk_consideration": null,
     "special_educational_needs": null,
     "exclusion": null

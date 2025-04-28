@@ -29,6 +29,15 @@
     },
     "eligibility_offence": [],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Accommodation services aim to achieve one or more of the following outcomes:",
+        "",
+        "\u2022 removing barriers to finding or keeping accommodation, like money problems, behaviour, health or past offences",
+        "\u2022 preventing homelessness, including support to help stop an eviction",
+        "\u2022 helping find and secure social or supported housing",
+        "\u2022 finding tenancy in the private rented sector, or keeping existing tenancy",
+        "\u2022 having stable housing or having a strong prospect of keeping stable housing for at least 3 months - this includes men who have been in prison for less than 6 months"
+    ],
     "risk_consideration": {
         "cn_score_guide": "NA",
         "extremism_risk_guide": null,

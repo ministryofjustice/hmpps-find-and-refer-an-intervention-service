@@ -31,6 +31,9 @@
         }
     ],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Reduce risk of IPV"
+    ],
     "risk_consideration": {
         "cn_score_guide": null,
         "extremism_risk_guide": null,

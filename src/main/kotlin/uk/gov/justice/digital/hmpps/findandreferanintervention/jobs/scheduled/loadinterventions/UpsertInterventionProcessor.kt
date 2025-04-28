@@ -596,15 +596,38 @@ class UpsertInterventionProcessor(
     catalogue: InterventionCatalogue,
   ): MutableSet<PossibleOutcome> {
     val possibleOutcomeList = mutableListOf<PossibleOutcome>()
+    val possibleOutcomesRecord = possibleOutcomeRepository.findByIntervention(catalogue)
 
-    for (possibleOutcome in possibleOutcomes) {
-      possibleOutcomeList.add(
-        PossibleOutcome(id = UUID.randomUUID(), outcome = possibleOutcome),
-      )
+    when {
+      possibleOutcomesRecord != null -> {
+        logger.info(
+          "Retrieved Possible Outcome record from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+        )
+
+        possibleOutcomesRecord.outcome = possibleOutcomes.toString()
+        possibleOutcomeList.add(possibleOutcomesRecord)
+
+        logger.info(
+          "Possible Outcomes record has now been upserted for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+        )
+
+        return possibleOutcomeList.toMutableSet()
+      }
+      else -> {
+        for (possibleOutcome in possibleOutcomes) {
+          possibleOutcomeList.add(
+            PossibleOutcome(
+              id = UUID.randomUUID(),
+              outcome = possibleOutcome,
+              intervention = catalogue,
+            ),
+          )
+        }
+
+        logger.info("Inserted ${possibleOutcomeList.size} Possible Outcome record for Intervention Catalogue Entry - ${catalogue.name}")
+        return possibleOutcomeRepository.saveAll(possibleOutcomeList).toMutableSet()
+      }
     }
-
-    logger.info("Inserted ${possibleOutcomeList.size} Possible Outcome records for Intervention Catalogue Entry - ${catalogue.name}")
-    return possibleOutcomeRepository.saveAll(possibleOutcomeList).toMutableSet()
   }
 
   fun hasRoshLevel(roshLevel: String?): RoshLevel? {

@@ -26,6 +26,11 @@
     },
     "eligibility_offence": [],
     "exclude_offence": [],
+    "possible_outcomes": [
+        "Develop thinking (cognitive) skills to manage risk factors, develop protective factors, and achieve pro-social goals.",
+        "",
+        "Better recognise and manage emotions."
+    ],
     "risk_consideration": {
         "cn_score_guide": "total score of 5+  OASys items \n2.6 - Recognises the impact and consequences of offending \n7.2 - Regular activities encourage offending \n11.4 - Temper control \n11.6 - Problem solving \n11.7 - Awareness of consequences \n11.9 - Understands other people's point of view \n12.1 - Pro-criminal attitudes",
         "extremism_risk_guide": null,

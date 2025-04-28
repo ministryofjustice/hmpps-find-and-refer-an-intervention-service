@@ -37,6 +37,9 @@
         }
     ],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "assist participant to desist from crime"
+    ],
     "risk_consideration": null,
     "special_educational_needs": {
         "exclusion_literacy_level_guide": null,

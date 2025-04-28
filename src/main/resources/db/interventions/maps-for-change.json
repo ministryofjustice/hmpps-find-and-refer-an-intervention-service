@@ -31,6 +31,9 @@
         }
     ],
     "exclude_offence": null,
+    "possible_outcomes": [
+        "Depends on the needs of the individual.  - each MAP has different goals"
+    ],
     "risk_consideration": {
         "cn_score_guide": null,
         "extremism_risk_guide": null,

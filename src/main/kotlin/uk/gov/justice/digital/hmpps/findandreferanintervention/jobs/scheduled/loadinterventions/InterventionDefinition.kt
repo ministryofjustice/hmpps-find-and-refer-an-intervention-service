@@ -14,7 +14,7 @@ data class InterventionCatalogueDefinition(
   @JsonProperty("personal_eligibility") val personalEligibility: PersonalEligibilityDefinition?,
   @JsonProperty("eligibility_offence") val eligibleOffence: Array<EligibleOffenceDefinition>?,
   @JsonProperty("exclude_offence") val excludedOffence: Array<ExcludedOffencesDefinition>?,
-  @JsonProperty("possible_outcome") val possibleOutcome: Array<String>?,
+  @JsonProperty("possible_outcomes") val possibleOutcome: Array<String>?,
   @JsonProperty("risk_consideration") val riskConsideration: RiskConsiderationDefinition?,
   @JsonProperty("special_educational_needs") val specialEducationalNeed: SpecialEducationalNeedDefinition?,
   @JsonProperty("exclusion") val exclusion: ExclusionDefinition?,
