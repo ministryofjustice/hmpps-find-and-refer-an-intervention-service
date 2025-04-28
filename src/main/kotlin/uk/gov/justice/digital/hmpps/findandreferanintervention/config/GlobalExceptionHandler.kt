@@ -49,7 +49,7 @@ class GlobalExceptionHandler {
         developerMessage = e.message,
       ),
     )
-    .also { log.debug("Forbidden (403) returned: {}", e.message) }
+    .also { log.error("Forbidden (403) returned: {}", e.message) }
 
   @ExceptionHandler(Exception::class)
   fun handleException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
@@ -73,7 +73,7 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      log.debug("Enum Mismatch exception: {}", e.message)
+      log.error("Enum Mismatch exception: {}", e.message)
     }
 
   @ExceptionHandler(ResponseStatusException::class)
