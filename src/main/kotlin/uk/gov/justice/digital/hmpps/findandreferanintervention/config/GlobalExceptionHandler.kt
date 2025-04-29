@@ -49,7 +49,7 @@ class GlobalExceptionHandler {
         developerMessage = e.message,
       ),
     )
-    .also { log.debug("Forbidden (403) returned: {}", e.message) }
+    .also { log.error("Forbidden (403) returned: {}", e.message) }
 
   @ExceptionHandler(Exception::class)
   fun handleException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
@@ -73,7 +73,7 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      log.error("Unexpected exception", e)
+      log.error("Enum Mismatch exception: {}", e.message)
     }
 
   @ExceptionHandler(ResponseStatusException::class)
@@ -81,7 +81,7 @@ class GlobalExceptionHandler {
   fun handleResponseException(e: ResponseStatusException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = e.reason, developerMessage = e.message),
-    ).also { log.error("Unexpected exception", e) }
+    ).also { log.error("Response Status exception: {}", e.message) }
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
