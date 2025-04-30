@@ -18,8 +18,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter:8.10.0")
-  implementation("io.sentry:sentry-logback:8.10.0")
+  implementation("io.sentry:sentry-spring-boot-starter:8.11.1")
+  implementation("io.sentry:sentry-logback:8.11.1")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.1")
 
