@@ -36,7 +36,7 @@
         "osp_dc_icc_combination_guide": "OSP-DC or OSP-IIC (OASys Sexual Reconviction Predictor \u2013 Contact or Indecent Imagery)",
         "ogrs_score_guide": "OGRS3 (Offender Group Reconviction Scale 3)",
         "ovp_guide": "OVP (OASys Violence Predictor)",
-        "ogp_guide": "OVP (OASys Violence Predictor)",
+        "ogp_guide": null,
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": "RSR (Risk of Serious Recidivism)"
