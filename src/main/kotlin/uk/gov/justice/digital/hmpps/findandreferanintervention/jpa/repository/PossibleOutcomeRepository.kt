@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Possib
 import java.util.UUID
 
 interface PossibleOutcomeRepository : JpaRepository<PossibleOutcome, UUID> {
-  fun findByIntervention(intervention: InterventionCatalogue): PossibleOutcome?
+  fun findByIntervention(intervention: InterventionCatalogue): List<PossibleOutcome>?
 }
