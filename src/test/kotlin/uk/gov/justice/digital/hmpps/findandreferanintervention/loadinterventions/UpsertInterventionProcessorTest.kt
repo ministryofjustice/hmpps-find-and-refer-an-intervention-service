@@ -752,16 +752,16 @@ internal class UpsertInterventionProcessorTest {
       ObjectMapper().readValue(possibleOutcomeDefinitionJson, object : TypeReference<Array<String>>() {})
 
     whenever(possibleOutcomeRepository.findByIntervention(any())).thenReturn(
-      PossibleOutcome(
-        id = UUID.randomUUID(),
-        outcome = "Prevent users from becoming homeless",
-        intervention = catalogue,
+      listOf(
+        PossibleOutcome(id = UUID.randomUUID(), outcome = "Obtain or maintain suitable accommodation", intervention = catalogue),
+        PossibleOutcome(id = UUID.randomUUID(), outcome = "Overcome barriers to obtaining suitable accommodation", intervention = catalogue),
+        PossibleOutcome(id = UUID.randomUUID(), outcome = "Prevent users from becoming homeless", intervention = catalogue),
       ),
     )
 
     val result = processor.upsertPossibleOutcomes(possibleOutcomeDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(1)
+    assertThat(result.count()).isEqualTo(3)
     verify(possibleOutcomeRepository, times(0)).saveAll(anyList())
   }
 

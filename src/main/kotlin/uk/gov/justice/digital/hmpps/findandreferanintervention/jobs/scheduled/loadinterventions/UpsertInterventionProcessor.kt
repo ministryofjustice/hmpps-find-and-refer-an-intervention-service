@@ -596,22 +596,16 @@ class UpsertInterventionProcessor(
     catalogue: InterventionCatalogue,
   ): MutableSet<PossibleOutcome> {
     val possibleOutcomeList = mutableListOf<PossibleOutcome>()
-    val possibleOutcomesRecord = possibleOutcomeRepository.findByIntervention(catalogue)
+    val possibleOutcomesRecords = possibleOutcomeRepository.findByIntervention(catalogue)
 
     when {
-      possibleOutcomesRecord != null -> {
+      possibleOutcomesRecords?.isNotEmpty() == true -> {
         logger.info(
-          "Retrieved Possible Outcome record from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
+          "Retrieved ${possibleOutcomesRecords.size} Possible Outcomes record from Database for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
         )
 
-        possibleOutcomesRecord.outcome = possibleOutcomes.toString()
-        possibleOutcomeList.add(possibleOutcomesRecord)
-
-        logger.info(
-          "Possible Outcomes record has now been upserted for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}",
-        )
-
-        return possibleOutcomeList.toMutableSet()
+        return possibleOutcomesRecords.toMutableSet()
       }
       else -> {
         for (possibleOutcome in possibleOutcomes) {
