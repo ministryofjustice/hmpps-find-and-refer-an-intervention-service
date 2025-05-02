@@ -66,6 +66,7 @@ dependencies {
   testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("org.springframework.batch:spring-batch-test")
+  testImplementation("org.springframework.security:spring-security-test")
   // testImplementation("com.github.tomakehurst:wiremock-jre8:3.0.1")
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.3")

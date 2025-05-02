@@ -11,6 +11,7 @@ import org.springframework.security.access.AccessDeniedException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.method.annotation.HandlerMethodValidationException
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.springframework.web.server.ResponseStatusException
 import org.springframework.web.servlet.resource.NoResourceFoundException
@@ -82,6 +83,21 @@ class GlobalExceptionHandler {
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = e.reason, developerMessage = e.message),
     ).also { log.error("Response Status exception: {}", e.message) }
+
+  @ExceptionHandler(HandlerMethodValidationException::class)
+  fun handleConstraintViolationException(ex: HandlerMethodValidationException): ResponseEntity<ErrorResponse> {
+    val violationMessages = ex.allErrors.joinToString("; ") { it.defaultMessage ?: "Validation error" }
+
+    return ResponseEntity.status(BAD_REQUEST)
+      .body(
+        ErrorResponse(
+          status = BAD_REQUEST,
+          userMessage = "Validation failure: $violationMessages",
+          developerMessage = ex.message,
+        ),
+      )
+      .also { log.info("Input request not matching the pattern: {}", violationMessages) }
+  }
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
