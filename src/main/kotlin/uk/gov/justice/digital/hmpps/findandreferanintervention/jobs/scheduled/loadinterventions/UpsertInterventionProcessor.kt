@@ -173,7 +173,7 @@ class UpsertInterventionProcessor(
     catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
 
     if (catalogue.deliveryMethods.isNotEmpty() && item.deliveryMethodSetting?.isNotEmpty() == true) {
-      upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue.deliveryMethods)
+      upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue)
     }
     if (item.eligibleOffence?.isNotEmpty() == true) {
       catalogue.eligibleOffences = upsertEligibleOffences(item.eligibleOffence, catalogue)
@@ -359,14 +359,10 @@ class UpsertInterventionProcessor(
 
   fun upsertDeliveryMethodSettings(
     deliveryMethodSettings: Array<String>,
-    deliveryMethods: MutableSet<DeliveryMethod>,
+    catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethodSetting> {
-    var deliveryMethodSettingRecords = mutableListOf<DeliveryMethodSetting>()
-
-    deliveryMethods.forEach { deliveryMethod ->
-      deliveryMethodSettingRecords =
-        deliveryMethodSettingRepository.findByDeliveryMethodId(deliveryMethod.id)?.toMutableList() ?: mutableListOf()
-    }
+    val deliveryMethodSettingRecords =
+      deliveryMethodSettingRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
       deliveryMethodSettingRecords.isNotEmpty() -> {
@@ -376,24 +372,25 @@ class UpsertInterventionProcessor(
         return deliveryMethodSettingRecords.toMutableSet()
       }
       else -> {
-        for (deliveryMethod in deliveryMethods) {
-          for (deliveryMethodSetting in deliveryMethodSettings) {
-            val settingType = hasDeliveryMethodSetting(deliveryMethodSetting)
+        for (deliveryMethodSetting in deliveryMethodSettings) {
+          val settingType = hasDeliveryMethodSetting(deliveryMethodSetting)
 
-            when {
-              settingType != null -> {
-                deliveryMethodSettingRecords.add(
-                  DeliveryMethodSetting(id = UUID.randomUUID(), deliveryMethodId = deliveryMethod.id, setting = settingType),
-                )
-              }
-              else -> {
-                logger.info(
-                  "Unable to create Delivery Method Setting record for Id - ${deliveryMethod.id}, as Setting Type is null or invalid",
-                )
-              }
+          when {
+            settingType != null -> {
+              deliveryMethodSettingRecords.add(
+                DeliveryMethodSetting(id = UUID.randomUUID(), intervention = catalogue, setting = settingType),
+              )
+            }
+            else -> {
+              logger.info(
+                "Unable to create Delivery Method Setting - '$deliveryMethodSetting', " +
+                  "for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}, " +
+                  "as SettingType is null or invalid",
+              )
             }
           }
         }
+
         deliveryMethodSettingRepository.saveAll(deliveryMethodSettingRecords)
         logger.info("Inserted ${deliveryMethodSettingRecords.size} Delivery Method Setting records")
         return deliveryMethodSettingRecords.toMutableSet()
