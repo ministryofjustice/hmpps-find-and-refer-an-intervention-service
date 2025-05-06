@@ -19,11 +19,9 @@ open class DeliveryLocation(
   @Column(name = "id")
   open var id: UUID,
 
-  @NotNull
   @Column(name = "provider_name", length = Integer.MAX_VALUE)
   open var providerName: String,
 
-  @NotNull
   @Column(name = "contact", length = Integer.MAX_VALUE)
   open var contact: String,
 
