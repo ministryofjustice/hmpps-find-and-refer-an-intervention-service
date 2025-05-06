@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
+import jakarta.annotation.Nullable
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -19,13 +20,13 @@ open class DeliveryLocation(
   @Column(name = "id")
   open var id: UUID,
 
-  @NotNull
+  @Nullable
   @Column(name = "provider_name", length = Integer.MAX_VALUE)
-  open var providerName: String,
+  open var providerName: String? = null,
 
-  @NotNull
+  @Nullable
   @Column(name = "contact", length = Integer.MAX_VALUE)
-  open var contact: String,
+  open var contact: String? = null,
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
