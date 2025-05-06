@@ -40,7 +40,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   val deliveryMethodDtos =
     this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
   val interventionsDtos = this.interventions.map { it.toDto() }
-  val deliverylocationDtos= this.deliveryLocations.map { it.toDto() }
+  val deliverylocationDtos = this.deliveryLocations.map { it.toDto() }
   val courseDtos = this.courses.map { it.toDto() }
 
   return InterventionDetailsDto(
@@ -72,12 +72,12 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   )
 }
 
-private fun getCommunityLocations(deliveryLocations: List<DeliveryLocationDto>): List<CommunityLocation>? {
-  return deliveryLocations.groupBy { it.pduRef.pccRegion }.map { pccRegion -> CommunityLocation(pccRegion.key.name,
-    pccRegion.value.map { it.pduRef }.toMutableSet()) }.ifEmpty { null }
-}
-
-
+private fun getCommunityLocations(deliveryLocations: List<DeliveryLocationDto>): List<CommunityLocation>? = deliveryLocations.groupBy { it.pduRef.pccRegion }.map { pccRegion ->
+  CommunityLocation(
+    pccRegion.key.name,
+    pccRegion.value.map { it.pduRef }.toMutableSet(),
+  )
+}.ifEmpty { null }
 
 private fun getCustodyLocations(courseDtos: List<CourseDto>): List<CustodyLocation>? = courseDtos.flatMap { courseDto ->
   val offerings = courseDto.offering

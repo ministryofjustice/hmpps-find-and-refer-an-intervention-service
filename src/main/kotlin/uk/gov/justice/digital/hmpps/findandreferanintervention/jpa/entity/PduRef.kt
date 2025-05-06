@@ -35,5 +35,5 @@ open class PduRef(
 fun PduRef.toDto(): PduRefDto = PduRefDto(
   id = this.id,
   pduName = this.name,
-  pccRegion = this.pccRegion.toDto()
+  pccRegion = this.pccRegion.toDto(),
 )
