@@ -6,6 +6,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUs
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethod
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethodSetting
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.EligibleOffence
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.EnablingIntervention
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.ExcludedOffence
@@ -56,6 +57,7 @@ fun InterventionCatalogueFactory.create(
   criminogenicNeeds: MutableSet<CriminogenicNeed> = criminogenicNeedFactory.createSet(),
   deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
   deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
+  deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),
   eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
   enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
   excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
@@ -85,6 +87,7 @@ fun InterventionCatalogueFactory.create(
     criminogenicNeeds,
     deliveryLocations,
     deliveryMethods,
+    deliveryMethodSettings,
     eligibleOffences,
     enablingInterventions,
     excludedOffences,
@@ -116,6 +119,7 @@ fun InterventionCatalogueFactory.createDto(
   criminogenicNeeds: MutableSet<CriminogenicNeed> = criminogenicNeedFactory.createSet(),
   deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
   deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
+  deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),
   eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
   enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
   excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
@@ -144,6 +148,7 @@ fun InterventionCatalogueFactory.createDto(
   criminogenicNeeds,
   deliveryLocations,
   deliveryMethods,
+  deliveryMethodSettings,
   eligibleOffences,
   enablingInterventions,
   excludedOffences,

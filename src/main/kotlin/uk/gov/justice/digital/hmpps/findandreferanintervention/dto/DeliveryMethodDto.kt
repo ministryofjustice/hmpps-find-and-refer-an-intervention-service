@@ -8,7 +8,6 @@ data class DeliveryMethodDto(
   val attendanceType: String? = null,
   val description: String? = null,
   val deliveryFormat: String? = null,
-  val deliveryMethodSettings: List<DeliveryMethodSettingDto> = mutableListOf(),
 ) {
   companion object {
     fun fromEntity(deliveryMethod: DeliveryMethod): DeliveryMethodDto = DeliveryMethodDto(
@@ -16,9 +15,6 @@ data class DeliveryMethodDto(
       attendanceType = deliveryMethod.attendanceType,
       description = deliveryMethod.deliveryMethodDescription,
       deliveryFormat = deliveryMethod.deliveryFormat,
-      deliveryMethodSettings = deliveryMethod.deliveryMethodSettings.map {
-        DeliveryMethodSettingDto.fromEntity(it)
-      },
     )
   }
 }

@@ -2,11 +2,9 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.specificatio
 
 import jakarta.persistence.criteria.CriteriaBuilder
 import jakarta.persistence.criteria.CriteriaQuery
-import jakarta.persistence.criteria.JoinType
 import jakarta.persistence.criteria.Predicate
 import jakarta.persistence.criteria.Root
 import org.springframework.data.jpa.domain.Specification
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethod
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethodSetting
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
@@ -46,14 +44,8 @@ fun getInterventionCatalogueSpecification(
   }
 
   settingType?.let {
-    val deliveryMethodSettingJoin =
-      root.join<InterventionCatalogue, DeliveryMethod>("deliveryMethods", JoinType.LEFT)
-        .join<DeliveryMethod, DeliveryMethodSetting>("deliveryMethodSettings", JoinType.LEFT)
     predicates.add(
-      criteriaBuilder.equal(
-        deliveryMethodSettingJoin.get<SettingType>("setting"),
-        settingType,
-      ),
+      root.get<DeliveryMethodSetting>("deliveryMethodSettings").get<SettingType>("setting").`in`(settingType),
     )
   }
   programmeName?.let {
