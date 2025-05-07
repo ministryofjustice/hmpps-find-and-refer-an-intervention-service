@@ -355,7 +355,8 @@ class UpsertInterventionProcessor(
     when {
       deliveryMethodSettingRecords.isNotEmpty() -> {
         logger.info(
-          "Retrieved ${deliveryMethodSettingRecords.size} Delivery Method Setting records",
+          "Retrieved ${deliveryMethodSettingRecords.size} Delivery Method Setting records for Intervention Catalogue Entry " +
+            "- ${catalogue.name}, id = ${catalogue.id}",
         )
         return deliveryMethodSettingRecords.toMutableSet()
       }
@@ -380,7 +381,10 @@ class UpsertInterventionProcessor(
         }
 
         deliveryMethodSettingRepository.saveAll(deliveryMethodSettingRecords)
-        logger.info("Inserted ${deliveryMethodSettingRecords.size} Delivery Method Setting records")
+        logger.info(
+          "Inserted ${deliveryMethodSettingRecords.size} Delivery Method Setting records for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
         return deliveryMethodSettingRecords.toMutableSet()
       }
     }
