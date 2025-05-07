@@ -169,10 +169,10 @@ class UpsertInterventionProcessor(
     if (item.deliveryLocation?.isNotEmpty() == true) {
       catalogue.deliveryLocations = upsertDeliveryLocations(item.deliveryLocation, catalogue)
     }
-
-    catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
-
-    if (catalogue.deliveryMethods.isNotEmpty() && item.deliveryMethodSetting?.isNotEmpty() == true) {
+    if (item.deliveryMethod?.isNotEmpty() == true) {
+      catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
+    }
+    if (item.deliveryMethodSetting.isNotEmpty()) {
       upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue)
     }
     if (item.eligibleOffence?.isNotEmpty() == true) {
@@ -286,7 +286,7 @@ class UpsertInterventionProcessor(
   }
 
   fun upsertDeliveryMethods(
-    deliveryMethods: Array<DeliveryMethodDefinition>?,
+    deliveryMethods: Array<DeliveryMethodDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethod> {
     val deliveryMethodRecords = deliveryMethodRepository.findByIntervention(catalogue)?.toMutableList()
@@ -300,25 +300,13 @@ class UpsertInterventionProcessor(
         return deliveryMethodRecords.toMutableSet()
       }
       else -> {
-        if (deliveryMethods?.isNotEmpty() == true) {
-          for (deliveryMethod in deliveryMethods) {
-            deliveryMethodRecords?.add(
-              DeliveryMethod(
-                id = UUID.randomUUID(),
-                attendanceType = deliveryMethod.attendanceType,
-                deliveryFormat = deliveryMethod.deliveryFormat,
-                deliveryMethodDescription = deliveryMethod.deliveryMethodDescription,
-                intervention = catalogue,
-              ),
-            )
-          }
-        } else {
+        for (deliveryMethod in deliveryMethods) {
           deliveryMethodRecords?.add(
             DeliveryMethod(
               id = UUID.randomUUID(),
-              attendanceType = null,
-              deliveryFormat = null,
-              deliveryMethodDescription = null,
+              attendanceType = deliveryMethod.attendanceType,
+              deliveryFormat = deliveryMethod.deliveryFormat,
+              deliveryMethodDescription = deliveryMethod.deliveryMethodDescription,
               intervention = catalogue,
             ),
           )

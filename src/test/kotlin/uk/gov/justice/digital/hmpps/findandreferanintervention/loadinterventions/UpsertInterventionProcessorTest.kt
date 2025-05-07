@@ -406,16 +406,6 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing no Json object to a new Delivery Method Definition object to be stored into the database`() {
-    val deliveryMethodDefinitions = emptyArray<DeliveryMethodDefinition>()
-
-    val result = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-
-    assertThat(result.count()).isEqualTo(1)
-    verify(deliveryMethodRepository, times(1)).saveAll(anyList())
-  }
-
-  @Test
   fun `Providing Json to be extracted as an Array of Delivery Method Setting Definition objects to be stored into the database`() {
     val deliveryMethodSettingDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
