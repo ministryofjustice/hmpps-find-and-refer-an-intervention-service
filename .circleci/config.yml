@@ -5,7 +5,7 @@ orbs:
 parameters:
   releases-slack-channel:
     type: string
-    default: SLACK_RELEASES_CHANNEL
+    default: find-refer-interventions-dev-notification
 
 jobs:
   validate:
