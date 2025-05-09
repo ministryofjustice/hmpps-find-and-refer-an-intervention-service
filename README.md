@@ -107,6 +107,30 @@ The job can be run manually using the following command to load the data locally
 SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=upsertInterventionsJob’
 ```
 
+For loading intervention metadata like delivery location, intervention catalogue map and intervention catalogue course map both locally and in a higher environment, a Spring Batch job is utilised. This reads the respective .csv files in the directory [here](src/main/resources/csv) and maps these to the corresponding db tables.
+
+The job can be run manually using the following command to load the data locally
+
+For loading Delivery location data, update the `delivery_location.csv` file in the directory [here](src/main/resources/csv) and run the following command:
+
+```zsh
+SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=loadDeliveryLocationJob’
+```
+
+For loading Intervention catalogue map data, update the `intervention_catalogue_map.csv` file in the directory [here](src/main/resources/csv) and run the following command:
+
+```zsh
+SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=loadInterventionCatalogueMapJob’
+```
+
+For loading Intervention catalogue course map data, update the `intervention_catalogue_course_map.csv` file in the directory [here](src/main/resources/csv) and run the following command:
+
+```zsh
+SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=loadInterventionCatalogueToCourseMapJob’
+```
+ 
+For future updates, we can just add the new rows to the end of the csv and the job will take care of inserting the new row. We also have the feature of deleting any data already present via the csv. We have to mark the status column of the particular row with 'D' and the job will delete that row from the database.
+
 ## Deployments
 
 Deployments are part of our CI process, on the `main` branch using the `build-test-and-deploy` Workflow.
