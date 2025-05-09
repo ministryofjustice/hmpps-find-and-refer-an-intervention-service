@@ -250,6 +250,7 @@ class InterventionCatalogueFilterRepositoryTest {
       "criminogenicNeeds",
       "deliveryLocations",
       "deliveryMethods",
+      "deliveryMethodSettings",
       "eligibleOffences",
       "enablingInterventions",
       "excludedOffences",

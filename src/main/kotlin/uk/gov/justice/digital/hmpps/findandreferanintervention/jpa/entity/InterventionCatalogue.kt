@@ -19,6 +19,7 @@ import org.hibernate.annotations.JdbcType
 import org.hibernate.dialect.PostgreSQLEnumJdbcType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.CriminogenicNeedDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryMethodDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.DeliveryMethodSettingDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.InterventionCatalogueDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.RiskConsiderationDto
 import java.time.LocalDate
@@ -99,6 +100,9 @@ open class InterventionCatalogue(
   open var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
+  open var deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
@@ -147,10 +151,9 @@ open class InterventionCatalogue(
 fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
   val deliveryMethodDtos =
     this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
-  val deliveryMethodSettingList =
-    deliveryMethodDtos.flatMap { methodDto ->
-      methodDto.deliveryMethodSettings.map { settingDto -> settingDto.setting }
-    }
+  val settingList =
+    this.deliveryMethodSettings.map { DeliveryMethodSettingDto.fromEntity(it).setting }
+
   return InterventionCatalogueDto(
     id = this.id,
     criminogenicNeeds =
@@ -160,7 +163,7 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
     title = this.name,
     description = this.shortDescription,
     interventionType = this.interventionType,
-    setting = deliveryMethodSettingList,
+    setting = settingList,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,
     riskCriteria =
