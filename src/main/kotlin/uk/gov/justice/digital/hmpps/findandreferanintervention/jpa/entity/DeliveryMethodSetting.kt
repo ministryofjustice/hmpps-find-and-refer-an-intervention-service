@@ -25,7 +25,7 @@ open class DeliveryMethodSetting(
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
-  open var intervention: InterventionCatalogue?,
+  open var intervention: InterventionCatalogue,
 
   @NotNull
   @Column(name = "setting")

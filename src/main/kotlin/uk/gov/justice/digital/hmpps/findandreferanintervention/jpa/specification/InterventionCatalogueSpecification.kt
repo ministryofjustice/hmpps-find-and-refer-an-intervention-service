@@ -45,7 +45,10 @@ fun getInterventionCatalogueSpecification(
 
   settingType?.let {
     predicates.add(
-      root.get<DeliveryMethodSetting>("deliveryMethodSettings").get<SettingType>("setting").`in`(settingType),
+      criteriaBuilder.equal(
+        root.get<DeliveryMethodSetting>("deliveryMethodSettings").get<SettingType>("setting"),
+        settingType,
+      ),
     )
   }
   programmeName?.let {
