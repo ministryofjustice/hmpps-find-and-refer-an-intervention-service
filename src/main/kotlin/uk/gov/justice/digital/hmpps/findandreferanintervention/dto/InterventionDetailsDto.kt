@@ -31,7 +31,7 @@ data class InterventionDetailsDto(
   val communityLocations: List<CommunityLocation>? = null,
   val custodyLocations: List<CustodyLocation>? = null,
 ) {
-  data class CommunityLocation(val pccRegion: String, val pdus: MutableSet<PduRefDto>)
+  data class CommunityLocation(val npsRegion: String, val pdus: MutableSet<PduRefDto>)
 
   data class CustodyLocation(val prisonName: String, val category: String?, val county: String?)
 }
@@ -39,7 +39,6 @@ data class InterventionDetailsDto(
 fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
   val deliveryMethodDtos =
     this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
-  val interventionsDtos = this.interventions.map { it.toDto() }
   val deliverylocationDtos = this.deliveryLocations.map { it.toDto() }
   val courseDtos = this.courses.map { it.toDto() }
 
@@ -67,15 +66,15 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     maxAge = this.personalEligibility?.maxAge,
     expectedOutcomes = this.possibleOutcomes.map { it.outcome }.sorted().ifEmpty { null },
     sessionDetails = this.sessionDetail,
-    communityLocations = getCommunityLocations(deliverylocationDtos)?.sortedBy { it.pccRegion },
+    communityLocations = getCommunityLocations(deliverylocationDtos)?.sortedBy { it.npsRegion },
     custodyLocations = getCustodyLocations(courseDtos)?.sortedBy { it.prisonName },
   )
 }
 
-private fun getCommunityLocations(deliveryLocations: List<DeliveryLocationDto>): List<CommunityLocation>? = deliveryLocations.groupBy { it.pduRef.pccRegion }.map { pccRegion ->
+private fun getCommunityLocations(deliveryLocations: List<DeliveryLocationDto>): List<CommunityLocation>? = deliveryLocations.groupBy { it.pduRef.pccRegion.npsRegion }.map { npsRegionDto ->
   CommunityLocation(
-    pccRegion.key.name,
-    pccRegion.value.map { it.pduRef }.toMutableSet(),
+    npsRegionDto.key.name,
+    npsRegionDto.value.map { it.pduRef }.toMutableSet(),
   )
 }.ifEmpty { null }
 
