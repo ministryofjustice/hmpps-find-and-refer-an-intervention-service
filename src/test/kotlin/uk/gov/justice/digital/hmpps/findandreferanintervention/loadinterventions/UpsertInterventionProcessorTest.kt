@@ -29,6 +29,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Crimin
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeedRef
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethod
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethodSetting
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.EligibleOffence
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.EnablingIntervention
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.ExcludedOffence
@@ -118,7 +119,7 @@ internal class UpsertInterventionProcessorTest {
     val defaultPduRef2 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
     whenever(deliveryMethodRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
-    whenever(deliveryMethodSettingRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
+    whenever(deliveryMethodSettingRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethodSetting>())
     whenever(eligibleOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EligibleOffence>())
     whenever(enablingInterventionRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
     whenever(excludedOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<ExcludedOffence>())
@@ -406,54 +407,16 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing no Json object to a new Delivery Method Definition object to be stored into the database`() {
-    val deliveryMethodDefinitions = emptyArray<DeliveryMethodDefinition>()
-
-    val result = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-
-    assertThat(result.count()).isEqualTo(1)
-    verify(deliveryMethodRepository, times(1)).saveAll(anyList())
-  }
-
-  @Test
   fun `Providing Json to be extracted as an Array of Delivery Method Setting Definition objects to be stored into the database`() {
-    val deliveryMethodDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource(
-        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
-      )
-
     val deliveryMethodSettingDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinition.json",
       )
 
-    val deliveryMethodDefinitions =
-      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
-
     val deliveryMethodSettingDefinitions =
       ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val deliveryMethods = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
-
-    assertThat(result.count()).isEqualTo(9)
-    verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
-  }
-
-  @Test
-  fun `Created Delivery Method object from no Json, and extract Provided json as an Array of Delivery Method Setting Definition objects to be stored into the database`() {
-    val deliveryMethodSettingDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource(
-        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinition.json",
-      )
-
-    val deliveryMethodDefinitions = null
-
-    val deliveryMethodSettingDefinitions =
-      ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
-
-    val deliveryMethods = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
+    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
@@ -461,26 +424,17 @@ internal class UpsertInterventionProcessorTest {
 
   @Test
   fun `Providing Json to be extracted as an Array with one invalid Delivery Method Setting Definition object to be stored into the database`() {
-    val deliveryMethodDefinitionJson =
-      InterventionLoadFileReaderHelper.getResource(
-        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
-      )
-
     val deliveryMethodSettingDefinitionJson =
       InterventionLoadFileReaderHelper.getResource(
         "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinitionInvalidType.json",
       )
 
-    val deliveryMethodDefinitions =
-      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
-
     val deliveryMethodSettingDefinitions =
       ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val deliveryMethods = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
-    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, deliveryMethods)
+    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(6)
+    assertThat(result.count()).isEqualTo(2)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 
@@ -827,14 +781,14 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing hasRoshLevel method with valid value`() {
-    val result = processor.hasRoshLevel("HIGH")
+  fun `Providing getRoshLevel method with valid value`() {
+    val result = processor.getRoshLevel("HIGH")
     assertThat(result).isEqualTo(RoshLevel.HIGH)
   }
 
   @Test
-  fun `Providing hasRoshLevel method with invalid value`() {
-    val result = processor.hasRoshLevel("NOT_HIGH")
+  fun `Providing getRoshLevel method with invalid value`() {
+    val result = processor.getRoshLevel("NOT_HIGH")
     assertThat(result).isEqualTo(null)
   }
 

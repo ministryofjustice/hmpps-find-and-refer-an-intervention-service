@@ -166,22 +166,22 @@ class UpsertInterventionProcessor(
     if (item.criminogenicNeed.toString().isNotEmpty()) {
       catalogue.criminogenicNeeds = upsertCriminogenicNeeds(item.criminogenicNeed, catalogue)
     }
-    if (item.deliveryLocation?.isNotEmpty() == true) {
+    if (item.deliveryLocation != null) {
       catalogue.deliveryLocations = upsertDeliveryLocations(item.deliveryLocation, catalogue)
     }
-
-    catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
-
-    if (catalogue.deliveryMethods.isNotEmpty() && item.deliveryMethodSetting?.isNotEmpty() == true) {
-      upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue.deliveryMethods)
+    if (item.deliveryMethod != null) {
+      catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
     }
-    if (item.eligibleOffence?.isNotEmpty() == true) {
+    if (item.deliveryMethodSetting.isNotEmpty()) {
+      upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue)
+    }
+    if (item.eligibleOffence != null) {
       catalogue.eligibleOffences = upsertEligibleOffences(item.eligibleOffence, catalogue)
     }
     if (item.enablingIntervention.toString().isNotEmpty()) {
       catalogue.enablingInterventions = upsertEnablingInterventions(item.enablingIntervention, catalogue)
     }
-    if (item.excludedOffence?.isNotEmpty() == true) {
+    if (item.excludedOffence != null) {
       catalogue.excludedOffences = upsertExcludedOffences(item.excludedOffence, catalogue)
     }
     if (item.exclusion.toString().isNotEmpty()) {
@@ -190,7 +190,7 @@ class UpsertInterventionProcessor(
     if (item.personalEligibility.toString().isNotEmpty()) {
       catalogue.personalEligibility = upsertPersonalEligibility(item.personalEligibility, catalogue)
     }
-    if (item.possibleOutcome?.isNotEmpty() == true) {
+    if (item.possibleOutcome != null) {
       catalogue.possibleOutcomes = upsertPossibleOutcomes(item.possibleOutcome, catalogue)
     }
     if (item.riskConsideration.toString().isNotEmpty()) {
@@ -200,7 +200,7 @@ class UpsertInterventionProcessor(
       catalogue.specialEducationalNeeds = upsertSpecialEducationalNeed(item.specialEducationalNeed, catalogue)
     }
 
-    logger.info("Finalised Intervention Catalogue Record for - ${catalogue.name}, id = ${catalogue.id}")
+    logger.info("Finished inserting Intervention Catalogue Record - ${catalogue.name}, id = ${catalogue.id}")
     return interventionCatalogueRepository.save(catalogue)
   }
 
@@ -208,18 +208,22 @@ class UpsertInterventionProcessor(
     criminogenicNeeds: Array<String>,
     catalogue: InterventionCatalogue,
   ): MutableSet<CriminogenicNeed> {
-    val criminogenicNeedRecords = criminogenicNeedRepository.findByIntervention(catalogue)?.toMutableList()
+    val criminogenicNeedRecords =
+      criminogenicNeedRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      criminogenicNeedRecords?.isNotEmpty() == true -> {
-        logger.info("Retrieved ${criminogenicNeedRecords.size} Criminogenic Need records from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+      criminogenicNeedRecords.isNotEmpty() -> {
+        logger.info(
+          "Retrieved ${criminogenicNeedRecords.size} Criminogenic Need records from Database for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
         return criminogenicNeedRecords.toMutableSet()
       }
       else -> {
         criminogenicNeeds.forEach { needReference ->
           val criminogenicReference = criminogenicNeedRefRepository.findByName(needReference)
 
-          criminogenicNeedRecords?.add(
+          criminogenicNeedRecords.add(
             CriminogenicNeed(
               id = UUID.randomUUID(),
               need = criminogenicReference ?: criminogenicNeedRefRepository.save(CriminogenicNeedRef(UUID.randomUUID(), needReference)),
@@ -228,8 +232,11 @@ class UpsertInterventionProcessor(
           )
         }
 
-        return if (criminogenicNeedRecords?.isNotEmpty() == true) {
-          logger.info("Inserted ${criminogenicNeedRecords.size} Criminogenic Need records from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+        return if (criminogenicNeedRecords.isNotEmpty()) {
+          logger.info(
+            "Inserted ${criminogenicNeedRecords.size} Criminogenic Need records from Database for Intervention Catalogue Entry - " +
+              "${catalogue.name}, id = ${catalogue.id}",
+          )
           return criminogenicNeedRepository.saveAll(criminogenicNeedRecords).toMutableSet()
         } else {
           mutableSetOf()
@@ -242,11 +249,15 @@ class UpsertInterventionProcessor(
     deliveryLocations: Array<DeliveryLocationDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryLocation> {
-    val deliveryLocationRecords = deliveryLocationRepository.findByIntervention(catalogue)?.toMutableList()
+    val deliveryLocationRecords =
+      deliveryLocationRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      deliveryLocationRecords?.isNotEmpty() == true -> {
-        logger.info("Retrieved ${deliveryLocationRecords.size} Delivery Location records from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+      deliveryLocationRecords.isNotEmpty() -> {
+        logger.info(
+          "Retrieved ${deliveryLocationRecords.size} Delivery Location records from Database for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
         return deliveryLocationRecords.toMutableSet()
       }
       else -> {
@@ -265,14 +276,14 @@ class UpsertInterventionProcessor(
                 ),
               )
 
-              deliveryLocationRecords?.add(newDeliveryLocation)
+              deliveryLocationRecords.add(newDeliveryLocation)
             } else {
               throw RuntimeException("PDU for ${deliveryLocation.providerName} was not found")
             }
           }
         }
 
-        return if (deliveryLocationRecords?.isNotEmpty() == true) {
+        return if (deliveryLocationRecords.isNotEmpty()) {
           logger.info(
             "Inserted ${deliveryLocationRecords.size} Delivery Location records from Database for Intervention Catalogue Entry - " +
               "${catalogue.name}, id = ${catalogue.id}",
@@ -286,13 +297,14 @@ class UpsertInterventionProcessor(
   }
 
   fun upsertDeliveryMethods(
-    deliveryMethods: Array<DeliveryMethodDefinition>?,
+    deliveryMethods: Array<DeliveryMethodDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethod> {
-    val deliveryMethodRecords = deliveryMethodRepository.findByIntervention(catalogue)?.toMutableList()
+    val deliveryMethodRecords =
+      deliveryMethodRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      deliveryMethodRecords?.isNotEmpty() == true -> {
+      deliveryMethodRecords.isNotEmpty() -> {
         logger.info(
           "Retrieved ${deliveryMethodRecords.size} Delivery Method records from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id = ${catalogue.id}",
@@ -300,34 +312,22 @@ class UpsertInterventionProcessor(
         return deliveryMethodRecords.toMutableSet()
       }
       else -> {
-        if (deliveryMethods?.isNotEmpty() == true) {
-          for (deliveryMethod in deliveryMethods) {
-            deliveryMethodRecords?.add(
-              DeliveryMethod(
-                id = UUID.randomUUID(),
-                attendanceType = deliveryMethod.attendanceType,
-                deliveryFormat = deliveryMethod.deliveryFormat,
-                deliveryMethodDescription = deliveryMethod.deliveryMethodDescription,
-                intervention = catalogue,
-              ),
-            )
-          }
-        } else {
-          deliveryMethodRecords?.add(
+        for (deliveryMethod in deliveryMethods) {
+          deliveryMethodRecords.add(
             DeliveryMethod(
               id = UUID.randomUUID(),
-              attendanceType = null,
-              deliveryFormat = null,
-              deliveryMethodDescription = null,
+              attendanceType = deliveryMethod.attendanceType,
+              deliveryFormat = deliveryMethod.deliveryFormat,
+              deliveryMethodDescription = deliveryMethod.deliveryMethodDescription,
               intervention = catalogue,
             ),
           )
         }
 
-        return if (deliveryMethodRecords?.isNotEmpty() == true) {
+        return if (deliveryMethodRecords.isNotEmpty()) {
           logger.info(
-            "Inserted ${deliveryMethodRecords.size} Delivery Method records from Database for Intervention Catalogue Entry " +
-              "- ${catalogue.name}, id = ${catalogue.id}",
+            "Inserted ${deliveryMethodRecords.size} Delivery Method records from Database for Intervention Catalogue Entry - " +
+              "${catalogue.name}, id = ${catalogue.id}",
           )
           return deliveryMethodRepository.saveAll(deliveryMethodRecords).toMutableSet()
         } else {
@@ -337,7 +337,7 @@ class UpsertInterventionProcessor(
     }
   }
 
-  fun hasDeliveryMethodSetting(settingName: String?): SettingType? {
+  fun getSettingTypeForSettingName(settingName: String?): SettingType? {
     val settingNameUppercased = settingName?.uppercase()
     val settingTypes = SettingType.entries.map(SettingType::name)
     var preRelease: String? = null
@@ -359,44 +359,44 @@ class UpsertInterventionProcessor(
 
   fun upsertDeliveryMethodSettings(
     deliveryMethodSettings: Array<String>,
-    deliveryMethods: MutableSet<DeliveryMethod>,
+    catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethodSetting> {
-    var deliveryMethodSettingRecords = mutableListOf<DeliveryMethodSetting>()
-
-    deliveryMethods.forEach { deliveryMethod ->
-      deliveryMethodSettingRecords =
-        deliveryMethodSettingRepository.findByDeliveryMethodId(deliveryMethod.id)?.toMutableList() ?: mutableListOf()
-    }
+    val deliveryMethodSettingRecords =
+      deliveryMethodSettingRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
       deliveryMethodSettingRecords.isNotEmpty() -> {
         logger.info(
-          "Retrieved ${deliveryMethodSettingRecords.size} Delivery Method Setting records",
+          "Retrieved ${deliveryMethodSettingRecords.size} Delivery Method Setting records for Intervention Catalogue Entry " +
+            "- ${catalogue.name}, id = ${catalogue.id}",
         )
         return deliveryMethodSettingRecords.toMutableSet()
       }
       else -> {
-        for (deliveryMethod in deliveryMethods) {
-          for (deliveryMethodSetting in deliveryMethodSettings) {
-            val settingType = hasDeliveryMethodSetting(deliveryMethodSetting)
+        for (deliveryMethodSetting in deliveryMethodSettings) {
+          val settingType = getSettingTypeForSettingName(deliveryMethodSetting)
 
-            when {
-              settingType != null -> {
-                deliveryMethodSettingRecords.add(
-                  DeliveryMethodSetting(id = UUID.randomUUID(), deliveryMethodId = deliveryMethod.id, setting = settingType),
-                )
-              }
-              else -> {
-                logger.info(
-                  "Unable to create Delivery Method Setting record for Id - ${deliveryMethod.id}, as Setting Type is null or invalid",
-                )
-              }
+          when {
+            settingType != null -> {
+              deliveryMethodSettingRecords.add(
+                DeliveryMethodSetting(id = UUID.randomUUID(), intervention = catalogue, setting = settingType),
+              )
+            }
+            else -> {
+              logger.info(
+                "Unable to create Delivery Method Setting - '$deliveryMethodSetting', " +
+                  "for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}, " +
+                  "as SettingType is null or invalid",
+              )
             }
           }
         }
-        deliveryMethodSettingRepository.saveAll(deliveryMethodSettingRecords)
-        logger.info("Inserted ${deliveryMethodSettingRecords.size} Delivery Method Setting records")
-        return deliveryMethodSettingRecords.toMutableSet()
+
+        logger.info(
+          "Inserted ${deliveryMethodSettingRecords.size} Delivery Method Setting records for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
+        return deliveryMethodSettingRepository.saveAll(deliveryMethodSettingRecords).toMutableSet()
       }
     }
   }
@@ -405,18 +405,22 @@ class UpsertInterventionProcessor(
     eligibleOffences: Array<EligibleOffenceDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<EligibleOffence> {
-    val eligibleOffenceRecords = eligibleOffenceRepository.findByIntervention(catalogue)?.toMutableList()
+    val eligibleOffenceRecords =
+      eligibleOffenceRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      eligibleOffenceRecords?.isNotEmpty() == true -> {
-        logger.info("Retrieved ${eligibleOffenceRecords.size} Eligible Offence records from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+      eligibleOffenceRecords.isNotEmpty() -> {
+        logger.info(
+          "Retrieved ${eligibleOffenceRecords.size} Eligible Offence records from Database for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
         return eligibleOffenceRecords.toMutableSet()
       }
       else -> {
         for (eligibleOffence in eligibleOffences) {
           val offenceType = offenceTypeRefRepository.findByName(eligibleOffence.offenceTypeId)
 
-          eligibleOffenceRecords?.add(
+          eligibleOffenceRecords.add(
             EligibleOffence(
               id = UUID.randomUUID(),
               offenceType = offenceType ?: offenceTypeRefRepository.save(OffenceTypeRef(UUID.randomUUID(), eligibleOffence.offenceTypeId)),
@@ -427,8 +431,11 @@ class UpsertInterventionProcessor(
           )
         }
 
-        return if (eligibleOffenceRecords?.isNotEmpty() == true) {
-          logger.info("Inserted ${eligibleOffenceRecords.size} Eligible Offence records for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+        return if (eligibleOffenceRecords.isNotEmpty()) {
+          logger.info(
+            "Inserted ${eligibleOffenceRecords.size} Eligible Offence records for Intervention Catalogue Entry - " +
+              "${catalogue.name}, id = ${catalogue.id}",
+          )
           return eligibleOffenceRepository.saveAll(eligibleOffenceRecords).toMutableSet()
         } else {
           mutableSetOf()
@@ -441,10 +448,11 @@ class UpsertInterventionProcessor(
     details: String?,
     catalogue: InterventionCatalogue,
   ): MutableSet<EnablingIntervention> {
-    val enablingInterventionRecords = enablingInterventionRepository.findByIntervention(catalogue)?.toMutableList()
+    val enablingInterventionRecords =
+      enablingInterventionRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      enablingInterventionRecords?.isNotEmpty() == true -> {
+      enablingInterventionRecords.isNotEmpty() -> {
         logger.info(
           "Retrieved ${enablingInterventionRecords.size} Enabling Intervention records from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id = ${catalogue.id}",
@@ -454,13 +462,16 @@ class UpsertInterventionProcessor(
       }
       else -> {
         details?.split(",")?.forEach { detail ->
-          enablingInterventionRecords?.add(
+          enablingInterventionRecords.add(
             EnablingIntervention(id = UUID.randomUUID(), enablingInterventionDetail = detail, intervention = catalogue),
           )
         }
 
-        return if (enablingInterventionRecords?.isNotEmpty() == true) {
-          logger.info("Inserted ${enablingInterventionRecords.size} Enabling Intervention records for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+        return if (enablingInterventionRecords.isNotEmpty()) {
+          logger.info(
+            "Inserted ${enablingInterventionRecords.size} Enabling Intervention records for Intervention Catalogue Entry - " +
+              "${catalogue.name}, id = ${catalogue.id}",
+          )
           return enablingInterventionRepository.saveAll(enablingInterventionRecords).toMutableSet()
         } else {
           mutableSetOf()
@@ -473,18 +484,22 @@ class UpsertInterventionProcessor(
     excludedOffences: Array<ExcludedOffencesDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<ExcludedOffence> {
-    val excludedOffenceRecords = excludedOffenceRepository.findByIntervention(catalogue)?.toMutableList()
+    val excludedOffenceRecords =
+      excludedOffenceRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      excludedOffenceRecords?.isNotEmpty() == true -> {
-        logger.info("Retrieved ${excludedOffenceRecords.size} Excluded Offence records from Database for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+      excludedOffenceRecords.isNotEmpty() -> {
+        logger.info(
+          "Retrieved ${excludedOffenceRecords.size} Excluded Offence records from Database for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
         return excludedOffenceRecords.toMutableSet()
       }
       else -> {
         for (excludedOffence in excludedOffences) {
           val offenceType = offenceTypeRefRepository.findByName(excludedOffence.offenceTypeId)
 
-          excludedOffenceRecords?.add(
+          excludedOffenceRecords.add(
             ExcludedOffence(
               id = UUID.randomUUID(),
               offenceType = offenceType ?: offenceTypeRefRepository.save(OffenceTypeRef(UUID.randomUUID(), excludedOffence.offenceTypeId)),
@@ -495,8 +510,11 @@ class UpsertInterventionProcessor(
           )
         }
 
-        return if (excludedOffenceRecords?.isNotEmpty() == true) {
-          logger.info("Inserted ${excludedOffenceRecords.size} Excluded Offence records for Intervention Catalogue Entry - ${catalogue.name}, id = ${catalogue.id}")
+        return if (excludedOffenceRecords.isNotEmpty()) {
+          logger.info(
+            "Inserted ${excludedOffenceRecords.size} Excluded Offence records for Intervention Catalogue Entry - " +
+              "${catalogue.name}, id = ${catalogue.id}",
+          )
           return excludedOffenceRepository.saveAll(excludedOffenceRecords).toMutableSet()
         } else {
           mutableSetOf()
@@ -596,10 +614,11 @@ class UpsertInterventionProcessor(
     catalogue: InterventionCatalogue,
   ): MutableSet<PossibleOutcome> {
     val possibleOutcomeList = mutableListOf<PossibleOutcome>()
-    val possibleOutcomesRecords = possibleOutcomeRepository.findByIntervention(catalogue)
+    val possibleOutcomesRecords =
+      possibleOutcomeRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
-      possibleOutcomesRecords?.isNotEmpty() == true -> {
+      possibleOutcomesRecords.isNotEmpty() -> {
         logger.info(
           "Retrieved ${possibleOutcomesRecords.size} Possible Outcomes record from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id = ${catalogue.id}",
@@ -618,13 +637,16 @@ class UpsertInterventionProcessor(
           )
         }
 
-        logger.info("Inserted ${possibleOutcomeList.size} Possible Outcome record for Intervention Catalogue Entry - ${catalogue.name}")
+        logger.info(
+          "Inserted ${possibleOutcomeList.size} Possible Outcome record for Intervention Catalogue Entry - " +
+            "${catalogue.name}, id = ${catalogue.id}",
+        )
         return possibleOutcomeRepository.saveAll(possibleOutcomeList).toMutableSet()
       }
     }
   }
 
-  fun hasRoshLevel(roshLevel: String?): RoshLevel? {
+  fun getRoshLevel(roshLevel: String?): RoshLevel? {
     val roshLevelUppercased = roshLevel?.uppercase()
     val roshLevels = RoshLevel.entries.map(RoshLevel::name)
     return if (roshLevels.contains(roshLevelUppercased)) {
@@ -657,7 +679,7 @@ class UpsertInterventionProcessor(
         riskConsiderationRecord.ogpGuide = riskConsideration?.ogpGuide
         riskConsiderationRecord.pnaGuide = riskConsideration?.pnaGuide
         riskConsiderationRecord.rsrGuide = riskConsideration?.rsrGuide
-        riskConsiderationRecord.roshLevel = hasRoshLevel(riskConsideration?.roshLevel)
+        riskConsiderationRecord.roshLevel = getRoshLevel(riskConsideration?.roshLevel)
         riskConsiderationRecord.intervention = catalogue
 
         logger.info(
@@ -683,7 +705,7 @@ class UpsertInterventionProcessor(
             ogpGuide = riskConsideration?.ogpGuide,
             pnaGuide = riskConsideration?.pnaGuide,
             rsrGuide = riskConsideration?.rsrGuide,
-            roshLevel = hasRoshLevel(riskConsideration?.roshLevel),
+            roshLevel = getRoshLevel(riskConsideration?.roshLevel),
             intervention = catalogue,
           ),
         )
