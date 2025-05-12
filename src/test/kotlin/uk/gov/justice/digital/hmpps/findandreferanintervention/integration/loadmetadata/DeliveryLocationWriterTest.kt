@@ -38,12 +38,14 @@ class DeliveryLocationWriterTest {
   fun `should save new delivery location`() {
     val batchDeliveryLocation = BatchDeliveryLocation(
       id = UUID.randomUUID().toString(),
+      interventionId = UUID.randomUUID().toString(),
       providerName = "Seetec Business Technology Centre Limited",
       pduRef = "bedfordhsire",
+      contact = "09434343",
       status = "",
     )
 
-    `when`(deliveryLocationRepository.findByPduRefIdAndInterventionId(any(), any())).thenReturn(null)
+    `when`(deliveryLocationRepository.findByPduRefIdAndInterventionIdAndProviderName(any(), any(), any())).thenReturn(null)
     `when`(interventionCatalogueRepository.findById(any())).thenReturn(Optional.of(mock()))
     `when`(pduRefRepository.findById(any())).thenReturn(Optional.of(mock()))
 
@@ -56,22 +58,26 @@ class DeliveryLocationWriterTest {
   fun `should delete delivery location when status is D`() {
     val batchDeliveryLocation = BatchDeliveryLocation(
       id = UUID.randomUUID().toString(),
+      interventionId = UUID.randomUUID().toString(),
       providerName = "Seetec Business Technology Centre Limited",
       pduRef = "bedfordhsire",
+      contact = "",
       status = "D",
     )
 
     writer.write(Chunk(listOf(batchDeliveryLocation)))
 
-    verify(deliveryLocationRepository, times(1)).deleteByPduRefIdAndInterventionId(any(), any())
+    verify(deliveryLocationRepository, times(1)).deleteByPduRefIdAndInterventionIdAndProviderName(any(), any(), any())
   }
 
   @Test
   fun `should not save or delete when no changes are needed`() {
     val batchDeliveryLocation = BatchDeliveryLocation(
       id = UUID.randomUUID().toString(),
+      interventionId = UUID.randomUUID().toString(),
       providerName = "Seetec Business Technology Centre Limited",
       pduRef = "bedfordhsire",
+      contact = "",
       status = "",
     )
 
@@ -83,12 +89,12 @@ class DeliveryLocationWriterTest {
       intervention = mock(),
     )
 
-    `when`(deliveryLocationRepository.findByPduRefIdAndInterventionId(any(), any()))
+    `when`(deliveryLocationRepository.findByPduRefIdAndInterventionIdAndProviderName(any(), any(), any()))
       .thenReturn(existingDeliveryLocation)
 
     writer.write(Chunk(listOf(batchDeliveryLocation)))
 
     verify(deliveryLocationRepository, times(0)).save(any())
-    verify(deliveryLocationRepository, times(0)).deleteByPduRefIdAndInterventionId(any(), any())
+    verify(deliveryLocationRepository, times(0)).deleteByPduRefIdAndInterventionIdAndProviderName(any(), any(), any())
   }
 }

@@ -39,7 +39,8 @@ class DeliveryLocationReaderTest {
 
     // Assert the first item's values
     assertThat(firstItem).isNotNull
-    assertThat(firstItem!!.id).isEqualTo("554b9fd0-6e66-4f1a-ad67-4f47503d3270")
+    assertThat(firstItem!!.id).isEqualTo("e255558c-a63c-4a48-a4eb-14783ea1b488")
+    assertThat(firstItem.interventionId).isEqualTo("554b9fd0-6e66-4f1a-ad67-4f47503d3270")
     assertThat(firstItem.providerName).isEqualTo("")
     assertThat(firstItem.pduRef).isEqualTo("bedfordshire")
     assertThat(firstItem.status).isEqualTo("")
@@ -49,7 +50,8 @@ class DeliveryLocationReaderTest {
 
     // Assert the second item's values
     assertThat(secondItem).isNotNull
-    assertThat(secondItem!!.id).isEqualTo("554b9fd0-6e66-4f1a-ad67-4f47503d3270")
+    assertThat(secondItem!!.id).isEqualTo("47c856d1-79b7-423c-acd7-466b9e3d93e5")
+    assertThat(secondItem.interventionId).isEqualTo("554b9fd0-6e66-4f1a-ad67-4f47503d3270")
     assertThat(secondItem.providerName).isEqualTo("")
     assertThat(secondItem.pduRef).isEqualTo("cambridgeshire")
     assertThat(secondItem.status).isEqualTo("")

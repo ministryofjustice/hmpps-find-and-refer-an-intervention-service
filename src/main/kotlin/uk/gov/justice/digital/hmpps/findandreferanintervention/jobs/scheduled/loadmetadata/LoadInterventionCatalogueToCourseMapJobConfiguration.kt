@@ -92,10 +92,16 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
       return null
     }
     val interventionCatalogue = interventionCatalogueRepository.findById(UUID.fromString(batchMap.interventionCatalogueId))
-      .orElseThrow { IllegalArgumentException("InterventionCatalogue not found for ID: ${batchMap.interventionCatalogueId}") }
+      .orElseGet {
+        logger.error("InterventionCatalogue not found for ID: ${batchMap.interventionCatalogueId}")
+        null
+      } ?: return null
 
     val course = courseRepository.findById(UUID.fromString(batchMap.courseId))
-      .orElseThrow { IllegalArgumentException("Course not found for ID: ${batchMap.courseId}") }
+      .orElseGet {
+        logger.error("Course not found for ID: ${batchMap.courseId}")
+        null
+      } ?: return null
 
     return InterventionCatalogueToCourseMap(
       interventionCatalogue = interventionCatalogue,

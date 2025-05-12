@@ -24,8 +24,10 @@ import java.util.*
 
 data class BatchDeliveryLocation(
   val id: String,
+  val interventionId: String,
   val providerName: String = "",
   val pduRef: String,
+  val contact: String,
   val status: String,
 )
 
@@ -52,12 +54,14 @@ class LoadDeliveryLocationJobConfiguration(
     .resource(ClassPathResource("csv/delivery_location.csv"))
     .linesToSkip(1)
     .delimited()
-    .names("intervention_id", "provider_name", "pdu_ref_id", "status")
+    .names("id", "intervention_id", "provider_name", "pdu_ref_id", "contact", "status")
     .fieldSetMapper { fieldSet ->
       BatchDeliveryLocation(
-        id = fieldSet.readString("intervention_id"),
+        id = fieldSet.readString("id"),
+        interventionId = fieldSet.readString("intervention_id"),
         providerName = fieldSet.readString("provider_name"),
         pduRef = fieldSet.readString("pdu_ref_id"),
+        contact = fieldSet.readString("contact"),
         status = fieldSet.readString("status"),
       )
     }
@@ -67,10 +71,9 @@ class LoadDeliveryLocationJobConfiguration(
   fun deliveryLocationWriter(): ItemWriter<BatchDeliveryLocation> = ItemWriter { items ->
     items.forEach { item ->
       if (item.status == "D") {
-        logger.info { "Deleting DeliveryLocation with ID: ${item.id}" }
-        deliveryLocationRepository.deleteByPduRefIdAndInterventionId(item.pduRef, UUID.fromString(item.id))
+        logger.info { "Deleting DeliveryLocation with ID: ${item.interventionId}" }
+        deliveryLocationRepository.deleteByPduRefIdAndInterventionIdAndProviderName(item.pduRef, UUID.fromString(item.interventionId), item.providerName)
       } else {
-        logger.info { "Saving DeliveryLocation with ID: ${item.id}" }
         mapToDeliveryLocationEntity(item)?.let {
           deliveryLocationRepository.save(it)
         }
@@ -88,42 +91,63 @@ class LoadDeliveryLocationJobConfiguration(
   private fun mapToDeliveryLocationEntity(
     batchDeliveryLocation: BatchDeliveryLocation,
   ): DeliveryLocation? {
-    val interventionCatalogueId = UUID.fromString(batchDeliveryLocation.id)
+    val interventionCatalogueId = UUID.fromString(batchDeliveryLocation.interventionId)
 
-    val existingDeliveryLocation = deliveryLocationRepository.findByPduRefIdAndInterventionId(
+    val existingDeliveryLocation = deliveryLocationRepository.findByPduRefIdAndInterventionIdAndProviderName(
       batchDeliveryLocation.pduRef,
       interventionCatalogueId,
+      batchDeliveryLocation.providerName,
     )
 
     if (existingDeliveryLocation != null) {
-      logger.info("DeliveryLocation already exists for pduRef ID: ${batchDeliveryLocation.pduRef} and intervention ID: $interventionCatalogueId")
-
-      var isUpdated = false
-      if (existingDeliveryLocation.providerName != batchDeliveryLocation.providerName) {
-        existingDeliveryLocation.providerName = batchDeliveryLocation.providerName
-        isUpdated = true
-      }
-
-      if (isUpdated) {
-        logger.info("Updating existing DeliveryLocation with ID: ${existingDeliveryLocation.id}")
-        return deliveryLocationRepository.save(existingDeliveryLocation)
-      }
-      return null
+      return updateExistingDeliveryLocation(batchDeliveryLocation, interventionCatalogueId, existingDeliveryLocation)
     }
-    val interventionCatalogue = interventionCatalogueRepository.findById(interventionCatalogueId)
-      .orElseThrow { IllegalArgumentException("Intervention not found for ID: $interventionCatalogueId") }
+    val interventionCatalogue = interventionCatalogueRepository.findById(interventionCatalogueId).orElseGet {
+      logger.error { "InterventionCatalogue not found for ID: $interventionCatalogueId" }
+      null
+    } ?: return null
 
-    val pduRef = pduRefRepository.findById(batchDeliveryLocation.pduRef)
-      .orElseThrow { IllegalArgumentException("PduRef not found for ID: ${batchDeliveryLocation.pduRef}") }
+    val pduRef = pduRefRepository.findById(batchDeliveryLocation.pduRef).orElseGet {
+      logger.error { "PduRef not found for ID: ${batchDeliveryLocation.pduRef}" }
+      null
+    } ?: return null
 
     logger.info { "Creating new DeliveryLocation with pduRef ID: ${batchDeliveryLocation.pduRef} and intervention ID: $interventionCatalogueId" }
 
     return DeliveryLocation(
-      id = UUID.randomUUID(),
+      id = UUID.fromString(batchDeliveryLocation.id),
       providerName = batchDeliveryLocation.providerName,
       contact = "",
       pduRef = pduRef,
       intervention = interventionCatalogue,
     )
+  }
+
+  private fun updateExistingDeliveryLocation(
+    batchDeliveryLocation: BatchDeliveryLocation,
+    interventionCatalogueId: UUID?,
+    existingDeliveryLocation: DeliveryLocation,
+  ): DeliveryLocation? {
+    logger.info(
+      "DeliveryLocation already exists for pduRef ID: ${batchDeliveryLocation.pduRef} and intervention ID: $interventionCatalogueId" +
+        " and providerName: ${batchDeliveryLocation.providerName}",
+    )
+
+    var isUpdated = false
+    if (existingDeliveryLocation.providerName != batchDeliveryLocation.providerName) {
+      existingDeliveryLocation.providerName = batchDeliveryLocation.providerName
+      isUpdated = true
+    }
+
+    if (existingDeliveryLocation.contact != batchDeliveryLocation.contact) {
+      existingDeliveryLocation.contact = batchDeliveryLocation.contact
+      isUpdated = true
+    }
+
+    if (isUpdated) {
+      logger.info("Updating existing DeliveryLocation with ID: ${existingDeliveryLocation.id}")
+      return deliveryLocationRepository.save(existingDeliveryLocation)
+    }
+    return null
   }
 }

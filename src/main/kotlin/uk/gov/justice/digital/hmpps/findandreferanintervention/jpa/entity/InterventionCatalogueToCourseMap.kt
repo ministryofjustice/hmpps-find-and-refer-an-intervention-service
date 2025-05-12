@@ -30,6 +30,6 @@ open class InterventionCatalogueToCourseMap(
 )
 
 data class InterventionCatalogueToCourseMapId(
-  val interventionCatalogue: UUID = UUID.randomUUID(),
-  val course: UUID = UUID.randomUUID(),
+  var interventionCatalogue: UUID? = null,
+  var course: UUID? = null,
 ) : Serializable
