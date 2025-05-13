@@ -7,4 +7,6 @@ import java.util.UUID
 
 interface DeliveryLocationRepository : JpaRepository<DeliveryLocation, UUID> {
   fun findByIntervention(intervention: InterventionCatalogue): List<DeliveryLocation>?
+  fun findByPduRefIdAndInterventionIdAndProviderName(pduRefId: String, interventionId: UUID, providerName: String): DeliveryLocation?
+  fun deleteByPduRefIdAndInterventionIdAndProviderName(pduRefId: String, interventionId: UUID, providerName: String): Int
 }
