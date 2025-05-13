@@ -16,6 +16,7 @@ class ServiceUserService {
       gender = "Male",
       "British",
       currentPdu = "East Sussex",
+      setting = "Community",
     )
   }
 
@@ -28,6 +29,7 @@ class ServiceUserService {
       gender = "Male",
       "British",
       currentPdu = "East Sussex",
+      setting = "Custody",
     )
   }
 }
