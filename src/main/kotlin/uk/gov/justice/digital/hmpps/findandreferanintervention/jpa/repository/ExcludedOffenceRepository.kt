@@ -7,4 +7,5 @@ import java.util.UUID
 
 interface ExcludedOffenceRepository : JpaRepository<ExcludedOffence, UUID> {
   fun findByIntervention(intervention: InterventionCatalogue): List<ExcludedOffence>?
+  fun deleteAllByIntervention(intervention: InterventionCatalogue)
 }

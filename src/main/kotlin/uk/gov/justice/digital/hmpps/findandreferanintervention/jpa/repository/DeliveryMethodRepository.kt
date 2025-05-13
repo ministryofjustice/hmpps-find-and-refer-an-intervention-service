@@ -7,4 +7,5 @@ import java.util.UUID
 
 interface DeliveryMethodRepository : JpaRepository<DeliveryMethod, UUID> {
   fun findByIntervention(intervention: InterventionCatalogue): List<DeliveryMethod>?
+  fun deleteAllByIntervention(intervention: InterventionCatalogue)
 }

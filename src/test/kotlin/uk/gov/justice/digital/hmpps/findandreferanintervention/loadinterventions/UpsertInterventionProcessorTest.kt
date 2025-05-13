@@ -44,6 +44,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Person
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PossibleOutcome
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RoshLevel
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRepository
@@ -387,8 +388,9 @@ internal class UpsertInterventionProcessorTest {
 
     val result = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(1)
-    verify(deliveryMethodRepository, times(0)).saveAll(anyList())
+    assertThat(result.count()).isEqualTo(3)
+    verify(deliveryMethodRepository, times(1)).deleteAllByIntervention(any())
+    verify(deliveryMethodRepository, times(1)).saveAll(anyList())
   }
 
   @Test
@@ -405,6 +407,33 @@ internal class UpsertInterventionProcessorTest {
 
     assertThat(result.count()).isEqualTo(3)
     verify(deliveryMethodRepository, times(1)).saveAll(anyList())
+  }
+
+  @Test
+  fun `Providing Json to be extracted and retrieve existing Delivery Method Setting Definitions object from the database`() {
+    val deliveryMethodSettingDefinitionJson =
+      InterventionLoadFileReaderHelper.getResource(
+        "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodSettingDefinition.json",
+      )
+
+    val deliveryMethodSettingDefinitions =
+      ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
+
+    whenever(deliveryMethodSettingRepository.findByIntervention(any())).thenReturn(
+      listOf(
+        DeliveryMethodSetting(
+          id = UUID.randomUUID(),
+          intervention = catalogue,
+          setting = SettingType.CUSTODY,
+        ),
+      ),
+    )
+
+    val result = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
+
+    assertThat(result.count()).isEqualTo(3)
+    verify(deliveryMethodSettingRepository, times(1)).deleteAllByIntervention(any())
+    verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
   }
 
   @Test
@@ -463,8 +492,9 @@ internal class UpsertInterventionProcessorTest {
 
     val result = processor.upsertEligibleOffences(eligibleOffenceDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(1)
-    verify(eligibleOffenceRepository, times(0)).saveAll(anyList())
+    assertThat(result.count()).isEqualTo(2)
+    verify(eligibleOffenceRepository, times(1)).deleteAllByIntervention(any())
+    verify(eligibleOffenceRepository, times(1)).saveAll(anyList())
   }
 
   @Test
@@ -559,8 +589,9 @@ internal class UpsertInterventionProcessorTest {
 
     val result = processor.upsertExcludedOffences(excludedOffenceDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(1)
-    verify(excludedOffenceRepository, times(0)).saveAll(anyList())
+    assertThat(result.count()).isEqualTo(2)
+    verify(excludedOffenceRepository, times(1)).deleteAllByIntervention(any())
+    verify(excludedOffenceRepository, times(1)).saveAll(anyList())
   }
 
   @Test
@@ -709,7 +740,6 @@ internal class UpsertInterventionProcessorTest {
     whenever(possibleOutcomeRepository.findByIntervention(any())).thenReturn(
       listOf(
         PossibleOutcome(id = UUID.randomUUID(), outcome = "Obtain or maintain suitable accommodation", intervention = catalogue),
-        PossibleOutcome(id = UUID.randomUUID(), outcome = "Overcome barriers to obtaining suitable accommodation", intervention = catalogue),
         PossibleOutcome(id = UUID.randomUUID(), outcome = "Prevent users from becoming homeless", intervention = catalogue),
       ),
     )
@@ -717,7 +747,8 @@ internal class UpsertInterventionProcessorTest {
     val result = processor.upsertPossibleOutcomes(possibleOutcomeDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
-    verify(possibleOutcomeRepository, times(0)).saveAll(anyList())
+    verify(possibleOutcomeRepository, times(1)).deleteAllByIntervention(any())
+    verify(possibleOutcomeRepository, times(1)).saveAll(anyList())
   }
 
   @Test

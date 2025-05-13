@@ -7,4 +7,5 @@ import java.util.UUID
 
 interface EligibleOffenceRepository : JpaRepository<EligibleOffence, UUID> {
   fun findByIntervention(intervention: InterventionCatalogue): List<EligibleOffence>?
+  fun deleteAllByIntervention(intervention: InterventionCatalogue)
 }
