@@ -28,6 +28,7 @@ internal class ServiceUserControllerTest {
       gender = "Male",
       ethnicity = "White British",
       currentPdu = "East Sussex",
+      setting = "Community",
     )
     whenever(service.getServiceUserByCrn(any())).thenReturn(testServiceUser)
 
@@ -41,6 +42,7 @@ internal class ServiceUserControllerTest {
     assertThat(response).isNotNull
     assertThat(response.name).isEqualTo("John")
     assertThat(response.crn).isEqualTo("X718255")
+    assertThat(response.setting).isEqualTo("Community")
   }
 
   @Test
@@ -52,6 +54,7 @@ internal class ServiceUserControllerTest {
       gender = "Female",
       ethnicity = "British",
       currentPdu = "West Sussex",
+      setting = "Custody",
     )
     whenever(service.getServiceUserByPrisonId(any())).thenReturn(testServiceUser)
 
@@ -65,6 +68,7 @@ internal class ServiceUserControllerTest {
     assertThat(response).isNotNull
     assertThat(response.name).isEqualTo("Jane")
     assertThat(response.crn).isEqualTo("X123456")
+    assertThat(response.setting).isEqualTo("Custody")
   }
 
   @Test
