@@ -1,3 +1,5 @@
+DELETE FROM delivery_method_setting;
+
 ALTER TABLE delivery_method_setting
     DROP COLUMN IF EXISTS delivery_method_id;
 
