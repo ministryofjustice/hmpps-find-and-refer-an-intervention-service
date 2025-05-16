@@ -4,7 +4,7 @@ ALTER TABLE delivery_method_setting
     DROP COLUMN IF EXISTS delivery_method_id;
 
 ALTER TABLE delivery_method_setting
-    ADD COLUMN intervention_id uuid;
+    ADD COLUMN IF NOT EXISTS intervention_id uuid;
 
 ALTER TABLE delivery_method_setting
     ALTER COLUMN intervention_id SET NOT NULL;
