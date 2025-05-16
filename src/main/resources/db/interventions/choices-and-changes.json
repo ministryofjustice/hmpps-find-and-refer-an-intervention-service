@@ -3,8 +3,8 @@
     "intervention_catalogue": {
         "name": "Choices and Changes",
         "int_type": "Toolkits",
-        "short_description": "The maturity resource pack primarily aims to promote maturity with young adult men aged 18-25 years old ",
-        "long_description": "The maturity resource pack primarily aims to promote maturity with young adult men aged 18-25 years old by specifically focusing on the priority areas identified in the literature. It is recognised that maturity is fluid and that not everyone will develop at the same stage. Age should therefore not be considered as a factor for exclusion. Men aged 25-30 who display a similar need to develop maturity can be considered for this resource pack to promote maturity.  \n",
+        "short_description": "The main focus of this Toolkit is to promote maturity with young adult men, aged 18 to 25. This can be extended to men up to 30 who display a similar need to develop maturity. ",
+        "long_description": "The main focus of this toolkit is to promote maturity with young adult men, aged 18 to 25. As we recognise that not everyone will develop at the same stage, this can be extended to men up to 30 who display a similar need to develop maturity. ",
         "session_detail": "",
         "reason_for_referral": ""
     },
@@ -27,12 +27,13 @@
     "eligibility_offence": [],
     "exclude_offence": null,
     "possible_outcomes": [
-        "Develop self-sufficiency and independence",
-        "Build resistance to peer influence",
-        "Develop a stable, pro-social identity",
-        "Enhance family support",
-        "Increase future orientation",
-        "Build skills to manage emotions and impulses"
+        "The outcomes of this Toolkit are to:",
+        "* develop self-sufficiency and independence",
+        "* build resistance to peer influence",
+        "* develop a stable, pro-social identity",
+        "* enhance family support",
+        "* increase future orientation",
+        "* build skills to manage emotions and impulses"
     ],
     "risk_consideration": null,
     "special_educational_needs": null,

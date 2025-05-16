@@ -3,15 +3,15 @@
     "intervention_catalogue": {
         "name": "Stepwise Driving",
         "int_type": "SI",
-        "short_description": "Structured Intervention: Attitudes, Thinking & Behaviour (Driving)",
-        "long_description": "Stepwise Driving is designed to support desistance from drink driving by focusing on areas such as awareness of safe driving; making decisions; and, consequential thinking. \nStepwise Driving is comprised of insight-oriented psycho-educational content around: 1. safer driving (e.g., Reaction times, Stopping distances, etc); 2. Consequences of dangerous driving; 3. effects of alcohol and drugs on driving; 4. Coping with disqualification.",
-        "session_detail": "1 x One-to-one session; \n 5 x group sessions",
+        "short_description": "Stepwise Driving is designed to support desistance from drink driving by focusing on areas such as awareness of safe driving, making decisions and consequential thinking. ",
+        "long_description": "Stepwise Driving is designed to support desistance from drink driving by focusing on areas such as awareness of safe driving, making decisions and consequential thinking. \n\nThis intervention includes insight-orientated, psychoeducational content around: \n\n* safer driving, for example, reaction times and stopping distances\n\n* consequences of dangerous driving\n\n* effects of alcohol and drugs on driving\n\n* coping with disqualification",
+        "session_detail": "1 x one-to-one session and 5 x group sessions",
         "reason_for_referral": ""
     },
     "delivery_methods": [
         {
-            "format": "Group or One-to-one",
-            "attendance_type": "In Person and Online"
+            "format": "Group or one-to-one",
+            "attendance_type": "In person and online"
         }
     ],
     "delivery_method_settings": [
@@ -29,28 +29,8 @@
         "males": true,
         "females": true
     },
-    "eligibility_offence": [
-        {
-            "offence_type_id": "Drink Driving",
-            "victim_type": "",
-            "motivation": ""
-        },
-        {
-            "offence_type_id": "Drug Driving",
-            "victim_type": "",
-            "motivation": ""
-        }
-    ],
-    "exclude_offence": [
-        {
-            "offence_type_id": "Sexual",
-            "victim_type": ""
-        },
-        {
-            "offence_type_id": "IPV",
-            "victim_type": ""
-        }
-    ],
+    "eligibility_offence": [],
+    "exclude_offence": [],
     "possible_outcomes": [],
     "risk_consideration": {
         "cn_score_guide": null,
@@ -59,7 +39,7 @@
         "sara_other_score_guide": null,
         "osp_score_guide": null,
         "osp_dc_icc_combination_guide": null,
-        "ogrs_score_guide": "OGRS3 (Over 2 years): score 25+",
+        "ogrs_score_guide": "OGRS3 (over 2 years): score 25+",
         "ovp_guide": null,
         "ogp_guide": null,
         "pna_guide": null,
@@ -67,16 +47,16 @@
         "rsr_guide": null
     },
     "special_educational_needs": {
-        "exclusion_literacy_level_guide": "Participants should be sufficiently literate (able to read and understand simple sentences)",
+        "exclusion_literacy_level_guide": "The person you are referring must be able to read and understand simple sentences.",
         "learning_disability_catered_for": null,
         "equivalent_non_ldc_programme_guide": null
     },
     "exclusion": {
         "min_remaining_sentence_duration_guide": null,
-        "remaining_license_community_order_guide": "Check with Treatment Manager if less than 9 months",
-        "alcohol_drug_problem_guide": "Alcohol / drug problems need to be stable before attendance.",
-        "mental_health_problem_guide": "Those with mental health problems should only be excluded from the programme if the issues are acute and damage the individual\u2019s ability to relate to others or concentrate",
-        "other_preferred_method_guide": "If participant meets the criteria for another SI or AcP, Stepwise Driving can be provided as an adjunct",
+        "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
+        "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
+        "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
+        "other_preferred_method_guide": "If the person meets the criteria for an Accredited Programme, or another Structured Intervention, they can do Stepwise Driving alongside it.",
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null
     }

@@ -5,13 +5,13 @@
         "int_type": "AcP",
         "short_description": "Becoming New Me Plus (BNM+) uses cognitive behavioural therapy. It is for men who are at high or very high risk of reoffending. This strand is for men convicted of an intimate partner violence offence.",
         "long_description": "Becoming New Me Plus (BNM+) uses cognitive behavioural therapy. It is for men who are at high or very high risk of reoffending. This strand is for men convicted of an intimate partner violence offence.",
-        "session_detail": "Group and One-to-one in person \n\n85 group sessions + 7 individual sessions\n\n\nOR exclusively One-to-one \nMinimum 20 sessions long\nDepends on the needs of the individual",
+        "session_detail": "Group and one-to-one, in person.\n\n85 group sessions + 7 individual sessions.\n\n\nAlternatively, sessions can be exclusively one-to-one with a minimum of 20 sessions (depending on the needs of the individual).",
         "reason_for_referral": ""
     },
     "delivery_methods": [
         {
-            "format": "Group or One-to-one",
-            "attendance_type": "In Person"
+            "format": "Group or one-to-one",
+            "attendance_type": "In person"
         }
     ],
     "delivery_method_settings": [

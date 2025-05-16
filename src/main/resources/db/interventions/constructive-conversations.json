@@ -3,14 +3,15 @@
     "intervention_catalogue": {
         "name": "Constructive Conversations",
         "int_type": "Toolkits",
-        "short_description": "In Pilot",
-        "long_description": "Series of three resource packs design to assist staff in structuring exploratory conversations with \u2018terrorist risk' cases.\n\nIt is structured in 3 stages:\nStage 1 - Commencing conversations\nStage 2 - Continuing conversations\nStage 3 - Changing conversations\n\nStage 1 and 2 can be delivered by Probation Practitioners, Counter Terrorism Specialist Probation Practitioners and Prison Prevent Leads.\n\nStage 3 can only be delivered by Counter Terrorism Specialist Probation Practitioners.",
+        "short_description": "This toolkit is made up of a series of 3 resource packs. They are designed to assist staff in structuring exploratory conversations with \u2018terrorist risk' cases.",
+        "long_description": "This toolkit is made up of a series of 3 resource packs. They are designed to assist staff in structuring exploratory conversations with \u2018terrorist risk' cases.\n\nIt is structured in 3 stages:\n\nStage 1 - Commencing conversations\n\nStage 2 - Continuing conversations\n\nStage 3 - Changing conversations\n\nStages 1 and 2 can be delivered by Probation Practitioners, Counter-Terrorism Specialist Probation Practitioners and Prison Prevent Leads.\n\nStage 3 can only be delivered by Counter Terrorism Specialist Probation Practitioners.",
         "session_detail": "",
         "reason_for_referral": ""
     },
     "delivery_methods": [],
     "delivery_method_settings": [
-        "COMMUNITY"
+        "COMMUNITY",
+        "CUSTODY"
     ],
     "enabling_intervention_detail": "",
     "criminogenic_needs": [],

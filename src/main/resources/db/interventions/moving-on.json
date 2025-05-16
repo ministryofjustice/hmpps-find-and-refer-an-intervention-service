@@ -3,9 +3,9 @@
     "intervention_catalogue": {
         "name": "Moving On",
         "int_type": "Toolkits",
-        "short_description": "Aimed at People on Probation who are experiencing negative thoughts and feelings about themselves, which are associated with their conviction/offending and its consequences. ",
-        "long_description": "Aimed at People on Probation who are experiencing negative thoughts and feelings about themselves, which are associated with their conviction/offending and its consequences. These thoughts and feelings (which may include conviction-related feelings of shame) will be blocking the individual, emotionally or psychologically, from moving forward positively with their life, potentially obstructing desistance",
-        "session_detail": "8 x One-to-one sessions",
+        "short_description": "Moving On is aimed at men on probation who are experiencing negative thoughts and feelings about themselves, associated with their offending and its consequences. \n",
+        "long_description": "Moving On is aimed at men on probation who are experiencing negative thoughts and feelings about themselves, associated with their offending and its consequences. \n\nThese thoughts and feelings can be an emotional or psychological barrier to moving forward positively with their life. This can potentially obstruct desistance.",
+        "session_detail": "8 x one-to-one sessions",
         "reason_for_referral": ""
     },
     "delivery_methods": [
