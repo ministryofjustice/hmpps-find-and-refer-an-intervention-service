@@ -1,11 +1,11 @@
 {
-    "uuid": "4D0B95E1-A83F-48DD-A2BC-C6AF4371B85A",
+    "uuid": "0BE08906-18A3-48E5-AF64-3CEF3FAC9B95",
     "intervention_catalogue": {
-        "name": "Stepwise Emotions",
+        "name": "Stepwise Relationships",
         "int_type": "SI",
-        "short_description": "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as aggressive behaviour and attitudes related to risk of serious harm.",
-        "long_description": "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as: \n* aggressive behaviour\n* thinking & behaviour, related to risk of serious harm to self or others\n* attitudes related to risk of serious harm to themselves or others\n\nIt has the following features:\n* a self-monitoring and behavioural analysis mechanism\n* insight-oriented, psychoeducational content on thinking, emotions and behaviour\n* skill-building around thinking, emotions and behaviour \n* building social relationships",
-        "session_detail": "1 x one-to-one session and 8 x group sessions",
+        "short_description": "Stepwise Relationships aims to support desistance from intimate partner violence (IPV) offending by enabling participants to overcome specific challenges. These include relationship problems, attitudes that support relationship violence, aggression and emotional mismanagement.",
+        "long_description": "Stepwise Relationships aims to support desistance from intimate partner violence (IPV) offending by enabling participants to overcome specific challenges. These include: \n* relationship problems\n* issues with social skills \n* attitudes that support relationship violence\n* aggression and anger\n* emotional mismanagement and self-regulation\n\nIt has the following features:\n* a self-monitoring and behavioural analysis mechanism\n* insight-oriented, psychoeducational content on thinking, emotions and behaviour\n* skill-building around thinking, emotions and behaviour \n* building social relationships",
+        "session_detail": "1 x one-to-one session and 9 x group sessions",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,7 +19,7 @@
     ],
     "enabling_intervention_detail": "",
     "criminogenic_needs": [
-        "Emotional Wellbeing",
+        "Relationships and Family",
         "Thinking and Behaviour"
     ],
     "personal_eligibility": {
@@ -28,17 +28,17 @@
         "females": true
     },
     "eligibility_offence": [],
-    "exclude_offence": [],
+    "exclude_offence": null,
     "possible_outcomes": [],
     "risk_consideration": {
-        "cn_score_guide": "Need is evidenced by at least one\nof the following OASys criteria\nbeing satisfied:\n* 11.3 = 2\n* Thinking and behaviour related RoSH\n* Attitudes related RoSH",
+        "cn_score_guide": "At least 1 of the following 3 OASys criteria needs to be satisfied:\n* score of 2 on item 11.3 - aggressive behaviour\n* answer of \u2018yes\u2019 to \u2018Thinking and behaviour\u2019 being related to risk of serious harm to self or others\n* answer of \u2018yes\u2019 to \u2018Attitudes\u2019 being related to risk of serious harm to self or others",
         "extremism_risk_guide": null,
         "sara_partner_score_guide": null,
-        "sara_other_score_guide": null,
+        "sara_other_score_guide": "Low risk on SARA",
         "osp_score_guide": null,
         "osp_dc_icc_combination_guide": null,
-        "ogrs_score_guide": "If OVP not available, then OGRS3 (over 2 years):\nscore 25+",
-        "ovp_guide": "OVP (over 2 years): score 20+",
+        "ogrs_score_guide": "If OVP not available, then OGRS3: score 25+",
+        "ovp_guide": "OVP: score 20+",
         "ogp_guide": null,
         "pna_guide": null,
         "rosh_level": null,
@@ -54,7 +54,7 @@
         "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
         "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
         "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
-        "other_preferred_method_guide": "The person you are referring should not be eligible for an Accredited Programme that they could likely complete before the end of their sentence.",
+        "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null
     }

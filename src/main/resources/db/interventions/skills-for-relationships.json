@@ -3,8 +3,8 @@
     "intervention_catalogue": {
         "name": "Skills for Relationships",
         "int_type": "Toolkits",
-        "short_description": "Aims to support desistance in people who have exhibited intimate partner violence (IPV)",
-        "long_description": "Aims to support desistance in people who have exhibited intimate partner violence (IPV). The key focus of the Skills for Relationships Toolkit is helping people cope with the complexities and pressures of their relationships without getting into conflict. It supports participants to decide how they want their relationships to be, recognise their strengths and develop new relationship skills.",
+        "short_description": "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV). ",
+        "long_description": "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV). \n\nThe key focus of this toolkit is to help men cope with the complexities and pressures of their relationships without getting into conflict. It helps people decide how they want their relationships to be, recognise their strengths and develop new relationship skills.",
         "session_detail": "",
         "reason_for_referral": ""
     },
@@ -23,16 +23,10 @@
         "males": true,
         "females": false
     },
-    "eligibility_offence": [
-        {
-            "offence_type_id": "IPV",
-            "victim_type": "Partner",
-            "motivation": ""
-        }
-    ],
+    "eligibility_offence": [],
     "exclude_offence": null,
     "possible_outcomes": [
-        "Reduce risk of IPV"
+        "The outcome of this toolkit is a reduced risk of intimate partner violence."
     ],
     "risk_consideration": {
         "cn_score_guide": null,

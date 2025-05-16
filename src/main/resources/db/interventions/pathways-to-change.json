@@ -3,9 +3,9 @@
     "intervention_catalogue": {
         "name": "Pathways to Change",
         "int_type": "Toolkits",
-        "short_description": "The toolkit for Women convicted of sexual offences",
-        "long_description": "The toolkit was created to fill the existing gap in provision for work with Women convicted of sexual offences. It is gender specific and trauma-informed, underpinned by strengths based approaches and Bio-psycho-social model, and is designed to be delivered flexibly to best address the needs of the woman on probation.",
-        "session_detail": "\nVariable ",
+        "short_description": "This toolkit is aimed at women convicted of sexual offences.",
+        "long_description": "This toolkit is aimed at women convicted of sexual offences.\n\nIt is gender-specific and trauma-informed, supported by strengths-based approaches and the biopsychosocial model. It is designed to be delivered flexibly to best address the needs of the woman on probation.",
+        "session_detail": "\nParts 2 to 5 of this 6-part toolkit are optional. Parts 1 and 6 need to be completed.",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -23,13 +23,7 @@
         "males": false,
         "females": true
     },
-    "eligibility_offence": [
-        {
-            "offence_type_id": "Sexual",
-            "victim_type": "",
-            "motivation": ""
-        }
-    ],
+    "eligibility_offence": [],
     "exclude_offence": null,
     "possible_outcomes": [],
     "risk_consideration": null,

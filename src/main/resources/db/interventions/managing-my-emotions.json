@@ -3,15 +3,15 @@
     "intervention_catalogue": {
         "name": "Managing My Emotions",
         "int_type": "SI",
-        "short_description": "Structured Intervention: Emotion Management",
-        "long_description": "Learning to manage emotions is key to positive, offence-free lifestyles\nand healthy relationships. This intervention aims to improve the\nindividuals ability to understand and manage their emotions in order to\navoid offending in the future.",
-        "session_detail": "1 x pre-group session; \n 6 x group sessions",
+        "short_description": "This intervention aims to improve people's ability to understand and manage their emotions to avoid offending in the future.",
+        "long_description": "Learning to manage emotions is key to positive, offence-free lifestyle and healthy relationships. This intervention aims to improve people's ability to understand and manage their emotions to avoid offending in the future.",
+        "session_detail": "1 x pre-group session and 6 x group sessions",
         "reason_for_referral": ""
     },
     "delivery_methods": [
         {
-            "format": "Group or One-to-one",
-            "attendance_type": "In Person and Online"
+            "format": "Group or one-to-one",
+            "attendance_type": "In person and online"
         }
     ],
     "delivery_method_settings": [
@@ -28,49 +28,34 @@
         "males": true,
         "females": true
     },
-    "eligibility_offence": [
-        {
-            "offence_type_id": "Violence",
-            "victim_type": "",
-            "motivation": ""
-        }
-    ],
-    "exclude_offence": [
-        {
-            "offence_type_id": "Sexual",
-            "victim_type": ""
-        },
-        {
-            "offence_type_id": "IPV",
-            "victim_type": ""
-        }
-    ],
+    "eligibility_offence": [],
+    "exclude_offence": [],
     "possible_outcomes": [],
     "risk_consideration": {
-        "cn_score_guide": "Need is evidenced by at least one\nof the following OASys criteria\nbeing satisfied:\n- 11.3 = 2\n- Thinking &amp; beh related RoSH\n- Attitudes related RoSH",
+        "cn_score_guide": "Need is evidenced by at least one\nof the following OASys criteria\nbeing satisfied:\n* 11.3 = 2\n* Thinking and behaviour related RoSH\n* Attitudes related RoSH",
         "extremism_risk_guide": null,
         "sara_partner_score_guide": null,
         "sara_other_score_guide": null,
         "osp_score_guide": null,
         "osp_dc_icc_combination_guide": null,
-        "ogrs_score_guide": "If OVP is not available, OGRS3 (over 2 years):\nscore of 25+",
-        "ovp_guide": "OVP (over 2 years): Score above 20+",
+        "ogrs_score_guide": "If OVP not available, then OGRS3 (over 2 years):\nscore 25+",
+        "ovp_guide": "OVP (over 2 years): score 20+",
         "ogp_guide": null,
         "pna_guide": null,
         "rosh_level": null,
         "rsr_guide": null
     },
     "special_educational_needs": {
-        "exclusion_literacy_level_guide": "Participants should be sufficiently literate (able to read and understand simple sentences)",
+        "exclusion_literacy_level_guide": "The person you are referring must be able to read and understand simple sentences.",
         "learning_disability_catered_for": null,
         "equivalent_non_ldc_programme_guide": null
     },
     "exclusion": {
         "min_remaining_sentence_duration_guide": null,
-        "remaining_license_community_order_guide": "Check with Treatment Manager if less than 9 months",
-        "alcohol_drug_problem_guide": "Alcohol / drug problems need to be stable before attendance.",
-        "mental_health_problem_guide": "Those with mental health problems should only be excluded from the programme if the issues are acute and damage the individual\u2019s ability to relate to others or concentrate",
-        "other_preferred_method_guide": "Must not be suitable for or not able to access an Accredited Programme",
+        "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
+        "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
+        "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
+        "other_preferred_method_guide": "The person you are referring must not be suitable for, or be unable to access an Accredited Programme.",
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null
     }

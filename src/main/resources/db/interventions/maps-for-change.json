@@ -3,9 +3,9 @@
     "intervention_catalogue": {
         "name": "Maps for Change",
         "int_type": "Toolkits",
-        "short_description": "Developed for use with adult males convicted of sexual/sexuality motivated offences. ",
-        "long_description": "Developed for use with adult males convicted of sexual/sexuality motivated offences. It does not replace an accredited programme and is aimed to suit those whose risk assessment scores are likely to be in the Low OSP/C and Low OSP/I category, however, the toolkit can be used for individuals who are unable to access an accredited programme e.g. for health or language reasons.\n\nEach MAP focuses on different areas of need and is underpinned by a strengths-based approach to help the individual develop strengths and capabilities to overcome risk factors.",
-        "session_detail": "Variable ",
+        "short_description": "This toolkit is aimed at men convicted of sexual or sexuality motivated offences.",
+        "long_description": "This toolkit is aimed at men convicted of sexual or sexuality motivated offences. It does not replace an Accredited Programme and is aimed at men whose risk assessment scores are likely to be in the 'Low OSP/C' and 'Low OSP/I' category. However, the toolkit can be used for men who are unable to access an Accredited Programme, for example, for health or language reasons.\n\nEach 'map' focuses on different areas of need and is supported by a strengths-based approach, to help the individual develop strengths and capabilities to overcome risk factors.",
+        "session_detail": "There are 9 possible 'maps' to complete. At least 1 must be completed. ",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -23,23 +23,17 @@
         "males": true,
         "females": false
     },
-    "eligibility_offence": [
-        {
-            "offence_type_id": "Sexual",
-            "victim_type": "",
-            "motivation": "Sexual"
-        }
-    ],
+    "eligibility_offence": [],
     "exclude_offence": null,
     "possible_outcomes": [
-        "Depends on the needs of the individual.  - each MAP has different goals"
+        "The outcomes will depend on the map or maps the person completes."
     ],
     "risk_consideration": {
         "cn_score_guide": null,
         "extremism_risk_guide": null,
         "sara_partner_score_guide": null,
         "sara_other_score_guide": null,
-        "osp_score_guide": "Low \nBut if Medium+  then non suitability for AP route applies",
+        "osp_score_guide": "Low, but if Medium+, then non-suitability for Accredited Programme route applies.",
         "osp_dc_icc_combination_guide": null,
         "ogrs_score_guide": null,
         "ovp_guide": null,

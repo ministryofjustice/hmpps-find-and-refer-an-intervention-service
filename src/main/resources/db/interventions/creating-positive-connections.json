@@ -1,11 +1,11 @@
 {
     "uuid": "E433436A-04CD-48CD-BF70-FEACD9109DAD",
     "intervention_catalogue": {
-        "name": "Creating positive connections",
+        "name": "Creating Positive Connections",
         "int_type": "Toolkits",
-        "short_description": "Designed to support desistance by enabling conversations in supervision that will help the person on probation.",
-        "long_description": "Designed to support desistance by enabling conversations in supervision that will help the person on probation: \n\nUnderstand social capital and its benefits.\n\nIdentify their networks.\n\nDevelop their confidence and feel a sense of connection.",
-        "session_detail": "8 x One-to-one sessions",
+        "short_description": "Creating Positive Connections supports desistance by helping men on probation understand the benefits of social networks and develop their sense of connection. ",
+        "long_description": "This toolkit is designed to support desistance by enabling conversations in supervision that will help men on probation: \n* understand social capital and its benefits\n* identify their networks\n* develop their confidence and feel a sense of connection",
+        "session_detail": "8 x one-to-one sessions",
         "reason_for_referral": ""
     },
     "delivery_methods": [

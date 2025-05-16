@@ -5,12 +5,12 @@
         "int_type": "AcP",
         "short_description": "Living as New Me (LNM) is a booster or maintenance programme for men who have completed New Me Strengths or Becoming New Me Plus and may need extra support. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only.",
         "long_description": "Living as New Me (LNM) is a booster or maintenance programme for men who have completed New Me Strengths or Becoming New Me Plus and may need extra support. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only.",
-        "session_detail": "Minimum 5 x group sessions\n\n(Depends on group size and the needs of each individual)",
+        "session_detail": "Minimum of 5 x group sessions (depends on group size and the needs of each individual)",
         "reason_for_referral": ""
     },
     "delivery_methods": [
         {
-            "format": "Group or One-to-one"
+            "format": "Group or one-to-one"
         }
     ],
     "delivery_method_settings": [
