@@ -4,11 +4,13 @@ import com.microsoft.applicationinsights.TelemetryClient
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.validation.constraints.Pattern
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.server.ResponseStatusException
 import uk.gov.justice.digital.hmpps.findandreferanintervention.config.logToAppInsights
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ServiceUserDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.ServiceUserService
@@ -21,7 +23,7 @@ class ServiceUserController(
 ) {
 
   @GetMapping(
-    "/service-user",
+    "/service-user/{identifier}",
     produces = [MediaType.APPLICATION_JSON_VALUE],
     name = "Get Service User for the CRN.",
   )
@@ -31,27 +33,22 @@ class ServiceUserController(
       ApiResponse(responseCode = "400", description = "Bad Request"),
     ],
   )
-  fun serviceUserByCrn(
-    @RequestParam(name = "crn", required = false)
-    @Pattern(regexp = "^[A-Z]\\d{6}$", message = "Invalid code format. Expected format for CRN: X718255")
-    crn: String?,
-    @RequestParam(name = "prisonId", required = false)
-    @Pattern(regexp = "^[A-Z]\\d{4}[A-Z]{2}$", message = "Invalid code format. Expected format for PrisonId: A1234AA")
-    prisonId: String?,
+  fun serviceUserByCrnOrPrisonerNumber(
+    @PathVariable(name = "identifier")
+    @Pattern(regexp = "^([A-Z]\\d{6}|[A-Z]\\d{4}[A-Z]{2})$", message = "Invalid code format. Expected format for CRN: X718255 or PrisonNumber: A1234AA")
+    identifier: String,
   ): ServiceUserDto {
     telemetryClient.logToAppInsights(
       "retrieve service user details",
       mapOf(
         "userMessage" to "User has hit service user details endpoint",
-        crn
-          ?.let { "crn" to it }
-          ?: prisonId?.let { "prisonId" to it }
-          ?: throw IllegalArgumentException("Either crn or prisonId must be provided"),
+        "identifier" to identifier,
       ),
     )
-    return crn
-      ?.let { service.getServiceUserByCrn(it) }
-      ?: prisonId?.let { service.getServiceUserByPrisonId(it) }
-      ?: throw IllegalArgumentException("Either crn or prisonId must be provided")
+    return service.getServiceUserByIdentifier(identifier)
+      ?: throw ResponseStatusException(
+        HttpStatus.NOT_FOUND,
+        "Service user with identifier $identifier not found",
+      )
   }
 }

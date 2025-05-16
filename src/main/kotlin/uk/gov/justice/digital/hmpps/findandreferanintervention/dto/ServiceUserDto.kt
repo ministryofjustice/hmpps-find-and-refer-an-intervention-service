@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 data class ServiceUserDto(
   var name: String? = null,
-  var crn: String? = null,
+  var crn: String,
   var dob: LocalDate,
   var gender: String? = null,
   var ethnicity: String? = null,

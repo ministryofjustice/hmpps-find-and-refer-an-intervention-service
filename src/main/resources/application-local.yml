@@ -1,5 +1,5 @@
 hmpps-auth:
-  url: "http://hmpps-auth:9090/auth"
+  baseurl: "http://hmpps-auth:9090/auth"
 
 spring:
   jpa:
@@ -11,3 +11,13 @@ spring:
     locations: classpath:db/migration,classpath:db/local
     clean-on-validation-error: true
     clean-disabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          find-and-refer-interventions-client:
+            client-id: hmpps-find-and-refer-an-intervention-ui-client
+            client-secret: clientsecret
+
+find-and-refer-and-delius:
+  baseurl: "http://localhost:9092"
