@@ -20,6 +20,7 @@ generic-service:
   env:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"
     HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+    FINDANDREFERANDDELIUS_BASEURL: "https://find-and-refer-and-delius-dev.hmpps.service.justice.gov.uk"
     # Template kotlin calls out to itself to provide an example of a service call
     # TODO: This should be replaced by a call to a different service, or removed
     # EXAMPLE_API_URL: "https://template-kotlin-dev.hmpps.service.justice.gov.uk"

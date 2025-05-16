@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/person/find/.*"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "crn": "X718255",
+      "nomsNumber": "A123333",
+      "name": {
+        "forename": "David",
+        "surname": "Clarke"
+      },
+      "dateOfBirth": "1981-04-15",
+      "ethnicity": "British",
+      "gender": "Male",
+      "probationDeliveryUnit": {
+        "code": "LON",
+        "description": "London"
+      },
+      "setting": "Community"
+    }
+  }
+}

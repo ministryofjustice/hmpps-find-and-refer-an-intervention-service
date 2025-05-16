@@ -6,7 +6,12 @@ management.endpoint:
   info.cache.time-to-live: 0
 
 hmpps-auth:
-  url: "http://localhost:8093/auth"
+  baseurl: "http://localhost:8093/auth"
+
+find-and-refer-and-delius:
+  locations:
+    find-person: "/person/find/{identifier}"
+  baseurl: "http://localhost:9092"
 
 spring:
   jpa:
@@ -16,3 +21,25 @@ spring:
     locations: classpath:db/migration,classpath:db/local
     clean-on-validation-error: true
     clean-disabled: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${hmpps-auth.baseurl}/.well-known/jwks.json
+      client:
+        provider:
+          hmpps-auth:
+            token-uri: ${hmpps-auth.baseurl}/oauth/token
+            token-request:
+              connect-timeout-ms: 500
+              read-timeout-ms: 500
+              retries: 3
+              retry-delay-ms: 500
+        registration:
+          find-and-refer-interventions-client:
+            provider: hmpps-auth
+            authorization-grant-type: client_credentials
+            scope: read,write
+            client-id: interventions
+            client-secret: clientsecret
