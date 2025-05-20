@@ -6,7 +6,7 @@ import java.util.UUID
 data class InterventionCatalogueDefinition(
   @JsonProperty("uuid") val uuid: UUID,
   @JsonProperty("intervention_catalogue") val catalogue: InterventionCatalogueEntryDefinition,
-  @JsonProperty("delivery_methods") val deliveryMethod: Array<DeliveryMethodDefinition>?,
+  @JsonProperty("delivery_methods") val deliveryMethod: DeliveryMethodDefinition?,
   @JsonProperty("delivery_method_settings") val deliveryMethodSetting: Array<String>,
   @JsonProperty("enabling_intervention_detail") val enablingIntervention: String?,
   @JsonProperty("criminogenic_needs") val criminogenicNeed: Array<String>?,
