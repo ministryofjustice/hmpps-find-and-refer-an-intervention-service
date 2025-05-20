@@ -22,13 +22,13 @@ spec:
         - name: data-dictionary
           image: "{{ .Values.image.repository }}:data-dictionary-{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.image.ports.dataDictionary }}
+            - containerPort: {{ .Values.image.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.image.ports.dataDictionary }}
+              port: {{ .Values.image.port }}
           readinessProbe:
             httpGet:
               path: /
-              port: {{ .Values.image.ports.dataDictionary }}
+              port: {{ .Values.image.port }}

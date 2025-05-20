@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "app.name" . }}-api
+  name: {{ template "app.name" . }}-data-dictionary
   labels:
     app: {{ template "app.name" . }}
     {{- include "app.labels" . | nindent 4 }}
@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: {{ .Values.image.ports.app }}
+      targetPort: {{ .Values.image.port }}
       name: http
   selector:
-    {{- include "app.selectorLabels" . | nindent 4 }}
+    {{- include "dataDictionary.selectorLabels" . | nindent 4 }}

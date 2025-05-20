@@ -1,46 +1,51 @@
-generic-service:
-  nameOverride: hmpps-find-and-refer-an-intervention-service
-  productId: "HMPPS545" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
+---
+# Default values for generic-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: hmpps-find-and-refer-an-intervention-service
+productId: "HMPPS545" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
 
-  replicaCount: 2
+replicaCount: 2
 
-  image:
-    repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service
-    tag: app_version # override at deployment time
-    port: 8080
+image:
+  repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service
+  tag: app_version # override at deployment time
+  port: 8080
 
-  ingress:
-    enabled: true
-    host: find-and-refer-an-intervention-service-dev.hmpps.service.justice.gov.uk # override per environment
-    tlsSecretName: hmpps-find-and-refer-an-intervention-service-cert
+serviceAccountName: "hmpps-find-and-refer-an-intervention"
 
-  # Environment variables to load into the deployment
-  env:
-    JAVA_OPTS: "-Xmx512m"
-    SERVER_PORT: "8080"
-    APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY)"
-    APPLICATIONINSIGHTS_CONFIGURATION_FILE: applicationinsights.json
+ingress:
+  enabled: true
+  host: find-and-refer-an-intervention-service-dev.hmpps.service.justice.gov.uk # override per environment
+  tlsSecretName: hmpps-find-and-refer-an-intervention-service-cert
 
-  # Pre-existing kubernetes secrets to load as environment variables in the deployment.
-  # namespace_secrets:
-  #   [name of kubernetes secret]:
-  #     [name of environment variable as seen by app]: [key of kubernetes secret to load]
+# Environment variables to load into the deployment
+env:
+  JAVA_OPTS: "-Xmx512m"
+  SERVER_PORT: "8080"
+  APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY)"
+  APPLICATIONINSIGHTS_CONFIGURATION_FILE: applicationinsights.json
 
-  namespace_secrets:
-    hmpps-find-and-refer-an-intervention-service:
-      APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
-      CLIENT_CREDS_CLIENT_ID: 'CLIENT_CREDS_CLIENT_ID'
-      CLIENT_CREDS_CLIENT_SECRET: 'CLIENT_CREDS_CLIENT_SECRET'
+# Pre-existing kubernetes secrets to load as environment variables in the deployment.
+# namespace_secrets:
+#   [name of kubernetes secret]:
+#     [name of environment variable as seen by app]: [key of kubernetes secret to load]
 
-    rds-instance-output:
-      POSTGRES_URI: "rds_instance_endpoint"
-      POSTGRES_DB: "database_name"
-      POSTGRES_USERNAME: "database_username"
-      POSTGRES_PASSWORD: "database_password"
+namespace_secrets:
+  hmpps-find-and-refer-an-intervention-service:
+    APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
+    CLIENT_CREDS_CLIENT_ID: 'CLIENT_CREDS_CLIENT_ID'
+    CLIENT_CREDS_CLIENT_SECRET: 'CLIENT_CREDS_CLIENT_SECRET'
 
-  allowlist:
-    groups:
-      - internal
+  rds-instance-output:
+    POSTGRES_URI: "rds_instance_endpoint"
+    POSTGRES_DB: "database_name"
+    POSTGRES_USERNAME: "database_username"
+    POSTGRES_PASSWORD: "database_password"
+
+allowlist:
+  groups:
+    - internal
 
 generic-prometheus-alerts:
   targetApplication: hmpps-find-and-refer-an-intervention-service
