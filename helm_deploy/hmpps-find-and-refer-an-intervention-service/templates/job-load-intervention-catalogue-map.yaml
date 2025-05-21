@@ -12,7 +12,7 @@ spec:
           restartPolicy: "Never"
           containers:
             - name: load-interventions-catalogue-map
-              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              image: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service:latest
               imagePullPolicy: Always
               args: ["--jobName=loadInterventionCatalogueMapJob"]
               securityContext:
