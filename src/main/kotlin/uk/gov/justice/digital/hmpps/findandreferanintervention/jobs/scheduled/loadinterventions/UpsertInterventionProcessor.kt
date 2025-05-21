@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.AuthUser
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.CriminogenicNeedRef
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethod
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryMethodSetting
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.EligibleOffence
@@ -25,7 +24,6 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Settin
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodSettingRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EligibleOffenceRepository
@@ -34,7 +32,6 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.Ex
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExclusionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.OffenceTypeRefRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PersonalEligibilityRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PossibleOutcomeRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.RiskConsiderationRepository
@@ -49,8 +46,6 @@ class UpsertInterventionProcessor(
   private val interventionCatalogueRepository: InterventionCatalogueRepository,
   private val criminogenicNeedRepository: CriminogenicNeedRepository,
   private val criminogenicNeedRefRepository: CriminogenicNeedRefRepository,
-  private val deliveryLocationRepository: DeliveryLocationRepository,
-  private val pduRefRepository: PduRefRepository,
   private val deliveryMethodRepository: DeliveryMethodRepository,
   private val deliveryMethodSettingRepository: DeliveryMethodSettingRepository,
   private val eligibleOffenceRepository: EligibleOffenceRepository,
@@ -167,25 +162,22 @@ class UpsertInterventionProcessor(
     item: InterventionCatalogueDefinition,
     catalogue: InterventionCatalogue,
   ): InterventionCatalogue {
-    if (item.criminogenicNeed.toString().isNotEmpty()) {
+    if (item.criminogenicNeed?.isNotEmpty() == true) {
       catalogue.criminogenicNeeds = upsertCriminogenicNeeds(item.criminogenicNeed, catalogue)
     }
-    if (item.deliveryLocation != null) {
-      catalogue.deliveryLocations = upsertDeliveryLocations(item.deliveryLocation, catalogue)
-    }
-    if (item.deliveryMethod != null) {
+    if (item.deliveryMethod?.isNotEmpty() == true) {
       catalogue.deliveryMethods = upsertDeliveryMethods(item.deliveryMethod, catalogue)
     }
     if (item.deliveryMethodSetting.isNotEmpty()) {
       upsertDeliveryMethodSettings(item.deliveryMethodSetting, catalogue)
     }
-    if (item.eligibleOffence != null) {
+    if (item.eligibleOffence?.isNotEmpty() == true) {
       catalogue.eligibleOffences = upsertEligibleOffences(item.eligibleOffence, catalogue)
     }
     if (item.enablingIntervention.toString().isNotEmpty()) {
       catalogue.enablingInterventions = upsertEnablingInterventions(item.enablingIntervention, catalogue)
     }
-    if (item.excludedOffence != null) {
+    if (item.excludedOffence?.isNotEmpty() == true) {
       catalogue.excludedOffences = upsertExcludedOffences(item.excludedOffence, catalogue)
     }
     if (item.exclusion.toString().isNotEmpty()) {
@@ -194,7 +186,7 @@ class UpsertInterventionProcessor(
     if (item.personalEligibility.toString().isNotEmpty()) {
       catalogue.personalEligibility = upsertPersonalEligibility(item.personalEligibility, catalogue)
     }
-    if (item.possibleOutcome != null) {
+    if (item.possibleOutcome?.isNotEmpty() == true) {
       catalogue.possibleOutcomes = upsertPossibleOutcomes(item.possibleOutcome, catalogue)
     }
     if (item.riskConsideration.toString().isNotEmpty()) {
@@ -212,12 +204,12 @@ class UpsertInterventionProcessor(
     criminogenicNeeds: Array<String>,
     catalogue: InterventionCatalogue,
   ): MutableSet<CriminogenicNeed> {
-    val criminogenicNeedRecords =
+    val criminogenicNeedRecords: MutableList<CriminogenicNeed> =
       criminogenicNeedRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     fun createCriminogenicNeeds() {
       criminogenicNeeds.forEach { needReference ->
-        val criminogenicReference = criminogenicNeedRefRepository.findByName(needReference)
+        val criminogenicReference: CriminogenicNeedRef? = criminogenicNeedRefRepository.findByName(needReference)
 
         criminogenicNeedRecords.add(
           CriminogenicNeed(
@@ -231,14 +223,13 @@ class UpsertInterventionProcessor(
 
     when {
       criminogenicNeedRecords.isNotEmpty() -> {
-        criminogenicNeedRepository.deleteAllByIntervention(catalogue)
-        criminogenicNeedRecords.removeAll(criminogenicNeedRecords)
-
         logger.info(
           "Retrieved and removed ${criminogenicNeedRecords.size} Criminogenic Needs from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
+        criminogenicNeedRepository.deleteAllByIntervention(catalogue)
+        criminogenicNeedRecords.removeAll(criminogenicNeedRecords)
         createCriminogenicNeeds()
       }
       else -> {
@@ -254,62 +245,11 @@ class UpsertInterventionProcessor(
     return criminogenicNeedRepository.saveAll(criminogenicNeedRecords).toMutableSet()
   }
 
-  fun upsertDeliveryLocations(
-    deliveryLocations: Array<DeliveryLocationDefinition>,
-    catalogue: InterventionCatalogue,
-  ): MutableSet<DeliveryLocation> {
-    val deliveryLocationRecords =
-      deliveryLocationRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
-
-    when {
-      deliveryLocationRecords.isNotEmpty() -> {
-        logger.info(
-          "Retrieved ${deliveryLocationRecords.size} Delivery Location records from Database for Intervention Catalogue Entry - " +
-            "${catalogue.name}, id - ${catalogue.id}",
-        )
-        return deliveryLocationRecords.toMutableSet()
-      }
-      else -> {
-        for (deliveryLocation in deliveryLocations) {
-          for (pdu in deliveryLocation.pduRefs) {
-            val pduRef = pduRefRepository.findByName(pdu)
-
-            if (pduRef != null) {
-              val newDeliveryLocation = deliveryLocationRepository.save(
-                DeliveryLocation(
-                  id = UUID.randomUUID(),
-                  providerName = deliveryLocation.providerName,
-                  contact = deliveryLocation.contact,
-                  pduRef = pduRef,
-                  intervention = catalogue,
-                ),
-              )
-
-              deliveryLocationRecords.add(newDeliveryLocation)
-            } else {
-              throw RuntimeException("PDU for ${deliveryLocation.providerName} was not found")
-            }
-          }
-        }
-
-        return if (deliveryLocationRecords.isNotEmpty()) {
-          logger.info(
-            "Inserted ${deliveryLocationRecords.size} Delivery Location records from Database for Intervention Catalogue Entry - " +
-              "${catalogue.name}, id - ${catalogue.id}",
-          )
-          return deliveryLocationRecords.toMutableSet()
-        } else {
-          mutableSetOf()
-        }
-      }
-    }
-  }
-
   fun upsertDeliveryMethods(
     deliveryMethods: Array<DeliveryMethodDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethod> {
-    val deliveryMethodRecords =
+    val deliveryMethodRecords: MutableList<DeliveryMethod> =
       deliveryMethodRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     fun createDeliveryMethods() {
@@ -328,14 +268,13 @@ class UpsertInterventionProcessor(
 
     when {
       deliveryMethodRecords.isNotEmpty() -> {
-        deliveryMethodRepository.deleteAllByIntervention(catalogue)
-        deliveryMethodRecords.removeAll(deliveryMethodRecords)
-
         logger.info(
           "Retrieved and removed ${deliveryMethodRecords.size} Delivery Method records from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
+        deliveryMethodRepository.deleteAllByIntervention(catalogue)
+        deliveryMethodRecords.removeAll(deliveryMethodRecords)
         createDeliveryMethods()
       }
       else -> {
@@ -352,8 +291,8 @@ class UpsertInterventionProcessor(
   }
 
   fun getSettingTypeForSettingName(settingName: String?): SettingType? {
-    val settingNameUppercased = settingName?.uppercase()
-    val settingTypes = SettingType.entries.map(SettingType::name)
+    val settingNameUppercased: String? = settingName?.uppercase()
+    val settingTypes: List<String> = SettingType.entries.map(SettingType::name)
     var preRelease: String? = null
 
     if (settingNameUppercased.equals("PRE-RELEASE")) preRelease = "PRE_RELEASE"
@@ -375,7 +314,7 @@ class UpsertInterventionProcessor(
     deliveryMethodSettings: Array<String>,
     catalogue: InterventionCatalogue,
   ): MutableSet<DeliveryMethodSetting> {
-    val deliveryMethodSettingRecords =
+    val deliveryMethodSettingRecords: MutableList<DeliveryMethodSetting> =
       deliveryMethodSettingRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     fun createDeliveryMethodSettings() {
@@ -405,13 +344,13 @@ class UpsertInterventionProcessor(
 
     when {
       deliveryMethodSettingRecords.isNotEmpty() -> {
-        deliveryMethodSettingRepository.deleteAllByIntervention(catalogue)
-        deliveryMethodSettingRecords.removeAll(deliveryMethodSettingRecords)
-
         logger.info(
           "Retrieved and removed ${deliveryMethodSettingRecords.size} Delivery Method Setting records from Database for Intervention Catalogue Entry " +
             "- ${catalogue.name}, id - ${catalogue.id}",
         )
+
+        deliveryMethodSettingRepository.deleteAllByIntervention(catalogue)
+        deliveryMethodSettingRecords.removeAll(deliveryMethodSettingRecords)
         createDeliveryMethodSettings()
       }
       else -> {
@@ -434,7 +373,7 @@ class UpsertInterventionProcessor(
     eligibleOffences: Array<EligibleOffenceDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<EligibleOffence> {
-    val eligibleOffenceRecords =
+    val eligibleOffenceRecords: MutableList<EligibleOffence> =
       eligibleOffenceRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     fun createEligibleOffences() {
@@ -455,14 +394,13 @@ class UpsertInterventionProcessor(
 
     when {
       eligibleOffenceRecords.isNotEmpty() -> {
-        eligibleOffenceRepository.deleteAllByIntervention(catalogue)
-        eligibleOffenceRecords.removeAll(eligibleOffenceRecords)
-
         logger.info(
           "Retrieved and removed ${eligibleOffenceRecords.size} Eligible Offence records from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
+        eligibleOffenceRepository.deleteAllByIntervention(catalogue)
+        eligibleOffenceRecords.removeAll(eligibleOffenceRecords)
         createEligibleOffences()
       }
       else -> {
@@ -482,7 +420,7 @@ class UpsertInterventionProcessor(
     details: String?,
     catalogue: InterventionCatalogue,
   ): MutableSet<EnablingIntervention> {
-    val enablingInterventionRecords =
+    val enablingInterventionRecords: MutableList<EnablingIntervention> =
       enablingInterventionRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     when {
@@ -518,12 +456,12 @@ class UpsertInterventionProcessor(
     excludedOffences: Array<ExcludedOffencesDefinition>,
     catalogue: InterventionCatalogue,
   ): MutableSet<ExcludedOffence> {
-    val excludedOffenceRecords =
+    val excludedOffenceRecords: MutableList<ExcludedOffence> =
       excludedOffenceRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     fun createExcludedOffences() {
       excludedOffences.forEach { excludedOffence ->
-        val offenceType = offenceTypeRefRepository.findByName(excludedOffence.offenceTypeId)
+        val offenceType: OffenceTypeRef? = offenceTypeRefRepository.findByName(excludedOffence.offenceTypeId)
 
         excludedOffenceRecords.add(
           ExcludedOffence(
@@ -539,14 +477,13 @@ class UpsertInterventionProcessor(
 
     when {
       excludedOffenceRecords.isNotEmpty() -> {
-        excludedOffenceRepository.deleteAllByIntervention(catalogue)
-        excludedOffenceRecords.removeAll(excludedOffenceRecords)
-
         logger.info(
           "Retrieved and removed ${excludedOffenceRecords.size} Excluded Offence records from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
+        excludedOffenceRepository.deleteAllByIntervention(catalogue)
+        excludedOffenceRecords.removeAll(excludedOffenceRecords)
         createExcludedOffences()
       }
       else -> {
@@ -566,7 +503,7 @@ class UpsertInterventionProcessor(
     exclusion: ExclusionDefinition?,
     catalogue: InterventionCatalogue,
   ): Exclusion {
-    val exclusionRecord = exclusionRepository.findByIntervention(catalogue)
+    val exclusionRecord: Exclusion? = exclusionRepository.findByIntervention(catalogue)
 
     when {
       exclusionRecord != null -> {
@@ -585,11 +522,11 @@ class UpsertInterventionProcessor(
         exclusionRecord.intervention = catalogue
 
         logger.info(
-          "Exclusion record have now been upserted into Database for Intervention Catalogue Entry - " +
+          "Upserted Exclusion record into Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-        return exclusionRecord
+        return exclusionRepository.save(exclusionRecord)
       }
       else -> {
         logger.info(
@@ -618,7 +555,7 @@ class UpsertInterventionProcessor(
     personalEligibility: PersonalEligibilityDefinition?,
     catalogue: InterventionCatalogue,
   ): PersonalEligibility {
-    val personalEligibilityRecord = personalEligibilityRepository.findByIntervention(catalogue)
+    val personalEligibilityRecord: PersonalEligibility? = personalEligibilityRepository.findByIntervention(catalogue)
 
     when {
       personalEligibilityRecord != null -> {
@@ -634,11 +571,11 @@ class UpsertInterventionProcessor(
         personalEligibilityRecord.intervention = catalogue
 
         logger.info(
-          "Personal Eligibility record have now been upserted for Intervention Catalogue Entry - " +
+          "Upserted Personal Eligibility record into Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-        return personalEligibilityRecord
+        return personalEligibilityRepository.save(personalEligibilityRecord)
       }
       else -> {
         logger.info(
@@ -664,7 +601,7 @@ class UpsertInterventionProcessor(
     possibleOutcomes: Array<String>,
     catalogue: InterventionCatalogue,
   ): MutableSet<PossibleOutcome> {
-    val possibleOutcomesRecords =
+    val possibleOutcomesRecords: MutableList<PossibleOutcome> =
       possibleOutcomeRepository.findByIntervention(catalogue)?.toMutableList() ?: mutableListOf()
 
     fun createPossibleOutcomes() {
@@ -681,14 +618,13 @@ class UpsertInterventionProcessor(
 
     when {
       possibleOutcomesRecords.isNotEmpty() -> {
-        possibleOutcomeRepository.deleteAllByIntervention(catalogue)
-        possibleOutcomesRecords.removeAll(possibleOutcomesRecords)
-
         logger.info(
           "Retrieved and removed ${possibleOutcomesRecords.size} Possible Outcomes record from Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
+        possibleOutcomeRepository.deleteAllByIntervention(catalogue)
+        possibleOutcomesRecords.removeAll(possibleOutcomesRecords)
         createPossibleOutcomes()
       }
       else -> {
@@ -705,8 +641,8 @@ class UpsertInterventionProcessor(
   }
 
   fun getRoshLevel(roshLevel: String?): RoshLevel? {
-    val roshLevelUppercased = roshLevel?.uppercase()
-    val roshLevels = RoshLevel.entries.map(RoshLevel::name)
+    val roshLevelUppercased: String? = roshLevel?.uppercase()
+    val roshLevels: List<String> = RoshLevel.entries.map(RoshLevel::name)
     return if (roshLevels.contains(roshLevelUppercased)) {
       RoshLevel.entries[roshLevels.indexOf(roshLevelUppercased)]
     } else {
@@ -718,7 +654,7 @@ class UpsertInterventionProcessor(
     riskConsideration: RiskConsiderationDefinition?,
     catalogue: InterventionCatalogue,
   ): RiskConsideration {
-    val riskConsiderationRecord = riskConsiderationRepository.findByIntervention(catalogue)
+    val riskConsiderationRecord: RiskConsideration? = riskConsiderationRepository.findByIntervention(catalogue)
 
     when {
       riskConsiderationRecord != null -> {
@@ -742,11 +678,11 @@ class UpsertInterventionProcessor(
         riskConsiderationRecord.intervention = catalogue
 
         logger.info(
-          "Risk Consideration record have now been upserted for Intervention Catalogue Entry - " +
+          "Upserted Risk Consideration record into Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-        return riskConsiderationRecord
+        return riskConsiderationRepository.save(riskConsiderationRecord)
       }
       else -> {
         logger.info(
@@ -780,7 +716,7 @@ class UpsertInterventionProcessor(
     specialEducationalNeed: SpecialEducationalNeedDefinition?,
     catalogue: InterventionCatalogue,
   ): SpecialEducationalNeed {
-    val specialEducationalNeedRecord = specialEducationalNeedRepository.findByIntervention(catalogue)
+    val specialEducationalNeedRecord: SpecialEducationalNeed? = specialEducationalNeedRepository.findByIntervention(catalogue)
 
     when {
       specialEducationalNeedRecord != null -> {
@@ -795,11 +731,11 @@ class UpsertInterventionProcessor(
         specialEducationalNeedRecord.equivalentNonLdcProgrammeGuide = specialEducationalNeed?.equivalentNonLdcProgrammeGuide
 
         logger.info(
-          "Special Educational Need record have now been upserted into Database for Intervention Catalogue Entry - " +
+          "Upserted Special Educational Need record into Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-        return specialEducationalNeedRecord
+        return specialEducationalNeedRepository.save(specialEducationalNeedRecord)
       }
       else -> {
         logger.info(

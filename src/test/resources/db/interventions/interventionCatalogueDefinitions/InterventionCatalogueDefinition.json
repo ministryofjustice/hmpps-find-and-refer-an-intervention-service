@@ -9,18 +9,6 @@
     "session_detail":null,
     "reason_for_referral":"Accommodation need"
   },
-  "delivery_location":[
-    {
-      "provider_name": "Default Provider Name 1",
-      "contact": "Group",
-      "pdu_establishments": ["Default PDU Ref1"]
-    },
-    {
-      "provider_name": "Default Provider Name 2",
-      "contact": "One-to-one",
-      "pdu_establishments": ["Default PDU Ref2"]
-    }
-  ],
   "delivery_methods":[
     {
       "delivery_method_description":"TBC",
