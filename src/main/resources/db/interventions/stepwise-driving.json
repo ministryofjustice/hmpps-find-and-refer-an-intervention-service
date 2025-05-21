@@ -17,7 +17,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [
         "Drug Misuse",
         "Alcohol Misuse",
@@ -29,8 +29,28 @@
         "males": true,
         "females": true
     },
-    "eligibility_offence": [],
-    "exclude_offence": [],
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Drink Driving",
+            "victim_type": "",
+            "motivation": ""
+        },
+        {
+            "offence_type_id": "Drug Driving",
+            "victim_type": "",
+            "motivation": ""
+        }
+    ],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": ""
+        },
+        {
+            "offence_type_id": "IPV",
+            "victim_type": ""
+        }
+    ],
     "possible_outcomes": [],
     "risk_consideration": {
         "cn_score_guide": null,
@@ -56,6 +76,8 @@
         "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
         "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
         "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
+        "notAllowedIfEligibleForAnotherIntervention": "If the person meets the criteria for an Accredited Programme, or another Structured Intervention, they can do Stepwise Driving alongside it.",
+        "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
         "other_preferred_method_guide": "If the person meets the criteria for an Accredited Programme, or another Structured Intervention, they can do Stepwise Driving alongside it.",
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null

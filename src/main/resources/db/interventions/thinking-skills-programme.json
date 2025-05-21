@@ -17,7 +17,7 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
@@ -25,7 +25,12 @@
         "females": true
     },
     "eligibility_offence": [],
-    "exclude_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": ""
+        }
+    ],
     "possible_outcomes": [
         "Develop thinking (cognitive) skills to manage risk factors, develop protective factors, and achieve pro-social goals.",
         "",
@@ -55,6 +60,8 @@
         "remaining_license_community_order_guide": null,
         "alcohol_drug_problem_guide": null,
         "mental_health_problem_guide": "Will be assesed if suitable after referral",
+        "notAllowedIfEligibleForAnotherIntervention": null,
+        "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null

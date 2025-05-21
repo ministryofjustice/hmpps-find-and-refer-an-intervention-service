@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": "Kaizen, Horizon, BNM+ or NMS",
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",

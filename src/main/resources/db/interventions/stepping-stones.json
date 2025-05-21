@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [
         "Thinking and Behaviour",
         "Attitudes"
@@ -27,7 +27,12 @@
         "females": false
     },
     "eligibility_offence": [],
-    "exclude_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": ""
+        }
+    ],
     "possible_outcomes": [],
     "risk_consideration": null,
     "special_educational_needs": null,

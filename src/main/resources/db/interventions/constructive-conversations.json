@@ -8,12 +8,12 @@
         "session_detail": "",
         "reason_for_referral": ""
     },
-    "delivery_methods": [],
+    "delivery_methods": null,
     "delivery_method_settings": [
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",

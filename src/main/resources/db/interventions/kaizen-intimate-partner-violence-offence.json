@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
@@ -76,6 +76,8 @@
         "remaining_license_community_order_guide": null,
         "alcohol_drug_problem_guide": null,
         "mental_health_problem_guide": null,
+        "notAllowedIfEligibleForAnotherIntervention": null,
+        "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": "No previous iHorizon",
         "schedule_frequency_guide": "Over-ride if exception"

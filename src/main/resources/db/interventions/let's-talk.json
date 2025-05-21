@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [
         "Emotional Wellbeing",
         "Thinking and Behaviour",
@@ -28,7 +28,16 @@
         "females": false
     },
     "eligibility_offence": [],
-    "exclude_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": ""
+        },
+        {
+            "offence_type_id": "IPV",
+            "victim_type": ""
+        }
+    ],
     "possible_outcomes": [
         "Outcomes of this programme include different thinking styles and communications skills."
     ],
