@@ -40,7 +40,7 @@ spec:
         - name: api
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.image.ports.app }}
+            - containerPort: {{ .Values.image.port}}
               protocol: TCP
           volumeMounts:
           - name: heap-dumps
@@ -48,14 +48,14 @@ spec:
           livenessProbe:
             httpGet:
               path: /health/liveness
-              port: {{ .Values.image.ports.app }}
+              port: {{ .Values.image.port}}
             initialDelaySeconds: 60
             timeoutSeconds: 5
             failureThreshold: 10
           readinessProbe:
             httpGet:
               path: /health/readiness
-              port: {{ .Values.image.ports.app }}
+              port: {{ .Values.image.port}}
             initialDelaySeconds: 60
             timeoutSeconds: 5
             failureThreshold: 10
