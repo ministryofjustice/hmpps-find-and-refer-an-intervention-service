@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: load-interventions
+  name: load-interventions-catalogue-to-course-map
 spec:
   schedule: "0 4 * * *"
   suspend: true
@@ -11,8 +11,16 @@ spec:
         spec:
           restartPolicy: "Never"
           containers:
-            - name: load-interventions
+            - name: load-interventions-catalogue-to-course-map
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
               imagePullPolicy: Always
               args: ["--jobName=loadInterventionCatalogueToCourseMapJob"]
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - "ALL"
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
 {{- include "deployment.envs" . | nindent 14 }}
