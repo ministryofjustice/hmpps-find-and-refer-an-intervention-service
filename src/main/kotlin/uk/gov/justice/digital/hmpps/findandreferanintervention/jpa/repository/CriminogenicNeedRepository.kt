@@ -7,4 +7,5 @@ import java.util.UUID
 
 interface CriminogenicNeedRepository : JpaRepository<CriminogenicNeed, UUID> {
   fun findByIntervention(intervention: InterventionCatalogue): List<CriminogenicNeed>?
+  fun deleteAllByIntervention(intervention: InterventionCatalogue)
 }

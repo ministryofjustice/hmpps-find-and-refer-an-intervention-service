@@ -6,11 +6,10 @@ import java.util.UUID
 data class InterventionCatalogueDefinition(
   @JsonProperty("uuid") val uuid: UUID,
   @JsonProperty("intervention_catalogue") val catalogue: InterventionCatalogueEntryDefinition,
-  @JsonProperty("delivery_location") val deliveryLocation: Array<DeliveryLocationDefinition>?,
   @JsonProperty("delivery_methods") val deliveryMethod: Array<DeliveryMethodDefinition>?,
   @JsonProperty("delivery_method_settings") val deliveryMethodSetting: Array<String>,
   @JsonProperty("enabling_intervention_detail") val enablingIntervention: String?,
-  @JsonProperty("criminogenic_needs") val criminogenicNeed: Array<String>,
+  @JsonProperty("criminogenic_needs") val criminogenicNeed: Array<String>?,
   @JsonProperty("personal_eligibility") val personalEligibility: PersonalEligibilityDefinition?,
   @JsonProperty("eligibility_offence") val eligibleOffence: Array<EligibleOffenceDefinition>?,
   @JsonProperty("exclude_offence") val excludedOffence: Array<ExcludedOffencesDefinition>?,
@@ -29,12 +28,6 @@ data class InterventionCatalogueEntryDefinition(
   @JsonProperty("session_detail") val sessionDetail: String?,
   @JsonProperty("reason_for_referral") val reasonForReferral: String,
   @JsonProperty("time_to_complete") val timeToComplete: String?,
-)
-
-data class DeliveryLocationDefinition(
-  @JsonProperty("provider_name") val providerName: String,
-  @JsonProperty("contact") val contact: String,
-  @JsonProperty("pdu_establishments") val pduRefs: Array<String>,
 )
 
 data class DeliveryMethodDefinition(
