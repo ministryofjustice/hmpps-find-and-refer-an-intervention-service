@@ -543,13 +543,13 @@ class UpsertInterventionProcessor(
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-      exclusionRecord.minRemainingSentenceDurationGuide = exclusion?.minRemaingSentenceGuide
+      exclusionRecord.minRemainingSentenceDurationGuide = exclusion?.minRemainingSentenceGuide
       exclusionRecord.remainingLicenseCommunityOrderGuide = exclusion?.remainingLicenseCommunityOrderGuide
       exclusionRecord.alcoholDrugProblemGuide = exclusion?.alcoholDrugProblemGuide
       exclusionRecord.mentalHealthProblemGuide = exclusion?.mentalHealthProblemGuide
       exclusionRecord.otherPreferredMethodGuide = exclusion?.otherPreferredMethodGuide
       exclusionRecord.sameTypeRuleGuide = exclusion?.sameTypeRuleGuide
-      exclusionRecord.scheduleFrequencyGuide = exclusion?.scheduleRequencyGuide
+      exclusionRecord.scheduleFrequencyGuide = exclusion?.scheduleFrequencyGuide
       exclusionRecord.notAllowedIfEligibleForAnotherInterventionGuide =
         exclusion?.notAllowedIfEligibleForAnotherInterventionGuide
       exclusionRecord.literacyLevelGuide = exclusion?.literacyLevelGuide
@@ -568,13 +568,13 @@ class UpsertInterventionProcessor(
         exclusionRepository.save(
           Exclusion(
             id = UUID.randomUUID(),
-            minRemainingSentenceDurationGuide = exclusion.minRemaingSentenceGuide,
+            minRemainingSentenceDurationGuide = exclusion.minRemainingSentenceGuide,
             remainingLicenseCommunityOrderGuide = exclusion.remainingLicenseCommunityOrderGuide,
             alcoholDrugProblemGuide = exclusion.alcoholDrugProblemGuide,
             mentalHealthProblemGuide = exclusion.mentalHealthProblemGuide,
             otherPreferredMethodGuide = exclusion.otherPreferredMethodGuide,
             sameTypeRuleGuide = exclusion.sameTypeRuleGuide,
-            scheduleFrequencyGuide = exclusion.scheduleRequencyGuide,
+            scheduleFrequencyGuide = exclusion.scheduleFrequencyGuide,
             notAllowedIfEligibleForAnotherInterventionGuide = exclusion.notAllowedIfEligibleForAnotherInterventionGuide,
             literacyLevelGuide = exclusion.literacyLevelGuide,
             intervention = catalogue,

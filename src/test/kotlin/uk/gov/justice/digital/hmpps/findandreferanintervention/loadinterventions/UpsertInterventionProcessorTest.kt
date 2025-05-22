@@ -629,13 +629,13 @@ internal class UpsertInterventionProcessorTest {
     whenever(exclusionRepository.findByIntervention(any())).thenReturn(
       Exclusion(
         id = UUID.randomUUID(),
-        minRemainingSentenceDurationGuide = exclusionDefinition?.minRemaingSentenceGuide,
+        minRemainingSentenceDurationGuide = exclusionDefinition?.minRemainingSentenceGuide,
         remainingLicenseCommunityOrderGuide = exclusionDefinition?.remainingLicenseCommunityOrderGuide,
         alcoholDrugProblemGuide = exclusionDefinition?.alcoholDrugProblemGuide,
         mentalHealthProblemGuide = exclusionDefinition?.mentalHealthProblemGuide,
         otherPreferredMethodGuide = exclusionDefinition?.otherPreferredMethodGuide,
         sameTypeRuleGuide = exclusionDefinition?.sameTypeRuleGuide,
-        scheduleFrequencyGuide = exclusionDefinition?.scheduleRequencyGuide,
+        scheduleFrequencyGuide = exclusionDefinition?.scheduleFrequencyGuide,
         intervention = catalogue,
       ),
     )
