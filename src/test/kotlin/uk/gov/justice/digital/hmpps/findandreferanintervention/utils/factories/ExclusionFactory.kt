@@ -15,6 +15,8 @@ fun ExclusionFactory.create(
   mentalHealthProblemGuide: String? = null,
   otherPreferredMethodGuide: String? = null,
   ameTypeRuleGuide: String? = null,
+  notAllowedIfEligibleForAnotherInterventionGuide: String? = null,
+  literacyLevelGuide: String? = null,
   scheduleFrequencyGuide: String? = null,
   intervention: InterventionCatalogue? = null,
 ): Exclusion = save(
@@ -27,6 +29,8 @@ fun ExclusionFactory.create(
     otherPreferredMethodGuide,
     ameTypeRuleGuide,
     scheduleFrequencyGuide,
+    notAllowedIfEligibleForAnotherInterventionGuide,
+    literacyLevelGuide,
     intervention,
   ),
 )
