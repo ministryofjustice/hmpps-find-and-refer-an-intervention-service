@@ -550,6 +550,9 @@ class UpsertInterventionProcessor(
       exclusionRecord.otherPreferredMethodGuide = exclusion?.otherPreferredMethodGuide
       exclusionRecord.sameTypeRuleGuide = exclusion?.sameTypeRuleGuide
       exclusionRecord.scheduleFrequencyGuide = exclusion?.scheduleRequencyGuide
+      exclusionRecord.notAllowedIfEligibleForAnotherInterventionGuide =
+        exclusion?.notAllowedIfEligibleForAnotherInterventionGuide
+      exclusionRecord.literacyLevelGuide = exclusion?.literacyLevelGuide
       exclusionRecord.intervention = catalogue
 
       logger.info(
@@ -572,6 +575,8 @@ class UpsertInterventionProcessor(
             otherPreferredMethodGuide = exclusion.otherPreferredMethodGuide,
             sameTypeRuleGuide = exclusion.sameTypeRuleGuide,
             scheduleFrequencyGuide = exclusion.scheduleRequencyGuide,
+            notAllowedIfEligibleForAnotherInterventionGuide = exclusion.notAllowedIfEligibleForAnotherInterventionGuide,
+            literacyLevelGuide = exclusion.literacyLevelGuide,
             intervention = catalogue,
           ),
         )
@@ -781,9 +786,9 @@ class UpsertInterventionProcessor(
           specialEducationalNeedRepository.save(
             SpecialEducationalNeed(
               id = UUID.randomUUID(),
-              literacyLevelGuide = specialEducationalNeed?.literacyLevelGuide,
-              learningDisabilityCateredFor = specialEducationalNeed?.learningDisabilityCateredFor,
-              equivalentNonLdcProgrammeGuide = specialEducationalNeed?.equivalentNonLdcProgrammeGuide,
+              literacyLevelGuide = specialEducationalNeed.literacyLevelGuide,
+              learningDisabilityCateredFor = specialEducationalNeed.learningDisabilityCateredFor,
+              equivalentNonLdcProgrammeGuide = specialEducationalNeed.equivalentNonLdcProgrammeGuide,
               intervention = catalogue,
             ),
           )

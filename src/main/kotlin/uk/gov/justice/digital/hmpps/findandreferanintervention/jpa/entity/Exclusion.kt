@@ -48,6 +48,14 @@ open class Exclusion(
   open var scheduleFrequencyGuide: String? = null,
 
   @Nullable
+  @Column(name = "not_allowed_if_eligible_for_another_intervention_guide", length = Integer.MAX_VALUE)
+  open var notAllowedIfEligibleForAnotherInterventionGuide: String? = null,
+
+  @Nullable
+  @Column(name = "literacy_level_guide", length = Integer.MAX_VALUE)
+  open var literacyLevelGuide: String? = null,
+
+  @Nullable
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var intervention: InterventionCatalogue?,
