@@ -2,7 +2,7 @@
 generic-service:
 
   nameOverride: hmpps-find-and-refer-an-intervention-service
-  serviceAccountName: "hmpps-find-and-refer-an-intervention"
+  serviceAccountName: "hmpps-find-and-refer-intervention"
   productId: "HMPPS545" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
 
   replicaCount: 2
