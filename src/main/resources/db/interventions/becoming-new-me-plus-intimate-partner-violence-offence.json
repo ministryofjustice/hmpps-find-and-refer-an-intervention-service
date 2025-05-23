@@ -27,8 +27,8 @@
     "eligibility_offence": [
         {
             "offence_type_id": "IPV",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         }
     ],
     "exclude_offence": null,

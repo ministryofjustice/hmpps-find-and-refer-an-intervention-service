@@ -26,7 +26,7 @@
     "eligibility_offence": [
         {
             "offence_type_id": "Any",
-            "victim_type": "",
+            "victim_type": null,
             "motivation": "engagement and/or identification with a group or gang."
         }
     ],

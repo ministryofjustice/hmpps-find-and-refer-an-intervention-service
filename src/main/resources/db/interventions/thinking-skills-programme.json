@@ -28,7 +28,7 @@
     "exclude_offence": [
         {
             "offence_type_id": "Sexual",
-            "victim_type": ""
+            "victim_type": null
         }
     ],
     "possible_outcomes": [
@@ -60,7 +60,7 @@
         "remaining_license_community_order_guide": null,
         "alcohol_drug_problem_guide": null,
         "mental_health_problem_guide": "Will be assesed if suitable after referral",
-        "notAllowedIfEligibleForAnotherIntervention": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
         "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,

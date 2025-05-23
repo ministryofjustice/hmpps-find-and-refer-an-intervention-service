@@ -27,7 +27,7 @@
         {
             "offence_type_id": "Internet Sexual",
             "victim_type": "children - no contact",
-            "motivation": ""
+            "motivation": null
         }
     ],
     "exclude_offence": [
@@ -59,7 +59,7 @@
         "remaining_license_community_order_guide": null,
         "alcohol_drug_problem_guide": null,
         "mental_health_problem_guide": null,
-        "notAllowedIfEligibleForAnotherIntervention": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
         "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": "No previous iHorizon",

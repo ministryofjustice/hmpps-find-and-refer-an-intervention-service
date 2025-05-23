@@ -31,11 +31,11 @@
     "exclude_offence": [
         {
             "offence_type_id": "Sexual",
-            "victim_type": ""
+            "victim_type": null
         },
         {
             "offence_type_id": "IPV",
-            "victim_type": ""
+            "victim_type": null
         }
     ],
     "possible_outcomes": [

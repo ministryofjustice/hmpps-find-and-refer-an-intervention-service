@@ -30,7 +30,7 @@
     "exclude_offence": [
         {
             "offence_type_id": "Sexual",
-            "victim_type": ""
+            "victim_type": null
         }
     ],
     "possible_outcomes": [],

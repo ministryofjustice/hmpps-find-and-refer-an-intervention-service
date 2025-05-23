@@ -27,53 +27,53 @@
     "eligibility_offence": [
         {
             "offence_type_id": "Acquisitive/Financial",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Alcohol motivated/disinhibited",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Domestic abuse",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Drugs motivated/disinhibited",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Motoring",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Other",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Robbery",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Sexual",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Violence (non DV) [MALES ONLY]",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Community Order",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         }
     ],
     "exclude_offence": null,

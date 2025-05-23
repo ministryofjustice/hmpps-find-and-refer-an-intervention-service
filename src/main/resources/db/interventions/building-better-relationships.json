@@ -57,7 +57,7 @@
         "remaining_license_community_order_guide": "12 months on licence or at least 18 months on community order",
         "alcohol_drug_problem_guide": null,
         "mental_health_problem_guide": "identified mental illness, or personality disorder",
-        "notAllowedIfEligibleForAnotherIntervention": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
         "literacy_level": "able to read and understand simple sentences",
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
