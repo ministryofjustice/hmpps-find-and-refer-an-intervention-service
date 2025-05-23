@@ -14,5 +14,4 @@ spring:
       hibernate.enable_lazy_load_no_trans: true
   flyway:
     locations: classpath:db/migration,classpath:db/local
-    clean-on-validation-error: true
     clean-disabled: false
