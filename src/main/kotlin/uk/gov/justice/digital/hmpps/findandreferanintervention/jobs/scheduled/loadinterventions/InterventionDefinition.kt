@@ -81,7 +81,7 @@ data class ExclusionDefinition(
   @JsonProperty("remaining_license_community_order_guide") val remainingLicenseCommunityOrderGuide: String?,
   @JsonProperty("alcohol_drug_problem_guide") val alcoholDrugProblemGuide: String?,
   @JsonProperty("mental_health_problem_guide") val mentalHealthProblemGuide: String?,
-  @JsonProperty("notAllowedIfEligibleForAnotherIntervention") val notAllowedIfEligibleForAnotherInterventionGuide: String?,
+  @JsonProperty("not_allowed_if_eligible_for_another_intervention") val notAllowedIfEligibleForAnotherInterventionGuide: String?,
   @JsonProperty("literacy_level") val literacyLevelGuide: String?,
   @JsonProperty("other_preferred_method_guide") val otherPreferredMethodGuide: String?,
   @JsonProperty("same_type_rule_guide") val sameTypeRuleGuide: String?,
