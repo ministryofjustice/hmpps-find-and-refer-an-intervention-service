@@ -8,6 +8,7 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
 import org.springframework.batch.item.ItemReader
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.PlatformTransactionManager
@@ -25,15 +26,18 @@ class UpsertInterventionsJobConfiguration(
   companion object : KLogging()
 
   @Bean
+  fun upsertInterventionsJobLauncher(upsertInterventionsJob: Job): ApplicationRunner = onStartupJobLauncherFactory.makeBatchLauncher(upsertInterventionsJob)
+
+  @Bean
   fun upsertInterventionsJob(upsertInterventionsStep: Step, jobRepository: JobRepository): Job {
-    logger("starting to instantiate Job...")
+    logger.info("starting to instantiate Job...")
 
     val job: Job = JobBuilder("upsertInterventionsJob", jobRepository)
       .incrementer(TimestampIncrementer())
       .start(upsertInterventionsStep)
       .build()
 
-    logger("created job... : " + job.name)
+    logger.info("created job... : " + job.name)
 
     return job
   }

@@ -10,6 +10,7 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.item.Chunk
 import org.springframework.batch.item.ItemWriter
 import org.springframework.transaction.PlatformTransactionManager
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchDeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.LoadDeliveryLocationJobConfiguration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
@@ -25,6 +26,7 @@ class DeliveryLocationWriterTest {
   private val pduRefRepository = mock<PduRefRepository>()
   private val jobRepository = mock<JobRepository>()
   private val transactionManager = mock<PlatformTransactionManager>()
+  private val onStartupJobLauncherFactory = mock<OnStartupJobLauncherFactory>()
 
   private val writer: ItemWriter<BatchDeliveryLocation> = LoadDeliveryLocationJobConfiguration(
     jobRepository,
@@ -32,6 +34,7 @@ class DeliveryLocationWriterTest {
     interventionCatalogueRepository,
     pduRefRepository,
     transactionManager,
+    onStartupJobLauncherFactory,
   ).deliveryLocationWriter()
 
   @Test

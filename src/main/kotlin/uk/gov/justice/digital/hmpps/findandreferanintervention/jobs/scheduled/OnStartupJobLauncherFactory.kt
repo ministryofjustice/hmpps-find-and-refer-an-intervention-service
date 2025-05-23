@@ -42,7 +42,7 @@ class OnStartupJobLauncherFactory(
   fun makeLauncher(jobName: String, entryPoint: (args: ApplicationArguments) -> Int): ApplicationRunner = ApplicationRunner { args ->
     if (args.getOptionValues("jobName")?.contains(jobName) == true) {
       logger.info("running one off job {}", StructuredArguments.kv("jobName", jobName))
-      exitProcess(0)
+      exitProcess(entryPoint(args))
     }
   }
 }
