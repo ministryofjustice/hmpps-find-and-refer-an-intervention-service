@@ -4,10 +4,14 @@ import com.microsoft.applicationinsights.TelemetryClient
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.Mockito.mock
 import org.mockito.kotlin.any
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.springframework.http.HttpStatusCode
+import org.springframework.web.server.ResponseStatusException
 import uk.gov.justice.digital.hmpps.findandreferanintervention.config.logToAppInsights
 import uk.gov.justice.digital.hmpps.findandreferanintervention.controller.ServiceUserController
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ServiceUserDto
@@ -19,8 +23,9 @@ internal class ServiceUserControllerTest {
   private val telemetryClient = mock<TelemetryClient>()
   private val controller = ServiceUserController(service, telemetryClient)
 
-  @Test
-  fun `serviceUserByCrn returns ServiceUserDto when CRN is provided`() {
+  @ParameterizedTest
+  @ValueSource(strings = ["X718255", "A1234DE"])
+  fun `serviceUserByCrnOrPrisonerNumber returns ServiceUserDto when CRN is provided`(identifier: String) {
     val testServiceUser = ServiceUserDto(
       name = "John",
       crn = "X718255",
@@ -30,13 +35,13 @@ internal class ServiceUserControllerTest {
       currentPdu = "East Sussex",
       setting = "Community",
     )
-    whenever(service.getServiceUserByCrn(any())).thenReturn(testServiceUser)
+    whenever(service.getServiceUserByIdentifier(any())).thenReturn(testServiceUser)
 
-    val response = controller.serviceUserByCrn(crn = "X718255", prisonId = null)
+    val response = controller.serviceUserByCrnOrPrisonerNumber(identifier = identifier)
 
     verify(telemetryClient).logToAppInsights(
       "retrieve service user details",
-      mapOf("userMessage" to "User has hit service user details endpoint", "crn" to "X718255"),
+      mapOf("userMessage" to "User has hit service user details endpoint", "identifier" to identifier),
     )
 
     assertThat(response).isNotNull
@@ -46,36 +51,28 @@ internal class ServiceUserControllerTest {
   }
 
   @Test
-  fun `serviceUserByCrn returns ServiceUserDto when prisonId is provided`() {
+  fun `find person identifier does not return any data for the identifier provided`() {
     val testServiceUser = ServiceUserDto(
-      name = "Jane",
-      crn = "X123456",
-      dob = LocalDate.parse("1985-05-15"),
-      gender = "Female",
-      ethnicity = "British",
-      currentPdu = "West Sussex",
-      setting = "Custody",
+      name = "John",
+      crn = "X718255",
+      dob = LocalDate.parse("1990-01-01"),
+      gender = "Male",
+      ethnicity = "White British",
+      currentPdu = "East Sussex",
+      setting = "Community",
     )
-    whenever(service.getServiceUserByPrisonId(any())).thenReturn(testServiceUser)
+    whenever(service.getServiceUserByIdentifier(any())).thenReturn(null)
 
-    val response = controller.serviceUserByCrn(crn = null, prisonId = "A1234AA")
+    val responseStatusException = assertThrows<ResponseStatusException> {
+      controller.serviceUserByCrnOrPrisonerNumber(identifier = "X718255")
+    }
 
     verify(telemetryClient).logToAppInsights(
       "retrieve service user details",
-      mapOf("userMessage" to "User has hit service user details endpoint", "prisonId" to "A1234AA"),
+      mapOf("userMessage" to "User has hit service user details endpoint", "identifier" to "X718255"),
     )
 
-    assertThat(response).isNotNull
-    assertThat(response.name).isEqualTo("Jane")
-    assertThat(response.crn).isEqualTo("X123456")
-    assertThat(response.setting).isEqualTo("Custody")
-  }
-
-  @Test
-  fun `serviceUserByCrn throws IllegalArgumentException when neither crn nor prisonId is provided`() {
-    val exception = assertThrows<IllegalArgumentException> {
-      controller.serviceUserByCrn(crn = null, prisonId = null)
-    }
-    assertThat(exception.message).isEqualTo("Either crn or prisonId must be provided")
+    assertThat(responseStatusException.statusCode).isEqualTo(HttpStatusCode.valueOf(404))
+    assertThat(responseStatusException.reason).isEqualTo("Service user with identifier X718255 not found")
   }
 }

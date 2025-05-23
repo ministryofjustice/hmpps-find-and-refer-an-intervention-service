@@ -1,7 +1,8 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.controller
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
@@ -23,23 +24,13 @@ class ServiceUserControllerValidationTest(@Autowired private val mockMvc: MockMv
   @MockitoBean
   private lateinit var serviceUserService: ServiceUserService
 
-  @Test
-  fun `should return 400 when invalid crn is provided`() {
-    val response = mockMvc.get("/service-user") {
-      param("crn", "INVALID123")
+  @ParameterizedTest
+  @ValueSource(strings = ["1234567", "A1234A", "X718255X"])
+  fun `should return 400 when invalid crn is provided`(identifier: String) {
+    val response = mockMvc.get("/service-user/{identifier}", identifier) {
     }.andReturn().response
 
     assertThat(response.status).isEqualTo(400)
-    assertThat(response.contentAsString).contains("Invalid code format. Expected format for CRN: X718255")
-  }
-
-  @Test
-  fun `should return 400 when invalid prisonId is provided`() {
-    val response = mockMvc.get("/service-user") {
-      param("prisonId", "1234INVALID")
-    }.andReturn().response
-
-    assertThat(response.status).isEqualTo(400)
-    assertThat(response.contentAsString).contains("Invalid code format. Expected format for PrisonId: A1234AA")
+    assertThat(response.contentAsString).contains("Invalid code format. Expected format for CRN: X718255 or PrisonNumber: A1234AA")
   }
 }

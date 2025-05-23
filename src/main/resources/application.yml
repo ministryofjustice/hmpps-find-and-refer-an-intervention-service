@@ -7,6 +7,10 @@ logging:
       springframework:
          beans:
            factory: WARN
+         security:
+           oauth2:
+             client: DEBUG
+             webclient: DEBUG
 spring:
   application:
     name: hmpps-find-and-refer-an-intervention-service
@@ -22,12 +26,22 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${hmpps-auth.url}/.well-known/jwks.json
-
+          issuer-uri: ${hmpps-auth.baseurl}/issuer
+          jwk-set-uri: ${hmpps-auth.baseurl}/.well-known/jwks.json
       client:
         provider:
           hmpps-auth:
-            token-uri: ${hmpps-auth.url}/oauth/token
+            token-uri: ${hmpps-auth.baseurl}/oauth/token
+            token-request:
+              connect-timeout-ms: 500
+              read-timeout-ms: 500
+              retries: 3
+              retry-delay-ms: 500
+        registration:
+          find-and-refer-interventions-client:
+            provider: hmpps-auth
+            authorization-grant-type: client_credentials
+            scope: read,write
 
   datasource:
     url: jdbc:postgresql://${postgres.uri:localhost:5432}/${postgres.db:postgres}?currentSchema=${database.schema.name:public}&user=${postgres.username:root}&password=${postgres.password:dev}&stringtype=unspecified
@@ -57,6 +71,15 @@ server:
   shutdown: graceful
   error:
     include-message: always
+
+webclient:
+  connect-timeout-seconds: 20
+  read-timeout-seconds: 10
+  write-timeout-seconds: 10
+
+find-and-refer-and-delius:
+  locations:
+    find-person: "/person/find/{identifier}"
 
 management:
   endpoints:
