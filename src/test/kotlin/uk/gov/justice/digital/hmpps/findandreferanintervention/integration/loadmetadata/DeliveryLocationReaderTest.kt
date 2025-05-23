@@ -7,6 +7,7 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.item.file.FlatFileItemReader
 import org.springframework.batch.test.MetaDataInstanceFactory
 import org.springframework.transaction.PlatformTransactionManager
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchDeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.LoadDeliveryLocationJobConfiguration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
@@ -20,6 +21,7 @@ class DeliveryLocationReaderTest {
   private val transactionManager = mock<PlatformTransactionManager>()
   private val interventionCatalogueRepository = mock<InterventionCatalogueRepository>()
   private val pduRefRepository = mock<PduRefRepository>()
+  private val onStartupJobLauncherFactory = mock<OnStartupJobLauncherFactory>()
 
   private val reader = LoadDeliveryLocationJobConfiguration(
     jobRepository,
@@ -27,6 +29,7 @@ class DeliveryLocationReaderTest {
     interventionCatalogueRepository,
     pduRefRepository,
     transactionManager,
+    onStartupJobLauncherFactory,
   ).deliveryLocationReader() as FlatFileItemReader<BatchDeliveryLocation>
 
   @Test

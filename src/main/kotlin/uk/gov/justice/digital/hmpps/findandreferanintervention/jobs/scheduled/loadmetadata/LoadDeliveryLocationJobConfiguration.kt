@@ -10,11 +10,13 @@ import org.springframework.batch.item.ItemReader
 import org.springframework.batch.item.ItemWriter
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
@@ -39,8 +41,12 @@ class LoadDeliveryLocationJobConfiguration(
   private val interventionCatalogueRepository: InterventionCatalogueRepository,
   private val pduRefRepository: PduRefRepository,
   private val transactionManager: PlatformTransactionManager,
+  private val onStartupJobLauncherFactory: OnStartupJobLauncherFactory,
 ) {
   companion object : KLogging()
+
+  @Bean
+  fun loadDeliveryLocationJobLauncher(loadDeliveryLocationJob: Job): ApplicationRunner = onStartupJobLauncherFactory.makeBatchLauncher(loadDeliveryLocationJob)
 
   @Bean
   fun loadDeliveryLocationJob(): Job = JobBuilder("loadDeliveryLocationJob", jobRepository)

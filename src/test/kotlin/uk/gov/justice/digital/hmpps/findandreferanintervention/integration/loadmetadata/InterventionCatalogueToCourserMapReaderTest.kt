@@ -7,6 +7,7 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.item.file.FlatFileItemReader
 import org.springframework.batch.test.MetaDataInstanceFactory
 import org.springframework.transaction.PlatformTransactionManager
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchInterventionCatalogueToCourseMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.LoadInterventionCatalogueToCourseMapJobConfiguration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CourseRepository
@@ -20,6 +21,7 @@ class InterventionCatalogueToCourserMapReaderTest {
   private val transactionManager = mock<PlatformTransactionManager>()
   private val interventionCatalogueToCourseMapRepository = mock<InterventionCatalogueToCourseMapRepository>()
   private val courseRepository = mock<CourseRepository>()
+  private val onStartupJobLauncherFactory = mock<OnStartupJobLauncherFactory>()
 
   private val reader = LoadInterventionCatalogueToCourseMapJobConfiguration(
     jobRepository,
@@ -27,6 +29,7 @@ class InterventionCatalogueToCourserMapReaderTest {
     interventionCatalogueToCourseMapRepository,
     courseRepository,
     transactionManager,
+    onStartupJobLauncherFactory,
   ).interventionCatalogueToCourseMapReader() as FlatFileItemReader<BatchInterventionCatalogueToCourseMap>
 
   @Test

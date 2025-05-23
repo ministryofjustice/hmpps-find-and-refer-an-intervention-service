@@ -9,6 +9,7 @@ import org.mockito.kotlin.verify
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.item.Chunk
 import org.springframework.transaction.PlatformTransactionManager
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchInterventionCatalogueToCourseMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.LoadInterventionCatalogueToCourseMapJobConfiguration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CourseRepository
@@ -23,6 +24,7 @@ class InterventionCatalogueToCourseMapWriterTest {
   private val transactionManager = mock<PlatformTransactionManager>()
   private val interventionCatalogueToCourseMapRepository = mock<InterventionCatalogueToCourseMapRepository>()
   private val courseRepository = mock<CourseRepository>()
+  private val onStartupJobLauncherFactory = mock<OnStartupJobLauncherFactory>()
 
   private val writer = LoadInterventionCatalogueToCourseMapJobConfiguration(
     jobRepository,
@@ -30,6 +32,7 @@ class InterventionCatalogueToCourseMapWriterTest {
     interventionCatalogueToCourseMapRepository,
     courseRepository,
     transactionManager,
+    onStartupJobLauncherFactory,
   ).interventionCatalogueToCourseMapWriter()
 
   @Test
