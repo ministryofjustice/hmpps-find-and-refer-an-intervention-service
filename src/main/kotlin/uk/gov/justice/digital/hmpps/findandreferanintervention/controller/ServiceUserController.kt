@@ -25,7 +25,7 @@ class ServiceUserController(
   @GetMapping(
     "/service-user/{identifier}",
     produces = [MediaType.APPLICATION_JSON_VALUE],
-    name = "Get Service User for the CRN.",
+    name = "Get Service User for the CRN or the Prison Number.",
   )
   @ApiResponses(
     value = [
