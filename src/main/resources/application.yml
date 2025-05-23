@@ -39,7 +39,7 @@ spring:
               retry-delay-ms: 500
         registration:
           find-and-refer-interventions-client:
-            client-id: hmpps-find-and-refer-an-intervention-api
+            client-id: hmpps-find-and-refer-an-intervention-api-1
             client-secret: clientsecret
             provider: hmpps-auth
             authorization-grant-type: client_credentials
