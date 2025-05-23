@@ -9,7 +9,7 @@ configurations {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.3")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.5")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
@@ -42,12 +42,12 @@ dependencies {
   //  implementation("software.amazon.awssdk:sts:2.26.31")
 
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.4.5")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.4.5")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.4.5")
-  implementation("org.springframework.security:spring-security-crypto:6.4.5")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.23.1")
-  implementation("org.apache.httpcomponents.client5:httpclient5:5.4.3")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.0")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.0")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.0")
+  implementation("org.springframework.security:spring-security-crypto:6.5.0")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.25")
+  implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -71,7 +71,7 @@ dependencies {
   testImplementation("org.springframework.security:spring-security-test")
   // testImplementation("com.github.tomakehurst:wiremock-jre8:3.0.1")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.3")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.5")
   testImplementation("org.wiremock:wiremock-standalone:3.13.0")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.28") {
     exclude(group = "io.swagger.core.v3")
