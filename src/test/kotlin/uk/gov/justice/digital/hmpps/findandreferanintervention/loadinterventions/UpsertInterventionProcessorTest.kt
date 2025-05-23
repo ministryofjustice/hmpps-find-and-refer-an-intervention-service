@@ -45,6 +45,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Settin
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodSettingRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EligibleOffenceRepository
@@ -69,6 +70,7 @@ internal class UpsertInterventionProcessorTest {
   private val criminogenicNeedRefRepository = mock<CriminogenicNeedRefRepository>()
   private val pduRefRepository = mock<PduRefRepository>()
   private val deliveryMethodRepository = mock<DeliveryMethodRepository>()
+  private val deliveryLocationRepository = mock<DeliveryLocationRepository>()
   private val deliveryMethodSettingRepository = mock<DeliveryMethodSettingRepository>()
   private val eligibleOffenceRepository = mock<EligibleOffenceRepository>()
   private val offenceTypeRefRepository = mock<OffenceTypeRefRepository>()
@@ -87,6 +89,8 @@ internal class UpsertInterventionProcessorTest {
     interventionCatalogueRepository,
     criminogenicNeedRepository,
     criminogenicNeedRefRepository,
+    deliveryLocationRepository,
+    pduRefRepository,
     deliveryMethodRepository,
     deliveryMethodSettingRepository,
     eligibleOffenceRepository,
@@ -104,10 +108,16 @@ internal class UpsertInterventionProcessorTest {
   fun setup() {
     whenever(interventionCatalogueRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
     whenever(criminogenicNeedRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeed>())
-    whenever(criminogenicNeedRefRepository.findByName(any())).thenReturn(CriminogenicNeedRef(id = UUID.randomUUID(), name = "Default Need Type"))
+    whenever(criminogenicNeedRefRepository.findByName(any())).thenReturn(
+      CriminogenicNeedRef(
+        id = UUID.randomUUID(),
+        name = "Default Need Type",
+      ),
+    )
     whenever(criminogenicNeedRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
     val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
-    val defaultPccRegion = PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
+    val defaultPccRegion =
+      PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
     val defaultPduRef1 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     val defaultPduRef2 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
@@ -116,7 +126,12 @@ internal class UpsertInterventionProcessorTest {
     whenever(eligibleOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EligibleOffence>())
     whenever(enablingInterventionRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
     whenever(excludedOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<ExcludedOffence>())
-    whenever(offenceTypeRefRepository.findByName(any())).thenReturn(OffenceTypeRef(id = UUID.randomUUID(), name = "Default Offence Type"))
+    whenever(offenceTypeRefRepository.findByName(any())).thenReturn(
+      OffenceTypeRef(
+        id = UUID.randomUUID(),
+        name = "Default Offence Type",
+      ),
+    )
     whenever(offenceTypeRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<OffenceTypeRef>())
     whenever(exclusionRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<Exclusion>())
     whenever(personalEligibilityRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<PersonalEligibility>())
@@ -133,7 +148,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val interventionCatalogueDefinitions: InterventionCatalogueDefinition =
-      ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
+      ObjectMapper().readValue(
+        interventionCatalogueDefinitionJson,
+        object : TypeReference<InterventionCatalogueDefinition>() {},
+      )
 
     val result: InterventionCatalogue? = processor.process(interventionCatalogueDefinitions)
 
@@ -151,7 +169,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val interventionCatalogueDefinitions: InterventionCatalogueDefinition =
-      ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
+      ObjectMapper().readValue(
+        interventionCatalogueDefinitionJson,
+        object : TypeReference<InterventionCatalogueDefinition>() {},
+      )
 
     val result: InterventionCatalogue? = processor.process(interventionCatalogueDefinitions)
 
@@ -167,7 +188,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val interventionCatalogueDefinitions: InterventionCatalogueDefinition =
-      ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
+      ObjectMapper().readValue(
+        interventionCatalogueDefinitionJson,
+        object : TypeReference<InterventionCatalogueDefinition>() {},
+      )
 
     val result: InterventionCatalogue? = processor.process(interventionCatalogueDefinitions)
 
@@ -183,7 +207,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val interventionCatalogueDefinitions: InterventionCatalogueDefinition =
-      ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
+      ObjectMapper().readValue(
+        interventionCatalogueDefinitionJson,
+        object : TypeReference<InterventionCatalogueDefinition>() {},
+      )
 
     val result: InterventionCatalogue? = processor.process(interventionCatalogueDefinitions)
 
@@ -199,9 +226,15 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val interventionCatalogueDefinitions: InterventionCatalogueDefinition =
-      ObjectMapper().readValue(interventionCatalogueDefinitionJson, object : TypeReference<InterventionCatalogueDefinition>() {})
+      ObjectMapper().readValue(
+        interventionCatalogueDefinitionJson,
+        object : TypeReference<InterventionCatalogueDefinition>() {},
+      )
 
-    val result: InterventionCatalogue = processor.createInterventionCatalogue(interventionCatalogueDefinitions, InterventionCatalogueFactory().create(name = "Accommodation"))
+    val result: InterventionCatalogue = processor.createInterventionCatalogue(
+      interventionCatalogueDefinitions,
+      InterventionCatalogueFactory().create(name = "Accommodation"),
+    )
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
@@ -218,9 +251,13 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val interventionCatalogueEntryDefinitions =
-      ObjectMapper().readValue(interventionCatalogueEntryDefinitionJson, object : TypeReference<InterventionCatalogueEntryDefinition>() {})
+      ObjectMapper().readValue(
+        interventionCatalogueEntryDefinitionJson,
+        object : TypeReference<InterventionCatalogueEntryDefinition>() {},
+      )
 
-    val result: InterventionCatalogue = processor.insertInterventionCatalogueEntry(interventionCatalogueEntryDefinitions, catalogueId)
+    val result: InterventionCatalogue =
+      processor.insertInterventionCatalogueEntry(interventionCatalogueEntryDefinitions, catalogueId)
 
     assertThat(result.name).isEqualTo("Accommodation")
     assertThat(result.interventionType).isEqualTo(InterventionType.CRS)
@@ -298,7 +335,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val deliveryMethodDefinitions: Array<DeliveryMethodDefinition> =
-      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
+      ObjectMapper().readValue(
+        deliveryMethodDefinitionJson,
+        object : TypeReference<Array<DeliveryMethodDefinition>>() {},
+      )
 
     whenever(deliveryMethodRepository.findByIntervention(any())).thenReturn(
       listOf(
@@ -327,7 +367,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val deliveryMethodDefinitions: Array<DeliveryMethodDefinition> =
-      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<Array<DeliveryMethodDefinition>>() {})
+      ObjectMapper().readValue(
+        deliveryMethodDefinitionJson,
+        object : TypeReference<Array<DeliveryMethodDefinition>>() {},
+      )
 
     val result: MutableSet<DeliveryMethod> = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
 
@@ -355,7 +398,8 @@ internal class UpsertInterventionProcessorTest {
       ),
     )
 
-    val result: MutableSet<DeliveryMethodSetting> = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
+    val result: MutableSet<DeliveryMethodSetting> =
+      processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
     verify(deliveryMethodSettingRepository, times(1)).deleteAllByIntervention(any())
@@ -372,7 +416,8 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethodSettingDefinitions: Array<String> =
       ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val result: MutableSet<DeliveryMethodSetting> = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
+    val result: MutableSet<DeliveryMethodSetting> =
+      processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(3)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
@@ -388,7 +433,8 @@ internal class UpsertInterventionProcessorTest {
     val deliveryMethodSettingDefinitions: Array<String> =
       ObjectMapper().readValue(deliveryMethodSettingDefinitionJson, object : TypeReference<Array<String>>() {})
 
-    val result: MutableSet<DeliveryMethodSetting> = processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
+    val result: MutableSet<DeliveryMethodSetting> =
+      processor.upsertDeliveryMethodSettings(deliveryMethodSettingDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(2)
     verify(deliveryMethodSettingRepository, times(1)).saveAll(anyList())
@@ -402,7 +448,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val eligibleOffenceDefinitions: Array<EligibleOffenceDefinition> =
-      ObjectMapper().readValue(eligibleOffenceDefinitionJson, object : TypeReference<Array<EligibleOffenceDefinition>>() {})
+      ObjectMapper().readValue(
+        eligibleOffenceDefinitionJson,
+        object : TypeReference<Array<EligibleOffenceDefinition>>() {},
+      )
 
     whenever(eligibleOffenceRepository.findByIntervention(any())).thenReturn(
       listOf(
@@ -431,7 +480,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val eligibleOffenceDefinitions: Array<EligibleOffenceDefinition> =
-      ObjectMapper().readValue(eligibleOffenceDefinitionJson, object : TypeReference<Array<EligibleOffenceDefinition>>() {})
+      ObjectMapper().readValue(
+        eligibleOffenceDefinitionJson,
+        object : TypeReference<Array<EligibleOffenceDefinition>>() {},
+      )
 
     val result: MutableSet<EligibleOffence> = processor.upsertEligibleOffences(eligibleOffenceDefinitions, catalogue)
 
@@ -447,7 +499,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val eligibleOffenceDefinitions: Array<EligibleOffenceDefinition> =
-      ObjectMapper().readValue(eligibleOffenceDefinitionJson, object : TypeReference<Array<EligibleOffenceDefinition>>() {})
+      ObjectMapper().readValue(
+        eligibleOffenceDefinitionJson,
+        object : TypeReference<Array<EligibleOffenceDefinition>>() {},
+      )
 
     whenever(offenceTypeRefRepository.findByName(any()))
       .thenReturn(OffenceTypeRef(id = UUID.randomUUID(), name = "Extremism offence"))
@@ -473,7 +528,8 @@ internal class UpsertInterventionProcessorTest {
       ),
     )
 
-    val result: MutableSet<EnablingIntervention> = processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
+    val result: MutableSet<EnablingIntervention> =
+      processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
 
     assertThat(result.count()).isEqualTo(1)
     verify(enablingInterventionRepository, times(0)).saveAll(anyList())
@@ -487,9 +543,10 @@ internal class UpsertInterventionProcessorTest {
     val enablingInterventionDefinitions: String =
       ObjectMapper().readValue(enablingInterventionDefinitionsJson, object : TypeReference<String>() {})
 
-    val result: MutableSet<EnablingIntervention> = processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
+    val result: MutableSet<EnablingIntervention> =
+      processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(4)
+    assertThat(result.count()).isEqualTo(1)
     verify(enablingInterventionRepository, times(1)).saveAll(anyList())
   }
 
@@ -499,7 +556,10 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/excludedOffenceDefinitions/ExcludedOffenceDefinition.json")
 
     val excludedOffenceDefinitions: Array<ExcludedOffencesDefinition> =
-      ObjectMapper().readValue(excludedOffenceDefinitionJson, object : TypeReference<Array<ExcludedOffencesDefinition>>() {})
+      ObjectMapper().readValue(
+        excludedOffenceDefinitionJson,
+        object : TypeReference<Array<ExcludedOffencesDefinition>>() {},
+      )
 
     whenever(excludedOffenceRepository.findByIntervention(any())).thenReturn(
       listOf(
@@ -526,7 +586,10 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/excludedOffenceDefinitions/ExcludedOffenceDefinition.json")
 
     val excludedOffenceDefinitions: Array<ExcludedOffencesDefinition> =
-      ObjectMapper().readValue(excludedOffenceDefinitionJson, object : TypeReference<Array<ExcludedOffencesDefinition>>() {})
+      ObjectMapper().readValue(
+        excludedOffenceDefinitionJson,
+        object : TypeReference<Array<ExcludedOffencesDefinition>>() {},
+      )
 
     val result: MutableSet<ExcludedOffence> = processor.upsertExcludedOffences(excludedOffenceDefinitions, catalogue)
 
@@ -540,7 +603,10 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/excludedOffenceDefinitions/ExcludedOffenceDefinitionUnknownId.json")
 
     val excludedOffenceDefinitions: Array<ExcludedOffencesDefinition> =
-      ObjectMapper().readValue(excludedOffenceDefinitionJson, object : TypeReference<Array<ExcludedOffencesDefinition>>() {})
+      ObjectMapper().readValue(
+        excludedOffenceDefinitionJson,
+        object : TypeReference<Array<ExcludedOffencesDefinition>>() {},
+      )
 
     whenever(offenceTypeRefRepository.findByName(any()))
       .thenReturn(OffenceTypeRef(id = UUID.randomUUID(), name = "Extremism offence"))
@@ -563,21 +629,21 @@ internal class UpsertInterventionProcessorTest {
     whenever(exclusionRepository.findByIntervention(any())).thenReturn(
       Exclusion(
         id = UUID.randomUUID(),
-        minRemainingSentenceDurationGuide = exclusionDefinition?.minRemaingSentenceGuide,
+        minRemainingSentenceDurationGuide = exclusionDefinition?.minRemainingSentenceGuide,
         remainingLicenseCommunityOrderGuide = exclusionDefinition?.remainingLicenseCommunityOrderGuide,
         alcoholDrugProblemGuide = exclusionDefinition?.alcoholDrugProblemGuide,
         mentalHealthProblemGuide = exclusionDefinition?.mentalHealthProblemGuide,
         otherPreferredMethodGuide = exclusionDefinition?.otherPreferredMethodGuide,
         sameTypeRuleGuide = exclusionDefinition?.sameTypeRuleGuide,
-        scheduleFrequencyGuide = exclusionDefinition?.scheduleRequencyGuide,
+        scheduleFrequencyGuide = exclusionDefinition?.scheduleFrequencyGuide,
         intervention = catalogue,
       ),
     )
 
-    val result: Exclusion = processor.upsertExclusion(exclusionDefinition, catalogue)
+    val result: Exclusion? = processor.upsertExclusion(exclusionDefinition, catalogue)
 
-    assertThat(result.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
-    assertThat(result.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
+    assertThat(result?.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
+    assertThat(result?.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
     verify(exclusionRepository, times(1)).save(any())
   }
 
@@ -591,8 +657,8 @@ internal class UpsertInterventionProcessorTest {
 
     val result = processor.upsertExclusion(exclusionDefinition, catalogue)
 
-    assertThat(result.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
-    assertThat(result.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
+    assertThat(result?.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
+    assertThat(result?.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
     verify(exclusionRepository, times(1)).save(any())
   }
 
@@ -604,7 +670,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val personalEligibilityDefinition: PersonalEligibilityDefinition =
-      ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
+      ObjectMapper().readValue(
+        personalEligibilityDefinitionJson,
+        object : TypeReference<PersonalEligibilityDefinition>() {},
+      )
 
     whenever(personalEligibilityRepository.findByIntervention(any())).thenReturn(
       PersonalEligibility(
@@ -631,7 +700,10 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val personalEligibilityDefinition: PersonalEligibilityDefinition =
-      ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
+      ObjectMapper().readValue(
+        personalEligibilityDefinitionJson,
+        object : TypeReference<PersonalEligibilityDefinition>() {},
+      )
 
     val result: PersonalEligibility = processor.upsertPersonalEligibility(personalEligibilityDefinition, catalogue)
 
@@ -647,11 +719,14 @@ internal class UpsertInterventionProcessorTest {
       )
 
     val personalEligibilityDefinition =
-      ObjectMapper().readValue(personalEligibilityDefinitionJson, object : TypeReference<PersonalEligibilityDefinition>() {})
+      ObjectMapper().readValue(
+        personalEligibilityDefinitionJson,
+        object : TypeReference<PersonalEligibilityDefinition>() {},
+      )
 
     val result: PersonalEligibility = processor.upsertPersonalEligibility(personalEligibilityDefinition, catalogue)
 
-    assertThat(result.maxAge).isEqualTo(null)
+    assertThat(result.maxAge).isNull()
     verify(personalEligibilityRepository, times(1)).save(any())
   }
 
@@ -665,8 +740,16 @@ internal class UpsertInterventionProcessorTest {
 
     whenever(possibleOutcomeRepository.findByIntervention(any())).thenReturn(
       listOf(
-        PossibleOutcome(id = UUID.randomUUID(), outcome = "Obtain or maintain suitable accommodation", intervention = catalogue),
-        PossibleOutcome(id = UUID.randomUUID(), outcome = "Prevent users from becoming homeless", intervention = catalogue),
+        PossibleOutcome(
+          id = UUID.randomUUID(),
+          outcome = "Obtain or maintain suitable accommodation",
+          intervention = catalogue,
+        ),
+        PossibleOutcome(
+          id = UUID.randomUUID(),
+          outcome = "Prevent users from becoming homeless",
+          intervention = catalogue,
+        ),
       ),
     )
 
@@ -697,7 +780,10 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/RiskConsiderationDefinition.json")
 
     val riskConsiderationDefinition: RiskConsiderationDefinition? =
-      ObjectMapper().readValue(riskConsiderationDefinitionJson, object : TypeReference<RiskConsiderationDefinition>() {})
+      ObjectMapper().readValue(
+        riskConsiderationDefinitionJson,
+        object : TypeReference<RiskConsiderationDefinition>() {},
+      )
 
     whenever(riskConsiderationRepository.findByIntervention(any())).thenReturn(
       RiskConsideration(
@@ -718,9 +804,9 @@ internal class UpsertInterventionProcessorTest {
       ),
     )
 
-    val result: RiskConsideration = processor.upsertRiskConsideration(riskConsiderationDefinition, catalogue)
+    val result: RiskConsideration? = processor.upsertRiskConsideration(riskConsiderationDefinition, catalogue)
 
-    assertThat(result.cnScoreGuide).isEqualTo("11.6 - Problem solving")
+    assertThat(result?.cnScoreGuide).isEqualTo("11.6 - Problem solving")
     verify(riskConsiderationRepository, times(1)).save(any())
   }
 
@@ -730,11 +816,14 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/RiskConsiderationDefinition.json")
 
     val riskConsiderationDefinition: RiskConsiderationDefinition =
-      ObjectMapper().readValue(riskConsiderationDefinitionJson, object : TypeReference<RiskConsiderationDefinition>() {})
+      ObjectMapper().readValue(
+        riskConsiderationDefinitionJson,
+        object : TypeReference<RiskConsiderationDefinition>() {},
+      )
 
-    val result: RiskConsideration = processor.upsertRiskConsideration(riskConsiderationDefinition, catalogue)
+    val result: RiskConsideration? = processor.upsertRiskConsideration(riskConsiderationDefinition, catalogue)
 
-    assertThat(result.cnScoreGuide).isEqualTo("11.6 - Problem solving")
+    assertThat(result?.cnScoreGuide).isEqualTo("11.6 - Problem solving")
     verify(riskConsiderationRepository, times(1)).save(any())
   }
 
@@ -756,7 +845,10 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/SpecialEducationalNeedDefinition.json")
 
     val specialEducationalNeedDefinition: SpecialEducationalNeedDefinition =
-      ObjectMapper().readValue(specialEducationalNeedJson, object : TypeReference<SpecialEducationalNeedDefinition>() {})
+      ObjectMapper().readValue(
+        specialEducationalNeedJson,
+        object : TypeReference<SpecialEducationalNeedDefinition>() {},
+      )
 
     whenever(specialEducationalNeedRepository.findByIntervention(any())).thenReturn(
       SpecialEducationalNeed(
@@ -768,9 +860,10 @@ internal class UpsertInterventionProcessorTest {
       ),
     )
 
-    val result: SpecialEducationalNeed = processor.upsertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
+    val result: SpecialEducationalNeed? =
+      processor.upsertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
 
-    assertThat(result.equivalentNonLdcProgrammeGuide).isEqualTo("Becoming New Me Plus")
+    assertThat(result?.equivalentNonLdcProgrammeGuide).isEqualTo("Becoming New Me Plus")
     verify(specialEducationalNeedRepository, times(1)).save(any())
   }
 
@@ -780,11 +873,15 @@ internal class UpsertInterventionProcessorTest {
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/SpecialEducationalNeedDefinition.json")
 
     val specialEducationalNeedDefinition =
-      ObjectMapper().readValue(specialEducationalNeedJson, object : TypeReference<SpecialEducationalNeedDefinition>() {})
+      ObjectMapper().readValue(
+        specialEducationalNeedJson,
+        object : TypeReference<SpecialEducationalNeedDefinition>() {},
+      )
 
-    val result: SpecialEducationalNeed = processor.upsertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
+    val result: SpecialEducationalNeed? =
+      processor.upsertSpecialEducationalNeed(specialEducationalNeedDefinition, catalogue)
 
-    assertThat(result.literacyLevelGuide).isEqualTo("Able to read and understand simple sentences")
+    assertThat(result?.literacyLevelGuide).isEqualTo("Able to read and understand simple sentences")
     verify(specialEducationalNeedRepository, times(1)).save(any())
   }
 }

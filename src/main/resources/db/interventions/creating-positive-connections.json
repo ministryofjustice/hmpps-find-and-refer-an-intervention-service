@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",

@@ -24,6 +24,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Settin
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodSettingRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EligibleOffenceRepository
@@ -32,6 +33,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.Ex
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ExclusionRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.OffenceTypeRefRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PersonalEligibilityRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PossibleOutcomeRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.RiskConsiderationRepository
@@ -46,6 +48,8 @@ class UpsertInterventionProcessor(
   private val interventionCatalogueRepository: InterventionCatalogueRepository,
   private val criminogenicNeedRepository: CriminogenicNeedRepository,
   private val criminogenicNeedRefRepository: CriminogenicNeedRefRepository,
+  private val deliveryLocationRepository: DeliveryLocationRepository,
+  private val pduRefRepository: PduRefRepository,
   private val deliveryMethodRepository: DeliveryMethodRepository,
   private val deliveryMethodSettingRepository: DeliveryMethodSettingRepository,
   private val eligibleOffenceRepository: EligibleOffenceRepository,
@@ -68,18 +72,22 @@ class UpsertInterventionProcessor(
         logger.info("Unable to create an Intervention Catalogue Entry as UUID was not provided")
         return null
       }
+
       item.catalogue.name.isBlank() -> {
         logger.info("Unable to create an Intervention Catalogue Entry as Name was not provided")
         return null
       }
+
       !checkInterventionType(item) -> {
         logger.info("Unable to create an Intervention Catalogue Entry as Type is invalid or was not provided")
         return null
       }
+
       item.deliveryMethodSetting.isEmpty() -> {
         logger.info("Unable to create an Intervention Catalogue Entry as SettingTypes was not provided")
         return null
       }
+
       else -> logger.info("Creating Intervention Catalogue Record - ${item.catalogue.name}")
     }
 
@@ -114,6 +122,7 @@ class UpsertInterventionProcessor(
 
         return createInterventionCatalogue(item, catalogueEntry)
       }
+
       else -> {
         logger.info(
           "Inserting Intervention Catalogue Entry - ${item.catalogue.name}, id - ${item.uuid}",
@@ -174,13 +183,13 @@ class UpsertInterventionProcessor(
     if (item.eligibleOffence?.isNotEmpty() == true) {
       catalogue.eligibleOffences = upsertEligibleOffences(item.eligibleOffence, catalogue)
     }
-    if (item.enablingIntervention.toString().isNotEmpty()) {
+    if (item.enablingIntervention != null) {
       catalogue.enablingInterventions = upsertEnablingInterventions(item.enablingIntervention, catalogue)
     }
     if (item.excludedOffence?.isNotEmpty() == true) {
       catalogue.excludedOffences = upsertExcludedOffences(item.excludedOffence, catalogue)
     }
-    if (item.exclusion.toString().isNotEmpty()) {
+    if (item.exclusion != null) {
       catalogue.exclusion = upsertExclusion(item.exclusion, catalogue)
     }
     if (item.personalEligibility.toString().isNotEmpty()) {
@@ -189,10 +198,10 @@ class UpsertInterventionProcessor(
     if (item.possibleOutcome?.isNotEmpty() == true) {
       catalogue.possibleOutcomes = upsertPossibleOutcomes(item.possibleOutcome, catalogue)
     }
-    if (item.riskConsideration.toString().isNotEmpty()) {
+    if (item.riskConsideration != null) {
       catalogue.riskConsideration = upsertRiskConsideration(item.riskConsideration, catalogue)
     }
-    if (item.specialEducationalNeed.toString().isNotEmpty()) {
+    if (item.specialEducationalNeed != null) {
       catalogue.specialEducationalNeeds = upsertSpecialEducationalNeed(item.specialEducationalNeed, catalogue)
     }
 
@@ -214,7 +223,12 @@ class UpsertInterventionProcessor(
         criminogenicNeedRecords.add(
           CriminogenicNeed(
             id = UUID.randomUUID(),
-            need = criminogenicReference ?: criminogenicNeedRefRepository.save(CriminogenicNeedRef(UUID.randomUUID(), needReference)),
+            need = criminogenicReference ?: criminogenicNeedRefRepository.save(
+              CriminogenicNeedRef(
+                UUID.randomUUID(),
+                needReference,
+              ),
+            ),
             intervention = catalogue,
           ),
         )
@@ -232,6 +246,7 @@ class UpsertInterventionProcessor(
         criminogenicNeedRecords.removeAll(criminogenicNeedRecords)
         createCriminogenicNeeds()
       }
+
       else -> {
         createCriminogenicNeeds()
       }
@@ -277,6 +292,7 @@ class UpsertInterventionProcessor(
         deliveryMethodRecords.removeAll(deliveryMethodRecords)
         createDeliveryMethods()
       }
+
       else -> {
         createDeliveryMethods()
       }
@@ -301,9 +317,11 @@ class UpsertInterventionProcessor(
       settingTypes.contains(settingNameUppercased) -> {
         SettingType.entries[settingTypes.indexOf(settingName)]
       }
+
       settingTypes.contains(preRelease) -> {
         SettingType.entries[settingTypes.indexOf(preRelease)]
       }
+
       else -> {
         null
       }
@@ -331,6 +349,7 @@ class UpsertInterventionProcessor(
               ),
             )
           }
+
           else -> {
             logger.info(
               "Unable to create Delivery Method Setting - '$deliveryMethodSetting', " +
@@ -353,6 +372,7 @@ class UpsertInterventionProcessor(
         deliveryMethodSettingRecords.removeAll(deliveryMethodSettingRecords)
         createDeliveryMethodSettings()
       }
+
       else -> {
         createDeliveryMethodSettings()
       }
@@ -383,7 +403,12 @@ class UpsertInterventionProcessor(
         eligibleOffenceRecords.add(
           EligibleOffence(
             id = UUID.randomUUID(),
-            offenceType = offenceType ?: offenceTypeRefRepository.save(OffenceTypeRef(UUID.randomUUID(), eligibleOffence.offenceTypeId)),
+            offenceType = offenceType ?: offenceTypeRefRepository.save(
+              OffenceTypeRef(
+                UUID.randomUUID(),
+                eligibleOffence.offenceTypeId,
+              ),
+            ),
             victimType = eligibleOffence.victimType,
             motivation = eligibleOffence.motivation,
             intervention = catalogue,
@@ -403,6 +428,7 @@ class UpsertInterventionProcessor(
         eligibleOffenceRecords.removeAll(eligibleOffenceRecords)
         createEligibleOffences()
       }
+
       else -> {
         createEligibleOffences()
       }
@@ -432,10 +458,15 @@ class UpsertInterventionProcessor(
 
         return enablingInterventionRecords.toMutableSet()
       }
+
       else -> {
-        details?.split(",")?.forEach { detail ->
+        details?.let {
           enablingInterventionRecords.add(
-            EnablingIntervention(id = UUID.randomUUID(), enablingInterventionDetail = detail, intervention = catalogue),
+            EnablingIntervention(
+              id = UUID.randomUUID(),
+              enablingInterventionDetail = details,
+              intervention = catalogue,
+            ),
           )
         }
 
@@ -444,7 +475,7 @@ class UpsertInterventionProcessor(
             "Inserted ${enablingInterventionRecords.size} Enabling Intervention records for Intervention Catalogue Entry - " +
               "${catalogue.name}, id - ${catalogue.id}",
           )
-          return enablingInterventionRepository.saveAll(enablingInterventionRecords).toMutableSet()
+          enablingInterventionRepository.saveAll(enablingInterventionRecords).toMutableSet()
         } else {
           mutableSetOf()
         }
@@ -466,7 +497,12 @@ class UpsertInterventionProcessor(
         excludedOffenceRecords.add(
           ExcludedOffence(
             id = UUID.randomUUID(),
-            offenceType = offenceType ?: offenceTypeRefRepository.save(OffenceTypeRef(UUID.randomUUID(), excludedOffence.offenceTypeId)),
+            offenceType = offenceType ?: offenceTypeRefRepository.save(
+              OffenceTypeRef(
+                UUID.randomUUID(),
+                excludedOffence.offenceTypeId,
+              ),
+            ),
             victimType = excludedOffence.victimType,
             motivation = excludedOffence.motivation,
             intervention = catalogue,
@@ -486,6 +522,7 @@ class UpsertInterventionProcessor(
         excludedOffenceRecords.removeAll(excludedOffenceRecords)
         createExcludedOffences()
       }
+
       else -> {
         createExcludedOffences()
       }
@@ -502,48 +539,48 @@ class UpsertInterventionProcessor(
   fun upsertExclusion(
     exclusion: ExclusionDefinition?,
     catalogue: InterventionCatalogue,
-  ): Exclusion {
+  ): Exclusion? {
     val exclusionRecord: Exclusion? = exclusionRepository.findByIntervention(catalogue)
+    return if (exclusionRecord !== null) {
+      logger.info(
+        "Retrieved Exclusion record from Database for Intervention Catalogue Entry - " +
+          "${catalogue.name}, id - ${catalogue.id}",
+      )
 
-    when {
-      exclusionRecord != null -> {
-        logger.info(
-          "Retrieved Exclusion record from Database for Intervention Catalogue Entry - " +
-            "${catalogue.name}, id - ${catalogue.id}",
-        )
+      exclusionRecord.minRemainingSentenceDurationGuide = exclusion?.minRemainingSentenceGuide
+      exclusionRecord.remainingLicenseCommunityOrderGuide = exclusion?.remainingLicenseCommunityOrderGuide
+      exclusionRecord.alcoholDrugProblemGuide = exclusion?.alcoholDrugProblemGuide
+      exclusionRecord.mentalHealthProblemGuide = exclusion?.mentalHealthProblemGuide
+      exclusionRecord.otherPreferredMethodGuide = exclusion?.otherPreferredMethodGuide
+      exclusionRecord.sameTypeRuleGuide = exclusion?.sameTypeRuleGuide
+      exclusionRecord.scheduleFrequencyGuide = exclusion?.scheduleFrequencyGuide
+      exclusionRecord.notAllowedIfEligibleForAnotherInterventionGuide =
+        exclusion?.notAllowedIfEligibleForAnotherInterventionGuide
+      exclusionRecord.literacyLevelGuide = exclusion?.literacyLevelGuide
+      exclusionRecord.intervention = catalogue
 
-        exclusionRecord.minRemainingSentenceDurationGuide = exclusion?.minRemaingSentenceGuide
-        exclusionRecord.remainingLicenseCommunityOrderGuide = exclusion?.remainingLicenseCommunityOrderGuide
-        exclusionRecord.alcoholDrugProblemGuide = exclusion?.alcoholDrugProblemGuide
-        exclusionRecord.mentalHealthProblemGuide = exclusion?.mentalHealthProblemGuide
-        exclusionRecord.otherPreferredMethodGuide = exclusion?.otherPreferredMethodGuide
-        exclusionRecord.sameTypeRuleGuide = exclusion?.sameTypeRuleGuide
-        exclusionRecord.scheduleFrequencyGuide = exclusion?.scheduleRequencyGuide
-        exclusionRecord.intervention = catalogue
+      logger.info(
+        "Upserted Exclusion record into Database for Intervention Catalogue Entry - " +
+          "${catalogue.name}, id - ${catalogue.id}",
+      )
 
-        logger.info(
-          "Upserted Exclusion record into Database for Intervention Catalogue Entry - " +
-            "${catalogue.name}, id - ${catalogue.id}",
-        )
-
-        return exclusionRepository.save(exclusionRecord)
-      }
-      else -> {
-        logger.info(
-          "Inserted Exclusion records into Database for Intervention Catalogue Entry - " +
-            "${catalogue.name}, id - ${catalogue.id}",
-        )
-
-        return exclusionRepository.save(
+      exclusionRepository.save(exclusionRecord)
+    } else {
+      logger.info("Inserted Exclusion records into Database for Intervention Catalogue Entry - ${catalogue.name}, id - ${catalogue.id}")
+      // If exclusion is null don't insert
+      exclusion?.let {
+        exclusionRepository.save(
           Exclusion(
             id = UUID.randomUUID(),
-            minRemainingSentenceDurationGuide = exclusion?.minRemaingSentenceGuide,
-            remainingLicenseCommunityOrderGuide = exclusion?.remainingLicenseCommunityOrderGuide,
-            alcoholDrugProblemGuide = exclusion?.alcoholDrugProblemGuide,
-            mentalHealthProblemGuide = exclusion?.mentalHealthProblemGuide,
-            otherPreferredMethodGuide = exclusion?.otherPreferredMethodGuide,
-            sameTypeRuleGuide = exclusion?.sameTypeRuleGuide,
-            scheduleFrequencyGuide = exclusion?.scheduleRequencyGuide,
+            minRemainingSentenceDurationGuide = exclusion.minRemainingSentenceGuide,
+            remainingLicenseCommunityOrderGuide = exclusion.remainingLicenseCommunityOrderGuide,
+            alcoholDrugProblemGuide = exclusion.alcoholDrugProblemGuide,
+            mentalHealthProblemGuide = exclusion.mentalHealthProblemGuide,
+            otherPreferredMethodGuide = exclusion.otherPreferredMethodGuide,
+            sameTypeRuleGuide = exclusion.sameTypeRuleGuide,
+            scheduleFrequencyGuide = exclusion.scheduleFrequencyGuide,
+            notAllowedIfEligibleForAnotherInterventionGuide = exclusion.notAllowedIfEligibleForAnotherInterventionGuide,
+            literacyLevelGuide = exclusion.literacyLevelGuide,
             intervention = catalogue,
           ),
         )
@@ -577,6 +614,7 @@ class UpsertInterventionProcessor(
 
         return personalEligibilityRepository.save(personalEligibilityRecord)
       }
+
       else -> {
         logger.info(
           "Inserted Personal Eligibility records for Intervention Catalogue Entry - " +
@@ -627,6 +665,7 @@ class UpsertInterventionProcessor(
         possibleOutcomesRecords.removeAll(possibleOutcomesRecords)
         createPossibleOutcomes()
       }
+
       else -> {
         createPossibleOutcomes()
       }
@@ -653,7 +692,7 @@ class UpsertInterventionProcessor(
   fun upsertRiskConsideration(
     riskConsideration: RiskConsiderationDefinition?,
     catalogue: InterventionCatalogue,
-  ): RiskConsideration {
+  ): RiskConsideration? {
     val riskConsiderationRecord: RiskConsideration? = riskConsiderationRepository.findByIntervention(catalogue)
 
     when {
@@ -684,30 +723,33 @@ class UpsertInterventionProcessor(
 
         return riskConsiderationRepository.save(riskConsiderationRecord)
       }
+
       else -> {
         logger.info(
           "Inserted Risk Consideration record into Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-        return riskConsiderationRepository.save(
-          RiskConsideration(
-            id = UUID.randomUUID(),
-            cnScoreGuide = riskConsideration?.cnScoreGuide,
-            extremismRiskGuide = riskConsideration?.extremismRiskGuide,
-            saraPartnerScoreGuide = riskConsideration?.saraPartnerScoreGuide,
-            saraOtherScoreGuide = riskConsideration?.saraOtherScoreGuide,
-            ospScoreGuide = riskConsideration?.ospScoreGuide,
-            ospDcIccCombinationGuide = riskConsideration?.ospDcIccCombinationGuide,
-            ogrsScoreGuide = riskConsideration?.ogrsScoreGuide,
-            ovpGuide = riskConsideration?.ovpGuide,
-            ogpGuide = riskConsideration?.ogpGuide,
-            pnaGuide = riskConsideration?.pnaGuide,
-            rsrGuide = riskConsideration?.rsrGuide,
-            roshLevel = getRoshLevel(riskConsideration?.roshLevel),
-            intervention = catalogue,
-          ),
-        )
+        return riskConsideration?.let {
+          riskConsiderationRepository.save(
+            RiskConsideration(
+              id = UUID.randomUUID(),
+              cnScoreGuide = riskConsideration.cnScoreGuide,
+              extremismRiskGuide = riskConsideration.extremismRiskGuide,
+              saraPartnerScoreGuide = riskConsideration.saraPartnerScoreGuide,
+              saraOtherScoreGuide = riskConsideration.saraOtherScoreGuide,
+              ospScoreGuide = riskConsideration.ospScoreGuide,
+              ospDcIccCombinationGuide = riskConsideration.ospDcIccCombinationGuide,
+              ogrsScoreGuide = riskConsideration.ogrsScoreGuide,
+              ovpGuide = riskConsideration.ovpGuide,
+              ogpGuide = riskConsideration.ogpGuide,
+              pnaGuide = riskConsideration.pnaGuide,
+              rsrGuide = riskConsideration.rsrGuide,
+              roshLevel = getRoshLevel(riskConsideration.roshLevel),
+              intervention = catalogue,
+            ),
+          )
+        }
       }
     }
   }
@@ -715,8 +757,9 @@ class UpsertInterventionProcessor(
   fun upsertSpecialEducationalNeed(
     specialEducationalNeed: SpecialEducationalNeedDefinition?,
     catalogue: InterventionCatalogue,
-  ): SpecialEducationalNeed {
-    val specialEducationalNeedRecord: SpecialEducationalNeed? = specialEducationalNeedRepository.findByIntervention(catalogue)
+  ): SpecialEducationalNeed? {
+    val specialEducationalNeedRecord: SpecialEducationalNeed? =
+      specialEducationalNeedRepository.findByIntervention(catalogue)
 
     when {
       specialEducationalNeedRecord != null -> {
@@ -728,7 +771,8 @@ class UpsertInterventionProcessor(
         specialEducationalNeedRecord.intervention = catalogue
         specialEducationalNeedRecord.literacyLevelGuide = specialEducationalNeed?.literacyLevelGuide
         specialEducationalNeedRecord.learningDisabilityCateredFor = specialEducationalNeed?.learningDisabilityCateredFor
-        specialEducationalNeedRecord.equivalentNonLdcProgrammeGuide = specialEducationalNeed?.equivalentNonLdcProgrammeGuide
+        specialEducationalNeedRecord.equivalentNonLdcProgrammeGuide =
+          specialEducationalNeed?.equivalentNonLdcProgrammeGuide
 
         logger.info(
           "Upserted Special Educational Need record into Database for Intervention Catalogue Entry - " +
@@ -737,21 +781,24 @@ class UpsertInterventionProcessor(
 
         return specialEducationalNeedRepository.save(specialEducationalNeedRecord)
       }
+
       else -> {
         logger.info(
           "Inserted Special Educational Need record into Database for Intervention Catalogue Entry - " +
             "${catalogue.name}, id - ${catalogue.id}",
         )
 
-        return specialEducationalNeedRepository.save(
-          SpecialEducationalNeed(
-            id = UUID.randomUUID(),
-            literacyLevelGuide = specialEducationalNeed?.literacyLevelGuide,
-            learningDisabilityCateredFor = specialEducationalNeed?.learningDisabilityCateredFor,
-            equivalentNonLdcProgrammeGuide = specialEducationalNeed?.equivalentNonLdcProgrammeGuide,
-            intervention = catalogue,
-          ),
-        )
+        return specialEducationalNeed?.let {
+          specialEducationalNeedRepository.save(
+            SpecialEducationalNeed(
+              id = UUID.randomUUID(),
+              literacyLevelGuide = specialEducationalNeed.literacyLevelGuide,
+              learningDisabilityCateredFor = specialEducationalNeed.learningDisabilityCateredFor,
+              equivalentNonLdcProgrammeGuide = specialEducationalNeed.equivalentNonLdcProgrammeGuide,
+              intervention = catalogue,
+            ),
+          )
+        }
       }
     }
   }

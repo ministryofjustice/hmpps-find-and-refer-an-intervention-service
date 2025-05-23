@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
@@ -26,18 +26,18 @@
     "eligibility_offence": [
         {
             "offence_type_id": "Sexual",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "General Violence",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "IPV",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         }
     ],
     "exclude_offence": null,
@@ -76,6 +76,8 @@
         "remaining_license_community_order_guide": null,
         "alcohol_drug_problem_guide": null,
         "mental_health_problem_guide": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
+        "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": "No previous iHorizon",
         "schedule_frequency_guide": "Over-ride if exception"

@@ -6,7 +6,6 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.client.WebClient
 import java.nio.charset.StandardCharsets
-import kotlin.let
 
 class FindAndReferRestClient(
   private val webClient: WebClient,
@@ -19,10 +18,10 @@ class FindAndReferRestClient(
   ): WebClient.RequestHeadersSpec<*> {
     val spec = webClient
       .get()
-      .uri {
-        it
+      .uri { uriBuilder ->
+        uriBuilder
           .path(uri)
-          .queryParams(queryParams)
+          .apply { queryParams?.let { queryParams(it) } }
           .build()
       }
 
@@ -31,7 +30,7 @@ class FindAndReferRestClient(
       .withAuth(customAuthentication)
   }
 
-  fun <T> post(
+  fun <T : Any> post(
     uri: String,
     body: T,
     customAuthentication: JwtAuthenticationToken? = null,
@@ -46,7 +45,7 @@ class FindAndReferRestClient(
       .withAuth(customAuthentication)
   }
 
-  fun <T> put(
+  fun <T : Any> put(
     uri: String,
     body: T,
     customAuthentication: JwtAuthenticationToken? = null,
@@ -61,7 +60,7 @@ class FindAndReferRestClient(
       .withAuth(customAuthentication)
   }
 
-  fun <T> patch(
+  fun <T : Any> patch(
     uri: String,
     body: T,
     customAuthentication: JwtAuthenticationToken? = null,
@@ -83,5 +82,9 @@ class FindAndReferRestClient(
   private fun WebClient.RequestHeadersSpec<*>.withAuth(authentication: JwtAuthenticationToken?): WebClient.RequestHeadersSpec<*> = authentication?.let {
     this.header("Authorization", "Bearer ${it.token.tokenValue}")
   }
-    ?: this.attributes(ServletOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId(oauth2ClientRegistrationId))
+    ?: this.attributes(
+      ServletOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId(
+        oauth2ClientRegistrationId,
+      ),
+    )
 }

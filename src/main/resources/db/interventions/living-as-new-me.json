@@ -17,7 +17,7 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": "Becoming New Me Plus (BNM+) or \nNew Me Strengths (NMS)",
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
@@ -27,13 +27,13 @@
     "eligibility_offence": [
         {
             "offence_type_id": "Custody: Any",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         },
         {
             "offence_type_id": "Community: Sexual",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         }
     ],
     "exclude_offence": null,

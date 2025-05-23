@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [
         "Drug Misuse",
         "Alcohol Misuse"
@@ -36,6 +36,8 @@
         "remaining_license_community_order_guide": null,
         "alcohol_drug_problem_guide": "This toolkit is not suitable for men with an alcohol treatment requirement or drug rehabilitation requirement. Men that self-report or are assessed as dependent on any substance are not eligible.",
         "mental_health_problem_guide": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
+        "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null

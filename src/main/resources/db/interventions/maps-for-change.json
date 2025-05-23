@@ -16,14 +16,20 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
         "males": true,
         "females": false
     },
-    "eligibility_offence": [],
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": null,
+            "motivation": "Sexual"
+        }
+    ],
     "exclude_offence": null,
     "possible_outcomes": [
         "The outcomes will depend on the map or maps the person completes."

@@ -111,9 +111,8 @@ class CsvLineAggregator<T>(fieldsToExtract: List<String>) : ExtractorLineAggrega
     )
   }
 
-  private val csvPrinter = CSVFormat.DEFAULT.builder()
-    .setRecordSeparator("") // the underlying aggregator adds line separators for us
-    .build()
+  private val csvPrinter: CSVFormat = CSVFormat.DEFAULT.builder()
+    .setRecordSeparator("").get() // the underlying aggregator adds line separators for us
 
   override fun doAggregate(fields: Array<out Any>): String {
     val out = StringBuilder()

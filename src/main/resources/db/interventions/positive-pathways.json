@@ -17,7 +17,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [
         "Thinking and Behaviour",
         "Attitudes"
@@ -54,7 +54,9 @@
         "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
         "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
         "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
-        "other_preferred_method_guide": "The person you are referring must not be suitable for, or be unable to access an Accredited Programme.",
+        "not_allowed_if_eligible_for_another_intervention": "The person you are referring must not be suitable for, or be unable to access an Accredited Programme.",
+        "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
+        "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
         "schedule_frequency_guide": null
     }

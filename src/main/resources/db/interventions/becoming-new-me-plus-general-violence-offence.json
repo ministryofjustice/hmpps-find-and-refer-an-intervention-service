@@ -17,7 +17,7 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
         "max_age": "",
@@ -27,8 +27,8 @@
     "eligibility_offence": [
         {
             "offence_type_id": "General Violence",
-            "victim_type": "",
-            "motivation": ""
+            "victim_type": null,
+            "motivation": null
         }
     ],
     "exclude_offence": null,

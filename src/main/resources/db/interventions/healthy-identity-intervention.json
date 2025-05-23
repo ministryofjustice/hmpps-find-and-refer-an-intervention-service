@@ -17,7 +17,7 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "",
+    "enabling_intervention_detail": null,
     "criminogenic_needs": [
         "Thinking and Behaviour",
         "Attitudes"
@@ -30,7 +30,7 @@
     "eligibility_offence": [
         {
             "offence_type_id": "Terrorism Act Cast",
-            "victim_type": "",
+            "victim_type": null,
             "motivation": "or under other legislation where extremism is identified as a motivation by the Court."
         }
     ],
