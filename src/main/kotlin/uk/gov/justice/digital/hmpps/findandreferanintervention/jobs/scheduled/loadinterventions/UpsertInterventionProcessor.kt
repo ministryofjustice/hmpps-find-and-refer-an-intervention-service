@@ -224,11 +224,11 @@ class UpsertInterventionProcessor(
           CriminogenicNeed(
             id = UUID.randomUUID(),
             need = criminogenicReference ?: criminogenicNeedRefRepository.save(
-                CriminogenicNeedRef(
-                  UUID.randomUUID(),
-                  needReference,
-                ),
+              CriminogenicNeedRef(
+                UUID.randomUUID(),
+                needReference,
               ),
+            ),
             intervention = catalogue,
           ),
         )
@@ -347,8 +347,7 @@ class UpsertInterventionProcessor(
                 setting = settingType,
               ),
             )
-
-  }
+          }
           else -> {
             logger.info(
               "Unable to create Delivery Method Setting - '$deliveryMethodSetting', " +
@@ -402,11 +401,11 @@ class UpsertInterventionProcessor(
           EligibleOffence(
             id = UUID.randomUUID(),
             offenceType = offenceType ?: offenceTypeRefRepository.save(
-                OffenceTypeRef(
-                  UUID.randomUUID(),
-                  eligibleOffence.offenceTypeId,
-                ),
+              OffenceTypeRef(
+                UUID.randomUUID(),
+                eligibleOffence.offenceTypeId,
               ),
+            ),
             victimType = eligibleOffence.victimType,
             motivation = eligibleOffence.motivation,
             intervention = catalogue,
@@ -495,11 +494,11 @@ class UpsertInterventionProcessor(
           ExcludedOffence(
             id = UUID.randomUUID(),
             offenceType = offenceType ?: offenceTypeRefRepository.save(
-                OffenceTypeRef(
-                  UUID.randomUUID(),
-                  excludedOffence.offenceTypeId,
-                ),
+              OffenceTypeRef(
+                UUID.randomUUID(),
+                excludedOffence.offenceTypeId,
               ),
+            ),
             victimType = excludedOffence.victimType,
             motivation = excludedOffence.motivation,
             intervention = catalogue,
@@ -539,9 +538,9 @@ class UpsertInterventionProcessor(
     val exclusionRecord: Exclusion? = exclusionRepository.findByIntervention(catalogue)
     return if (exclusionRecord !== null) {
       logger.info(
-          "Retrieved Exclusion record from Database for Intervention Catalogue Entry - " +
-            "${catalogue.name}, id - ${catalogue.id}",
-        )
+        "Retrieved Exclusion record from Database for Intervention Catalogue Entry - " +
+          "${catalogue.name}, id - ${catalogue.id}",
+      )
 
       exclusionRecord.minRemainingSentenceDurationGuide = exclusion?.minRemainingSentenceGuide
       exclusionRecord.remainingLicenseCommunityOrderGuide = exclusion?.remainingLicenseCommunityOrderGuide
@@ -557,7 +556,7 @@ class UpsertInterventionProcessor(
 
       logger.info(
         "Upserted Exclusion record into Database for Intervention Catalogue Entry - " +
-            "${catalogue.name}, id - ${catalogue.id}",
+          "${catalogue.name}, id - ${catalogue.id}",
       )
 
       exclusionRecord
