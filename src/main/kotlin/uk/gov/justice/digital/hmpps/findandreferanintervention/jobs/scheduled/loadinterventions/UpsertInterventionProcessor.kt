@@ -292,6 +292,7 @@ class UpsertInterventionProcessor(
         deliveryMethodRecords.removeAll(deliveryMethodRecords)
         createDeliveryMethods()
       }
+
       else -> {
         createDeliveryMethods()
       }
@@ -348,6 +349,7 @@ class UpsertInterventionProcessor(
               ),
             )
           }
+
           else -> {
             logger.info(
               "Unable to create Delivery Method Setting - '$deliveryMethodSetting', " +
@@ -370,6 +372,7 @@ class UpsertInterventionProcessor(
         deliveryMethodSettingRecords.removeAll(deliveryMethodSettingRecords)
         createDeliveryMethodSettings()
       }
+
       else -> {
         createDeliveryMethodSettings()
       }
@@ -425,6 +428,7 @@ class UpsertInterventionProcessor(
         eligibleOffenceRecords.removeAll(eligibleOffenceRecords)
         createEligibleOffences()
       }
+
       else -> {
         createEligibleOffences()
       }
@@ -518,6 +522,7 @@ class UpsertInterventionProcessor(
         excludedOffenceRecords.removeAll(excludedOffenceRecords)
         createExcludedOffences()
       }
+
       else -> {
         createExcludedOffences()
       }
@@ -559,7 +564,7 @@ class UpsertInterventionProcessor(
           "${catalogue.name}, id - ${catalogue.id}",
       )
 
-      exclusionRecord
+      exclusionRepository.save(exclusionRecord)
     } else {
       logger.info("Inserted Exclusion records into Database for Intervention Catalogue Entry - ${catalogue.name}, id - ${catalogue.id}")
       // If exclusion is null don't insert
@@ -660,6 +665,7 @@ class UpsertInterventionProcessor(
         possibleOutcomesRecords.removeAll(possibleOutcomesRecords)
         createPossibleOutcomes()
       }
+
       else -> {
         createPossibleOutcomes()
       }
@@ -752,7 +758,8 @@ class UpsertInterventionProcessor(
     specialEducationalNeed: SpecialEducationalNeedDefinition?,
     catalogue: InterventionCatalogue,
   ): SpecialEducationalNeed? {
-    val specialEducationalNeedRecord: SpecialEducationalNeed? = specialEducationalNeedRepository.findByIntervention(catalogue)
+    val specialEducationalNeedRecord: SpecialEducationalNeed? =
+      specialEducationalNeedRepository.findByIntervention(catalogue)
 
     when {
       specialEducationalNeedRecord != null -> {

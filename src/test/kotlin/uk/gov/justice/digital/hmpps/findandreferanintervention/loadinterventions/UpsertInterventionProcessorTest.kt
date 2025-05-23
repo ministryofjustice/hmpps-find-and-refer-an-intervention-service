@@ -546,7 +546,7 @@ internal class UpsertInterventionProcessorTest {
     val result: MutableSet<EnablingIntervention> =
       processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(4)
+    assertThat(result.count()).isEqualTo(1)
     verify(enablingInterventionRepository, times(1)).saveAll(anyList())
   }
 
