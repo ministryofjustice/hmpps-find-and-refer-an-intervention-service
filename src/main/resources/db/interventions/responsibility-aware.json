@@ -6,6 +6,7 @@
         "short_description": "Responsibly Aware is designed to provide people with the opportunity to reflect on their substance use and develop skills and techniques to support them in making positive change.",
         "long_description": "Responsibly Aware is designed to provide men with the opportunity to reflect on their substance use and develop skills and techniques to support them in making positive change.\n\nIt has been developed as an early intervention toolkit for men who have started to experience problems related to their substance use. These men have not reached the point of addiction or where a more intensive treatment path would be deemed appropriate.\n\nResponsibly Aware takes a harm-reduction approach and aims to support and guide men on probation to develop safe and responsible substance use. \u2018Safe and responsible\u2019 refers to behaviours on several levels, considering the impact on: \n* physical and emotional well-being\n* finances\n* lifestyle\n* relationships \n* other people",
         "session_detail": "There are 5 to 6 weekly sessions.",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -22,7 +23,8 @@
         "Alcohol Misuse"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": false
     },

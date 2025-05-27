@@ -5,7 +5,8 @@
         "int_type": "AcP",
         "short_description": "iHorizon is for men convicted of an internet-only sexual or sexually motivated offence, who are medium risk or above. It helps address problematic factors and how they contribute to behaviour.",
         "long_description": "iHorizon is for men convicted of an internet-only sexual or sexually motivated offence, who are medium risk or above. It helps address problematic factors and how they contribute to behaviour.",
-        "session_detail": "3 x one-to-one sessions and 23 x group sessions\n\n",
+        "session_detail": "3 x one-to-one sessions and 23 x group sessions",
+        "time_to_complete": "At least 30 hours.",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,7 +20,8 @@
     "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": false
     },

@@ -3,9 +3,10 @@
     "intervention_catalogue": {
         "name": "Stepwise Driving",
         "int_type": "SI",
-        "short_description": "Stepwise Driving is designed to support desistance from drink driving by focusing on areas such as awareness of safe driving, making decisions and consequential thinking. ",
+        "short_description": "Stepwise Driving is designed to support desistance from drink driving by focusing on areas such as awareness of safe driving, making decisions and consequential thinking.",
         "long_description": "Stepwise Driving is designed to support desistance from drink driving by focusing on areas such as awareness of safe driving, making decisions and consequential thinking. \n\nThis intervention includes insight-orientated, psychoeducational content around: \n\n* safer driving, for example, reaction times and stopping distances\n\n* consequences of dangerous driving\n\n* effects of alcohol and drugs on driving\n\n* coping with disqualification",
         "session_detail": "1 x one-to-one session and 5 x group sessions",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -25,7 +26,8 @@
         "Attitudes"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": true
     },

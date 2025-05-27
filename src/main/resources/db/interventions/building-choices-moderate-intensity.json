@@ -6,6 +6,7 @@
         "short_description": "Building Choices helps people to develop skills for change and future-focused goals. It is a cognitive-behavioural programme, combining group and one-to-one sessions. It develops skills such as emotion management, healthy thinking, healthy relationships, sense of purpose and healthy sex. This is the moderate intensity pathway.",
         "long_description": "Building Choices helps people to develop skills for change and future-focused goals. It is a cognitive-behavioural programme, combining group and one-to-one sessions. It develops skills such as emotion management, healthy thinking, healthy relationships, sense of purpose and healthy sex. This is the moderate intensity pathway.",
         "session_detail": "6 x One-to-one sessions 21 x Group Sessions",
+        "time_to_complete": "Around 10 to 13 weeks (2 to 3 sessions a week)",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -20,7 +21,8 @@
     "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": null,
+        "max_age": null,
         "males": true,
         "females": true
     },

@@ -5,7 +5,8 @@
         "int_type": "Toolkits",
         "short_description": "This toolkit is aimed at women convicted of sexual offences.",
         "long_description": "This toolkit is aimed at women convicted of sexual offences.\n\nIt is gender-specific and trauma-informed, supported by strengths-based approaches and the biopsychosocial model. It is designed to be delivered flexibly to best address the needs of the woman on probation.",
-        "session_detail": "\nParts 2 to 5 of this 6-part toolkit are optional. Parts 1 and 6 need to be completed.",
+        "session_detail": "Parts 2 to 5 of this 6-part toolkit are optional. Parts 1 and 6 need to be completed.",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,7 +20,8 @@
     "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": false,
         "females": true
     },

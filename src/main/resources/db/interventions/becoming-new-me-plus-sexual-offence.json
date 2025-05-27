@@ -6,6 +6,7 @@
         "short_description": "Becoming New Me Plus (BNM+) uses cognitive behavioural therapy. It is for men who are at high or very high risk of reoffending. This strand is for men convicted of a sexual offence.",
         "long_description": "Becoming New Me Plus (BNM+) uses cognitive behavioural therapy. It is for men who are at high or very high risk of reoffending. This strand is for men convicted of a sexual offence.",
         "session_detail": "Group and one-to-one, in person.\n\n85 group sessions + 7 individual sessions.\n\n\nAlternatively, sessions can be exclusively one-to-one with a minimum of 20 sessions (depending on the needs of the individual).",
+        "time_to_complete": "At least 12 months.",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -20,7 +21,8 @@
     "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": false
     },
