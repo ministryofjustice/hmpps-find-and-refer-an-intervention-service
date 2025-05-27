@@ -3,9 +3,10 @@
     "intervention_catalogue": {
         "name": "FIRS4Women",
         "int_type": "SI",
-        "short_description": "This is a programme to help people build themselves up to have a stronger sense of who they are and what they are capable of. ",
+        "short_description": "This is a programme to help people build themselves up to have a stronger sense of who they are and what they are capable of.",
         "long_description": "This is a programme to help people build themselves up to have a stronger sense of who they are and what they are capable of. It offers insight into what skills they have to be able to deal with life\u2019s surprises.",
         "session_detail": "2 x one-to-one sessions and 6 x group sessions",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -24,7 +25,8 @@
         "Attitudes"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": false,
         "females": true
     },

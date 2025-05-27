@@ -6,6 +6,7 @@
         "short_description": "This intervention aims to improve people's ability to understand and manage their emotions to avoid offending in the future.",
         "long_description": "Learning to manage emotions is key to positive, offence-free lifestyle and healthy relationships. This intervention aims to improve people's ability to understand and manage their emotions to avoid offending in the future.",
         "session_detail": "1 x pre-group session and 6 x group sessions",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -24,7 +25,8 @@
         "Attitudes"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": true
     },

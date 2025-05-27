@@ -6,6 +6,7 @@
         "short_description": "Kaizen uses a unified approach, focusing on the needs of participants. It is inclusive and effective for a range of responsivity needs, including difficulties with engagement, therapeutic relationships and denial. This strand is for men convicted of an intimate partner violence offence.",
         "long_description": "Kaizen uses a unified approach, focusing on the needs of participants. It is inclusive and effective for a range of responsivity needs, including difficulties with engagement, therapeutic relationships and denial. This strand is for men convicted of an intimate partner violence offence.",
         "session_detail": "68 core curriculum sessions with 11 supported learning sessions (one to one or small group)",
+        "time_to_complete": "At least 6 months.",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,7 +20,8 @@
     "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": null,
+        "max_age": null,
         "males": true,
         "females": false
     },

@@ -6,6 +6,7 @@
         "short_description": "This toolkit is designed to help probation practitioners support graduates of Accredited Programmes.",
         "long_description": "This toolkit is designed to help probation practitioners support graduates of Accredited Programmes. It includes short exercises to help the person on probation generalise their learning to new circumstances and contexts as they progress through the sentence",
         "session_detail": "",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -20,7 +21,8 @@
     "enabling_intervention_detail": "This is for graduates of the following Accredited Programmes: \n* Kaizen\n* Becoming New Me\n* Horizon\n* iHorizon\n* New Me Strengths\n* Living as New me\n* Healthy Sex Programme\n* Cognitive Self Change Programme (CSCP)\n* Self Change Programme (SCP)",
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": null,
+        "max_age": null,
         "males": true,
         "females": false
     },

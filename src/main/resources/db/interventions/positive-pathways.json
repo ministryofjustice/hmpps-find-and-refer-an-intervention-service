@@ -3,9 +3,10 @@
     "intervention_catalogue": {
         "name": "Positive Pathways",
         "int_type": "SI",
-        "short_description": "This is a core, strengths-based programme and is a suitable early intervention for everyone. ",
+        "short_description": "This is a core, strengths-based programme and is a suitable early intervention for everyone.",
         "long_description": "This is a core, strengths-based programme and is a suitable early intervention for everyone. \n\nEach programme session follows the 'Check-in, Review, Intervention, Summarise and Set Task' (CRISS) model of delivery. All practitioners adopt motivational approaches to engagement, including a flexible approach to programme delivery, to support different learning preferences.",
         "session_detail": "1 x pre-group session and 6 x group sessions",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -23,7 +24,8 @@
         "Attitudes"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": true
     },

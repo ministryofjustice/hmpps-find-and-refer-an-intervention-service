@@ -3,9 +3,10 @@
     "intervention_catalogue": {
         "name": "First Steps to Change",
         "int_type": "Toolkits",
-        "short_description": "First Steps to Change is designed to provide structure when working with women. ",
-        "long_description": "First Steps to Change is designed to provide structure when working with women. The aim is to:\n* improve engagement throughout Community Orders and periods of licence supervision\n* increase self-esteem and well-being\n* facilitate a therapeutic alliance between practitioner and the woman being supervised\n\nThe toolkit is designed to support engagement and compliance throughout a Community Order or period of licence supervision. It does this by providing practical activities focused on building skills, strengths and strategies to encourage women to desist from offending and have a positive future. It takes into account that for a woman to be motivated, they need to feel safe and supported by someone with a genuine interest in their story. ",
+        "short_description": "First Steps to Change is designed to provide structure when working with women.",
+        "long_description": "First Steps to Change is designed to provide structure when working with women. The aim is to:\n* improve engagement throughout Community Orders and periods of licence supervision\n* increase self-esteem and well-being\n* facilitate a therapeutic alliance between practitioner and the woman being supervised\n\nThe toolkit is designed to support engagement and compliance throughout a Community Order or period of licence supervision. It does this by providing practical activities focused on building skills, strengths and strategies to encourage women to desist from offending and have a positive future. It takes into account that for a woman to be motivated, they need to feel safe and supported by someone with a genuine interest in their story.",
         "session_detail": "",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,7 +20,8 @@
     "enabling_intervention_detail": null,
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": null,
+        "max_age": null,
         "males": false,
         "females": true
     },

@@ -3,9 +3,10 @@
     "intervention_catalogue": {
         "name": "Personal wellbeing services",
         "int_type": "CRS",
-        "short_description": "Personal wellbeing services help men improve their emotional wellbeing and reduce their risk of reoffending. The service is structured around 4 key pathways that promote stability and positive change. ",
-        "long_description": "Personal wellbeing  services are structured around 4 pathways designed to support men on probation with the following needs:\n\n\u2022 emotional wellbeing\n\u2022 family and significant others\n\u2022 lifestyle and associates\n\u2022 social inclusion\n\nMen under supervision can also get support from a social inclusion mentoring service before release. If these meetings are required as part of their sentence, they must attend.\n",
-        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
+        "short_description": "Personal wellbeing services help men improve their emotional wellbeing and reduce their risk of reoffending. The service is structured around 4 key pathways that promote stability and positive change.",
+        "long_description": "Personal wellbeing  services are structured around 4 pathways designed to support men on probation with the following needs:\n\n\u2022 emotional wellbeing\n\u2022 family and significant others\n\u2022 lifestyle and associates\n\u2022 social inclusion\n\nMen under supervision can also get support from a social inclusion mentoring service before release. If these meetings are required as part of their sentence, they must attend.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -25,7 +26,8 @@
         "Attitudes"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": null,
+        "max_age": null,
         "males": true,
         "females": false
     },

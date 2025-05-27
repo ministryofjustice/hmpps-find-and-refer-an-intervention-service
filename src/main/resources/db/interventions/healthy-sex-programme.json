@@ -6,6 +6,7 @@
         "short_description": "Healthy Sex Programme (HSP) is a follow-up programme for men who have completed Kaizen, Becoming New Me Plus, Horizon, or New Me Strengths. It uses cognitive behavioural therapy and is aimed at men convicted of a sexual offence, or an offence with a sexual element.",
         "long_description": "Healthy Sex Programme (HSP) is a follow-up programme for men who have completed Kaizen, Becoming New Me Plus, Horizon, or New Me Strengths. It uses cognitive behavioural therapy and is aimed at men convicted of a sexual offence, or an offence with a sexual element.",
         "session_detail": "",
+        "time_to_complete": "At least 12-30 hours.",
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -19,7 +20,8 @@
     "enabling_intervention_detail": "Kaizen, Horizon, BNM+ or NMS",
     "criminogenic_needs": [],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": "18",
+        "max_age": null,
         "males": true,
         "females": false
     },

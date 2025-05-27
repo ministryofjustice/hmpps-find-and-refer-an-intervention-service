@@ -5,7 +5,8 @@
         "int_type": "CRS",
         "short_description": "Accommodation services provide short-term housing and support to help men on probation find stable, long-term accommodation.",
         "long_description": "Accommodation services provide short-term housing and support to help men on probation find stable, long-term accommodation.",
-        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
+        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_methods": [
@@ -23,7 +24,8 @@
         "Accommodation"
     ],
     "personal_eligibility": {
-        "max_age": "",
+        "min_age": null,
+        "max_age": null,
         "males": true,
         "females": false
     },
