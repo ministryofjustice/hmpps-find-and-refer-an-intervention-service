@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.config
 
 import jakarta.validation.ValidationException
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.FORBIDDEN
 import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.HandlerMethodValidationException
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+import org.springframework.web.reactive.function.client.WebClientResponseException
 import org.springframework.web.server.ResponseStatusException
 import org.springframework.web.servlet.resource.NoResourceFoundException
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
@@ -98,6 +100,27 @@ class GlobalExceptionHandler {
       )
       .also { log.info("Input request not matching the pattern: {}", violationMessages) }
   }
+
+  @ExceptionHandler(WebClientResponseException.NotFound::class)
+  fun handleNotFound(ex: WebClientResponseException.NotFound): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
+    .body(
+      ErrorResponse(status = NOT_FOUND, userMessage = ex.message, developerMessage = ex.message),
+    ).also { log.error("External service data not found: {}", ex.message) }
+
+  @ExceptionHandler(WebClientResponseException.Unauthorized::class)
+  fun handleUnauthorized(ex: WebClientResponseException.Unauthorized): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+    ErrorResponse(status = HttpStatus.UNAUTHORIZED, userMessage = ex.message, developerMessage = ex.message),
+  ).also { log.error("External service unauthorized: {}", ex.message) }
+
+  @ExceptionHandler(WebClientResponseException.InternalServerError::class)
+  fun handleServerError(ex: WebClientResponseException.InternalServerError): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+    ErrorResponse(status = HttpStatus.INTERNAL_SERVER_ERROR, userMessage = ex.message, developerMessage = ex.message),
+  ).also { log.error("External service threw internal server error: {}", ex.message) }
+
+  @ExceptionHandler(WebClientResponseException::class)
+  fun handleOtherWebClientErrors(ex: WebClientResponseException): ResponseEntity<ErrorResponse> = ResponseEntity.status(ex.statusCode).body(
+    ErrorResponse(status = HttpStatus.valueOf(ex.statusCode.value()), userMessage = ex.localizedMessage, developerMessage = ex.message),
+  ).also { log.error("External service threw an error: {}", ex.message) }
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
