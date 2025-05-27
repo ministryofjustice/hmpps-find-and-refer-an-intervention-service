@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import io.swagger.v3.oas.annotations.media.Schema
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import java.util.UUID
@@ -93,4 +94,51 @@ data class InterventionCatalogueDto(
     example = "Becoming New Me Plus",
   )
   val equivalentNonLdcProgramme: String?,
+
+  @field:Schema(
+    description = "The minimum age that is required for the Intervention",
+    nullable = true,
+    example = "18",
+
+  )
+  val minAge: Int?,
+  @field:Schema(
+    description = "The maximum age that is required for the Intervention",
+    nullable = true,
+    example = "18",
+
+  )
+  val maxAge: Int?,
 )
+
+fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
+  val deliveryMethodDtos =
+    this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
+  val settingList =
+    this.deliveryMethodSettings.map { DeliveryMethodSettingDto.fromEntity(it).setting }
+
+  return InterventionCatalogueDto(
+    id = this.id,
+    criminogenicNeeds =
+    this.criminogenicNeeds.map {
+      CriminogenicNeedDto.fromEntity(it).need
+    }.sorted(),
+    title = this.name,
+    description = this.shortDescription,
+    interventionType = this.interventionType,
+    setting = settingList,
+    allowsMales = this.personalEligibility?.males!!,
+    allowsFemales = this.personalEligibility?.females!!,
+    riskCriteria =
+    this.riskConsideration?.let {
+      RiskConsiderationDto.fromEntity(it).listOfRisks()
+    },
+    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.sorted(),
+    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.sorted(),
+    timeToComplete = this.timeToComplete,
+    suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
+    equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
+    minAge = this.personalEligibility?.minAge,
+    maxAge = this.personalEligibility?.maxAge,
+  )
+}
