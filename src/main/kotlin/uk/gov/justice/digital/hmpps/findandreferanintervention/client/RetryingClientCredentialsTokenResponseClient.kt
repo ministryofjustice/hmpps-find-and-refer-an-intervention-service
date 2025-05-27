@@ -72,7 +72,6 @@ class RetryingClientCredentialsTokenResponseClient(
     .requestFactory(factory)
     .messageConverters {
       it.add(FormHttpMessageConverter())
-      it.add(MappingJackson2HttpMessageConverter())
       it.add(OAuth2AccessTokenResponseHttpMessageConverter())
     }
     .build()
@@ -90,7 +89,6 @@ class RetryingClientCredentialsTokenResponseClient(
 
     val formData: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>().apply {
       add(OAuth2ParameterNames.GRANT_TYPE, "client_credentials")
-      add(OAuth2ParameterNames.SCOPE, request.clientRegistration.scopes.joinToString(" "))
     }
 
     val headers = HttpHeaders().apply {
