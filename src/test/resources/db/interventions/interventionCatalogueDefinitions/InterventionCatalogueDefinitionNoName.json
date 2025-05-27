@@ -9,18 +9,11 @@
     "session_detail":null,
     "reason_for_referral":"Accommodation need"
   },
-  "delivery_methods":[
-    {
-      "delivery_method_description":"TBC",
-      "format":"Group",
-      "attendance_type":"In Person"
-    },
-    {
-      "delivery_method_description":"TBC",
-      "format":"One-to-one",
-      "attendance_type":"TBC"
-    }
-  ],
+  "delivery_method": {
+    "format": "Group or One-to-one",
+    "attendance_type": "In Person and Online",
+    "delivery_method_description": "Description for Delivery Method for invalid Intervention Catalogue Definition No Name"
+  },
   "delivery_method_settings":[
     "COMMUNITY", "CUSTODY"
   ],
