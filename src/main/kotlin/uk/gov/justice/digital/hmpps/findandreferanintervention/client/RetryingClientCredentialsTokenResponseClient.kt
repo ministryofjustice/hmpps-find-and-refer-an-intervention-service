@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.http.converter.FormHttpMessageConverter
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.retry.RetryCallback
 import org.springframework.retry.RetryContext
 import org.springframework.retry.RetryListener
@@ -72,7 +71,6 @@ class RetryingClientCredentialsTokenResponseClient(
     .requestFactory(factory)
     .messageConverters {
       it.add(FormHttpMessageConverter())
-      it.add(MappingJackson2HttpMessageConverter())
       it.add(OAuth2AccessTokenResponseHttpMessageConverter())
     }
     .build()
@@ -90,7 +88,6 @@ class RetryingClientCredentialsTokenResponseClient(
 
     val formData: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>().apply {
       add(OAuth2ParameterNames.GRANT_TYPE, "client_credentials")
-      add(OAuth2ParameterNames.SCOPE, request.clientRegistration.scopes.joinToString(" "))
     }
 
     val headers = HttpHeaders().apply {
