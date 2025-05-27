@@ -67,6 +67,54 @@ class ServiceUserServiceTest {
   }
 
   @Test
+  fun `should return ServiceUserDto when some non mandatory elements are not present`() {
+    // Arrange
+    val identifier = "X718255"
+    val offenderResponse = OffenderIdentifiersResponse(
+      crn = "X718255",
+      nomsNumber = null,
+      name = OffenderName(forename = "Mitchell", surname = "Marsh"),
+      dateOfBirth = "1990-01-01",
+      ethnicity = null,
+      gender = null,
+      probationDeliveryUnit = ProbationDeliveryUnit(code = null, description = "Unit 1"),
+      setting = "Custody",
+    )
+    val expectedDto = ServiceUserDto(
+      name = "Mitchell Marsh",
+      crn = "X718255",
+      dob = LocalDate.parse("1990-01-01"),
+      gender = null,
+      ethnicity = null,
+      currentPdu = null,
+      setting = "Custody",
+    )
+
+    val offenderIdentifiersPath = UriComponentsBuilder.fromPath(findPersonLocation)
+      .buildAndExpand(identifier)
+      .toString()
+
+    val requestHeadersSpecMock = mock(WebClient.RequestHeadersSpec::class.java)
+    val responseSpecMock = mock(WebClient.ResponseSpec::class.java)
+
+    `when`(findAndReferDeliusApiClient.get(offenderIdentifiersPath))
+      .thenReturn(requestHeadersSpecMock)
+    `when`(requestHeadersSpecMock.retrieve())
+      .thenReturn(responseSpecMock)
+    `when`(responseSpecMock.bodyToMono(OffenderIdentifiersResponse::class.java))
+      .thenReturn(Mono.just(offenderResponse))
+
+    // Act
+    val result = serviceUserService.getServiceUserByIdentifier(identifier)
+
+    // Assert
+    assertEquals(expectedDto, result)
+    verify(findAndReferDeliusApiClient).get(offenderIdentifiersPath)
+    verify(requestHeadersSpecMock).retrieve()
+    verify(responseSpecMock).bodyToMono(OffenderIdentifiersResponse::class.java)
+  }
+
+  @Test
   fun `should return null when no offender is found`() {
     // Arrange
     val identifier = "A12345"

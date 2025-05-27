@@ -12,14 +12,14 @@ data class OffenderIdentifiersResponse(
   val nomsNumber: String?,
   val name: OffenderName,
   val dateOfBirth: String,
-  val ethnicity: String,
-  val gender: String,
+  val ethnicity: String?,
+  val gender: String?,
   val probationDeliveryUnit: ProbationDeliveryUnit,
   val setting: String,
 )
 
 data class ProbationDeliveryUnit(
-  val code: String? = null,
+  val code: String?,
   val description: String,
 )
 
@@ -43,7 +43,7 @@ class ServiceUserService(
       .retrieve()
       .bodyToMono(OffenderIdentifiersResponse::class.java)
       .block().let { it ->
-        it?.let {
+        it?.let { it ->
           ServiceUserDto(
             name = it.name.forename + " " + it.name.surname,
             crn = it.crn,
