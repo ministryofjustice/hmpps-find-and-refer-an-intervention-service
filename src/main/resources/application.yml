@@ -43,6 +43,7 @@ spring:
             client-secret: clientsecret
             provider: hmpps-auth
             authorization-grant-type: client_credentials
+            scope: read,write
 
   datasource:
     url: jdbc:postgresql://${postgres.uri:localhost:5432}/${postgres.db:postgres}?currentSchema=${database.schema.name:public}&user=${postgres.username:root}&password=${postgres.password:dev}&stringtype=unspecified
