@@ -17,7 +17,7 @@ data class InterventionDetailsDto(
   val criminogenicNeeds: List<String>? = null,
   val criminogenicNeedsScore: String? = null,
   val eligibleOffence: String? = null,
-  val enablingIntervention: List<String>? = null,
+  val enablingInterventions: List<String>? = null,
   val interventionType: InterventionType,
   val title: String,
   val minAge: Int? = null,
@@ -57,7 +57,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     description = this.longDescription ?: this.shortDescription,
     // TODO the way eligible offences are saved to db are not compatible with displaying this as formatted content
     // eligibleOffence = "",
-    enablingIntervention = this.enablingInterventions.mapNotNull { it.toDto().enablingInterventionDetail }
+    enablingInterventions = this.enablingInterventions.mapNotNull { it.toDto().enablingInterventionDetail }
       .ifEmpty { null },
     interventionType = this.interventionType,
     allowsMales = this.personalEligibility?.males!!,
