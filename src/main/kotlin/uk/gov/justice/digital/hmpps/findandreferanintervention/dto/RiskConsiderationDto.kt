@@ -20,10 +20,10 @@ data class RiskConsiderationDto(
   val roshLevel: RoshLevel? = null,
 ) {
 
+  // The Criminogenic Needs Score (cnScoreGuide) has been excluded from this list as it should not be displayed alongside the risk criteria.
   val listOfRisks: () -> List<String> =
     {
       listOfNotNull(
-        cnScoreGuide,
         extremismRiskGuide,
         saraPartnerScoreGuide,
         saraOtherScoreGuide,
