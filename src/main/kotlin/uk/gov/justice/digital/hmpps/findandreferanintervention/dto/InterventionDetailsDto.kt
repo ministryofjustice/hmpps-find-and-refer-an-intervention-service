@@ -15,7 +15,7 @@ data class InterventionDetailsDto(
   val allowsMales: Boolean,
   val allowsFemales: Boolean,
   val criminogenicNeeds: List<String>? = null,
-  val criminogenicNeedScore: String? = null,
+  val criminogenicNeedsScore: String? = null,
   val eligibleOffence: String? = null,
   val enablingIntervention: List<String>? = null,
   val interventionType: InterventionType,
@@ -50,7 +50,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     this.criminogenicNeeds.map {
       CriminogenicNeedDto.fromEntity(it).need
     }.sorted(),
-    criminogenicNeedScore = riskConsideration?.cnScoreGuide,
+    criminogenicNeedsScore = riskConsideration?.cnScoreGuide,
     title = this.name,
     description = this.longDescription?.map { it } ?: listOf(this.shortDescription),
     // TODO the way eligible offences are saved to db are not compatible with displaying this as formatted content
