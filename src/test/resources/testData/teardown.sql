@@ -25,4 +25,6 @@ FROM delivery_location;
 DELETE
 FROM intervention_catalogue_map;
 DELETE
+FROM intervention_catalogue_to_course_map;
+DELETE
 FROM intervention_catalogue;

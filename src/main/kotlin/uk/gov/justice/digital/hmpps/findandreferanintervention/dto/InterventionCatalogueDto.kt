@@ -105,7 +105,7 @@ data class InterventionCatalogueDto(
   @field:Schema(
     description = "The maximum age that is required for the Intervention",
     nullable = true,
-    example = "18",
+    example = "30",
 
   )
   val maxAge: Int?,
