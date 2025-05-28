@@ -102,7 +102,7 @@ class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(WebClientResponseException.NotFound::class)
-  fun handleNotFound(ex: WebClientResponseException.NotFound): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
+  fun handleNotFound(ex: WebClientResponseException.NotFound): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.OK)
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = ex.message, developerMessage = ex.message),
     ).also { log.error("External service data not found: {}", ex.message) }
