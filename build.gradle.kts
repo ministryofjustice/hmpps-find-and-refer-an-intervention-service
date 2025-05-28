@@ -56,7 +56,7 @@ dependencies {
   implementation("org.hibernate:hibernate-core:7.0.0.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.9.10")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.5")
+  runtimeOnly("org.postgresql:postgresql:42.7.6")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
   // json and csv
