@@ -1,0 +1,57 @@
+{
+    "uuid": "47B0048C-CAB2-4509-A64A-29A4218712C9",
+    "intervention_catalogue": {
+        "name": "Accommodation services",
+        "int_type": "CRS",
+        "short_description": "Accommodation services provide short-term housing and support to help men on probation find stable, long-term accommodation.",
+        "long_description": "Accommodation services provide short-term housing and support to help men on probation find stable, long-term accommodation.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group\nOne-to-one",
+        "attendance_type": "Variable\n(face-to-face, virtual, telephone, email, messaging) *Accomodation services West Midlands"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Accommodation"
+    ],
+    "personal_eligibility": {
+        "min_age": null,
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "Accommodation services aim to achieve one or more of the following outcomes:",
+        "",
+        "\u2022 removing barriers to finding or keeping accommodation, like money problems, behaviour, health or past offences",
+        "\u2022 preventing homelessness, including support to help stop an eviction",
+        "\u2022 helping find and secure social or supported housing",
+        "\u2022 finding tenancy in the private rented sector, or keeping existing tenancy",
+        "\u2022 having stable housing or having a strong prospect of keeping stable housing for at least 3 months - this includes men who have been in prison for less than 6 months"
+    ],
+    "risk_consideration": {
+        "cn_score_guide": "NA",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

@@ -1,0 +1,45 @@
+{
+    "uuid": "173FA9DA-8CB4-4F37-8CE4-CEF21801CFC4",
+    "intervention_catalogue": {
+        "name": "Responsibility Aware",
+        "int_type": "Toolkits",
+        "short_description": "Responsibly Aware is designed to provide people with the opportunity to reflect on their substance use and develop skills and techniques to support them in making positive change.",
+        "long_description": "Responsibly Aware is designed to provide men with the opportunity to reflect on their substance use and develop skills and techniques to support them in making positive change.\n\nIt has been developed as an early intervention toolkit for men who have started to experience problems related to their substance use. These men have not reached the point of addiction or where a more intensive treatment path would be deemed appropriate.\n\nResponsibly Aware takes a harm-reduction approach and aims to support and guide men on probation to develop safe and responsible substance use. \u2018Safe and responsible\u2019 refers to behaviours on several levels, considering the impact on: \n* physical and emotional well-being\n* finances\n* lifestyle\n* relationships \n* other people",
+        "session_detail": "There are 5 to 6 weekly sessions.",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "One-to-one"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Drug Misuse",
+        "Alcohol Misuse"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": null,
+        "alcohol_drug_problem_guide": "This toolkit is not suitable for men with an alcohol treatment requirement or drug rehabilitation requirement. Men that self-report or are assessed as dependent on any substance are not eligible.",
+        "mental_health_problem_guide": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
+        "literacy_level": null,
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}
