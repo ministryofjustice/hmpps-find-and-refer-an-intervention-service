@@ -1,0 +1,40 @@
+{
+    "uuid": "735E4A9A-01E6-40F3-898A-F52C771A87F2",
+    "intervention_catalogue": {
+        "name": "Stepping Stones",
+        "int_type": "Toolkits",
+        "short_description": "Stepping Stones is designed to support practitioners hold discussions and complete exercises with men on probation to help them lead an offence-free life.",
+        "long_description": "Stepping Stones is designed to support practitioners hold discussions and complete exercises with men on probation to help them lead an offence-free life. \n\nIt can be used in a flexible way and tailored to meet the needs of each man.\n\nIt offers practical exercises to use in supervision with men on licence or a community order. The primary focus is on strengthening and developing the protective factors identified in the Risk of Serious Harm (RoSH) guidance 2021, to support rehabilitation and reduce re-offending.",
+        "session_detail": "",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "One-to-one"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Thinking and Behaviour",
+        "Attitudes"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": null
+        }
+    ],
+    "possible_outcomes": [],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

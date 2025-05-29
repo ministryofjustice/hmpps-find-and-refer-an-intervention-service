@@ -91,8 +91,9 @@ open class InterventionCatalogue(
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
-  open var deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
+  @Nullable
+  @OneToOne(mappedBy = "intervention")
+  open var deliveryMethod: DeliveryMethod? = null,
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),

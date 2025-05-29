@@ -1,0 +1,38 @@
+{
+    "uuid": "02BB45CC-8070-4BF6-A924-00CDB705550D",
+    "intervention_catalogue": {
+        "name": "Pathways to Change",
+        "int_type": "Toolkits",
+        "short_description": "This toolkit is aimed at women convicted of sexual offences.",
+        "long_description": "This toolkit is aimed at women convicted of sexual offences.\n\nIt is gender-specific and trauma-informed, supported by strengths-based approaches and the biopsychosocial model. It is designed to be delivered flexibly to best address the needs of the woman on probation.",
+        "session_detail": "Parts 2 to 5 of this 6-part toolkit are optional. Parts 1 and 6 need to be completed.",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "One-to-one"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": null,
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": null,
+            "motivation": null
+        }
+    ],
+    "exclude_offence": null,
+    "possible_outcomes": [],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

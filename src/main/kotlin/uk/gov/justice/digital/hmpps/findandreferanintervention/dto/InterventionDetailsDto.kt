@@ -24,8 +24,8 @@ data class InterventionDetailsDto(
   val suitableForPeopleWithLearningDifficulties: String? = null,
   val equivalentNonLdcProgramme: String? = null,
   val timeToComplete: String? = null,
-  val deliveryFormat: List<String>? = null,
-  val attendanceType: List<String>? = null,
+  val deliveryFormat: String? = null,
+  val attendanceType: String? = null,
   val description: String,
   val sessionDetails: String? = null,
   val communityLocations: List<CommunityLocation>? = null,
@@ -37,8 +37,6 @@ data class InterventionDetailsDto(
 }
 
 fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
-  val deliveryMethodDtos =
-    this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
   val deliverylocationDtos = this.deliveryLocations.map { it.toDto() }
   val courseDtos = this.courses.map { it.toDto() }
 
@@ -57,8 +55,8 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     this.riskConsideration?.let {
       RiskConsiderationDto.fromEntity(it).listOfRisks()
     },
-    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.sorted().ifEmpty { null },
-    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.sorted().ifEmpty { null },
+    attendanceType = this.deliveryMethod?.attendanceType,
+    deliveryFormat = this.deliveryMethod?.deliveryFormat,
     timeToComplete = this.timeToComplete,
     suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
     equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,

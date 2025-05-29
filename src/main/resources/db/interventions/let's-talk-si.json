@@ -1,0 +1,60 @@
+{
+    "uuid": "98A4C2E4-D399-4A35-B3FC-C729FBBD78AB",
+    "intervention_catalogue": {
+        "name": "Let's Talk",
+        "int_type": "SI",
+        "short_description": "Let\u2019s Talk is aimed at men who have been exposed to, or demonstrate entitled masculinity beliefs and behaviours.",
+        "long_description": "Let\u2019s Talk is aimed at men who have been exposed to, or demonstrate entitled masculinity beliefs and behaviours. \n\nMen taking part in this will develop an understanding about their emotions and how to express these in our modern society. They will work on developing an understanding of how previous trauma links to their current behaviour, self-esteem and general well-being. \n\nIt is not suitable for women. \n\nThis is a Rehabilitation Activity Requirement (RAR) which will look at ways their self-esteem is shaped and how society or personal circumstances influence this. It looks at how they understand and express emotions within relationships and explores support networks, role models and goal-setting. The programme will also look at different thinking styles and communications skills.",
+        "session_detail": "1 x pre-group session and 7 x group sessions",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Emotional Wellbeing",
+        "Thinking and Behaviour",
+        "Attitudes"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": null
+        },
+        {
+            "offence_type_id": "IPV",
+            "victim_type": null
+        }
+    ],
+    "possible_outcomes": [
+        "Outcomes of this programme include different thinking styles and communications skills."
+    ],
+    "risk_consideration": {
+        "cn_score_guide": "Need is evidenced by at least one of the following OASys criteria being satisfied: \n* 11.3 = 2\n* Thinking and behaviour related RoSH\n* Attitudes related RoSH",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "If OVP not available, then OGRS3 (over 2 years):\nscore 25+",
+        "ovp_guide": "OVP (over 2 years): score 20+",
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

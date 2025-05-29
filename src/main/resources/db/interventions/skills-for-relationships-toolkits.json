@@ -1,0 +1,58 @@
+{
+    "uuid": "E643606F-FEA5-4C86-AA45-0EB7758CFE6C",
+    "intervention_catalogue": {
+        "name": "Skills for Relationships",
+        "int_type": "Toolkits",
+        "short_description": "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV).",
+        "long_description": "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV). \n\nThe key focus of this toolkit is to help men cope with the complexities and pressures of their relationships without getting into conflict. It helps people decide how they want their relationships to be, recognise their strengths and develop new relationship skills.",
+        "session_detail": "",
+        "time_to_complete": "Up to 20 weeks",
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "One-to-one"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": null,
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Domestic Abuse",
+            "victim_type": "Partner",
+            "motivation": null
+        },
+        {
+            "offence_type_id": "IPV",
+            "victim_type": "Partner",
+            "motivation": null
+        }
+    ],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "The outcome of this toolkit is a reduced risk of intimate partner violence."
+    ],
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": "< Medium for SI\nOR if Medium = BBR unless insufficient time or other ineligibility reason",
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": null,
+    "exclusion": null
+}

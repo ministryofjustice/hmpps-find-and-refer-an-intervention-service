@@ -6,6 +6,5 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Interv
 import java.util.UUID
 
 interface DeliveryMethodRepository : JpaRepository<DeliveryMethod, UUID> {
-  fun findByIntervention(intervention: InterventionCatalogue): List<DeliveryMethod>?
-  fun deleteAllByIntervention(intervention: InterventionCatalogue)
+  fun findByIntervention(intervention: InterventionCatalogue): DeliveryMethod?
 }

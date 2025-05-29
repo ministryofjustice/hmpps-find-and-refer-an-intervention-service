@@ -45,7 +45,6 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Settin
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SpecialEducationalNeed
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRefRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CriminogenicNeedRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryMethodSettingRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.EligibleOffenceRepository
@@ -70,7 +69,6 @@ internal class UpsertInterventionProcessorTest {
   private val criminogenicNeedRefRepository = mock<CriminogenicNeedRefRepository>()
   private val pduRefRepository = mock<PduRefRepository>()
   private val deliveryMethodRepository = mock<DeliveryMethodRepository>()
-  private val deliveryLocationRepository = mock<DeliveryLocationRepository>()
   private val deliveryMethodSettingRepository = mock<DeliveryMethodSettingRepository>()
   private val eligibleOffenceRepository = mock<EligibleOffenceRepository>()
   private val offenceTypeRefRepository = mock<OffenceTypeRefRepository>()
@@ -89,8 +87,6 @@ internal class UpsertInterventionProcessorTest {
     interventionCatalogueRepository,
     criminogenicNeedRepository,
     criminogenicNeedRefRepository,
-    deliveryLocationRepository,
-    pduRefRepository,
     deliveryMethodRepository,
     deliveryMethodSettingRepository,
     eligibleOffenceRepository,
@@ -116,12 +112,11 @@ internal class UpsertInterventionProcessorTest {
     )
     whenever(criminogenicNeedRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
     val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
-    val defaultPccRegion =
-      PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
+    val defaultPccRegion = PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
     val defaultPduRef1 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     val defaultPduRef2 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
-    whenever(deliveryMethodRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
+    whenever(deliveryMethodRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
     whenever(deliveryMethodSettingRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethodSetting>())
     whenever(eligibleOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EligibleOffence>())
     whenever(enablingInterventionRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
@@ -334,29 +329,23 @@ internal class UpsertInterventionProcessorTest {
         "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
       )
 
-    val deliveryMethodDefinitions: Array<DeliveryMethodDefinition> =
-      ObjectMapper().readValue(
-        deliveryMethodDefinitionJson,
-        object : TypeReference<Array<DeliveryMethodDefinition>>() {},
-      )
+    val deliveryMethodDefinition: DeliveryMethodDefinition =
+      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<DeliveryMethodDefinition>() {})
 
     whenever(deliveryMethodRepository.findByIntervention(any())).thenReturn(
-      listOf(
-        DeliveryMethod(
-          id = UUID.randomUUID(),
-          attendanceType = deliveryMethodDefinitions[0].attendanceType,
-          deliveryFormat = deliveryMethodDefinitions[0].deliveryFormat,
-          deliveryMethodDescription = deliveryMethodDefinitions[0].deliveryMethodDescription,
-          intervention = catalogue,
-        ),
+      DeliveryMethod(
+        id = UUID.randomUUID(),
+        attendanceType = deliveryMethodDefinition.attendanceType,
+        deliveryFormat = deliveryMethodDefinition.deliveryFormat,
+        deliveryMethodDescription = deliveryMethodDefinition.deliveryMethodDescription,
+        intervention = catalogue,
       ),
     )
 
-    val result: MutableSet<DeliveryMethod> = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    val result: DeliveryMethod = processor.upsertDeliveryMethod(deliveryMethodDefinition, catalogue)
 
-    assertThat(result.count()).isEqualTo(3)
-    verify(deliveryMethodRepository, times(1)).deleteAllByIntervention(any())
-    verify(deliveryMethodRepository, times(1)).saveAll(anyList())
+    assertThat(result.deliveryFormat).isEqualTo("Group or One-to-one")
+    verify(deliveryMethodRepository, times(1)).save(any())
   }
 
   @Test
@@ -366,16 +355,13 @@ internal class UpsertInterventionProcessorTest {
         "classpath:db/interventions/deliveryMethodDefinitions/DeliveryMethodDefinition.json",
       )
 
-    val deliveryMethodDefinitions: Array<DeliveryMethodDefinition> =
-      ObjectMapper().readValue(
-        deliveryMethodDefinitionJson,
-        object : TypeReference<Array<DeliveryMethodDefinition>>() {},
-      )
+    val deliveryMethodDefinitions: DeliveryMethodDefinition =
+      ObjectMapper().readValue(deliveryMethodDefinitionJson, object : TypeReference<DeliveryMethodDefinition>() {})
 
-    val result: MutableSet<DeliveryMethod> = processor.upsertDeliveryMethods(deliveryMethodDefinitions, catalogue)
+    val result: DeliveryMethod = processor.upsertDeliveryMethod(deliveryMethodDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(3)
-    verify(deliveryMethodRepository, times(1)).saveAll(anyList())
+    assertThat(result.deliveryFormat).isEqualTo("Group or One-to-one")
+    verify(deliveryMethodRepository, times(1)).save(any())
   }
 
   @Test
@@ -872,7 +858,7 @@ internal class UpsertInterventionProcessorTest {
     val specialEducationalNeedJson: String =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/SpecialEducationalNeedDefinition.json")
 
-    val specialEducationalNeedDefinition =
+    val specialEducationalNeedDefinition: SpecialEducationalNeedDefinition =
       ObjectMapper().readValue(
         specialEducationalNeedJson,
         object : TypeReference<SpecialEducationalNeedDefinition>() {},

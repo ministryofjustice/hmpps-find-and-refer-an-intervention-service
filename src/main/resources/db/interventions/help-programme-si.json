@@ -1,0 +1,79 @@
+{
+    "uuid": "0D707B96-D051-457A-AB01-338AF6B65B55",
+    "intervention_catalogue": {
+        "name": "Help Programme",
+        "int_type": "SI",
+        "short_description": "Help is an early intervention domestic abuse programme.",
+        "long_description": "Help is an early intervention domestic abuse programme. The aim of Help is to support the development and maintenance of healthy intimate relationships and to protect against the escalation of problematic behaviours. \n\nTo do this, it offers insight into the values, attitudes and skills which are necessary to develop and maintain healthy intimate relationships. It provides the opportunity for the man referred to reflect on his attitudes and behaviours within the relationship, and to work towards positive change.",
+        "session_detail": "1 x pre-group session \n 12 x group sessions \n 2 x one-to-one sessions",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group or one-to-one",
+        "attendance_type": "In person and online"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Relationships and Family",
+        "Thinking and Behaviour"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Domestic Abuse",
+            "victim_type": null,
+            "motivation": null
+        },
+        {
+            "offence_type_id": "IPV",
+            "victim_type": null,
+            "motivation": null
+        }
+    ],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "By the end of the programme, participants will be able to:",
+        "* develop and maintain healthy intimate relationships",
+        "* protect themselves against the escalation of problematic behaviours",
+        ""
+    ],
+    "risk_consideration": {
+        "cn_score_guide": "At least 1 of the following 3 OASys criteria needs to be satisfied:\n* score of 2 on item 11.3 - aggressive behaviour\n* answer of \u2018yes\u2019 to \u2018Thinking and behaviour\u2019 being related to risk of serious harm to self or others\n* answer of \u2018yes\u2019 to \u2018Attitudes\u2019 being related to risk of serious harm to self or others",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": "Low risk on SARA",
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "If OVP not available, then OGRS3: score 25+",
+        "ovp_guide": "OVP: score 20+",
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "The person you are referring must be able to read and understand simple sentences.",
+        "learning_disability_catered_for": null,
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
+        "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
+        "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
+        "not_allowed_if_eligible_for_another_intervention": "The person you are referring must not be suitable for, or be unable to access an Accredited Programme.",
+        "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
+        "other_preferred_method_guide": "This programme is only suitable for heterosexual men.",
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "uuid": "F72A7650-3E7C-46AA-991E-5612B2BBF74C",
+    "intervention_catalogue": {
+        "name": "New Me Strengths: intimate partner violence offence",
+        "int_type": "AcP",
+        "short_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
+        "long_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
+        "session_detail": "",
+        "time_to_complete": "At least 6 months.",
+        "reason_for_referral": ""
+    },
+    "delivery_method": null,
+    "delivery_method_settings": [
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": null,
+    "personal_eligibility": {
+        "min_age": null,
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [],
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": "Medium SARA (Spousal Assault Risk Assessment) against partners",
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}
