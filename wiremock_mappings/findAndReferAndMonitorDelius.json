@@ -1,28 +1,49 @@
 {
-  "request": {
-    "method": "GET",
-    "urlPathPattern": "/person/find/.*"
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/person/find/.*"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "crn": "X718255",
+          "nomsNumber": "A123333",
+          "name": {
+            "forename": "David",
+            "surname": "Clarke"
+          },
+          "dateOfBirth": "1981-04-15",
+          "ethnicity": "British",
+          "gender": "Male",
+          "probationDeliveryUnit": {
+            "code": "LON",
+            "description": "London"
+          },
+          "setting": "Community"
+        }
+      }
     },
-    "jsonBody": {
-      "crn": "X718255",
-      "nomsNumber": "A123333",
-      "name": {
-        "forename": "David",
-        "surname": "Clarke"
+    {
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/user/.*/access/.*"
       },
-      "dateOfBirth": "1981-04-15",
-      "ethnicity": "British",
-      "gender": "Male",
-      "probationDeliveryUnit": {
-        "code": "LON",
-        "description": "London"
-      },
-      "setting": "Community"
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "crn": "X718255",
+          "userExcluded": false,
+          "userRestricted": false
+        }
+      }
     }
-  }
+  ]
 }
