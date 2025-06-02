@@ -81,7 +81,7 @@ webclient:
 find-and-refer-and-delius:
   locations:
     find-person: "/person/find/{identifier}"
-    limited-access-offender-check: "/user/{username}/access/{identifier}"
+    limited-access-offender-check: "/users/{username}/access/{identifier}"
 
 management:
   endpoints:

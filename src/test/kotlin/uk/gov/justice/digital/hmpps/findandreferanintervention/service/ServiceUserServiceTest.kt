@@ -18,7 +18,7 @@ import kotlin.text.get
 class ServiceUserServiceTest {
 
   private val findPersonLocation = "/offenders/{identifier}"
-  private val laocLocation = "/user/{username}/access/{identifier}"
+  private val laocLocation = "/users/{username}/access/{identifier}"
   private val findAndReferDeliusApiClient: FindAndReferRestClient = mock(FindAndReferRestClient::class.java)
   private val serviceUserService = ServiceUserService(findPersonLocation, laocLocation, findAndReferDeliusApiClient)
 
@@ -150,7 +150,7 @@ class ServiceUserServiceTest {
   fun `should return true when user is not excluded and not restricted`() {
     val username = "Valerie Wyman"
     val identifier = "X718255"
-    val laocPath = "/user/$username/access/$identifier"
+    val laocPath = "/users/$username/access/$identifier"
     val response = LimitedAccessOffenderCheckResponse(
       crn = identifier,
       userExcluded = false,
@@ -174,7 +174,7 @@ class ServiceUserServiceTest {
   fun `should return false when user is excluded`() {
     val username = "user2"
     val identifier = "X12345"
-    val laocPath = "/user/$username/access/$identifier"
+    val laocPath = "/users/$username/access/$identifier"
     val response = LimitedAccessOffenderCheckResponse(
       crn = identifier,
       userExcluded = true,
@@ -197,7 +197,7 @@ class ServiceUserServiceTest {
   fun `should return false when user is restricted`() {
     val username = "user3"
     val identifier = "X12345"
-    val laocPath = "/user/$username/access/$identifier"
+    val laocPath = "/users/$username/access/$identifier"
     val response = LimitedAccessOffenderCheckResponse(
       crn = identifier,
       userExcluded = false,
@@ -220,7 +220,7 @@ class ServiceUserServiceTest {
   fun `should return false when response is null`() {
     val username = "user4"
     val identifier = "X12345"
-    val laocPath = "/user/$username/access/$identifier"
+    val laocPath = "/users/$username/access/$identifier"
 
     val requestHeadersSpecMock = mock(WebClient.RequestHeadersSpec::class.java)
     val responseSpecMock = mock(WebClient.ResponseSpec::class.java)
