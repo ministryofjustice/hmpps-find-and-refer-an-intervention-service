@@ -28,9 +28,19 @@ data class OffenderName(
   val surname: String,
 )
 
+data class LimitedAccessOffenderCheckResponse(
+  val crn: String,
+  val userExcluded: Boolean,
+  val userRestricted: Boolean,
+  val exclusionMessage: String? = null,
+  val restrictionMessage: String? = null,
+)
+
 @Service
 class ServiceUserService(
   @Value("\${find-and-refer-and-delius.locations.find-person}") private val findPersonLocation: String,
+  @Value("\${find-and-refer-and-delius.locations.limited-access-offender-check}") private val laocLocation: String,
+
   private val findAndReferDeliusApiClient: FindAndReferRestClient,
 ) {
 
@@ -55,5 +65,20 @@ class ServiceUserService(
           )
         }
       }
+  }
+
+  fun checkIfAuthenticatedDeliusUserHasAccessToServiceUser(username: String, identifier: String): Boolean {
+    val laocPath = UriComponentsBuilder.fromPath(laocLocation)
+      .buildAndExpand(username, identifier)
+      .toString()
+
+    val limitedAccessOffenderCheckResponse = findAndReferDeliusApiClient.get(laocPath)
+      .retrieve()
+      .bodyToMono(LimitedAccessOffenderCheckResponse::class.java)
+      .block()
+
+    return limitedAccessOffenderCheckResponse?.let {
+      !it.userExcluded && !it.userRestricted
+    } ?: false
   }
 }

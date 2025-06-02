@@ -1,6 +1,8 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
@@ -11,12 +13,14 @@ import reactor.core.publisher.Mono
 import uk.gov.justice.digital.hmpps.findandreferanintervention.client.FindAndReferRestClient
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ServiceUserDto
 import java.time.LocalDate
+import kotlin.text.get
 
 class ServiceUserServiceTest {
 
   private val findPersonLocation = "/offenders/{identifier}"
+  private val laocLocation = "/user/{username}/access/{identifier}"
   private val findAndReferDeliusApiClient: FindAndReferRestClient = mock(FindAndReferRestClient::class.java)
-  private val serviceUserService = ServiceUserService(findPersonLocation, findAndReferDeliusApiClient)
+  private val serviceUserService = ServiceUserService(findPersonLocation, laocLocation, findAndReferDeliusApiClient)
 
   @Test
   fun `should return ServiceUserDto when valid identifier is provided`() {
@@ -140,5 +144,93 @@ class ServiceUserServiceTest {
     verify(findAndReferDeliusApiClient).get(offenderIdentifiersPath)
     verify(requestHeadersSpecMock).retrieve()
     verify(responseSpecMock).bodyToMono(OffenderIdentifiersResponse::class.java)
+  }
+
+  @Test
+  fun `should return true when user is not excluded and not restricted`() {
+    val username = "Valerie Wyman"
+    val identifier = "X718255"
+    val laocPath = "/user/$username/access/$identifier"
+    val response = LimitedAccessOffenderCheckResponse(
+      crn = identifier,
+      userExcluded = false,
+      userRestricted = false,
+    )
+
+    val requestHeadersSpecMock = mock(WebClient.RequestHeadersSpec::class.java)
+    val responseSpecMock = mock(WebClient.ResponseSpec::class.java)
+
+    `when`(findAndReferDeliusApiClient.get(laocPath)).thenReturn(requestHeadersSpecMock)
+    `when`(requestHeadersSpecMock.retrieve()).thenReturn(responseSpecMock)
+    `when`(responseSpecMock.bodyToMono(LimitedAccessOffenderCheckResponse::class.java)).thenReturn(Mono.just(response))
+
+    val result = serviceUserService.checkIfAuthenticatedDeliusUserHasAccessToServiceUser(username, identifier)
+
+    assertTrue(result)
+    verify(findAndReferDeliusApiClient).get(laocPath)
+  }
+
+  @Test
+  fun `should return false when user is excluded`() {
+    val username = "user2"
+    val identifier = "X12345"
+    val laocPath = "/user/$username/access/$identifier"
+    val response = LimitedAccessOffenderCheckResponse(
+      crn = identifier,
+      userExcluded = true,
+      userRestricted = false,
+    )
+
+    val requestHeadersSpecMock = mock(WebClient.RequestHeadersSpec::class.java)
+    val responseSpecMock = mock(WebClient.ResponseSpec::class.java)
+
+    `when`(findAndReferDeliusApiClient.get(laocPath)).thenReturn(requestHeadersSpecMock)
+    `when`(requestHeadersSpecMock.retrieve()).thenReturn(responseSpecMock)
+    `when`(responseSpecMock.bodyToMono(LimitedAccessOffenderCheckResponse::class.java)).thenReturn(Mono.just(response))
+
+    val result = serviceUserService.checkIfAuthenticatedDeliusUserHasAccessToServiceUser(username, identifier)
+
+    assertFalse(result)
+  }
+
+  @Test
+  fun `should return false when user is restricted`() {
+    val username = "user3"
+    val identifier = "X12345"
+    val laocPath = "/user/$username/access/$identifier"
+    val response = LimitedAccessOffenderCheckResponse(
+      crn = identifier,
+      userExcluded = false,
+      userRestricted = true,
+    )
+
+    val requestHeadersSpecMock = mock(WebClient.RequestHeadersSpec::class.java)
+    val responseSpecMock = mock(WebClient.ResponseSpec::class.java)
+
+    `when`(findAndReferDeliusApiClient.get(laocPath)).thenReturn(requestHeadersSpecMock)
+    `when`(requestHeadersSpecMock.retrieve()).thenReturn(responseSpecMock)
+    `when`(responseSpecMock.bodyToMono(LimitedAccessOffenderCheckResponse::class.java)).thenReturn(Mono.just(response))
+
+    val result = serviceUserService.checkIfAuthenticatedDeliusUserHasAccessToServiceUser(username, identifier)
+
+    assertFalse(result)
+  }
+
+  @Test
+  fun `should return false when response is null`() {
+    val username = "user4"
+    val identifier = "X12345"
+    val laocPath = "/user/$username/access/$identifier"
+
+    val requestHeadersSpecMock = mock(WebClient.RequestHeadersSpec::class.java)
+    val responseSpecMock = mock(WebClient.ResponseSpec::class.java)
+
+    `when`(findAndReferDeliusApiClient.get(laocPath)).thenReturn(requestHeadersSpecMock)
+    `when`(requestHeadersSpecMock.retrieve()).thenReturn(responseSpecMock)
+    `when`(responseSpecMock.bodyToMono(LimitedAccessOffenderCheckResponse::class.java)).thenReturn(Mono.empty())
+
+    val result = serviceUserService.checkIfAuthenticatedDeliusUserHasAccessToServiceUser(username, identifier)
+
+    assertFalse(result)
   }
 }
