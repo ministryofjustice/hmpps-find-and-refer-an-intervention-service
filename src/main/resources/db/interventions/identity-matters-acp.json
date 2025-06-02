@@ -1,0 +1,59 @@
+{
+    "uuid": "6D6A02A5-813F-42FC-BA87-91A6CD6932EB",
+    "intervention_catalogue": {
+        "name": "Identity Matters",
+        "int_type": "AcP",
+        "short_description": "Identity Matters (IM) is for men whose offending was motivated or enabled by their affiliation to a particular group. It aims to change the nature of their relationship to the group and helps them develop skills to resist peer influence.",
+        "long_description": "Identity Matters (IM) is for men whose offending was motivated or enabled by their affiliation to a particular group. It aims to change the nature of their relationship to the group and helps them develop skills to resist peer influence.",
+        "session_detail": "23 x one-to-one sessions with a post-programme review.",
+        "time_to_complete": "Around 25 hours (at least 3 months).",
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "One-to-one"
+    },
+    "delivery_method_settings": [
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": null,
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Any",
+            "victim_type": null,
+            "motivation": "engagement and/or identification with a group or gang."
+        }
+    ],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "Ending or reducing an individual\u2019s engagement and/or identification with a gang",
+        "",
+        "Ending or reducing an individual\u2019s readiness to offend on behalf of the gang"
+    ],
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": "Medium or high ROSH (Risk of Serious Harm)\n50+ OGRS (Offender Group Reconviction Scale)",
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Assessed case by case",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

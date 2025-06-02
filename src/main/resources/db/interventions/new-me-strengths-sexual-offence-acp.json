@@ -1,0 +1,64 @@
+{
+    "uuid": "74F348FD-D46B-4419-B5F6-13DB825D5465",
+    "intervention_catalogue": {
+        "name": "New Me Strengths: sexual offence",
+        "int_type": "AcP",
+        "short_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
+        "long_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
+        "session_detail": "Group and one-to-one, in person, and one-to-one only.\n\n32 to 34 group sessions +  4 individual sessions, or 15+ individual sessions.",
+        "time_to_complete": "At least 6 months.",
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group or one-to-one",
+        "attendance_type": "In person"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": null,
+    "personal_eligibility": {
+        "min_age": null,
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "",
+        "NMS supports development of skills to strengthen pro-social identity and plan for an offence-free life. The programme is designed to target the following criminogenic needs:",
+        "",
+        "Managing life\u2019s problems",
+        "",
+        "Positive relationships",
+        "",
+        "Healthy thinking",
+        "",
+        "Sense of purpose",
+        "",
+        "Healthy sexual interest (those with sexual convictions only)"
+    ],
+    "risk_consideration": {
+        "cn_score_guide": null,
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": "Medium OSP (OASys Sexual Reconviction Predictor)",
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": null,
+        "ovp_guide": null,
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

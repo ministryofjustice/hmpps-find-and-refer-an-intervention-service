@@ -1,0 +1,49 @@
+{
+    "uuid": "A709CCFB-744A-4185-8D04-6416DB13BBBA",
+    "intervention_catalogue": {
+        "name": "Community Led Initiatives (CLI) - peer support ",
+        "int_type": "CRS",
+        "short_description": "CLI provide intensive peer support to people on probation, offering emotional and practical support to help with recovery and reduce the risk of reoffending.",
+        "long_description": "CLI provide intensive peer support to people on probation, offering emotional and practical support to help with recovery and reduce the risk of reoffending.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location.",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "One-to-one",
+        "attendance_type": "In person or online"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Accommodation",
+        "Education, Training and Employment",
+        "Finance and Debt",
+        "Relationships and Family",
+        "Emotional Wellbeing"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "CLI peer support services are personalised based on the complexity of the individual\u2019s needs. Depending on the needs, the aim is to achieve one or more of the following outcomes:",
+        "",
+        "\u2022 getting access to things like a doctor, dentist, mental health support and help with drugs and alcohol",
+        "\u2022 helping with finances, benefits and debt",
+        "\u2022 understanding housing benefit support and the housing system",
+        "\u2022 building routine and structure with positive activities in the community",
+        "\u2022 accessing employment support in the community",
+        "\u2022 accessing courses and education",
+        "\u2022 feeling supported and empowered to change direction"
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

@@ -57,21 +57,18 @@ data class InterventionCatalogueDto(
   val riskCriteria: List<String>?,
 
   @field:Schema(
-    description = "List of the Attendance Types (empty if null)",
-    example = "[\"In Person\"]",
-    type = "List<String>",
-    allowableValues = ["In Person"],
-    nullable = false,
+    description = "List of Attendance Types held in String (empty if null)",
+    example = "In Person and Online",
+    type = "String",
   )
-  val attendanceType: List<String>,
+  val attendanceType: String?,
 
   @field:Schema(
-    description = "List of Delivery Formats",
-    example = "[\"One-to-One\"]",
-    type = "List<String>",
-    allowableValues = ["One-to-One", "Group"],
+    description = "List of Delivery Formats held in String (empty if null)",
+    example = "Group or One-to-one",
+    type = "String",
   )
-  val deliveryFormat: List<String>,
+  val deliveryFormat: String?,
 
   @field:Schema(
     description = "A human-readable description of the estimated time to complete the intervention.  Likely null (and therefore missing)",
@@ -112,8 +109,6 @@ data class InterventionCatalogueDto(
 )
 
 fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
-  val deliveryMethodDtos =
-    this.deliveryMethods.map { DeliveryMethodDto.fromEntity(it) }
   val settingList =
     this.deliveryMethodSettings.map { DeliveryMethodSettingDto.fromEntity(it).setting }
 
@@ -133,8 +128,8 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
     this.riskConsideration?.let {
       RiskConsiderationDto.fromEntity(it).listOfRisks()
     },
-    attendanceType = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.attendanceType }.sorted(),
-    deliveryFormat = deliveryMethodDtos.mapNotNull { methodDto -> methodDto.deliveryFormat }.sorted(),
+    attendanceType = this.deliveryMethod?.attendanceType,
+    deliveryFormat = this.deliveryMethod?.deliveryFormat,
     timeToComplete = this.timeToComplete,
     suitableForPeopleWithLearningDifficulties = this.specialEducationalNeeds?.learningDisabilityCateredFor,
     equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,

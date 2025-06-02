@@ -249,7 +249,7 @@ class InterventionCatalogueFilterRepositoryTest {
       "reasonForReferral",
       "criminogenicNeeds",
       "deliveryLocations",
-      "deliveryMethods",
+      "deliveryMethod",
       "deliveryMethodSettings",
       "eligibleOffences",
       "enablingInterventions",

@@ -29,6 +29,7 @@ class InterventionCatalogueFactory(em: TestEntityManager? = null) : EntityFactor
 
 private val authUserFactory = AuthUserFactory()
 private val criminogenicNeedFactory = CriminogenicNeedFactory()
+private val deliveryMethodFactory = DeliveryMethodFactory()
 private val exclusionFactory = ExclusionFactory()
 private val riskConsiderationFactory = RiskConsiderationFactory()
 private val personalEligibilityFactory = PersonalEligibilityFactory()
@@ -56,7 +57,7 @@ fun InterventionCatalogueFactory.create(
   reasonsForReferral: String = "Lifestyle and associate",
   criminogenicNeeds: MutableSet<CriminogenicNeed> = criminogenicNeedFactory.createSet(),
   deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
-  deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
+  deliveryMethod: DeliveryMethod = deliveryMethodFactory.create(),
   deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),
   eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
   enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
@@ -86,7 +87,7 @@ fun InterventionCatalogueFactory.create(
     reasonsForReferral,
     criminogenicNeeds,
     deliveryLocations,
-    deliveryMethods,
+    deliveryMethod,
     deliveryMethodSettings,
     eligibleOffences,
     enablingInterventions,
@@ -118,7 +119,7 @@ fun InterventionCatalogueFactory.createDto(
   reasonsForReferral: String = "Lifestyle and associate",
   criminogenicNeeds: MutableSet<CriminogenicNeed> = criminogenicNeedFactory.createSet(),
   deliveryLocations: MutableSet<DeliveryLocation> = mutableSetOf(),
-  deliveryMethods: MutableSet<DeliveryMethod> = mutableSetOf(),
+  deliveryMethod: DeliveryMethod = deliveryMethodFactory.create(),
   deliveryMethodSettings: MutableSet<DeliveryMethodSetting> = mutableSetOf(),
   eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
   enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
@@ -147,7 +148,7 @@ fun InterventionCatalogueFactory.createDto(
   reasonsForReferral,
   criminogenicNeeds,
   deliveryLocations,
-  deliveryMethods,
+  deliveryMethod,
   deliveryMethodSettings,
   eligibleOffences,
   enablingInterventions,

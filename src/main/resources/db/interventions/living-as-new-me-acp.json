@@ -1,0 +1,50 @@
+{
+    "uuid": "C5458E4A-02EE-4E2C-A927-5C96DF19FB68",
+    "intervention_catalogue": {
+        "name": "Living as New Me",
+        "int_type": "AcP",
+        "short_description": "Living as New Me (LNM) is a booster or maintenance programme for men who have completed New Me Strengths or Becoming New Me Plus and may need extra support. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only.",
+        "long_description": "Living as New Me (LNM) is a booster or maintenance programme for men who have completed New Me Strengths or Becoming New Me Plus and may need extra support. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only.",
+        "session_detail": "Minimum of 5 x group sessions (depends on group size and the needs of each individual)",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group or one-to-one"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": "Becoming New Me Plus (BNM+) or \nNew Me Strengths (NMS)",
+    "criminogenic_needs": null,
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": false
+    },
+    "eligibility_offence": [
+        {
+            "offence_type_id": "Custody: Any",
+            "victim_type": null,
+            "motivation": null
+        },
+        {
+            "offence_type_id": "Community: Sexual",
+            "victim_type": null,
+            "motivation": null
+        }
+    ],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "assist participant to desist from crime"
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": null,
+        "learning_disability_catered_for": "Yes",
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": null
+}

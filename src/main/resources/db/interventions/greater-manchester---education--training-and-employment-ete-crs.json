@@ -1,0 +1,40 @@
+{
+    "uuid": "85FCC379-6523-4AEE-B354-367B28D4BB9C",
+    "intervention_catalogue": {
+        "name": "Greater Manchester - Education, training and employment (ETE)",
+        "int_type": "CRS",
+        "short_description": "Education, training and employment services aim to help people on probation develop the skills they need for future employment. The services can be delivered across different formats, depending on the complexity of the individual\u2019s needs.",
+        "long_description": "Education, training and employment services aim to help people on probation develop the skills they need for future employment. The services can be delivered across different formats, depending on the complexity of the individual\u2019s needs. These formats include: \n\n\u2022 one-to-one sessions\n\u2022 group work sessions\n\u2022 Job Club\n\u2022 online learning\n\u2022 employer engagement",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group\nOne-to-one",
+        "attendance_type": "In person or online"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Education, Training and Employment"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "Education, training and employment services aim to achieve the following outcomes:",
+        "",
+        "\u2022 finding and maintaining suitable training, education and employment, overcoming any potential barriers",
+        "\u2022 improving the skills and attitude needed to enable self-development and increase employability"
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}

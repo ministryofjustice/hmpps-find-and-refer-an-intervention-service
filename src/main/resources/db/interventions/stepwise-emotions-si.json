@@ -1,0 +1,72 @@
+{
+    "uuid": "4D0B95E1-A83F-48DD-A2BC-C6AF4371B85A",
+    "intervention_catalogue": {
+        "name": "Stepwise Emotions",
+        "int_type": "SI",
+        "short_description": "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as aggressive behaviour and attitudes related to risk of serious harm.",
+        "long_description": "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as: \n* aggressive behaviour\n* thinking & behaviour, related to risk of serious harm to self or others\n* attitudes related to risk of serious harm to themselves or others\n\nIt has the following features:\n* a self-monitoring and behavioural analysis mechanism\n* insight-oriented, psychoeducational content on thinking, emotions and behaviour\n* skill-building around thinking, emotions and behaviour \n* building social relationships",
+        "session_detail": "1 x one-to-one session and 8 x group sessions",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group or one-to-one",
+        "attendance_type": "In person and online"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Emotional Wellbeing",
+        "Thinking and Behaviour"
+    ],
+    "personal_eligibility": {
+        "min_age": "18",
+        "max_age": null,
+        "males": true,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": [
+        {
+            "offence_type_id": "Sexual",
+            "victim_type": null
+        },
+        {
+            "offence_type_id": "IPV",
+            "victim_type": null
+        }
+    ],
+    "possible_outcomes": [],
+    "risk_consideration": {
+        "cn_score_guide": "Need is evidenced by at least one\nof the following OASys criteria\nbeing satisfied:\n* 11.3 = 2\n* Thinking and behaviour related RoSH\n* Attitudes related RoSH",
+        "extremism_risk_guide": null,
+        "sara_partner_score_guide": null,
+        "sara_other_score_guide": null,
+        "osp_score_guide": null,
+        "osp_dc_icc_combination_guide": null,
+        "ogrs_score_guide": "If OVP not available, then OGRS3 (over 2 years):\nscore 25+",
+        "ovp_guide": "OVP (over 2 years): score 20+",
+        "ogp_guide": null,
+        "pna_guide": null,
+        "rosh_level": null,
+        "rsr_guide": null
+    },
+    "special_educational_needs": {
+        "exclusion_literacy_level_guide": "The person you are referring must be able to read and understand simple sentences.",
+        "learning_disability_catered_for": null,
+        "equivalent_non_ldc_programme_guide": null
+    },
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": "If there are less than 9 months remaining on the licence or community order, you should check with the Treatment Manager.",
+        "alcohol_drug_problem_guide": "Any alcohol or drug-related problems must be stable before attending the programme",
+        "mental_health_problem_guide": "People with mental health problems should only be excluded from the programme if the issues are acute and damage their ability to relate to others or concentrate.",
+        "not_allowed_if_eligible_for_another_intervention": "The person you are referring should not be eligible for an Accredited Programme that they could likely complete before the end of their sentence.",
+        "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "uuid": "C7AF63B6-E46C-4D6B-94AB-47F3107A2F82",
+    "intervention_catalogue": {
+        "name": "Women's services",
+        "int_type": "CRS",
+        "short_description": "Women\u2019s services support women with housing, jobs, recovery or personal wellbeing, depending on their rehabilitative needs.",
+        "long_description": "These services are designed to cover the specific rehabilitative needs of each woman. They are delivered in an environment which is safe and suitable for women, by people trained in trauma-informed approaches. \n\nThey are tailored to reflect the complexity of an individual\u2019s needs, recognising possible barriers to achieving the relevant outcome.",
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
+        "time_to_complete": null,
+        "reason_for_referral": ""
+    },
+    "delivery_method": {
+        "format": "Group\nOne-to-one"
+    },
+    "delivery_method_settings": [
+        "COMMUNITY",
+        "CUSTODY"
+    ],
+    "enabling_intervention_detail": null,
+    "criminogenic_needs": [
+        "Accommodation",
+        "Finance and Debt",
+        "Relationships and Family",
+        "Lifestyle and Associates",
+        "Drug Misuse",
+        "Alcohol Misuse",
+        "Emotional Wellbeing",
+        "Thinking and Behaviour",
+        "Attitudes"
+    ],
+    "personal_eligibility": {
+        "min_age": null,
+        "max_age": null,
+        "males": false,
+        "females": true
+    },
+    "eligibility_offence": [],
+    "exclude_offence": null,
+    "possible_outcomes": [
+        "Women\u2019s services are designed to cover the specific rehabilitative needs of each woman. Depending on the service, the aim is to achieve some of the following outcomes:",
+        "",
+        "\u2022 removing barriers to finding or keeping accommodation, like money problems, behaviour, health or past offences",
+        "\u2022 preventing homelessness",
+        "\u2022 creating and maintaining positive relationships",
+        "\u2022 developing positive, confident and responsible parenting behaviours",
+        "\u2022 developing positive coping strategies in the event of the breakdown of relationships",
+        "\u2022 complying with voluntary or mandatory programmes",
+        "\u2022 improving pro-social self-identity, with the ability to access community-based support networks",
+        "\u2022 engaging in pro-social purposeful activities and interests",
+        "\u2022 reducing engagement with pro-criminal associates, activities and networks, such as organised crime",
+        "\u2022 securing early post-release engagement with community-based services",
+        "\u2022 developing and maintaining social networks to reduce initial social isolation",
+        "\u2022 developing resilience to cope with challenges on returning to the community",
+        "\u2022 improving financial management skills",
+        "\u2022 understanding how to navigate the benefits system and online banking",
+        "\u2022 understanding how to access appropriate financial products, advice and services",
+        "\u2022 getting quick access to Universal Credit",
+        "\u2022 stopping substance misuse or achieving non-dependent, non-problematic substance misuse",
+        "\u2022 understanding addictive behaviours, triggers and options to reduce dependency",
+        "\u2022 improving skills to manage situations which may cause a trigger or relapse",
+        "\u2022 improving physical health and mental resilience",
+        "\u2022 establishing dependency pathways to manage a range of addictive behaviours",
+        ""
+    ],
+    "risk_consideration": null,
+    "special_educational_needs": null,
+    "exclusion": null
+}
