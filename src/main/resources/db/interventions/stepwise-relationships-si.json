@@ -4,9 +4,21 @@
         "name": "Stepwise Relationships",
         "int_type": "SI",
         "short_description": "Stepwise Relationships aims to support desistance from intimate partner violence (IPV) offending by enabling participants to overcome specific challenges. These include relationship problems, attitudes that support relationship violence, aggression and emotional mismanagement.",
-        "long_description": "Stepwise Relationships aims to support desistance from intimate partner violence (IPV) offending by enabling participants to overcome specific challenges. These include: \n* relationship problems\n* issues with social skills \n* attitudes that support relationship violence\n* aggression and anger\n* emotional mismanagement and self-regulation\n\nIt has the following features:\n* a self-monitoring and behavioural analysis mechanism\n* insight-oriented, psychoeducational content on thinking, emotions and behaviour\n* skill-building around thinking, emotions and behaviour \n* building social relationships",
+        "long_description": [
+            "Stepwise Relationships aims to support desistance from intimate partner violence (IPV) offending by enabling participants to overcome specific challenges. These include:",
+            "* relationship problems",
+            "* issues with social skills",
+            "* attitudes that support relationship violence",
+            "* aggression and anger",
+            "* emotional mismanagement and self-regulation",
+            "",
+            "It has the following features:",
+            "* a self-monitoring and behavioural analysis mechanism",
+            "* insight-oriented, psychoeducational content on thinking, emotions and behaviour",
+            "* skill-building around thinking, emotions and behaviour",
+            "* building social relationships"
+        ],
         "session_detail": "1 x one-to-one session and 9 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

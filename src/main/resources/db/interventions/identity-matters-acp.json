@@ -4,9 +4,10 @@
         "name": "Identity Matters",
         "int_type": "AcP",
         "short_description": "Identity Matters (IM) is for men whose offending was motivated or enabled by their affiliation to a particular group. It aims to change the nature of their relationship to the group and helps them develop skills to resist peer influence.",
-        "long_description": "Identity Matters (IM) is for men whose offending was motivated or enabled by their affiliation to a particular group. It aims to change the nature of their relationship to the group and helps them develop skills to resist peer influence.",
-        "session_detail": "23 x one-to-one sessions with a post-programme review.",
-        "time_to_complete": "Around 25 hours (at least 3 months).",
+        "long_description": [
+            "Identity Matters (IM) is for men whose offending was motivated or enabled by their affiliation to a particular group. It aims to change the nature of their relationship to the group and helps them develop skills to resist peer influence."
+        ],
+        "session_detail": " 23 x one-to-one sessions with a post-programme review.",
         "reason_for_referral": ""
     },
     "delivery_method": {

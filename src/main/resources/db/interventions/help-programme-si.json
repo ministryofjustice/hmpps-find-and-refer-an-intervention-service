@@ -4,9 +4,12 @@
         "name": "Help Programme",
         "int_type": "SI",
         "short_description": "Help is an early intervention domestic abuse programme.",
-        "long_description": "Help is an early intervention domestic abuse programme. The aim of Help is to support the development and maintenance of healthy intimate relationships and to protect against the escalation of problematic behaviours. \n\nTo do this, it offers insight into the values, attitudes and skills which are necessary to develop and maintain healthy intimate relationships. It provides the opportunity for the man referred to reflect on his attitudes and behaviours within the relationship, and to work towards positive change.",
+        "long_description": [
+            "Help is an early intervention domestic abuse programme. The aim of Help is to support the development and maintenance of healthy intimate relationships and to protect against the escalation of problematic behaviours.",
+            "",
+            "To do this, it offers insight into the values, attitudes and skills which are necessary to develop and maintain healthy intimate relationships. It provides the opportunity for the man referred to reflect on his attitudes and behaviours within the relationship, and to work towards positive change."
+        ],
         "session_detail": "1 x pre-group session \n 12 x group sessions \n 2 x one-to-one sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

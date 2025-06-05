@@ -4,9 +4,16 @@
         "name": "Let's Talk",
         "int_type": "SI",
         "short_description": "Let\u2019s Talk is aimed at men who have been exposed to, or demonstrate entitled masculinity beliefs and behaviours.",
-        "long_description": "Let\u2019s Talk is aimed at men who have been exposed to, or demonstrate entitled masculinity beliefs and behaviours. \n\nMen taking part in this will develop an understanding about their emotions and how to express these in our modern society. They will work on developing an understanding of how previous trauma links to their current behaviour, self-esteem and general well-being. \n\nIt is not suitable for women. \n\nThis is a Rehabilitation Activity Requirement (RAR) which will look at ways their self-esteem is shaped and how society or personal circumstances influence this. It looks at how they understand and express emotions within relationships and explores support networks, role models and goal-setting. The programme will also look at different thinking styles and communications skills.",
+        "long_description": [
+            "Let\u2019s Talk is aimed at men who have been exposed to, or demonstrate entitled masculinity beliefs and behaviours.",
+            "",
+            "Men taking part in this will develop an understanding about their emotions and how to express these in our modern society. They will work on developing an understanding of how previous trauma links to their current behaviour, self-esteem and general well-being.",
+            "",
+            "It is not suitable for women.",
+            "",
+            "This is a Rehabilitation Activity Requirement (RAR) which will look at ways their self-esteem is shaped and how society or personal circumstances influence this. It looks at how they understand and express emotions within relationships and explores support networks, role models and goal-setting. The programme will also look at different thinking styles and communications skills."
+        ],
         "session_detail": "1 x pre-group session and 7 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

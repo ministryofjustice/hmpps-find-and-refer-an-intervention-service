@@ -26,7 +26,7 @@ data class InterventionDetailsDto(
   val timeToComplete: String? = null,
   val deliveryFormat: String? = null,
   val attendanceType: String? = null,
-  val description: String,
+  val description: List<String>? = null,
   val sessionDetails: String? = null,
   val communityLocations: List<CommunityLocation>? = null,
   val custodyLocations: List<CustodyLocation>? = null,
@@ -47,7 +47,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
       CriminogenicNeedDto.fromEntity(it).need
     }.sorted(),
     title = this.name,
-    description = this.longDescription ?: this.shortDescription,
+    description = this.longDescription?.map { it } ?: listOf(this.shortDescription),
     interventionType = this.interventionType,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,

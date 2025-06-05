@@ -4,9 +4,12 @@
         "name": "Maps for Change",
         "int_type": "Toolkits",
         "short_description": "This toolkit is aimed at men convicted of sexual or sexuality motivated offences.",
-        "long_description": "This toolkit is aimed at men convicted of sexual or sexuality motivated offences. It does not replace an Accredited Programme and is aimed at men whose risk assessment scores are likely to be in the 'Low OSP/C' and 'Low OSP/I' category. However, the toolkit can be used for men who are unable to access an Accredited Programme, for example, for health or language reasons.\n\nEach 'map' focuses on different areas of need and is supported by a strengths-based approach, to help the individual develop strengths and capabilities to overcome risk factors.",
-        "session_detail": "There are 9 possible 'maps' to complete. At least 1 must be completed.",
-        "time_to_complete": null,
+        "long_description": [
+            "This toolkit is aimed at men convicted of sexual or sexuality motivated offences. It does not replace an Accredited Programme and is aimed at men whose risk assessment scores are likely to be in the 'Low OSP/C' and 'Low OSP/I' category. However, the toolkit can be used for men who are unable to access an Accredited Programme, for example, for health or language reasons.",
+            "",
+            "Each 'map' focuses on different areas of need and is supported by a strengths-based approach, to help the individual develop strengths and capabilities to overcome risk factors."
+        ],
+        "session_detail": "There are 9 possible 'maps' to complete. At least 1 must be completed. ",
         "reason_for_referral": ""
     },
     "delivery_method": {

@@ -4,9 +4,10 @@
         "name": "Choices and Changes",
         "int_type": "Toolkits",
         "short_description": "The main focus of this Toolkit is to promote maturity with young adult men, aged 18 to 25. This can be extended to men up to 30 who display a similar need to develop maturity.",
-        "long_description": "The main focus of this toolkit is to promote maturity with young adult men, aged 18 to 25. As we recognise that not everyone will develop at the same stage, this can be extended to men up to 30 who display a similar need to develop maturity.",
+        "long_description": [
+            "The main focus of this toolkit is to promote maturity with young adult men, aged 18 to 25. As we recognise that not everyone will develop at the same stage, this can be extended to men up to 30 who display a similar need to develop maturity."
+        ],
         "session_detail": "",
-        "time_to_complete": "Around 30 minutes for each of the 6 priority areas identified.",
         "reason_for_referral": ""
     },
     "delivery_method": {

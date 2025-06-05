@@ -4,9 +4,10 @@
         "name": "Better Solutions",
         "int_type": "SI",
         "short_description": "Better Solutions is an intervention designed to help people develop their thinking skills.",
-        "long_description": "Better Solutions is an intervention designed to help people develop their thinking skills. The course provides an important foundation, influencing ways to approach situations and choices.",
+        "long_description": [
+            "Better Solutions is an intervention designed to help people develop their thinking skills. The course provides an important foundation, influencing ways to approach situations and choices."
+        ],
         "session_detail": "1 x pre-group session and 6 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

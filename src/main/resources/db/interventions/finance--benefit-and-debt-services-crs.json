@@ -4,9 +4,10 @@
         "name": "Finance, benefit and debt services",
         "int_type": "CRS",
         "short_description": "Finance, benefit and debt services help men on probation manage their money effectively, reducing financial stress that could lead to reoffending.",
-        "long_description": "Finance, benefit and debt services help men on probation manage their money effectively, reducing financial stress that could lead to reoffending.",
-        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
-        "time_to_complete": null,
+        "long_description": [
+            "Finance, benefit and debt services help men on probation manage their money effectively, reducing financial stress that could lead to reoffending."
+        ],
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_method": {

@@ -4,9 +4,10 @@
         "name": "New Me MOT",
         "int_type": "Toolkits",
         "short_description": "This toolkit is designed to help probation practitioners support graduates of Accredited Programmes.",
-        "long_description": "This toolkit is designed to help probation practitioners support graduates of Accredited Programmes. It includes short exercises to help the person on probation generalise their learning to new circumstances and contexts as they progress through the sentence",
+        "long_description": [
+            "This toolkit is designed to help probation practitioners support graduates of Accredited Programmes. It includes short exercises to help the person on probation generalise their learning to new circumstances and contexts as they progress through the sentence"
+        ],
         "session_detail": "",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

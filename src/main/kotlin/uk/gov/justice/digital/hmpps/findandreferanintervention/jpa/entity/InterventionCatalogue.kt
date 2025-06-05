@@ -1,7 +1,9 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 
 import jakarta.annotation.Nullable
+import jakarta.persistence.CollectionTable
 import jakarta.persistence.Column
+import jakarta.persistence.ElementCollection
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -34,8 +36,10 @@ open class InterventionCatalogue(
   open var shortDescription: String,
 
   @Nullable
+  @ElementCollection(targetClass = String::class)
+  @CollectionTable(name = "intervention_catalogue_long_description", joinColumns = [JoinColumn(name = "intervention_id")])
   @Column(name = "long_description", length = Integer.MAX_VALUE)
-  open var longDescription: String? = null,
+  open var longDescription: MutableList<String>? = null,
 
   @Nullable
   @Column(name = "topic", length = Integer.MAX_VALUE)

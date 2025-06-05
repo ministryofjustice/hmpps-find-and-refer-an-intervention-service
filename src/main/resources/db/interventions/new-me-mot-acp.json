@@ -4,9 +4,10 @@
         "name": "New Me MOT",
         "int_type": "AcP",
         "short_description": "New Me MOT (NMMOT) is not an Accredited Programme, but is for men who have already completed Becoming New Me Plus, Kaizen, Healthy Sex Programme, Horizon, iHorizon, New Me Strengths, the Cognitive Self-Change Programme or the Self-Change Programme. It offers support throughout a person\u2019s sentence, set out as a series of short exercises. These are completed with support from the person\u2019s Prison Offender Manager in custody or their Probation Practitioner in the community. This gives them the chance to practise skills in different contexts, generalising and maintaining their learning from the Accredited Programme.",
-        "long_description": "New Me MOT (NMMOT) is not an Accredited Programme, but is for men who have already completed Becoming New Me Plus, Kaizen, Healthy Sex Programme, Horizon, iHorizon, New Me Strengths, the Cognitive Self-Change Programme or the Self-Change Programme. It offers support throughout a person\u2019s sentence, set out as a series of short exercises. These are completed with support from the person\u2019s Prison Offender Manager in custody or their Probation Practitioner in the community. This gives them the chance to practise skills in different contexts, generalising and maintaining their learning from the Accredited Programme.",
+        "long_description": [
+            "New Me MOT (NMMOT) is not an Accredited Programme, but is for men who have already completed Becoming New Me Plus, Kaizen, Healthy Sex Programme, Horizon, iHorizon, New Me Strengths, the Cognitive Self-Change Programme or the Self-Change Programme. It offers support throughout a person\u2019s sentence, set out as a series of short exercises. These are completed with support from the person\u2019s Prison Offender Manager in custody or their Probation Practitioner in the community. This gives them the chance to practise skills in different contexts, generalising and maintaining their learning from the Accredited Programme."
+        ],
         "session_detail": "Number of sessions is at the discretion of the practitioner and depends on the risk, need and responsivity profile of the individual. Has a 30-day Rehabilitation Activity Requirement (RAR) in the community.",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": null,

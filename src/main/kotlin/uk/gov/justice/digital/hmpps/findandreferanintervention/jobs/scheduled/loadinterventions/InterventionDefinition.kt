@@ -23,7 +23,7 @@ data class InterventionCatalogueEntryDefinition(
   @JsonProperty("name") val name: String,
   @JsonProperty("int_type") val interventionType: String,
   @JsonProperty("short_description") val shortDescription: String,
-  @JsonProperty("long_description") val longDescription: String?,
+  @JsonProperty("long_description") val longDescription: Array<String>?,
   @JsonProperty("topic") val topic: String?,
   @JsonProperty("session_detail") val sessionDetail: String?,
   @JsonProperty("reason_for_referral") val reasonForReferral: String,

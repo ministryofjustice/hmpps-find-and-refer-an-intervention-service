@@ -4,9 +4,10 @@
         "name": "Control of Violence for Angry Impulsive Drinkers",
         "int_type": "AcP",
         "short_description": "Control of Violence for Angry Impulsive Drinkers (COVAID) is a cognitive-behavioural programme for people who are violent under the influence of alcohol. It encourages them to understand their behaviour and practise skills for change. It combines 10 group sessions with individual support sessions.",
-        "long_description": "Control of Violence for Angry Impulsive Drinkers (COVAID) is a cognitive-behavioural programme for people who are violent under the influence of alcohol. It encourages them to understand their behaviour and practise skills for change. It combines 10 group sessions with individual support sessions.",
+        "long_description": [
+            "Control of Violence for Angry Impulsive Drinkers (COVAID) is a cognitive-behavioural programme for people who are violent under the influence of alcohol. It encourages them to understand their behaviour and practise skills for change. It combines 10 group sessions with individual support sessions."
+        ],
         "session_detail": "",
-        "time_to_complete": "Around 4 weeks.",
         "reason_for_referral": ""
     },
     "delivery_method": null,

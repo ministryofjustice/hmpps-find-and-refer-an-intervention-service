@@ -102,7 +102,7 @@ class UpsertInterventionProcessor(
 
         catalogueEntry.name = item.catalogue.name
         catalogueEntry.shortDescription = item.catalogue.shortDescription
-        catalogueEntry.longDescription = item.catalogue.longDescription
+        catalogueEntry.longDescription = item.catalogue.longDescription?.toMutableList()
         catalogueEntry.topic = item.catalogue.topic
         catalogueEntry.sessionDetail = item.catalogue.sessionDetail
         catalogueEntry.commencementDate = LocalDate.now()
@@ -132,7 +132,7 @@ class UpsertInterventionProcessor(
       id = catalogueId,
       name = catalogue.name,
       shortDescription = catalogue.shortDescription,
-      longDescription = catalogue.longDescription,
+      longDescription = catalogue.longDescription?.toMutableList(),
       topic = catalogue.topic,
       sessionDetail = catalogue.sessionDetail,
       commencementDate = LocalDate.now(),

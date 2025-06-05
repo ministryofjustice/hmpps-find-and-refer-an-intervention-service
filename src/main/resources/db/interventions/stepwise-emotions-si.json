@@ -4,9 +4,19 @@
         "name": "Stepwise Emotions",
         "int_type": "SI",
         "short_description": "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as aggressive behaviour and attitudes related to risk of serious harm.",
-        "long_description": "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as: \n* aggressive behaviour\n* thinking & behaviour, related to risk of serious harm to self or others\n* attitudes related to risk of serious harm to themselves or others\n\nIt has the following features:\n* a self-monitoring and behavioural analysis mechanism\n* insight-oriented, psychoeducational content on thinking, emotions and behaviour\n* skill-building around thinking, emotions and behaviour \n* building social relationships",
+        "long_description": [
+            "Stepwise Emotions aims to support desistance from violent offending by enabling people to overcome challenges such as:",
+            "* aggressive behaviour",
+            "* thinking & behaviour, related to risk of serious harm to self or others",
+            "* attitudes related to risk of serious harm to themselves or others",
+            "",
+            "It has the following features:",
+            "* a self-monitoring and behavioural analysis mechanism",
+            "* insight-oriented, psychoeducational content on thinking, emotions and behaviour",
+            "* skill-building around thinking, emotions and behaviour",
+            "* building social relationships"
+        ],
         "session_detail": "1 x one-to-one session and 8 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

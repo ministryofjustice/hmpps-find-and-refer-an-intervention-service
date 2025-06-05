@@ -4,9 +4,21 @@
         "name": "Stepwise Problem Solving",
         "int_type": "SI",
         "short_description": "Stepwise Problem Solving aims to support desistance by focusing on areas such as making decisions, solving problems\nand achieving life goals.",
-        "long_description": "Stepwise Problem Solving aims to support desistance by focusing on areas such as:\n* making decisions\n* solving problems\n* achieving life goals\n* managing the influence of anti-social relationships\n* using pro-social interpersonal skills\n\nIt has the following features: \n* insight-oriented, psycho-educational content around the impact of thinking and emotions on behaviour \n* problem solving steps\n* skill-building around thinking, emotions and behaviour\n* building social relationships",
+        "long_description": [
+            "Stepwise Problem Solving aims to support desistance by focusing on areas such as:",
+            "* making decisions",
+            "* solving problems",
+            "* achieving life goals",
+            "* managing the influence of anti-social relationships",
+            "* using pro-social interpersonal skills",
+            "",
+            "It has the following features:",
+            "* insight-oriented, psycho-educational content around the impact of thinking and emotions on behaviour",
+            "* problem solving steps",
+            "* skill-building around thinking, emotions and behaviour",
+            "* building social relationships"
+        ],
         "session_detail": "1 x one-to-one session and 5 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

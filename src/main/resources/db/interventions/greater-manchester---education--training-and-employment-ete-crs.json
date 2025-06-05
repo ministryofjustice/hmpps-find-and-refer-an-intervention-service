@@ -4,9 +4,16 @@
         "name": "Greater Manchester - Education, training and employment (ETE)",
         "int_type": "CRS",
         "short_description": "Education, training and employment services aim to help people on probation develop the skills they need for future employment. The services can be delivered across different formats, depending on the complexity of the individual\u2019s needs.",
-        "long_description": "Education, training and employment services aim to help people on probation develop the skills they need for future employment. The services can be delivered across different formats, depending on the complexity of the individual\u2019s needs. These formats include: \n\n\u2022 one-to-one sessions\n\u2022 group work sessions\n\u2022 Job Club\n\u2022 online learning\n\u2022 employer engagement",
-        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
-        "time_to_complete": null,
+        "long_description": [
+            "Education, training and employment services aim to help people on probation develop the skills they need for future employment. The services can be delivered across different formats, depending on the complexity of the individual\u2019s needs. These formats include:",
+            "",
+            "\u2022 one-to-one sessions",
+            "\u2022 group work sessions",
+            "\u2022 Job Club",
+            "\u2022 online learning",
+            "\u2022 employer engagement"
+        ],
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_method": {
