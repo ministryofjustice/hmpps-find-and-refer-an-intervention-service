@@ -156,6 +156,10 @@ COMMENT ON COLUMN intervention_catalogue.last_modified IS 'date the intervention
 COMMENT ON COLUMN intervention_catalogue.last_modified_by IS 'auth identifier of the user that last mofified this intervention record';
 COMMENT ON COLUMN intervention_catalogue.reason_for_referral IS 'valid reason that referral to this intervention can be made';
 
+COMMENT ON TABLE intervention_catalogue_long_description IS 'mapping table covering where there is a long description list on an intervention';
+COMMENT ON COLUMN intervention_catalogue_long_description.intervention_id IS 'identifier of the intervention to which this mapping record applies';
+COMMENT ON COLUMN intervention_catalogue_long_description.long_description IS 'a longer full description of the intervention catalogue';
+
 COMMENT ON TABLE intervention_catalogue_map IS 'mapping table covering where there are more than one matching implementation';
 COMMENT ON COLUMN intervention_catalogue_map.intervention_catalogue_id IS 'service-owned unique identifier';
 COMMENT ON COLUMN intervention_catalogue_map.intervention_id IS 'identifier of the intervention to which this mapping record applies';

@@ -4,9 +4,10 @@
         "name": "Thinking Skills Programme",
         "int_type": "AcP",
         "short_description": "Thinking Skills Programme (TSP) helps men and women to develop skills in pro-social problem solving, perspective taking, developing and managing relationships, and self-management. Suitable for all offences \u2013 for sexual offences, consider Horizon or Kaizen first.",
-        "long_description": "Thinking Skills Programme (TSP) helps men and women to develop skills in pro-social problem solving, perspective taking, developing and managing relationships, and self-management. Suitable for all offences \u2013 for sexual offences, consider Horizon or Kaizen first.",
+        "long_description": [
+            "Thinking Skills Programme (TSP) helps men and women to develop skills in pro-social problem solving, perspective taking, developing and managing relationships, and self-management. Suitable for all offences \u2013 for sexual offences, consider Horizon or Kaizen first."
+        ],
         "session_detail": "4 x one-to-one sessions and 15 x group sessions",
-        "time_to_complete": "At least 6 months.",
         "reason_for_referral": ""
     },
     "delivery_method": {

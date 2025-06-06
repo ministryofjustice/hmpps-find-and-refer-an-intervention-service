@@ -4,9 +4,10 @@
         "name": "Dependency and recovery services",
         "int_type": "CRS",
         "short_description": "Dependency and recovery services offer men support with recovery from substance abuse, including drug and alcohol addiction.",
-        "long_description": "Dependency and recovery services offer men support with recovery from substance abuse, including drug and alcohol addiction.",
-        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
-        "time_to_complete": null,
+        "long_description": [
+            "Dependency and recovery services offer men support with recovery from substance abuse, including drug and alcohol addiction."
+        ],
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_method": {

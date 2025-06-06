@@ -4,9 +4,12 @@
         "name": "Positive Pathways Plus",
         "int_type": "SI",
         "short_description": "Postive pathways plus is a specifically adapted and extended version of Positive Pathways. It addresses a range of domestic abuse and problematic relationship issues, from a personal, self-management basis.",
-        "long_description": "Postive pathways plus is a specifically adapted and extended version of Positive Pathways. It addresses a range of domestic abuse and problematic relationship issues, from a personal, self-management basis. \n\nThis programme offers an intervention in the absence of a specific Accredited Programme requirement, such as Building Better Relationships, which is used where there is evidence of more serious harmful behaviour.",
+        "long_description": [
+            "Postive pathways plus is a specifically adapted and extended version of Positive Pathways. It addresses a range of domestic abuse and problematic relationship issues, from a personal, self-management basis.",
+            "",
+            "This programme offers an intervention in the absence of a specific Accredited Programme requirement, such as Building Better Relationships, which is used where there is evidence of more serious harmful behaviour."
+        ],
         "session_detail": "1 x pre-group session and 9 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

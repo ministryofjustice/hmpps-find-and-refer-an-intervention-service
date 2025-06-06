@@ -4,9 +4,12 @@
         "name": "Women's services",
         "int_type": "CRS",
         "short_description": "Women\u2019s services support women with housing, jobs, recovery or personal wellbeing, depending on their rehabilitative needs.",
-        "long_description": "These services are designed to cover the specific rehabilitative needs of each woman. They are delivered in an environment which is safe and suitable for women, by people trained in trauma-informed approaches. \n\nThey are tailored to reflect the complexity of an individual\u2019s needs, recognising possible barriers to achieving the relevant outcome.",
-        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider.",
-        "time_to_complete": null,
+        "long_description": [
+            "These services are designed to cover the specific rehabilitative needs of each woman. They are delivered in an environment which is safe and suitable for women, by people trained in trauma-informed approaches.",
+            "",
+            "They are tailored to reflect the complexity of an individual\u2019s needs, recognising possible barriers to achieving the relevant outcome."
+        ],
+        "session_detail": "The type, number and length of sessions can vary, depending on the location and service provider. ",
         "reason_for_referral": ""
     },
     "delivery_method": {

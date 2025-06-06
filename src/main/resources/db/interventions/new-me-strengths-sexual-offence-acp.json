@@ -4,9 +4,10 @@
         "name": "New Me Strengths: sexual offence",
         "int_type": "AcP",
         "short_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
-        "long_description": "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours.",
-        "session_detail": "Group and one-to-one, in person, and one-to-one only.\n\n32 to 34 group sessions +  4 individual sessions, or 15+ individual sessions.",
-        "time_to_complete": "At least 6 months.",
+        "long_description": [
+            "New Me Strengths (NMS) is a cognitive-behavioural programme for men at medium risk of reconviction. In a custody setting, it is for men convicted of any offence. In the community, it is for sexual offences only. It helps people recognise the impact and consequences of offending and avoid activities that encourage offending behaviours."
+        ],
+        "session_detail": "Group and one-to-one, in person, and one-to-one only.\n\n32 to 34 group sessions +  4 individual sessions, or 15+ individual sessions. ",
         "reason_for_referral": ""
     },
     "delivery_method": {

@@ -4,9 +4,10 @@
         "name": "Developing Assertiveness for Women in Relationships (DAWN)",
         "int_type": "SI",
         "short_description": "The aim of this intervention is to give women the skills and tools to manage their unhealthy behaviour in partner relationships.",
-        "long_description": "The aim of this intervention is to give women the skills and tools to manage their unhealthy behaviour in partner relationships.",
+        "long_description": [
+            "The aim of this intervention is to give women the skills and tools to manage their unhealthy behaviour in partner relationships."
+        ],
         "session_detail": "1 x one-to-one session and 6 x group sessions",
-        "time_to_complete": null,
         "reason_for_referral": ""
     },
     "delivery_method": {

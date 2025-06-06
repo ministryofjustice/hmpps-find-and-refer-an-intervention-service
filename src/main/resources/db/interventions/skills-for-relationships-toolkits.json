@@ -4,9 +4,12 @@
         "name": "Skills for Relationships",
         "int_type": "Toolkits",
         "short_description": "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV).",
-        "long_description": "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV). \n\nThe key focus of this toolkit is to help men cope with the complexities and pressures of their relationships without getting into conflict. It helps people decide how they want their relationships to be, recognise their strengths and develop new relationship skills.",
+        "long_description": [
+            "Skills for Relationships aims to support desistance in men who have exhibited intimate partner violence (IPV).",
+            "",
+            "The key focus of this toolkit is to help men cope with the complexities and pressures of their relationships without getting into conflict. It helps people decide how they want their relationships to be, recognise their strengths and develop new relationship skills."
+        ],
         "session_detail": "",
-        "time_to_complete": "Up to 20 weeks",
         "reason_for_referral": ""
     },
     "delivery_method": {
