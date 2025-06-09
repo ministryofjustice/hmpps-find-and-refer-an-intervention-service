@@ -21,15 +21,19 @@ jobs:
       - name: Check UUID not changed in existing files
         run: |
           set -e
+          error_files=""
           while read file; do
-            # Check if file exists in both base and PR (skip new and deleted files)
             if git cat-file -e origin/${{ github.base_ref }}:"$file" && [ -f "$file" ]; then
               base_uuid=$(git show origin/${{ github.base_ref }}:"$file" | jq -r .uuid)
               pr_uuid=$(cat "$file" | jq -r .uuid)
               if [ "$base_uuid" != "$pr_uuid" ]; then
                 echo "UUID changed in $file: $base_uuid -> $pr_uuid"
-                exit 1
+                error_files="$error_files $file"
               fi
             fi
           done < changed_files.txt
+          if [ -n "$error_files" ]; then
+            echo "UUID changed in the following files:$error_files"
+            exit 1
+          fi
         shell: bash
