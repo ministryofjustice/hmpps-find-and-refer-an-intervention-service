@@ -1,0 +1,39 @@
+name: Check UUID Not Changed
+
+on: [pull_request]
+
+jobs:
+  check-uuid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get list of changed intervention files
+        id: changed
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff --name-only origin/${{ github.base_ref }}...HEAD -- src/main/resources/db/interventions/*.json > changed_files.txt
+          cat changed_files.txt
+
+      - name: Check UUID not changed in existing files
+        run: |
+          set -e
+          error_files=""
+          while read file; do
+            if git cat-file -e origin/${{ github.base_ref }}:"$file" && [ -f "$file" ]; then
+              base_uuid=$(git show origin/${{ github.base_ref }}:"$file" | jq -r .uuid)
+              pr_uuid=$(cat "$file" | jq -r .uuid)
+              if [ "$base_uuid" != "$pr_uuid" ]; then
+                echo "UUID changed in $file: $base_uuid -> $pr_uuid"
+                error_files="$error_files $file"
+              fi
+            fi
+          done < changed_files.txt
+          if [ -n "$error_files" ]; then
+            echo "UUID changed in the following files:$error_files"
+            exit 1
+          fi
+        shell: bash
