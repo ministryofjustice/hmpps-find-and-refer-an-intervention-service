@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.config
 
+import io.sentry.Sentry
 import jakarta.validation.ValidationException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -30,7 +31,10 @@ class GlobalExceptionHandler {
         developerMessage = e.message,
       ),
     )
-    .also { log.info("Validation exception: {}", e.message) }
+    .also {
+      Sentry.captureException(e)
+      log.info("Validation exception: {}", e.message)
+    }
 
   @ExceptionHandler(NoResourceFoundException::class)
   fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
@@ -41,7 +45,10 @@ class GlobalExceptionHandler {
         developerMessage = e.message,
       ),
     )
-    .also { log.info("No resource found exception: {}", e.message) }
+    .also {
+      Sentry.captureException(e)
+      log.info("No resource found exception: {}", e.message)
+    }
 
   @ExceptionHandler(AccessDeniedException::class)
   fun handleAccessDeniedException(e: AccessDeniedException): ResponseEntity<ErrorResponse> = ResponseEntity.status(FORBIDDEN)
@@ -52,7 +59,10 @@ class GlobalExceptionHandler {
         developerMessage = e.message,
       ),
     )
-    .also { log.error("Forbidden (403) returned: {}", e.message) }
+    .also {
+      Sentry.captureException(e)
+      log.error("Forbidden (403) returned: {}", e.message)
+    }
 
   @ExceptionHandler(Exception::class)
   fun handleException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
@@ -63,7 +73,10 @@ class GlobalExceptionHandler {
         developerMessage = e.message,
       ),
     )
-    .also { log.error("Unexpected exception", e) }
+    .also {
+      Sentry.captureException(e)
+      log.error("Unexpected exception", e)
+    }
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)
   @ResponseStatus(BAD_REQUEST)
@@ -76,6 +89,7 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
+      Sentry.captureException(e)
       log.error("Enum Mismatch exception: {}", e.message)
     }
 
@@ -84,7 +98,10 @@ class GlobalExceptionHandler {
   fun handleResponseException(e: ResponseStatusException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = e.reason, developerMessage = e.message),
-    ).also { log.error("Response Status exception: {}", e.message) }
+    ).also {
+      Sentry.captureException(e)
+      log.error("Response Status exception: {}", e.message)
+    }
 
   @ExceptionHandler(HandlerMethodValidationException::class)
   fun handleConstraintViolationException(ex: HandlerMethodValidationException): ResponseEntity<ErrorResponse> {
@@ -98,29 +115,58 @@ class GlobalExceptionHandler {
           developerMessage = ex.message,
         ),
       )
-      .also { log.info("Input request not matching the pattern: {}", violationMessages) }
+      .also {
+        Sentry.captureException(ex)
+        log.info("Input request not matching the pattern: {}", violationMessages)
+      }
   }
 
   @ExceptionHandler(WebClientResponseException.NotFound::class)
   fun handleNotFound(ex: WebClientResponseException.NotFound): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = ex.message, developerMessage = ex.message),
-    ).also { log.error("External service data not found: {}", ex.message) }
+    ).also {
+      Sentry.captureException(ex)
+      log.error("External service data not found: {}", ex.message)
+    }
 
   @ExceptionHandler(WebClientResponseException.Unauthorized::class)
   fun handleUnauthorized(ex: WebClientResponseException.Unauthorized): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
     ErrorResponse(status = HttpStatus.UNAUTHORIZED, userMessage = ex.message, developerMessage = ex.message),
-  ).also { log.error("External service unauthorized: {}", ex.message) }
+  ).also {
+    Sentry.captureException(ex)
+    log.error("External service unauthorized: {}", ex.message)
+  }
 
   @ExceptionHandler(WebClientResponseException.InternalServerError::class)
   fun handleServerError(ex: WebClientResponseException.InternalServerError): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
     ErrorResponse(status = HttpStatus.INTERNAL_SERVER_ERROR, userMessage = ex.message, developerMessage = ex.message),
-  ).also { log.error("External service threw internal server error: {}", ex.message) }
+  ).also {
+    Sentry.captureException(ex)
+    log.error("External service threw internal server error: {}", ex.message)
+  }
 
   @ExceptionHandler(WebClientResponseException::class)
   fun handleOtherWebClientErrors(ex: WebClientResponseException): ResponseEntity<ErrorResponse> = ResponseEntity.status(ex.statusCode).body(
     ErrorResponse(status = HttpStatus.valueOf(ex.statusCode.value()), userMessage = ex.localizedMessage, developerMessage = ex.message),
-  ).also { log.error("External service threw an error: {}", ex.message) }
+  ).also {
+    Sentry.captureException(ex)
+    log.error("External service threw an error: {}", ex.message)
+  }
+
+  @ExceptionHandler(Throwable::class)
+  fun handleException(e: Throwable): ResponseEntity<ErrorResponse?>? = ResponseEntity
+    .status(INTERNAL_SERVER_ERROR)
+    .body(
+      ErrorResponse(
+        status = INTERNAL_SERVER_ERROR,
+        userMessage = "Unexpected error: ${e.message}",
+        developerMessage = e.message,
+      ).also {
+        Sentry.captureException(e)
+        log.error("Unexpected error", e)
+      },
+    )
 
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
