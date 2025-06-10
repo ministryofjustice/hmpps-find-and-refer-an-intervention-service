@@ -25,6 +25,8 @@ FROM delivery_location;
 DELETE
 FROM intervention_catalogue_map;
 DELETE
+FROM intervention_catalogue_to_course_map;
+DELETE
 FROM intervention_catalogue;
 
 INSERT INTO intervention_catalogue (id, name, int_type, short_description, long_description, topic,
@@ -113,17 +115,22 @@ VALUES
 INSERT INTO delivery_method (id, intervention_id, delivery_method_description, delivery_format, attendance_type)
 VALUES
     -- CRS Interventions
-    ('57b42ecb-8774-400f-805b-a7fc7efb0a66', 'c5d53fbd-b7e3-40bd-9096-6720a01a53bf', null, 'Group and One-to-one', 'In Person and Online'),
-    ('dd3acfe4-b62e-4366-955d-296d975cbe34', '47b0048c-cab2-4509-a64a-29a4218712c9', null, 'Group or One-to-one', 'In Person'),
-    ('0855cf84-1249-40ac-8ed5-321b7deb106c', '1e2370d7-be74-4faf-b973-68d258fea015', null, 'Group and One-to-one', 'In Person or Online'),
+    ('57b42ecb-8774-400f-805b-a7fc7efb0a66', 'c5d53fbd-b7e3-40bd-9096-6720a01a53bf', null, 'Group and One-to-one',
+     'In Person and Online'),
+    ('dd3acfe4-b62e-4366-955d-296d975cbe34', '47b0048c-cab2-4509-a64a-29a4218712c9', null, 'Group or One-to-one',
+     'In Person'),
+    ('0855cf84-1249-40ac-8ed5-321b7deb106c', '1e2370d7-be74-4faf-b973-68d258fea015', null, 'Group and One-to-one',
+     'In Person or Online'),
     -- ACP Interventions
-    ('bb8ec055-7448-4594-bf1a-6fbdad1c2ec9', '8380e2d6-ba49-4309-8be7-cc83bf87f372', null, 'Group or One-to-one', 'In Person and Online'),
+    ('bb8ec055-7448-4594-bf1a-6fbdad1c2ec9', '8380e2d6-ba49-4309-8be7-cc83bf87f372', null, 'Group or One-to-one',
+     'In Person and Online'),
     ('95837c47-955a-4364-b73e-0ccefd12681a', '7ce8b4ef-1429-4fc9-a7fe-706aab4dde78', null, 'One-to-one', null),
     ('f1ba6326-6eb7-4422-8c1f-0e312952c48f', 'c5363bae-bd0c-45be-816f-01863cf6396d', null, 'Group', 'In Person'),
     -- SI Interventions
     ('f2433173-2fa7-40a4-8780-04f8c446c61e', '7822b08d-1780-4866-8303-76f1632315ff', null, 'Group', 'In Person'),
     ('4eba09ca-b601-4f3d-b3f0-f4c925600320', '1bca8fb6-2e94-4680-b211-847ffbd9a294', null, 'Group', 'Online'),
-    ('06c3f1fd-b46f-43e1-a581-c3458877b993', '9c697406-e6ab-46c4-9420-1bddaac3193c', null, 'Group and One-to-one', 'In Person or Online'),
+    ('06c3f1fd-b46f-43e1-a581-c3458877b993', '9c697406-e6ab-46c4-9420-1bddaac3193c', null, 'Group and One-to-one',
+     'In Person or Online'),
     -- TOOLKITS Interventions
     ('598154bd-58bd-40dd-a0a5-9c82899b22b1', 'bfbbe2a9-e1d1-453d-88a6-3589f4bda870', null, 'One-to-one', null),
     ('1f512d29-723b-486c-9bee-3bf9bd28e165', 'd97a7462-4035-473e-abe0-afda8c28d1fc', null, 'One-to-one', null),

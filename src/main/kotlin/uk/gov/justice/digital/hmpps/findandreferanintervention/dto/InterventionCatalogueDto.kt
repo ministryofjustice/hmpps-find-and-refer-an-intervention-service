@@ -53,8 +53,7 @@ data class InterventionCatalogueDto(
   val allowsMales: Boolean,
 
   val allowsFemales: Boolean,
-
-  val riskCriteria: List<String>?,
+  val riskCriteria: RiskConsiderationDto? = null,
 
   @field:Schema(
     description = "List of Attendance Types held in String (empty if null)",
@@ -124,10 +123,7 @@ fun InterventionCatalogue.toDto(): InterventionCatalogueDto {
     setting = settingList,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,
-    riskCriteria =
-    this.riskConsideration?.let {
-      RiskConsiderationDto.fromEntity(it).listOfRisks()
-    },
+    riskCriteria = this.riskConsideration?.toDto(),
     attendanceType = this.deliveryMethod?.attendanceType,
     deliveryFormat = this.deliveryMethod?.deliveryFormat,
     timeToComplete = this.timeToComplete,

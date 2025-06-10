@@ -1,11 +1,11 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RiskConsideration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.RoshLevel
-import java.util.UUID
 
+@JsonInclude(JsonInclude.Include.NON_NULL) // Excludes any properties that have null values when creating dto.
 data class RiskConsiderationDto(
-  val id: UUID,
   val cnScoreGuide: String? = null,
   val extremismRiskGuide: String? = null,
   val saraPartnerScoreGuide: String? = null,
@@ -18,42 +18,19 @@ data class RiskConsiderationDto(
   val pnaGuide: String? = null,
   val rsrGuide: String? = null,
   val roshLevel: RoshLevel? = null,
-) {
+)
 
-  // The Criminogenic Needs Score (cnScoreGuide) has been excluded from this list as it should not be displayed alongside the risk criteria.
-  val listOfRisks: () -> List<String> =
-    {
-      listOfNotNull(
-        extremismRiskGuide,
-        saraPartnerScoreGuide,
-        saraOtherScoreGuide,
-        ospScoreGuide,
-        ospDcIccCombinationGuide,
-        ogrsScoreGuide,
-        ovpGuide,
-        ogpGuide,
-        pnaGuide,
-        rsrGuide,
-        roshLevel?.toString(),
-      ).sorted()
-    }
-
-  companion object {
-
-    fun fromEntity(riskConsideration: RiskConsideration): RiskConsiderationDto = RiskConsiderationDto(
-      id = riskConsideration.id,
-      cnScoreGuide = riskConsideration.cnScoreGuide,
-      extremismRiskGuide = riskConsideration.extremismRiskGuide,
-      saraPartnerScoreGuide = riskConsideration.saraPartnerScoreGuide,
-      saraOtherScoreGuide = riskConsideration.saraOtherScoreGuide,
-      ospScoreGuide = riskConsideration.ospScoreGuide,
-      ospDcIccCombinationGuide = riskConsideration.ospDcIccCombinationGuide,
-      ogrsScoreGuide = riskConsideration.ogrsScoreGuide,
-      ovpGuide = riskConsideration.ovpGuide,
-      ogpGuide = riskConsideration.ogpGuide,
-      pnaGuide = riskConsideration.pnaGuide,
-      rsrGuide = riskConsideration.rsrGuide,
-      roshLevel = riskConsideration.roshLevel,
-    )
-  }
-}
+fun RiskConsideration.toDto(): RiskConsiderationDto = RiskConsiderationDto(
+  cnScoreGuide = this.cnScoreGuide,
+  extremismRiskGuide = this.extremismRiskGuide,
+  saraPartnerScoreGuide = this.saraPartnerScoreGuide,
+  saraOtherScoreGuide = this.saraOtherScoreGuide,
+  ospScoreGuide = this.ospScoreGuide,
+  ospDcIccCombinationGuide = this.ospDcIccCombinationGuide,
+  ogrsScoreGuide = this.ogrsScoreGuide,
+  ovpGuide = this.ovpGuide,
+  ogpGuide = this.ogpGuide,
+  pnaGuide = this.pnaGuide,
+  rsrGuide = this.rsrGuide,
+  roshLevel = this.roshLevel,
+)
