@@ -20,7 +20,7 @@ data class InterventionDetailsDto(
   val minAge: Int? = null,
   val maxAge: Int? = null,
   val expectedOutcomes: List<String>? = null,
-  val riskCriteria: List<String>? = null,
+  val riskCriteria: RiskConsiderationDto? = null,
   val suitableForPeopleWithLearningDifficulties: String? = null,
   val equivalentNonLdcProgramme: String? = null,
   val timeToComplete: String? = null,
@@ -51,10 +51,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     interventionType = this.interventionType,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,
-    riskCriteria =
-    this.riskConsideration?.let {
-      RiskConsiderationDto.fromEntity(it).listOfRisks()
-    },
+    riskCriteria = this.riskConsideration?.toDto(),
     attendanceType = this.deliveryMethod?.attendanceType,
     deliveryFormat = this.deliveryMethod?.deliveryFormat,
     timeToComplete = this.timeToComplete,
