@@ -22,6 +22,7 @@ generic-service:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.preprod.json"
     HMPPS_AUTH_BASEURL: "https://sign-in-preprod.hmpps.service.justice.gov.uk/auth"
     FIND_AND_REFER_AND_DELIUS_BASEURL: "https://find-and-refer-and-delius-preprod.hmpps.service.justice.gov.uk"
+    SENTRY_ENVIRONMENT: preprod
     # Template kotlin calls out to itself to provide an example of a service call
     # TODO: This should be replaced by a call to a different service, or removed
     EXAMPLE_API_URL: "https://template-kotlin-preprod.hmpps.service.justice.gov.uk"
