@@ -19,7 +19,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": null,
     "criminogenic_needs": [
         "Thinking and Behaviour",
         "Attitudes"
@@ -61,6 +61,7 @@
         "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
-        "schedule_frequency_guide": null
+        "schedule_frequency_guide": null,
+        "convicted_for_offence_type": null
     }
 }

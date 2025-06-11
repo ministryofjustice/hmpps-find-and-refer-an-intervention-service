@@ -28,7 +28,10 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": {
+        "qualifying_previous_intervention": null,
+        "convicted_for_offence_type": "Eligibility is based on the person being convicted for intimate partner violence offences, with the offence factor of domestic abuse."
+    },
     "criminogenic_needs": [
         "Relationships and Family",
         "Thinking and Behaviour"
@@ -81,6 +84,7 @@
         "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
-        "schedule_frequency_guide": null
+        "schedule_frequency_guide": null,
+        "convicted_for_offence_type": null
     }
 }

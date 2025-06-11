@@ -17,7 +17,10 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": {
+        "qualifying_previous_intervention": null,
+        "convicted_for_offence_type": "Convicted under terrorism legislation in England and Wales.\n\nTACT Cases only (Terrorism Act Case)"
+    },
     "criminogenic_needs": [
         "Thinking and Behaviour",
         "Attitudes"

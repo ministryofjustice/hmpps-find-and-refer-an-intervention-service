@@ -16,7 +16,7 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": null,
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": null,

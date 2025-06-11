@@ -22,7 +22,7 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": null,
     "criminogenic_needs": [
         "Emotional Wellbeing",
         "Thinking and Behaviour",
@@ -63,5 +63,16 @@
         "rsr_guide": null
     },
     "special_educational_needs": null,
-    "exclusion": null
+    "exclusion": {
+        "min_remaining_sentence_duration_guide": null,
+        "remaining_license_community_order_guide": null,
+        "alcohol_drug_problem_guide": null,
+        "mental_health_problem_guide": null,
+        "not_allowed_if_eligible_for_another_intervention": null,
+        "literacy_level": null,
+        "other_preferred_method_guide": null,
+        "same_type_rule_guide": null,
+        "schedule_frequency_guide": null,
+        "convicted_for_offence_type": "This intervention should not be delivered to address needs relating directly to\nsexual offending or intimate partner violence."
+    }
 }

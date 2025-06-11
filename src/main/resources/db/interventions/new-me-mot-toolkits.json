@@ -17,7 +17,10 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "This is for graduates of the following Accredited Programmes: \n* Kaizen\n* Becoming New Me\n* Horizon\n* iHorizon\n* New Me Strengths\n* Living as New me\n* Healthy Sex Programme\n* Cognitive Self Change Programme (CSCP)\n* Self Change Programme (SCP)",
+    "enabling_intervention": {
+        "qualifying_previous_intervention": "This is for graduates of the following Accredited Programmes: \n* Kaizen\n* Becoming New Me\n* Horizon\n* iHorizon\n* New Me Strengths\n* Living as New me\n* Healthy Sex Programme\n* Cognitive Self Change Programme (CSCP)\n* Self Change Programme (SCP)",
+        "convicted_for_offence_type": "This is for men convicted of any of the following offence types: \n* acquisitive or financial\n* alcohol or drugs motivated \n* domestic abuse \n* motoring\n* robbery\n* sexual\n* violence (non-domestic violence)\n\nIn the community (for men sentenced to a Community Order) New Me MOT is currently only available for delivery with men with sexually-motivated convictions."
+    },
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": null,

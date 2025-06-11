@@ -16,7 +16,10 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": {
+        "qualifying_previous_intervention": null,
+        "convicted_for_offence_type": "Sexual, or\nGeneral Violence, or \nIntimate Partner Violence (IPV)"
+    },
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": "18",
@@ -86,6 +89,7 @@
         "literacy_level": null,
         "other_preferred_method_guide": null,
         "same_type_rule_guide": "No previous iHorizon",
-        "schedule_frequency_guide": "Over-ride if exception"
+        "schedule_frequency_guide": "Over-ride if exception",
+        "convicted_for_offence_type": "None internet sexual offence"
     }
 }

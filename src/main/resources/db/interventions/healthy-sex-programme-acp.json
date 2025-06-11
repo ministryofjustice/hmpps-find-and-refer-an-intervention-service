@@ -16,7 +16,10 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "Kaizen, Horizon, BNM+ or NMS",
+    "enabling_intervention": {
+        "qualifying_previous_intervention": "Kaizen, Horizon, BNM+ or NMS",
+        "convicted_for_offence_type": "Sexual"
+    },
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": "18",
