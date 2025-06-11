@@ -56,6 +56,10 @@ open class Exclusion(
   open var literacyLevelGuide: String? = null,
 
   @Nullable
+  @Column(name = "convicted_for_offence_type_guide", length = Integer.MAX_VALUE)
+  open var convictedForOffenceTypeGuide: String? = null,
+
+  @Nullable
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "intervention_id", referencedColumnName = "id")
   open var intervention: InterventionCatalogue?,

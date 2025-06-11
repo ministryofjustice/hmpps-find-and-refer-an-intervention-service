@@ -15,6 +15,9 @@ data class InterventionDetailsDto(
   val allowsMales: Boolean,
   val allowsFemales: Boolean,
   val criminogenicNeeds: List<String>? = null,
+  val criminogenicNeedsScore: String? = null,
+  val eligibleOffence: String? = null,
+  val enablingIntervention: EnablingInterventionDto? = null,
   val interventionType: InterventionType,
   val title: String,
   val minAge: Int? = null,
@@ -30,6 +33,7 @@ data class InterventionDetailsDto(
   val sessionDetails: String? = null,
   val communityLocations: List<CommunityLocation>? = null,
   val custodyLocations: List<CustodyLocation>? = null,
+  val exclusion: ExclusionDto? = null,
 ) {
   data class CommunityLocation(val npsRegion: String, val pdus: MutableSet<PduRefDto>)
 
@@ -37,7 +41,7 @@ data class InterventionDetailsDto(
 }
 
 fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
-  val deliverylocationDtos = this.deliveryLocations.map { it.toDto() }
+  val deliveryLocationDtos = this.deliveryLocations.map { it.toDto() }
   val courseDtos = this.courses.map { it.toDto() }
 
   return InterventionDetailsDto(
@@ -46,8 +50,10 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     this.criminogenicNeeds.map {
       CriminogenicNeedDto.fromEntity(it).need
     }.sorted(),
+    criminogenicNeedsScore = riskConsideration?.cnScoreGuide,
     title = this.name,
     description = this.longDescription?.map { it } ?: listOf(this.shortDescription),
+    enablingIntervention = this.enablingIntervention?.toDto(),
     interventionType = this.interventionType,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,
@@ -59,10 +65,11 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     equivalentNonLdcProgramme = this.specialEducationalNeeds?.equivalentNonLdcProgrammeGuide,
     minAge = this.personalEligibility?.minAge,
     maxAge = this.personalEligibility?.maxAge,
-    expectedOutcomes = this.possibleOutcomes.map { it.outcome }.sorted().ifEmpty { null },
+    expectedOutcomes = this.possibleOutcomes.map { it.outcome }.ifEmpty { null },
     sessionDetails = this.sessionDetail,
-    communityLocations = getCommunityLocations(deliverylocationDtos)?.sortedBy { it.npsRegion },
+    communityLocations = getCommunityLocations(deliveryLocationDtos)?.sortedBy { it.npsRegion },
     custodyLocations = getCustodyLocations(courseDtos)?.sortedBy { it.prisonName },
+    exclusion = this.exclusion?.toDto(),
   )
 }
 

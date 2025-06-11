@@ -252,7 +252,7 @@ class InterventionCatalogueFilterRepositoryTest {
       "deliveryMethod",
       "deliveryMethodSettings",
       "eligibleOffences",
-      "enablingInterventions",
+      "enablingIntervention",
       "excludedOffences",
       "exclusion",
       "interventions",

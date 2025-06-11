@@ -14,10 +14,11 @@ fun ExclusionFactory.create(
   alcoholDrugProblemGuide: String? = null,
   mentalHealthProblemGuide: String? = null,
   otherPreferredMethodGuide: String? = null,
-  ameTypeRuleGuide: String? = null,
+  sameTypeRuleGuide: String? = null,
   notAllowedIfEligibleForAnotherInterventionGuide: String? = null,
   literacyLevelGuide: String? = null,
   scheduleFrequencyGuide: String? = null,
+  convictedForOffenceTypeGuide: String? = null,
   intervention: InterventionCatalogue? = null,
 ): Exclusion = save(
   Exclusion(
@@ -27,10 +28,11 @@ fun ExclusionFactory.create(
     alcoholDrugProblemGuide,
     mentalHealthProblemGuide,
     otherPreferredMethodGuide,
-    ameTypeRuleGuide,
+    sameTypeRuleGuide,
     scheduleFrequencyGuide,
     notAllowedIfEligibleForAnotherInterventionGuide,
     literacyLevelGuide,
+    convictedForOffenceTypeGuide,
     intervention,
   ),
 )

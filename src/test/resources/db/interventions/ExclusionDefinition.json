@@ -5,5 +5,6 @@
   "mental_health_problem_guide": "Identified mental illness, or personality disorder",
   "other_preferred_method_guide": null,
   "same_type_rule_guide": null,
-  "schedule_frequency_guide": null
+  "schedule_frequency_guide": null,
+  "convicted_for_offence_type": "IPV"
 }
