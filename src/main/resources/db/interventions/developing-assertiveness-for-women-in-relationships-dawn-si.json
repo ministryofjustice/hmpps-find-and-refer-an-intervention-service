@@ -17,7 +17,10 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": "If the person meets the criteria for an Accredited Programme, or another Structured Intervention, they can participate in Developing Assertiveness for Women in Relationships (DAWN) alongside it.",
+    "enabling_intervention": {
+        "qualifying_previous_intervention": "If the person meets the criteria for an Accredited Programme, or another Structured Intervention, they can participate in Developing Assertiveness for Women in Relationships (DAWN) alongside it.",
+        "convicted_for_offence_type": "Eligibility is based on the person being convicted for domestic abuse offences."
+    },
     "criminogenic_needs": [
         "Relationships and Family",
         "Thinking and Behaviour"
@@ -71,6 +74,7 @@
         "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
-        "schedule_frequency_guide": null
+        "schedule_frequency_guide": null,
+        "convicted_for_offence_type": null
     }
 }

@@ -17,7 +17,10 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": {
+        "qualifying_previous_intervention": null,
+        "convicted_for_offence_type": "IPV related offence - indicated by OASys 2.3d  or historical by OASys 6.7)\nOVERRIDE:\n(Community): Non IPV-related can also be referred to BBR if they are also assessed as being a High Risk on the SARA and they meet all other risk and need\n\n(Custody): Perpetrated at least one\naggressive act or there is evidence of coercive control or stalking behaviour and breaches of domestic abuse related protective orders e.g., restraining orders. These incidents can be convicted or unconvicted against an intimate partner, either during:\n\u2212 The current prison sentence (on remand or following \nconviction). This could include written or verbal\naggression and threats made to partner in custody, or\ncould be direct or indirect via a proxy perpetrator\n(accomplice)\n\u2212 Within their last 24 months in the community"
+    },
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": "18",
@@ -62,6 +65,7 @@
         "literacy_level": "able to read and understand simple sentences",
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
-        "schedule_frequency_guide": null
+        "schedule_frequency_guide": null,
+        "convicted_for_offence_type": null
     }
 }

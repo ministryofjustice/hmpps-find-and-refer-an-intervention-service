@@ -16,7 +16,10 @@
     "delivery_method_settings": [
         "CUSTODY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": {
+        "qualifying_previous_intervention": null,
+        "convicted_for_offence_type": "Any"
+    },
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": "18",

@@ -17,7 +17,10 @@
         "COMMUNITY",
         "CUSTODY"
     ],
-    "enabling_intervention_detail": "Becoming New Me Plus (BNM+) or \nNew Me Strengths (NMS)",
+    "enabling_intervention": {
+        "qualifying_previous_intervention": "Becoming New Me Plus (BNM+) or \nNew Me Strengths (NMS)",
+        "convicted_for_offence_type": "Any (Custody)\nSexual (Community)"
+    },
     "criminogenic_needs": null,
     "personal_eligibility": {
         "min_age": "18",

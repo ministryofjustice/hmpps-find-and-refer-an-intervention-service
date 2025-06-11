@@ -27,7 +27,10 @@
     "delivery_method_settings": [
         "COMMUNITY"
     ],
-    "enabling_intervention_detail": null,
+    "enabling_intervention": {
+        "qualifying_previous_intervention": null,
+        "convicted_for_offence_type": "Eligibility is based on the person being convitcted for drink or drug-driving offences."
+    },
     "criminogenic_needs": [
         "Drug Misuse",
         "Alcohol Misuse",
@@ -91,6 +94,7 @@
         "literacy_level": "The person you are referring must be able to read and understand simple sentences.",
         "other_preferred_method_guide": null,
         "same_type_rule_guide": null,
-        "schedule_frequency_guide": null
+        "schedule_frequency_guide": null,
+        "convicted_for_offence_type": "This intervention should not be delivered to address needs relating directly to\nsexual offending or intimate partner violence."
     }
 }
