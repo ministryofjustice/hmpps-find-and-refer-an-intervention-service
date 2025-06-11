@@ -14,6 +14,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions.DeliveryMethodDefinition
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions.EligibleOffenceDefinition
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions.EnablingInterventionDefinition
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions.ExcludedOffencesDefinition
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions.ExclusionDefinition
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions.InterventionCatalogueDefinition
@@ -112,14 +113,15 @@ internal class UpsertInterventionProcessorTest {
     )
     whenever(criminogenicNeedRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
     val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
-    val defaultPccRegion = PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
+    val defaultPccRegion =
+      PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
     val defaultPduRef1 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     val defaultPduRef2 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
     whenever(deliveryMethodRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
     whenever(deliveryMethodSettingRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethodSetting>())
     whenever(eligibleOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EligibleOffence>())
-    whenever(enablingInterventionRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
+    whenever(enablingInterventionRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
     whenever(excludedOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<ExcludedOffence>())
     whenever(offenceTypeRefRepository.findByName(any())).thenReturn(
       OffenceTypeRef(
@@ -501,39 +503,77 @@ internal class UpsertInterventionProcessorTest {
   }
 
   @Test
-  fun `Providing Json to be extracted and retrieve existing Enabling Intervention Definition object from the database`() {
+  fun `Providing Json to be extracted and retrieve existing Enabling Intervention Definition object from the database and insert when different values`() {
     val enablingInterventionDefinitionsJson: String =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/EnablingInterventionDefinition.json")
 
-    val enablingInterventionDefinitions: String =
-      ObjectMapper().readValue(enablingInterventionDefinitionsJson, object : TypeReference<String>() {})
+    val enablingInterventionDefinition: EnablingInterventionDefinition =
+      ObjectMapper().readValue(
+        enablingInterventionDefinitionsJson,
+        object : TypeReference<EnablingInterventionDefinition>() {},
+      )
 
     whenever(enablingInterventionRepository.findByIntervention(any())).thenReturn(
-      listOf(
-        EnablingIntervention(id = UUID.randomUUID(), enablingInterventionDetail = "BNM+", intervention = catalogue),
+      EnablingIntervention(
+        id = UUID.randomUUID(),
+        enablingInterventionDetail = "BNM+",
+        intervention = catalogue,
+        convictedForOffenceTypeGuide = "Convicted for IPV",
       ),
     )
 
-    val result: MutableSet<EnablingIntervention> =
-      processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
+    val result: EnablingIntervention? =
+      processor.upsertEnablingInterventions(enablingInterventionDefinition, catalogue)
 
-    assertThat(result.count()).isEqualTo(1)
-    verify(enablingInterventionRepository, times(0)).saveAll(anyList())
+    assertThat(result?.enablingInterventionDetail).isEqualTo("BNM+")
+    assertThat(result?.convictedForOffenceTypeGuide).isEqualTo("Eligibility is based on the person being convicted for intimate partner violence offences, with the offence factor of domestic abuse.")
+    verify(enablingInterventionRepository, times(1)).save(any())
   }
 
   @Test
-  fun `Providing Json to be extracted to create a new Array of Enabling Intervention Definition objects to be stored into the database`() {
+  fun `Providing Json to be extracted and retrieve existing Enabling Intervention Definition object from the database and not insert when identical values`() {
     val enablingInterventionDefinitionsJson: String =
       InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/EnablingInterventionDefinition.json")
 
-    val enablingInterventionDefinitions: String =
-      ObjectMapper().readValue(enablingInterventionDefinitionsJson, object : TypeReference<String>() {})
+    val enablingInterventionDefinition: EnablingInterventionDefinition =
+      ObjectMapper().readValue(
+        enablingInterventionDefinitionsJson,
+        object : TypeReference<EnablingInterventionDefinition>() {},
+      )
 
-    val result: MutableSet<EnablingIntervention> =
+    whenever(enablingInterventionRepository.findByIntervention(any())).thenReturn(
+      EnablingIntervention(
+        id = UUID.randomUUID(),
+        enablingInterventionDetail = "BNM+",
+        intervention = catalogue,
+        convictedForOffenceTypeGuide = "Eligibility is based on the person being convicted for intimate partner violence offences, with the offence factor of domestic abuse.",
+      ),
+    )
+
+    val result: EnablingIntervention? =
+      processor.upsertEnablingInterventions(enablingInterventionDefinition, catalogue)
+
+    assertThat(result).isNull()
+    verify(enablingInterventionRepository, times(0)).save(any())
+  }
+
+  @Test
+  fun `Providing Json to be extracted to create a new Enabling Intervention Definition object to be stored into the database`() {
+    val enablingInterventionDefinitionsJson: String =
+      InterventionLoadFileReaderHelper.getResource("classpath:db/interventions/EnablingInterventionDefinition.json")
+
+    val enablingInterventionDefinitions: EnablingInterventionDefinition =
+      ObjectMapper().readValue(
+        enablingInterventionDefinitionsJson,
+        object : TypeReference<EnablingInterventionDefinition>() {},
+      )
+
+    val result: EnablingIntervention? =
       processor.upsertEnablingInterventions(enablingInterventionDefinitions, catalogue)
 
-    assertThat(result.count()).isEqualTo(1)
-    verify(enablingInterventionRepository, times(1)).saveAll(anyList())
+    assertThat(result?.enablingInterventionDetail).isEqualTo("BNM+")
+    assertThat(result?.convictedForOffenceTypeGuide).isEqualTo("Eligibility is based on the person being convicted for intimate partner violence offences, with the offence factor of domestic abuse.")
+    verify(enablingInterventionRepository, times(1)).save(any())
   }
 
   @Test
@@ -622,6 +662,7 @@ internal class UpsertInterventionProcessorTest {
         otherPreferredMethodGuide = exclusionDefinition?.otherPreferredMethodGuide,
         sameTypeRuleGuide = exclusionDefinition?.sameTypeRuleGuide,
         scheduleFrequencyGuide = exclusionDefinition?.scheduleFrequencyGuide,
+        convictedForOffenceTypeGuide = exclusionDefinition?.convictedForOffenceTypeGuide,
         intervention = catalogue,
       ),
     )
@@ -629,6 +670,7 @@ internal class UpsertInterventionProcessorTest {
     val result: Exclusion? = processor.upsertExclusion(exclusionDefinition, catalogue)
 
     assertThat(result?.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
+    assertThat(result?.convictedForOffenceTypeGuide).isEqualTo("IPV")
     assertThat(result?.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
     verify(exclusionRepository, times(1)).save(any())
   }
@@ -645,6 +687,7 @@ internal class UpsertInterventionProcessorTest {
 
     assertThat(result?.remainingLicenseCommunityOrderGuide).isEqualTo("12 months on licence or at least 18 months on community order.")
     assertThat(result?.mentalHealthProblemGuide).isEqualTo("Identified mental illness, or personality disorder")
+    assertThat(result?.convictedForOffenceTypeGuide).isEqualTo("IPV")
     verify(exclusionRepository, times(1)).save(any())
   }
 

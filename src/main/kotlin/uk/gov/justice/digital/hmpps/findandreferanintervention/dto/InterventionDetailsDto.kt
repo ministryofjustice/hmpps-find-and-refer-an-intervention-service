@@ -17,7 +17,7 @@ data class InterventionDetailsDto(
   val criminogenicNeeds: List<String>? = null,
   val criminogenicNeedsScore: String? = null,
   val eligibleOffence: String? = null,
-  val enablingInterventions: List<String>? = null,
+  val enablingInterventions: EnablingInterventionDto? = null,
   val interventionType: InterventionType,
   val title: String,
   val minAge: Int? = null,
@@ -33,7 +33,7 @@ data class InterventionDetailsDto(
   val sessionDetails: String? = null,
   val communityLocations: List<CommunityLocation>? = null,
   val custodyLocations: List<CustodyLocation>? = null,
-  val programmeSuitability: ExclusionDto? = null,
+  val exclusion: ExclusionDto? = null,
 ) {
   data class CommunityLocation(val npsRegion: String, val pdus: MutableSet<PduRefDto>)
 
@@ -53,10 +53,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     criminogenicNeedsScore = riskConsideration?.cnScoreGuide,
     title = this.name,
     description = this.longDescription?.map { it } ?: listOf(this.shortDescription),
-    // TODO the way eligible offences are saved to db are not compatible with displaying this as formatted content
-    // eligibleOffence = "",
-    enablingInterventions = this.enablingInterventions.mapNotNull { it.toDto().enablingInterventionDetail }
-      .ifEmpty { null },
+    enablingInterventions = this.enablingIntervention?.toDto(),
     interventionType = this.interventionType,
     allowsMales = this.personalEligibility?.males!!,
     allowsFemales = this.personalEligibility?.females!!,
@@ -72,8 +69,7 @@ fun InterventionCatalogue.toDetailsDto(): InterventionDetailsDto {
     sessionDetails = this.sessionDetail,
     communityLocations = getCommunityLocations(deliveryLocationDtos)?.sortedBy { it.npsRegion },
     custodyLocations = getCustodyLocations(courseDtos)?.sortedBy { it.prisonName },
-    // TODO Convicted for offence type is missing from this block as we currently do not save this in a way that allows it to bring back formatted text.
-    programmeSuitability = this.exclusion?.toDto(),
+    exclusion = this.exclusion?.toDto(),
   )
 }
 

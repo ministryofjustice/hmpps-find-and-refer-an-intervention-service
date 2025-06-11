@@ -6,5 +6,5 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Interv
 import java.util.UUID
 
 interface EnablingInterventionRepository : JpaRepository<EnablingIntervention, UUID> {
-  fun findByIntervention(intervention: InterventionCatalogue): List<EnablingIntervention>?
+  fun findByIntervention(intervention: InterventionCatalogue): EnablingIntervention?
 }

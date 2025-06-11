@@ -1,14 +1,16 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.dto
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.EnablingIntervention
-import java.util.UUID
 
+// Excludes any properties that have null values when creating dto.
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class EnablingInterventionDto(
-  val id: UUID,
   val enablingInterventionDetail: String? = null,
+  val convictedForOffenceTypeGuide: String? = null,
 )
 
 fun EnablingIntervention.toDto(): EnablingInterventionDto = EnablingInterventionDto(
-  id = this.id,
   enablingInterventionDetail = this.enablingInterventionDetail,
+  convictedForOffenceTypeGuide = this.convictedForOffenceTypeGuide,
 )

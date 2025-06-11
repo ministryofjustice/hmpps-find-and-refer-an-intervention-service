@@ -8,7 +8,7 @@ data class InterventionCatalogueDefinition(
   @JsonProperty("intervention_catalogue") val catalogue: InterventionCatalogueEntryDefinition,
   @JsonProperty("delivery_method") val deliveryMethod: DeliveryMethodDefinition?,
   @JsonProperty("delivery_method_settings") val deliveryMethodSetting: Array<String>,
-  @JsonProperty("enabling_intervention_detail") val enablingIntervention: String?,
+  @JsonProperty("enabling_intervention") val enablingIntervention: EnablingInterventionDefinition?,
   @JsonProperty("criminogenic_needs") val criminogenicNeed: Array<String>?,
   @JsonProperty("personal_eligibility") val personalEligibility: PersonalEligibilityDefinition?,
   @JsonProperty("eligibility_offence") val eligibleOffence: Array<EligibleOffenceDefinition>?,
@@ -86,4 +86,10 @@ data class ExclusionDefinition(
   @JsonProperty("other_preferred_method_guide") val otherPreferredMethodGuide: String?,
   @JsonProperty("same_type_rule_guide") val sameTypeRuleGuide: String?,
   @JsonProperty("schedule_frequency_guide") val scheduleFrequencyGuide: String?,
+  @JsonProperty("convicted_for_offence_type") val convictedForOffenceTypeGuide: String?,
+)
+
+data class EnablingInterventionDefinition(
+  @JsonProperty("qualifying_previous_intervention") val qualifyingPreviousIntervention: String?,
+  @JsonProperty("convicted_for_offence_type") val convictedForOffenceTypeGuide: String?,
 )

@@ -37,7 +37,10 @@ open class InterventionCatalogue(
 
   @Nullable
   @ElementCollection(targetClass = String::class)
-  @CollectionTable(name = "intervention_catalogue_long_description", joinColumns = [JoinColumn(name = "intervention_id")])
+  @CollectionTable(
+    name = "intervention_catalogue_long_description",
+    joinColumns = [JoinColumn(name = "intervention_id")],
+  )
   @Column(name = "long_description", length = Integer.MAX_VALUE)
   open var longDescription: MutableList<String>? = null,
 
@@ -105,8 +108,9 @@ open class InterventionCatalogue(
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var eligibleOffences: MutableSet<EligibleOffence> = mutableSetOf(),
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
-  open var enablingInterventions: MutableSet<EnablingIntervention> = mutableSetOf(),
+  @Nullable
+  @OneToOne(mappedBy = "intervention")
+  open var enablingIntervention: EnablingIntervention? = null,
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "intervention")
   open var excludedOffences: MutableSet<ExcludedOffence> = mutableSetOf(),
