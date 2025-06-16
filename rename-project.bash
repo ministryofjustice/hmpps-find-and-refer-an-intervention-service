@@ -88,7 +88,7 @@ RANDOM_MINUTE=$(($RANDOM%60))
 RANDOM_MINUTE2=$(($RANDOM%60))
 sed -i -z -E \
   -e "s/SLACK_RELEASES_CHANNEL/$SLACK_RELEASES_CHANNEL/" \
-  .circleci/config.yml
+  .circleci/container.yml
 
 sed -i -z -E \
   -e "s/on:\n  workflow_dispatch:\n  schedule:\n    - cron: \"19 6/on:\n  workflow_dispatch:\n  schedule:\n    - cron: \"$RANDOM_MINUTE $RANDOM_HOUR/" \

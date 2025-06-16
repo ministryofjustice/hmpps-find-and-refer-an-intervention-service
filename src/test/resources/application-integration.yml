@@ -1,6 +1,10 @@
 server:
   shutdown: immediate
 
+logging:
+  level:
+    uk.gov: DEBUG
+
 management.endpoint:
   health.cache.time-to-live: 0
   info.cache.time-to-live: 0
@@ -42,3 +46,17 @@ spring:
             scope: read,write
             client-id: interventions
             client-secret: clientsecret
+
+hmpps:
+  sqs:
+    provider: localstack
+    queues:
+      hmppsdomaineventsqueue:
+        queueName: hmpps_domain_events_queue
+        dlqName: hmpps_domain_events_dlq
+        subscribeTopicId: hmppseventtopic
+        subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.liccondition.created" ]}'
+        asyncQueueClient: true
+    topics:
+      hmppseventtopic:
+        arn: arn:aws:sns:eu-west-2:000000000000:${random.uuid}
