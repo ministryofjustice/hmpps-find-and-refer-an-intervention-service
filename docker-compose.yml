@@ -54,17 +54,21 @@ services:
 
   localstack:
     image: localstack/localstack:latest
-    networks:
-      - hmpps
-    container_name: hmpps-fandr-localstack
+    container_name: localstack-sqs
     ports:
       - "4566:4566"
     environment:
       - SERVICES=sns,sqs
       - DEBUG=${DEBUG- }
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - DEFAULT_REGION=eu-west-2
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    healthcheck:
+      test: [ "CMD", "bash", "awslocal sns list-queues" ]
+      interval: 15s
+      timeout: 10s
+      retries: 3
 
 networks:
   hmpps:
