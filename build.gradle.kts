@@ -14,7 +14,7 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.0") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.1") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
@@ -23,7 +23,7 @@ dependencies {
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.1")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.0") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.1") // needed for OffsetDateTime for AppInsights
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
@@ -45,7 +45,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.0")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.0")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.0")
-  implementation("org.springframework.security:spring-security-crypto:6.5.0")
+  implementation("org.springframework.security:spring-security-crypto:6.5.1")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.25")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
@@ -54,7 +54,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
   implementation("org.hibernate:hibernate-core:7.0.2.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.0")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.1")
 
   runtimeOnly("org.postgresql:postgresql:42.7.7")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
