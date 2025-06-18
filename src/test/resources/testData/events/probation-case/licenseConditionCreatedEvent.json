@@ -12,15 +12,31 @@
   "MessageAttributes": {
     "eventType": {
       "Type": "String",
-      "Value": "probation-case.requirement.created"
+      "Value": "probation-case.licence-condition.created"
     },
-    "requirementSubType": {
+    "licconditionMainType": {
       "Type": "String",
-      "Value": "Breaking Free Online"
+      "Value": "License - Accredited Programme"
     },
-    "requirementMainType": {
+    "licconiditionId": {
       "Type": "String",
-      "Value": "Court - Accredited Programme"
+      "Value": "2500782763"
+    },
+    "eventNumber": {
+      "Type": "String",
+      "Value": "1"
+    },
+    "licconditionSubType": {
+      "Type": "String",
+      "Value": "Horizon"
     }
+  },
+  "personReference": {
+    "identifiers": [
+      {
+        "type": "CRN",
+        "value": "X929377"
+      }
+    ]
   }
 }

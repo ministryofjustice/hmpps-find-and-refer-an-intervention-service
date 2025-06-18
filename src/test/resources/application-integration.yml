@@ -55,7 +55,7 @@ hmpps:
         queueName: hmpps_domain_events_queue
         dlqName: hmpps_domain_events_dlq
         subscribeTopicId: hmppseventtopic
-        subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.liccondition.created" ]}'
+        subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.licence-condition.created" ]}'
         asyncQueueClient: true
     topics:
       hmppseventtopic:

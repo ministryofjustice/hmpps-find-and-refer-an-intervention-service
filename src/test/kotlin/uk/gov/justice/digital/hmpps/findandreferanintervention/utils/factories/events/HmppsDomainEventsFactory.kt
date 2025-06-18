@@ -41,9 +41,8 @@ fun HmppsDomainEventsFactory.createRequirementCreatedEvent() = this.create(
   occurredAt = ZonedDateTime.now(),
 )
 
-fun HmppsDomainEventsFactory.createLicconditionCreatedEvent() = this.create(
-  eventType = "probation-case.liccondition.created",
-  // TODO we don't know the structure of this event quite yet
-  additionalInformation = mapOf(),
+fun HmppsDomainEventsFactory.createLicenceConditionCreatedEvent() = this.create(
+  eventType = "probation-case.licence-condition.created",
+  additionalInformation = mapOf(Pair("licconditionMainType", "Polygraph Condition")),
   occurredAt = ZonedDateTime.now(),
 )

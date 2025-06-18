@@ -12,13 +12,13 @@ class DomainEventsListener {
   fun receive(notification: Notification) {
     when (notification.eventType) {
       REQUIREMENT_CREATED -> logger.info("probation-case.requirement.created event \n ${notification.message}")
-      LICCONDITION_CREATED -> logger.info("probation-case.liccondition.created event \n ${notification.message}")
+      LICENCE_CONDITION_CREATED -> logger.info("probation-case.licence-condition.created event \n ${notification.message}")
       else -> logger.error("Unknown event type ${notification.eventType}")
     }
   }
 
   companion object {
     const val REQUIREMENT_CREATED = "probation-case.requirement.created"
-    const val LICCONDITION_CREATED = "probation-case.liccondition.created"
+    const val LICENCE_CONDITION_CREATED = "probation-case.licence-condition.created"
   }
 }

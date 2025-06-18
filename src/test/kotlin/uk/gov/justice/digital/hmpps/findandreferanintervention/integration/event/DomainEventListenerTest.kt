@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.event.DomainEventsListener
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.HmppsDomainEventsFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createLicconditionCreatedEvent
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createLicenceConditionCreatedEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createRequirementCreatedEvent
 import java.time.Duration.ofSeconds
 
@@ -48,12 +48,12 @@ class DomainEventListenerTest : IntegrationTestBase() {
   }
 
   @Test
-  fun `handle probation-case liccondition created event`() {
-    sendDomainEvent(hmppsDomainEventsFactory.createLicconditionCreatedEvent())
+  fun `handle probation-case licence-condition created event`() {
+    sendDomainEvent(hmppsDomainEventsFactory.createLicenceConditionCreatedEvent())
     // Wait for message to be processed
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 
     val logMessages = listAppender.list.map { it.formattedMessage }
-    assertThat(logMessages.first()).contains("probation-case.liccondition.created event")
+    assertThat(logMessages.first()).contains("probation-case.licence-condition.created event")
   }
 }

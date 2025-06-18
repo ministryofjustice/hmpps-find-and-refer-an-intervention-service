@@ -28,7 +28,7 @@ hmpps.sqs:
       queueName: hmppsdomainevent
       dlqName: ${random.uuid}
       subscribeTopicId: hmppseventtopic
-      subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.liccondition.created" ]}'
+      subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.licence-condition.created" ]}'
   topics:
     hmppseventtopic:
       arn: arn:aws:sns:eu-west-2:000000000000:hmppseventstopic
