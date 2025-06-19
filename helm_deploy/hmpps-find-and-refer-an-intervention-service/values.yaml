@@ -23,8 +23,8 @@ generic-service:
     SERVER_PORT: "8080"
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY)"
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: applicationinsights.json
-    SENTRY_SAMPLE-RATE: 1
-    SENTRY_TRACES-SAMPLE-RATE: 0.2
+    SENTRY_SAMPLE_RATE: 1
+    SENTRY_TRACES_SAMPLE_RATE: "0.05"
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
   # namespace_secrets:
@@ -38,6 +38,7 @@ generic-service:
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_FIND-AND-REFER-INTERVENTIONS-CLIENT_CLIENT-SECRET: "CLIENT_CREDS_CLIENT_SECRET"
     sentry:
       SENTRY_DSN: "SENTRY_DSN"
+      SENTRY_AUTH_TOKEN: "SENTRY_AUTH_TOKEN"
 
     rds-instance-output:
       POSTGRES_URI: "rds_instance_endpoint"
