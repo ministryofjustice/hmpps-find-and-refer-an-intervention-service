@@ -58,6 +58,29 @@ Create new connection using local database credentials;
 | Username | root  |
 | Password | dev   |
 
+### Events
+
+The application listens to events that are published on the `HMPPS_DOMAIN_EVENTS_QUEUE`. This functionality is
+replicated locally using localstack. If you wish to view and create messages/queues/etc then it is recommended to use
+the `awslocal` wrapper which can be installed using
+
+```zsh
+brew install awscli-local
+```
+
+You can view the created queue by running:
+
+```zsh
+awslocal sqs list-queues
+```
+
+There are example messages in the following directory [here](./src/test/resources/testData/events). To send one of these
+events to our queues we can run the following command:
+
+```zsh
+ awslocal sqs send-message --queue-url http://sqs.eu-west-2.localhost.localstack.cloud:4566/000000000000/hmppsdomainevent  --message-body file://src/test/resources/testData/events/probationCaseRequirementCreatedEvent.json
+```
+
 ### Authorization
 
 The service uses an Oauth 2.0 setup managed through the Hmpps Auth project. To call any endpoints locally a bearer token
@@ -107,45 +130,55 @@ The job can be run manually using the following command to load the data locally
 SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=upsertInterventionsJob’
 ```
 
-For loading intervention metadata like delivery location, intervention catalogue map and intervention catalogue course map both locally and in a higher environment, a Spring Batch job is utilised. This reads the respective .csv files in the directory [here](src/main/resources/csv) and maps these to the corresponding db tables.
+For loading intervention metadata like delivery location, intervention catalogue map and intervention catalogue course
+map both locally and in a higher environment, a Spring Batch job is utilised. This reads the respective .csv files in
+the directory [here](src/main/resources/csv) and maps these to the corresponding db tables.
 
 The job can be run manually using the following command to load the data locally
 
-For loading Delivery location data, update the `delivery_location.csv` file in the directory [here](src/main/resources/csv) and run the following command:
+For loading Delivery location data, update the `delivery_location.csv` file in the
+directory [here](src/main/resources/csv) and run the following command:
 
 ```zsh
 SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=loadDeliveryLocationJob’
 ```
 
-For loading Intervention catalogue map data, update the `intervention_catalogue_map.csv` file in the directory [here](src/main/resources/csv) and run the following command:
+For loading Intervention catalogue map data, update the `intervention_catalogue_map.csv` file in the
+directory [here](src/main/resources/csv) and run the following command:
 
 ```zsh
 SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=loadInterventionCatalogueMapJob’
 ```
 
-For loading Intervention catalogue course map data, update the `intervention_catalogue_course_map.csv` file in the directory [here](src/main/resources/csv) and run the following command:
+For loading Intervention catalogue course map data, update the `intervention_catalogue_course_map.csv` file in the
+directory [here](src/main/resources/csv) and run the following command:
 
 ```zsh
 SPRING_PROFILES_ACTIVE=local ./gradlew bootRun --args=‘--jobName=loadInterventionCatalogueToCourseMapJob’
 ```
- 
-For future updates, we can just add the new rows to the end of the csv and the job will take care of inserting the new row. We also have the feature of deleting any data already present via the csv. We have to mark the status column of the particular row with 'D' and the job will delete that row from the database.
+
+For future updates, we can just add the new rows to the end of the csv and the job will take care of inserting the new
+row. We also have the feature of deleting any data already present via the csv. We have to mark the status column of the
+particular row with 'D' and the job will delete that row from the database.
 
 ## Deployments
 
 Deployments are part of our CI process, on the `main` branch using the `build-test-and-deploy` Workflow.
 
-[This is a link](https://app.circleci.com/pipelines/github/ministryofjustice/hmpps-find-and-refer-an-intervention-service?branch=main) to the most recent runs of that Workflow.
+[This is a link](https://app.circleci.com/pipelines/github/ministryofjustice/hmpps-find-and-refer-an-intervention-service?branch=main)
+to the most recent runs of that Workflow.
 
 Deployments require a manual approval step.
 
 ### Testing a Deployment
 
-The Find & Refer an Intervention Service is not presently live.  We therefore do not have a Production environment available.
+The Find & Refer an Intervention Service is not presently live. We therefore do not have a Production environment
+available.
 
 It is only possible to do User Acceptance Testing (UAT), i.e. click around a browser, on our Dev environment.
 
-To test a deployment to production, we have to examine the logs of a pod, to assert if it has spun up successfully or not.  This is obviously not ideal.
+To test a deployment to production, we have to examine the logs of a pod, to assert if it has spun up successfully or
+not. This is obviously not ideal.
 
 ### Kubernetes
 
@@ -155,7 +188,8 @@ For information on how to connect to the Cloud Platform's Kubernetes cluster fol
 guide [here](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/kubectl-config.html#connecting-to-the-cloud-platform-39-s-kubernetes-cluster).
 
 For further Kubernetes commands a useful cheat sheet is
-provided [here](https://kubernetes.io/docs/reference/kubectl/quick-reference/).  Similarly, the `--help` flag on any `kubectl` command will give you more information.
+provided [here](https://kubernetes.io/docs/reference/kubectl/quick-reference/). Similarly, the `--help` flag on any
+`kubectl` command will give you more information.
 
 ### Testing a Deployment
 
@@ -187,7 +221,8 @@ hmpps-find-and-refer-an-intervention-service   0/0     0            0           
 hmpps-find-and-refer-an-intervention-ui        2/2     2            2           41d
 ```
 
-If you have done a deployment of UI, there should be more than 0 Pods marked as `READY` in that response, indicating that they have, indeed, been spun up.
+If you have done a deployment of UI, there should be more than 0 Pods marked as `READY` in that response, indicating
+that they have, indeed, been spun up.
 
 #### 2. Double-check the Pod(s) associated with the Deployment:
 
@@ -208,10 +243,10 @@ hmpps-find-and-refer-an-intervention-service-58bb6f56b4-kzqsn   1/1     Running 
 
 #### 3. Check the logs of a Pod
 
-It is possible to read the logs of a given Pod to check that the build and spin-up process for the Pod has been successful.
+It is possible to read the logs of a given Pod to check that the build and spin-up process for the Pod has been
+successful.
 
 To view the logs from any of the Pods whose name is given in the previous responses:
-
 
 ```zsh
 $ kubectl logs $POD_NAME --namespace hmpps-find-and-refer-an-intervention-prod

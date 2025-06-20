@@ -20,3 +20,15 @@ spring:
 
 find-and-refer-and-delius:
   baseurl: "http://localhost:9092"
+
+hmpps.sqs:
+  provider: localstack
+  queues:
+    hmppsdomaineventsqueue:
+      queueName: hmppsdomainevent
+      dlqName: ${random.uuid}
+      subscribeTopicId: hmppseventtopic
+      subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.licence-condition.created" ]}'
+  topics:
+    hmppseventtopic:
+      arn: arn:aws:sns:eu-west-2:000000000000:hmppseventstopic
