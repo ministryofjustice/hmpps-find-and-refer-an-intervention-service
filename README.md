@@ -104,6 +104,7 @@ This project has a branch naming validator in place in the GitHub action pipelin
 To ensure these pipelines pass the branch name must conform one of the following patterns:
 
 * FRI-[0-9]/*branch-name-here*
+* APG-[0-9]/*branch-name-here*
 * no-ticket/*branch-name-here*
 * renovate/*branch-name-here*
 * hotfix/*branch-name-here*
