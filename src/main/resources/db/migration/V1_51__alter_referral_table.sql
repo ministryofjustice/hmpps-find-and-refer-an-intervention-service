@@ -11,6 +11,7 @@ ALTER TABLE referral
     ADD COLUMN sourced_from_reference_type sourced_from_reference_type NOT NULL,
     ADD COLUMN sourced_from_reference      TEXT                        NOT NULL;
 
+COMMENT ON TABLE referral IS 'Stores basic information about a referral to an Intervention';
 COMMENT ON COLUMN referral.setting IS 'The setting that the referral is for.';
 COMMENT ON COLUMN referral.intervention_type IS 'The type of the intervention that the person is being referred to.';
 COMMENT ON COLUMN referral.intervention_name IS 'The name of the intervention that the person is being referred to.';
