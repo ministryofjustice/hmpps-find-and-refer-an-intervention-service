@@ -1,18 +1,26 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.service.event
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.awspring.cloud.sqs.annotation.SqsListener
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import uk.gov.justice.digital.hmpps.findandreferanintervention.service.ReferralService
 
 @Service
-class DomainEventsListener {
+class DomainEventsListener(private val objectMapper: ObjectMapper, private val referralService: ReferralService) {
   private val logger = LoggerFactory.getLogger(this::class.java)
 
   @SqsListener("hmppsdomaineventsqueue", factory = "hmppsQueueContainerFactoryProxy")
   fun receive(notification: Notification) {
     when (notification.eventType) {
-      REQUIREMENT_CREATED -> logger.info("probation-case.requirement.created event \n ${notification.message}")
-      LICENCE_CONDITION_CREATED -> logger.info("probation-case.licence-condition.created event \n ${notification.message}")
+      REQUIREMENT_CREATED -> referralService.handleRequirementCreatedEvent(objectMapper.readValue(notification.message))
+      LICENCE_CONDITION_CREATED -> referralService.handleLicenceConditionCreatedEvent(
+        objectMapper.readValue(
+          notification.message,
+        ),
+      )
+
       else -> logger.error("Unknown event type ${notification.eventType}")
     }
   }

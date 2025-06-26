@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.model.event
 
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PersonReferenceType
 import java.time.ZonedDateTime
 
 data class HmppsDomainEvent(
@@ -9,16 +10,25 @@ data class HmppsDomainEvent(
   val occurredAt: ZonedDateTime,
   val description: String? = null,
   val additionalInformation: Map<String, Any?>,
-  val personReference: PersonReference? = null,
+  val personReference: PersonReference,
 )
 
 data class PersonReference(val identifiers: List<Identifier> = listOf()) {
-  operator fun get(key: String) = identifiers.find { it.type == key }?.value
+  fun findCrn() = get("CRN")
   fun findNomsNumber() = get(NOMS_NUMBER_TYPE)
+  fun getPersonReferenceTypeAndValue(): Pair<PersonReferenceType, String?> = if (findCrn() != null) {
+    Pair(PersonReferenceType.CRN, findCrn())
+  } else {
+    Pair(
+      PersonReferenceType.NOMS,
+      findNomsNumber(),
+    )
+  }
+
+  operator fun get(key: String) = identifiers.find { it.type == key }?.value
 
   companion object {
     const val NOMS_NUMBER_TYPE = "NOMS"
-    fun withPrisonNumber(prisonNumber: String) = PersonReference(listOf(Identifier(NOMS_NUMBER_TYPE, prisonNumber)))
   }
 
   data class Identifier(val type: String, val value: String)

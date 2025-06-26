@@ -28,3 +28,5 @@ DELETE
 FROM intervention_catalogue_to_course_map;
 DELETE
 FROM intervention_catalogue;
+DELETE
+FROM referral;

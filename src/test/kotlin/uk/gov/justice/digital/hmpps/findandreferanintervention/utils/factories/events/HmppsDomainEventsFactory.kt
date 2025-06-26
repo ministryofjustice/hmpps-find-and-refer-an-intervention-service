@@ -15,7 +15,7 @@ fun HmppsDomainEventsFactory.create(
   occurredAt: ZonedDateTime = ZonedDateTime.now(),
   description: String? = null,
   additionalInformation: Map<String, Any?> = mutableMapOf(),
-  personReference: PersonReference? = PersonReference(
+  personReference: PersonReference = PersonReference(
     listOf(
       PersonReference.Identifier(
         type = "CRN",
@@ -37,12 +37,23 @@ fun HmppsDomainEventsFactory.create(
 
 fun HmppsDomainEventsFactory.createRequirementCreatedEvent() = this.create(
   eventType = "probation-case.requirement.created",
-  additionalInformation = mapOf(Pair("requirementSubType", "Curfew")),
+  additionalInformation = mapOf(
+    Pair("requirementSubType", "Breaking Free Online"),
+    Pair("requirementMainType", "Court - Accredited Programme"),
+    Pair("requirementId", "2500812305"),
+    Pair("eventNumber", "1"),
+    Pair("restrictiveRequirement", "false"),
+  ),
   occurredAt = ZonedDateTime.now(),
 )
 
 fun HmppsDomainEventsFactory.createLicenceConditionCreatedEvent() = this.create(
   eventType = "probation-case.licence-condition.created",
-  additionalInformation = mapOf(Pair("licconditionMainType", "Polygraph Condition")),
+  additionalInformation = mapOf(
+    Pair("licconditionSubType", "Horizon"),
+    Pair("licconditionMainType", "License - Accredited Programme"),
+    Pair("licconiditionId", "2500782763"),
+    Pair("eventNumber", "1"),
+  ),
   occurredAt = ZonedDateTime.now(),
 )
