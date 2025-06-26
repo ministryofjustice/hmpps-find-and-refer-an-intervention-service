@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.ResourceLoader
 import org.springframework.jdbc.datasource.init.ScriptUtils
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SourcedFromReferenceType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ReferralRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.HmppsDomainEventsFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createLicenceConditionCreatedEvent
@@ -57,6 +58,7 @@ class DomainEventListenerTest : IntegrationTestBase() {
     val referral = referralRepository.findAll().first()
     assertThat(referral.interventionName).isEqualTo("Breaking Free Online")
     assertThat(referral.sourcedFromReference).isEqualTo("2500812305")
+    assertThat(referral.sourcedFromReferenceType).isEqualTo(SourcedFromReferenceType.REQUIREMENT)
   }
 
   @Test
@@ -69,5 +71,6 @@ class DomainEventListenerTest : IntegrationTestBase() {
     val referral = referralRepository.findAll().first()
     assertThat(referral.interventionName).isEqualTo("Horizon")
     assertThat(referral.sourcedFromReference).isEqualTo("2500782763")
+    assertThat(referral.sourcedFromReferenceType).isEqualTo(SourcedFromReferenceType.LICENCE_CONDITION)
   }
 }

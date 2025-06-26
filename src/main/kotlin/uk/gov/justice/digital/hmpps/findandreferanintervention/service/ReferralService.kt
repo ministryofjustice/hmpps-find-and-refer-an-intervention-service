@@ -41,7 +41,7 @@ class ReferralService(private val referralRepository: ReferralRepository) {
         interventionName = event.additionalInformation.getValue("licconditionSubType") as String,
         personReferenceType = event.personReference.getPersonReferenceTypeAndValue().first,
         personReference = event.personReference.getPersonReferenceTypeAndValue().second!!,
-        sourcedFromReferenceType = SourcedFromReferenceType.REQUIREMENT,
+        sourcedFromReferenceType = SourcedFromReferenceType.LICENCE_CONDITION,
         sourcedFromReference = event.additionalInformation["licconiditionId"] as String,
       ),
     )
