@@ -13,7 +13,9 @@ import java.util.UUID
 
 @Service
 @Transactional
-class ReferralService(private val referralRepository: ReferralRepository) {
+class ReferralService(
+  private val referralRepository: ReferralRepository,
+) {
   private val logger = LoggerFactory.getLogger(this::class.java)
   fun handleRequirementCreatedEvent(event: HmppsDomainEvent) {
     logger.info("Saving requirement-condition.created created event to db with requirementId: ${event.additionalInformation["requirementId"]}")
