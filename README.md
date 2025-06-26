@@ -78,7 +78,7 @@ There are example messages in the following directory [here](./src/test/resource
 events to our queues we can run the following command:
 
 ```zsh
- awslocal sqs send-message --queue-url http://sqs.eu-west-2.localhost.localstack.cloud:4566/000000000000/hmppsdomainevent  --message-body file://src/test/resources/testData/events/probationCaseRequirementCreatedEvent.json
+ awslocal sqs send-message --queue-url http://sqs.eu-west-2.localhost.localstack.cloud:4566/000000000000/hmppsdomainevent  --message-body file://src/test/resources/testData/events/probation-case/requirementCreatedEvent.json
 ```
 
 ### Authorization

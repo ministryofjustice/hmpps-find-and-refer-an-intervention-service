@@ -1,8 +1,5 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.event
 
-import ch.qos.logback.classic.Logger
-import ch.qos.logback.classic.spi.ILoggingEvent
-import ch.qos.logback.core.read.ListAppender
 import org.assertj.core.api.Assertions.assertThat
 import org.awaitility.kotlin.await
 import org.awaitility.kotlin.matches
@@ -11,30 +8,44 @@ import org.awaitility.kotlin.withPollDelay
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.ResourceLoader
+import org.springframework.jdbc.datasource.init.ScriptUtils
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.IntegrationTestBase
-import uk.gov.justice.digital.hmpps.findandreferanintervention.service.event.DomainEventsListener
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ReferralRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.HmppsDomainEventsFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createLicenceConditionCreatedEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createRequirementCreatedEvent
 import java.time.Duration.ofSeconds
+import javax.sql.DataSource
 
 class DomainEventListenerTest : IntegrationTestBase() {
 
-  private val hmppsDomainEventsFactory = HmppsDomainEventsFactory()
+  @Autowired
+  private lateinit var referralRepository: ReferralRepository
 
-  val logger = LoggerFactory.getLogger(DomainEventsListener::class.java) as Logger
-  val listAppender = ListAppender<ILoggingEvent>()
+  @Autowired
+  private lateinit var dataSource: DataSource
+
+  @Autowired
+  private lateinit var resourceLoader: ResourceLoader
+
+  private val hmppsDomainEventsFactory = HmppsDomainEventsFactory()
 
   @BeforeEach
   fun beforeEach() {
-    listAppender.start()
-    logger.addAppender(listAppender)
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/setup.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
   }
 
   @AfterEach
   fun afterEach() {
-    listAppender.stop()
+    dataSource.connection.use {
+      val r = resourceLoader.getResource("classpath:testData/teardown.sql")
+      ScriptUtils.executeSqlScript(it, r)
+    }
   }
 
   @Test
@@ -42,9 +53,10 @@ class DomainEventListenerTest : IntegrationTestBase() {
     sendDomainEvent(hmppsDomainEventsFactory.createRequirementCreatedEvent())
     // Wait for message to be processed
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
-
-    val logMessages = listAppender.list.map { it.formattedMessage }
-    assertThat(logMessages.first()).contains("probation-case.requirement.created event")
+    assertThat(referralRepository.count()).isEqualTo(1)
+    val referral = referralRepository.findAll().first()
+    assertThat(referral.interventionName).isEqualTo("Breaking Free Online")
+    assertThat(referral.sourcedFromReference).isEqualTo("2500812305")
   }
 
   @Test
@@ -53,7 +65,9 @@ class DomainEventListenerTest : IntegrationTestBase() {
     // Wait for message to be processed
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 
-    val logMessages = listAppender.list.map { it.formattedMessage }
-    assertThat(logMessages.first()).contains("probation-case.licence-condition.created event")
+    assertThat(referralRepository.count()).isEqualTo(1)
+    val referral = referralRepository.findAll().first()
+    assertThat(referral.interventionName).isEqualTo("Horizon")
+    assertThat(referral.sourcedFromReference).isEqualTo("2500782763")
   }
 }
