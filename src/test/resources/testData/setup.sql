@@ -29,6 +29,8 @@ FROM intervention_catalogue_to_course_map;
 DELETE
 FROM intervention_catalogue;
 DELETE
+FROM message;
+DELETE
 FROM referral;
 
 INSERT INTO intervention_catalogue (id, name, int_type, short_description, long_description, topic,

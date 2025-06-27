@@ -26,7 +26,7 @@ hmpps.sqs:
   queues:
     hmppsdomaineventsqueue:
       queueName: hmppsdomainevent
-      dlqName: ${random.uuid}
+      dlqName: hmppsdomaineventdlq
       subscribeTopicId: hmppseventtopic
       subscribeFilter: '{"eventType":[ "probation-case.requirement.created", "probation-case.licence-condition.created" ]}'
   topics:
