@@ -11,6 +11,6 @@ COMMENT ON COLUMN message.id IS 'Unique ID of the event in our db.';
 COMMENT ON COLUMN message.event IS 'Raw json of the received event.';
 
 INSERT INTO metadata(table_name, column_name, sensitive, domain_data)
-VALUES ('message_history', 'id', false, false),
-       ('message_history', 'referral_id', false, false),
-       ('message_history', 'event', false, false);
+VALUES ('message', 'id', false, false),
+       ('message', 'referral_id', false, false),
+       ('message', 'event', false, false);
