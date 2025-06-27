@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Message
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.MessageHistoryRepository
+import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.MessageRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.model.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.ReferralService
 import java.util.UUID
@@ -16,7 +16,7 @@ import java.util.UUID
 class DomainEventsListener(
   private val objectMapper: ObjectMapper,
   private val referralService: ReferralService,
-  private val messageHistoryRepository: MessageHistoryRepository,
+  private val messageRepository: MessageRepository,
 
 ) {
   private val logger = LoggerFactory.getLogger(this::class.java)
@@ -30,10 +30,10 @@ class DomainEventsListener(
   }
 
   private fun handleHmppsDomainEvent(sqsMessage: SqsMessage) {
-    val message = messageHistoryRepository.findByIdOrNull(sqsMessage.messageId)
+    val message = messageRepository.findByIdOrNull(sqsMessage.messageId)
     if (message == null) {
       logger.info("Inserting Event with Id: ${sqsMessage.messageId}")
-      val messageId: UUID = messageHistoryRepository.save(
+      val messageId: UUID = messageRepository.save(
         Message(
           id = sqsMessage.messageId,
           referral = null,
