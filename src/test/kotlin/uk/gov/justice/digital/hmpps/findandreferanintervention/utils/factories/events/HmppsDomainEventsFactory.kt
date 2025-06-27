@@ -1,8 +1,8 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
-import uk.gov.justice.digital.hmpps.findandreferanintervention.model.event.HmppsDomainEvent
-import uk.gov.justice.digital.hmpps.findandreferanintervention.model.event.PersonReference
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.PersonReference
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.EntityFactory
 import java.time.ZonedDateTime
 

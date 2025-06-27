@@ -3,12 +3,12 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Referral
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SourcedFromReferenceType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ReferralRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.model.event.HmppsDomainEvent
 import java.util.UUID
 
 @Service

@@ -16,11 +16,11 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import software.amazon.awssdk.services.sqs.model.PurgeQueueRequest
 import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.LocalStackContainer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.LocalStackContainer.setLocalStackProperties
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.wiremock.HmppsAuthApiExtension
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.wiremock.HmppsAuthApiExtension.Companion.hmppsAuth
-import uk.gov.justice.digital.hmpps.findandreferanintervention.model.event.HmppsDomainEvent
 import uk.gov.justice.hmpps.sqs.HmppsQueue
 import uk.gov.justice.hmpps.sqs.HmppsQueueService
 import uk.gov.justice.hmpps.sqs.MissingQueueException
