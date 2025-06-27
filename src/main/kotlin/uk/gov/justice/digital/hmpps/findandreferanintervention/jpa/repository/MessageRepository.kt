@@ -4,4 +4,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Message
 import java.util.UUID
 
-interface MessageHistoryRepository : JpaRepository<Message, UUID>
+interface MessageRepository : JpaRepository<Message, UUID>
