@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.findandreferanintervention.model.event
+package uk.gov.justice.digital.hmpps.findandreferanintervention.event
 
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PersonReferenceType
 import java.time.ZonedDateTime
