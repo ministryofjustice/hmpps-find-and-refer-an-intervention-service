@@ -73,6 +73,37 @@ server:
   error:
     include-message: always
 
+servers:
+  development:
+    host: "hmpps-domain-events-dev.live-1.cloud-platform.service.justice.gov.uk"
+    protocol: sqs
+    description: Development Environment
+  preproduction:
+    host: "hmpps-domain-events-preprod.live-1.cloud-platform.service.justice.gov.uk"
+    protocol: sqs
+    description: Pre-production Environment
+  production:
+    host: "hmpps-domain-events-prod.live-1.cloud-platform.service.justice.gov.uk"
+    protocol: sqs
+    description: Production Environment
+
+
+  channels:
+    hmpps-domain-events:
+      description: HMPPS domain events SNS topic
+      bindings:
+        sns:
+          name: domainevents
+
+  operations:
+    publish-event:
+      action: send
+      channel:
+        $ref: '#/channels/hmpps-domain-events'
+      messages:
+        - $ref: '#/channels/hmpps-domain-events/messages/interventions.community-referral.created'
+
+
 webclient:
   connect-timeout-seconds: 20
   read-timeout-seconds: 10
