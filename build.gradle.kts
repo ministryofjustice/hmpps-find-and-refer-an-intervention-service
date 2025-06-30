@@ -52,7 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:7.0.3.Final")
+  implementation("org.hibernate:hibernate-core:7.0.4.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.1")
 
   runtimeOnly("org.postgresql:postgresql:42.7.7")
@@ -70,8 +70,8 @@ dependencies {
   testImplementation("org.springframework.security:spring-security-test")
 
   // Test containers
-  testImplementation("org.testcontainers:postgresql:1.21.2")
-  testImplementation("org.testcontainers:localstack:1.21.2")
+  testImplementation("org.testcontainers:postgresql:1.21.3")
+  testImplementation("org.testcontainers:localstack:1.21.3")
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.7")
   testImplementation("org.wiremock:wiremock-standalone:3.13.1")
