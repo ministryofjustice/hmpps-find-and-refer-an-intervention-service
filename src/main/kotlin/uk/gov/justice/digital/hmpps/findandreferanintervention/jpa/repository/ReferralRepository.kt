@@ -6,6 +6,8 @@ import java.util.UUID
 
 interface ReferralRepository : JpaRepository<Referral, UUID> {
 
+  fun findReferralById(referralId: UUID): Referral?
+
   fun findByPersonReferenceAndInterventionNameAndSourcedFromReference(
     personReference: String,
     interventionName: String,

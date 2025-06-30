@@ -3,6 +3,8 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDetailsDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Referral
@@ -20,6 +22,8 @@ class ReferralService(
 ) {
 
   private val logger = LoggerFactory.getLogger(this::class.java)
+
+  fun getReferralDetailsById(referralId: UUID): ReferralDetailsDto? = referralRepository.findReferralById(referralId)?.toDto()
 
   fun handleRequirementCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
