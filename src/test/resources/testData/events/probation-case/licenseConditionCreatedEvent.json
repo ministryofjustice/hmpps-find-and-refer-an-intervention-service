@@ -3,7 +3,7 @@
   "MessageId": "f39059e7-a62d-4157-929a-fb049015c993",
   "Token": null,
   "TopicArn": "arn:aws:sns:eu-west-2:000000000000:hmpps-domain",
-  "Message": "{\"eventType\":\"probation-case.licence-condition.created\",\"version\":\"1\",\"description\":\"ALicenceConditionhasbeencreatedinDelius\",\"occurredAt\":\"2025-06-26T09:18:21.89+01:00\",\"additionalInformation\":{\"licconditionMainType\":\"License-AccreditedProgramme\",\"licconiditionId\":\"2500782763\",\"eventNumber\":\"1\",\"licconditionSubType\":\"Horizon\"},\"personReference\":{\"identifiers\":[{\"type\":\"CRN\",\"value\":\"X929377\"}]}}",
+  "Message": "{\"eventType\":\"probation-case.licence-condition.created\",\"version\":\"1\",\"description\":\"A Licence Condition has been created in Delius\",\"occurredAt\":\"2025-06-26T09:18:21.89+01:00\",\"additionalInformation\":{\"licconditionMainType\":\"License - AccreditedProgramme\",\"licconiditionId\":\"2500782763\",\"eventNumber\":\"1\",\"licconditionSubType\":\"Horizon\"},\"personReference\":{\"identifiers\":[{\"type\":\"CRN\",\"value\":\"X929377\"}]}}",
   "SubscribeURL": null,
   "Timestamp": "2021-10-21T06:27:57.028Z",
   "SignatureVersion": "1",

@@ -4,8 +4,19 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.ZonedDateTime
+import java.util.UUID
 
-data class Notification(
+data class SqsMessage(
+  @JsonProperty("Type") val type: String,
+  @JsonProperty("MessageId") val messageId: UUID,
+  @JsonProperty("Token") val token: String?,
+  @JsonProperty("TopicArn") val topicArn: String,
+  @JsonProperty("SubscribeURL") val subscribeUrl: String?,
+  @JsonProperty("Timestamp") val timestamp: ZonedDateTime,
+  @JsonProperty("SignatureVersion") val signatureVersion: String?,
+  @JsonProperty("Signature") val signature: String?,
+  @JsonProperty("SigningCertURL") val signingCertURL: String?,
   @JsonProperty("Message") val message: String,
   @JsonProperty("MessageAttributes") val attributes: MessageAttributes = MessageAttributes(),
 ) {
