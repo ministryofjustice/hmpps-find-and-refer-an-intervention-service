@@ -33,6 +33,8 @@ class GetReferralDetailsTest : IntegrationTestBase() {
     dataSource.connection.use {
       val r = resourceLoader.getResource("classpath:testData/setup.sql")
       ScriptUtils.executeSqlScript(it, r)
+      val referrals = resourceLoader.getResource("classpath:testData/referrals.sql")
+      ScriptUtils.executeSqlScript(it, referrals)
     }
   }
 
