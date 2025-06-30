@@ -24,7 +24,7 @@ class ReferralService(
   fun handleRequirementCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
     val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("requirementSubType") as String
-    val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["requirementId"] as String
+    val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["requirementID"] as String
     val existingReferral = referralRepository.findByPersonReferenceAndInterventionNameAndSourcedFromReference(
       personReference,
       interventionName,
@@ -66,7 +66,7 @@ class ReferralService(
     if (existingReferral != null) {
       return logger.info("Duplicate request to create referral from license-condition.created event for Person reference: $personReference, Intervention Name: $interventionName and Reference Id: $sourcedFromReference")
     }
-    logger.info("Saving licence-condition.created event to db with licconiditionId: ${hmppsDomainEvent.additionalInformation["licconiditionId"]}")
+    logger.info("Saving licence-condition.created event to db with licconditionId: ${hmppsDomainEvent.additionalInformation["licconditionId"]}")
     val referral = referralRepository.save(
       Referral(
         id = UUID.randomUUID(),
@@ -76,7 +76,7 @@ class ReferralService(
         personReferenceType = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().first,
         personReference = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!,
         sourcedFromReferenceType = SourcedFromReferenceType.LICENCE_CONDITION,
-        sourcedFromReference = hmppsDomainEvent.additionalInformation["licconiditionId"] as String,
+        sourcedFromReference = hmppsDomainEvent.additionalInformation["licconditionId"] as String,
       ),
     )
     val message = messageRepository.getReferenceById(messageId)

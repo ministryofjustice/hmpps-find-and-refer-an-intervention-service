@@ -40,7 +40,7 @@ fun HmppsDomainEventsFactory.createRequirementCreatedEvent() = this.create(
   additionalInformation = mapOf(
     Pair("requirementSubType", "Breaking Free Online"),
     Pair("requirementMainType", "Court - Accredited Programme"),
-    Pair("requirementId", "2500812305"),
+    Pair("requirementID", "2500812305"),
     Pair("eventNumber", "1"),
     Pair("restrictiveRequirement", "false"),
   ),
@@ -52,7 +52,7 @@ fun HmppsDomainEventsFactory.createLicenceConditionCreatedEvent() = this.create(
   additionalInformation = mapOf(
     Pair("licconditionSubType", "Horizon"),
     Pair("licconditionMainType", "License - Accredited Programme"),
-    Pair("licconiditionId", "2500782763"),
+    Pair("licconditionId", "2500782763"),
     Pair("eventNumber", "1"),
   ),
   occurredAt = ZonedDateTime.now(),
