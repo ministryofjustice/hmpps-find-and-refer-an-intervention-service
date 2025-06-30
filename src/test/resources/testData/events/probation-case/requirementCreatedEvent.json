@@ -3,7 +3,7 @@
   "MessageId": "f39059e7-a62d-4157-929a-fb049015c993",
   "Token": null,
   "TopicArn": "arn:aws:sns:eu-west-2:000000000000:hmpps-domain",
-  "Message": "{\"eventType\":\"probation-case.requirement.created\",\"version\":\"1\",\"description\":\"A requirement has been created in Delius\",\"occurredAt\":\"2025-06-26T09:18:21.89+01:00\",\"additionalInformation\":{\"requirementSubType\":\"Breaking Free Online\",\"requirementMainType\":\"Court - Accredited Programme\",\"requirementId\":\"2500812305\",\"eventNumber\":\"1\",\"restrictiveRequirement\":\"false\"},\"personReference\":{\"identifiers\":[{\"type\":\"CRN\",\"value\":\"X929377\"}]}}",
+  "Message": "{\"eventType\":\"probation-case.requirement.created\",\"version\":\"1\",\"description\":\"A requirement has been created in Delius\",\"occurredAt\":\"2025-06-26T09:18:21.89+01:00\",\"additionalInformation\":{\"requirementSubType\":\"Breaking Free Online\",\"requirementMainType\":\"Court - Accredited Programme\",\"requirementID\":\"2500812305\",\"eventNumber\":\"1\",\"restrictiveRequirement\":\"false\"},\"personReference\":{\"identifiers\":[{\"type\":\"CRN\",\"value\":\"X929377\"}]}}",
   "SubscribeURL": null,
   "Timestamp": "2021-10-21T06:27:57.028Z",
   "SignatureVersion": "1",
