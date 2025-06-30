@@ -57,7 +57,7 @@ class ReferralService(
   fun handleLicenceConditionCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
     val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType") as String
-    val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["licconiditionId"] as String
+    val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["licconditionId"] as String
     val existingReferral = referralRepository.findByPersonReferenceAndInterventionNameAndSourcedFromReference(
       personReference,
       interventionName,
