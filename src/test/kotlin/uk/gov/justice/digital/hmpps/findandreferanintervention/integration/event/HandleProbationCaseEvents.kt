@@ -87,4 +87,28 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     assertThat(message.event.eventType).isEqualTo(LICENCE_CONDITION_CREATED)
     assertThat(message.referral!!.id).isEqualTo(referral.id)
   }
+
+  @Test
+  fun `when duplicate referral created request for Requirement Created event don't create referral`() {
+    val duplicateEvent = hmppsDomainEventsFactory.createRequirementCreatedEvent()
+    sendDomainEvent(duplicateEvent)
+    sendDomainEvent(duplicateEvent)
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+
+    assertThat(referralRepository.count()).isEqualTo(1)
+    assertThat(messageRepository.count()).isEqualTo(2)
+  }
+
+  @Test
+  fun `when duplicate referral created request for Licence Condition created event don't create referral`() {
+    val duplicateEvent = hmppsDomainEventsFactory.createLicenceConditionCreatedEvent()
+    sendDomainEvent(duplicateEvent)
+    sendDomainEvent(duplicateEvent)
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+
+    assertThat(referralRepository.count()).isEqualTo(1)
+    assertThat(messageRepository.count()).isEqualTo(2)
+  }
 }

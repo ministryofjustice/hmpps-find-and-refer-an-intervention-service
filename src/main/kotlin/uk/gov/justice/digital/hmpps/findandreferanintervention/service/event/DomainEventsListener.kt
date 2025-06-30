@@ -6,9 +6,9 @@ import io.awspring.cloud.sqs.annotation.SqsListener
 import org.slf4j.LoggerFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Message
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.MessageRepository
-import uk.gov.justice.digital.hmpps.findandreferanintervention.model.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.ReferralService
 import java.util.UUID
 

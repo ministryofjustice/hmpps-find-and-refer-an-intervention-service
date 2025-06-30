@@ -14,3 +14,5 @@ INSERT INTO metadata(table_name, column_name, sensitive, domain_data)
 VALUES ('message', 'id', false, false),
        ('message', 'referral_id', false, false),
        ('message', 'event', false, false);
+
+CREATE UNIQUE INDEX idx ON referral (person_reference, intervention_name, sourced_from_reference);
