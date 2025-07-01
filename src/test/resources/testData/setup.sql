@@ -304,10 +304,3 @@ VALUES -- SI Interventions
 
 INSERT INTO intervention_catalogue_map(intervention_catalogue_id, intervention_id)
 VALUES ('c5d53fbd-b7e3-40bd-9096-6720a01a53bf', '65301f01-2e52-474a-a8ec-df94c7e6fced');
-
-
-
-
-
-
-

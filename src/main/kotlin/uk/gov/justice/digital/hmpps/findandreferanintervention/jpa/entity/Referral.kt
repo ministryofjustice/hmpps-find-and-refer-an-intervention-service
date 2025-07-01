@@ -20,10 +20,6 @@ open class Referral(
   open var id: UUID,
 
   @NotNull
-  @Column(name = "person_reference", length = Integer.MAX_VALUE)
-  open var personReference: String,
-
-  @NotNull
   @Column(name = "setting")
   @Enumerated(EnumType.STRING)
   @JdbcType(PostgreSQLEnumJdbcType::class)
@@ -37,7 +33,11 @@ open class Referral(
 
   @NotNull
   @Column(name = "intervention_name", length = Integer.MAX_VALUE)
-  open var interventionName: String? = null,
+  open var interventionName: String,
+
+  @NotNull
+  @Column(name = "person_reference", length = Integer.MAX_VALUE)
+  open var personReference: String,
 
   @NotNull
   @Column(name = "person_reference_type")
