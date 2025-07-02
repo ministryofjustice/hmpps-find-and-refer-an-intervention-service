@@ -21,7 +21,7 @@ servers:
 components:
   messages:
     interventions.community-referral.created:
-      $ref: https://raw.githubusercontent.com/ministryofjustice/hmpps-domain-events/main/spec/schemas/interventions/community-referral.created.yaml
+      $ref: https://raw.githubusercontent.com/ministryofjustice/hmpps-domain-events/refs/heads/main/spec/schemas/interventions/community-referral-created.yml
 
 channels:
   hmpps-domain-events:
