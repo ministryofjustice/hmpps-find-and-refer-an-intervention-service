@@ -3,7 +3,7 @@
   "MessageId": "ba0cd0f0-887b-4a97-b502-41bdf32aa27c",
   "Token": null,
   "TopicArn": "arn:aws:sns:eu-west-2:000000000000:hmpps-domain",
-  "Message": "{\"eventType\":\"interventions.community-referral.created\",\"version\":1,\"detailUrl\":\"http://localhost:8080/referral/1a2b31d5-3508-4f3a-983e-f952d78ef843\",\"occurredAt\":\"2025-07-02T13:32:00.209063+01:00\",\"description\":\"A interventions referral in community has been created.\",\"additionalInformation\":{},\"personReference\":{\"identifiers\":[{\"type\":\"CRN\",\"value\":\"X928972\"}],\"personReferenceTypeAndValue\":{\"first\":\"CRN\",\"second\":\"X928972\"}}}",
+  "Message": "{\"eventType\":\"interventions.community-referral.created\",\"version\":1,\"detailUrl\":\"http://localhost:8080/referral/773888f1-d658-49cb-8d73-1d79862aaae8\",\"occurredAt\":\"2025-07-02T14:14:17.51815+01:00\",\"description\":\"AnInterventionsreferralincommunityhasbeencreated.\",\"additionalInformation\":{},\"personReference\":{\"identifiers\":[{\"type\":\"CRN\",\"value\":\"X928972\"}]}}",
   "SubscribeURL": null,
   "Timestamp": "2021-10-21T06:27:57.028Z",
   "SignatureVersion": "1",

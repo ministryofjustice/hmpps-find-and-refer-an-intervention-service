@@ -9,6 +9,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.DomainEventPublisher
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.PersonReference
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.getPersonReferenceTypeAndValue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Referral
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
@@ -103,9 +104,9 @@ class ReferralService(
       version = 1,
       detailUrl = "$findAndReferBaseUrl/referral/$referralId",
       occurredAt = ZonedDateTime.now(),
-      description = "A interventions referral in community has been created.",
+      description = "An Interventions referral in community has been created.",
       additionalInformation = mutableMapOf(),
-      personReference = personReference,
+      personReference = PersonReference.withIdentifier(personReference),
     )
     logger.info("Publishing intervention.community-referral.created event for referralId: $referralId")
     domainEventPublisher.publish(hmppsDomainEvent)
