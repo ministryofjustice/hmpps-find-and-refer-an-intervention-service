@@ -25,7 +25,7 @@ class DomainEventsListener(
   fun receive(sqsMessage: SqsMessage) {
     when (sqsMessage.eventType) {
       REQUIREMENT_CREATED, LICENCE_CONDITION_CREATED -> handleHmppsDomainEvent(sqsMessage)
-      else -> logger.error("Unknown event type ${sqsMessage.eventType}")
+      else -> logger.info("Unknown event type ${sqsMessage.eventType}")
     }
   }
 
@@ -46,7 +46,7 @@ class DomainEventsListener(
         LICENCE_CONDITION_CREATED -> referralService.handleLicenceConditionCreatedEvent(hmppsDomainEvent, messageId)
       }
     } else {
-      logger.info("Event with Id: ${sqsMessage.messageId} already exists. Skipping insert.")
+      return logger.info("Event with Id: ${sqsMessage.messageId} already exists. Skipping insert.")
     }
   }
 

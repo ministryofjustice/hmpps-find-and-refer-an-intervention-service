@@ -1,17 +1,22 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.DomainEventPublisher
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.PersonReference
+import uk.gov.justice.digital.hmpps.findandreferanintervention.event.getPersonReferenceTypeAndValue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Referral
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SourcedFromReferenceType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.MessageRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ReferralRepository
+import java.time.ZonedDateTime
 import java.util.UUID
 
 @Service
@@ -19,6 +24,8 @@ import java.util.UUID
 class ReferralService(
   private val referralRepository: ReferralRepository,
   private val messageRepository: MessageRepository,
+  private val domainEventPublisher: DomainEventPublisher,
+  @Value($$"${api.baseurl.find-and-refer}") private val findAndReferBaseUrl: String,
 ) {
 
   private val logger = LoggerFactory.getLogger(this::class.java)
@@ -38,7 +45,7 @@ class ReferralService(
       return logger.info("Duplicate request to create referral from requirement.created for Person reference: $personReference, Intervention Name: $interventionName and Reference Id: $sourcedFromReference")
     }
 
-    logger.info("Saving requirement-condition.created created event to db with requirementId: ${hmppsDomainEvent.additionalInformation["requirementId"]}")
+    logger.info("Saving requirement-condition.created created event to db with requirementId: ${hmppsDomainEvent.additionalInformation["requirementID"]}")
 
     val newReferral =
       referralRepository.save(
@@ -56,6 +63,8 @@ class ReferralService(
     val message = messageRepository.getReferenceById(messageId)
     message.referral = newReferral
     messageRepository.save(message)
+
+    createCommunityReferralCreatedEvent(newReferral.id, hmppsDomainEvent.personReference)
   }
 
   fun handleLicenceConditionCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
@@ -71,7 +80,7 @@ class ReferralService(
       return logger.info("Duplicate request to create referral from license-condition.created event for Person reference: $personReference, Intervention Name: $interventionName and Reference Id: $sourcedFromReference")
     }
     logger.info("Saving licence-condition.created event to db with licconditionId: ${hmppsDomainEvent.additionalInformation["licconditionId"]}")
-    val referral = referralRepository.save(
+    val newReferral = referralRepository.save(
       Referral(
         id = UUID.randomUUID(),
         settingType = SettingType.COMMUNITY,
@@ -84,7 +93,22 @@ class ReferralService(
       ),
     )
     val message = messageRepository.getReferenceById(messageId)
-    message.referral = referral
+    message.referral = newReferral
     messageRepository.save(message)
+    createCommunityReferralCreatedEvent(newReferral.id, hmppsDomainEvent.personReference)
+  }
+
+  private fun createCommunityReferralCreatedEvent(referralId: UUID, personReference: PersonReference) {
+    val hmppsDomainEvent = HmppsDomainEvent(
+      eventType = "interventions.community-referral.created",
+      version = 1,
+      detailUrl = "$findAndReferBaseUrl/referral/$referralId",
+      occurredAt = ZonedDateTime.now(),
+      description = "An Interventions referral in community has been created.",
+      additionalInformation = mutableMapOf(),
+      personReference = PersonReference.withIdentifier(personReference),
+    )
+    logger.info("Publishing intervention.community-referral.created event for referralId: $referralId")
+    domainEventPublisher.publish(hmppsDomainEvent)
   }
 }

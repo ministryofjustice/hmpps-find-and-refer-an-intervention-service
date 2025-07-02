@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.event
 
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.Assertions.assertThat
 import org.awaitility.kotlin.await
 import org.awaitility.kotlin.matches
@@ -17,7 +18,9 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.Me
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ReferralRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.event.DomainEventsListener.Companion.LICENCE_CONDITION_CREATED
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.event.DomainEventsListener.Companion.REQUIREMENT_CREATED
+import uk.gov.justice.digital.hmpps.findandreferanintervention.service.event.SqsMessage
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.HmppsDomainEventsFactory
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.create
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createLicenceConditionCreatedEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createRequirementCreatedEvent
 import java.time.Duration.ofSeconds
@@ -56,6 +59,15 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
   }
 
   @Test
+  fun `when unknown event log event type`() {
+    sendDomainEvent(hmppsDomainEventsFactory.create("UNKNOWN_EVENT"))
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+    assertThat(referralRepository.count()).isEqualTo(0)
+    assertThat(messageRepository.count()).isEqualTo(0)
+  }
+
+  @Test
   fun `handle probation-case requirement created event`() {
     sendDomainEvent(hmppsDomainEventsFactory.createRequirementCreatedEvent())
     // Wait for message to be processed
@@ -69,6 +81,8 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     val message = messageRepository.findAll().first()
     assertThat(message.event.eventType).isEqualTo(REQUIREMENT_CREATED)
     assertThat(message.referral!!.id).isEqualTo(referral.id)
+
+    verifyInterventionEventPublished()
   }
 
   @Test
@@ -86,6 +100,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     val message = messageRepository.findAll().first()
     assertThat(message.event.eventType).isEqualTo(LICENCE_CONDITION_CREATED)
     assertThat(message.referral!!.id).isEqualTo(referral.id)
+    verifyInterventionEventPublished()
   }
 
   @Test
@@ -98,6 +113,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
 
     assertThat(referralRepository.count()).isEqualTo(1)
     assertThat(messageRepository.count()).isEqualTo(2)
+    verifyInterventionEventPublished()
   }
 
   @Test
@@ -110,5 +126,12 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
 
     assertThat(referralRepository.count()).isEqualTo(1)
     assertThat(messageRepository.count()).isEqualTo(2)
+    verifyInterventionEventPublished()
+  }
+
+  private fun verifyInterventionEventPublished() {
+    await untilCallTo { interventionsQueue.countAllMessagesOnQueue() } matches { it == 1 }
+    val eventBody = objectMapper.readValue<SqsMessage>(interventionsQueue.receiveMessageOnQueue().body())
+    assertThat(eventBody.eventType).isEqualTo("interventions.community-referral.created")
   }
 }

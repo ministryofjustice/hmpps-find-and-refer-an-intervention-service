@@ -58,6 +58,11 @@ abstract class IntegrationTestBase {
       ?: throw MissingQueueException("HmppsTopic hmpps event topic not found")
   }
 
+  internal val interventionsQueue by lazy {
+    hmppsQueueService.findByQueueId("interventionseventtestqueue")
+      ?: throw MissingQueueException("interventionseventtestqueue queue not found")
+  }
+
   val domainEventsTopic by lazy {
     hmppsQueueService.findByTopicId("hmppseventtopic") ?: throw MissingTopicException("hmppseventtopic not found")
   }
@@ -70,6 +75,10 @@ abstract class IntegrationTestBase {
   fun `clear queues`() {
     hmppsDomainEventsQueue.sqsClient.purgeQueue(
       PurgeQueueRequest.builder().queueUrl(hmppsDomainEventsQueue.queueUrl).build(),
+    )
+      .get()
+    interventionsQueue.sqsClient.purgeQueue(
+      PurgeQueueRequest.builder().queueUrl(interventionsQueue.queueUrl).build(),
     )
       .get()
   }

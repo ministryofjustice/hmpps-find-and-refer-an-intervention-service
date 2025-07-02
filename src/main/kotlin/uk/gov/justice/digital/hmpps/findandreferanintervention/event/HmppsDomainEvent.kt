@@ -16,20 +16,25 @@ data class HmppsDomainEvent(
 data class PersonReference(val identifiers: List<Identifier> = listOf()) {
   fun findCrn() = get("CRN")
   fun findNomsNumber() = get(NOMS_NUMBER_TYPE)
-  fun getPersonReferenceTypeAndValue(): Pair<PersonReferenceType, String?> = if (findCrn() != null) {
-    Pair(PersonReferenceType.CRN, findCrn())
-  } else {
-    Pair(
-      PersonReferenceType.NOMS,
-      findNomsNumber(),
-    )
-  }
 
   operator fun get(key: String) = identifiers.find { it.type == key }?.value
 
   companion object {
     const val NOMS_NUMBER_TYPE = "NOMS"
+    fun withIdentifier(personReference: PersonReference): PersonReference {
+      val (personReferenceType, personReferenceString) = personReference.getPersonReferenceTypeAndValue()
+      return PersonReference(listOf(Identifier(personReferenceType.name, personReferenceString!!)))
+    }
   }
 
   data class Identifier(val type: String, val value: String)
+}
+
+fun PersonReference.getPersonReferenceTypeAndValue(): Pair<PersonReferenceType, String?> = if (findCrn() != null) {
+  Pair(PersonReferenceType.CRN, findCrn())
+} else {
+  Pair(
+    PersonReferenceType.NOMS,
+    findNomsNumber(),
+  )
 }

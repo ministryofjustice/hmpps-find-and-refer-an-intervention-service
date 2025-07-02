@@ -1,3 +1,7 @@
+api:
+  baseurl:
+    find-and-refer: "http://localhost:8080"
+
 server:
   shutdown: immediate
 
@@ -51,6 +55,11 @@ hmpps:
   sqs:
     provider: localstack
     queues:
+      interventionseventtestqueue:
+        queueName: interventionseventtestqueue
+        dlqName: interventionseventtestqueuedlq
+        subscribeTopicId: hmppseventtopic
+        subscribeFilter: '{"eventType":[ "interventions.community-referral.created" ]}'
       hmppsdomaineventsqueue:
         queueName: hmpps_domain_events_queue
         dlqName: hmpps_domain_events_dlq
