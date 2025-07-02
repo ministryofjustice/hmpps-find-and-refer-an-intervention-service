@@ -1,3 +1,7 @@
+api:
+  baseurl:
+    find-and-refer: "http://localhost:8080"
+
 hmpps-auth:
   baseurl: "http://hmpps-auth:9090/auth"
 
@@ -25,8 +29,8 @@ hmpps.sqs:
   provider: localstack
   queues:
     interventionseventtestqueue:
-      queueName: hmppsdomaineventtestqueue
-      dlqName: hmppsdomaineventtestqueuedlq
+      queueName: interventionseventtestqueue
+      dlqName: interventionseventtestqueuedlq
       subscribeTopicId: hmppseventtopic
       subscribeFilter: '{"eventType":[ "interventions.community-referral.created" ]}'
     hmppsdomaineventsqueue:

@@ -1,3 +1,7 @@
+api:
+  baseurl:
+    find-and-refer: "http://localhost:8080"
+
 server:
   shutdown: immediate
 

@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDetailsDto
@@ -23,6 +24,7 @@ class ReferralService(
   private val referralRepository: ReferralRepository,
   private val messageRepository: MessageRepository,
   private val domainEventPublisher: DomainEventPublisher,
+  @Value($$"${api.baseurl.find-and-refer}") private val findAndReferBaseUrl: String,
 ) {
 
   private val logger = LoggerFactory.getLogger(this::class.java)
@@ -99,7 +101,7 @@ class ReferralService(
     val hmppsDomainEvent = HmppsDomainEvent(
       eventType = "interventions.community-referral.created",
       version = 1,
-      detailUrl = "ADD_HOST_PREFIX_HERE/referral/$referralId",
+      detailUrl = "$findAndReferBaseUrl/referral/$referralId",
       occurredAt = ZonedDateTime.now(),
       description = "A interventions referral in community has been created.",
       additionalInformation = mutableMapOf(),
