@@ -1,6 +1,6 @@
 info.app:
-name: HMPPS Find And Refer An Intervention Service
-version: 1.0
+  name: HMPPS Find And Refer An Intervention Service
+  version: 1.0
 logging:
   level:
     org:
