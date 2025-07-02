@@ -51,6 +51,11 @@ hmpps:
   sqs:
     provider: localstack
     queues:
+      interventionseventtestqueue:
+        queueName: interventionseventtestqueue
+        dlqName: interventionseventtestqueuedlq
+        subscribeTopicId: hmppseventtopic
+        subscribeFilter: '{"eventType":[ "interventions.community-referral.created" ]}'
       hmppsdomaineventsqueue:
         queueName: hmpps_domain_events_queue
         dlqName: hmpps_domain_events_dlq

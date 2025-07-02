@@ -1,16 +1,16 @@
 info.app:
-  name: HMPPS Find And Refer An Intervention Service
-  version: 1.0
+name: HMPPS Find And Refer An Intervention Service
+version: 1.0
 logging:
   level:
     org:
       springframework:
-         beans:
-           factory: WARN
-         security:
-           oauth2:
-             client: DEBUG
-             webclient: DEBUG
+        beans:
+          factory: WARN
+        security:
+          oauth2:
+            client: DEBUG
+            webclient: DEBUG
 spring:
   application:
     name: hmpps-find-and-refer-an-intervention-service

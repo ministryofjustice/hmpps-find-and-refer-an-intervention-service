@@ -24,6 +24,11 @@ find-and-refer-and-delius:
 hmpps.sqs:
   provider: localstack
   queues:
+    interventionseventtestqueue:
+      queueName: hmppsdomaineventtestqueue
+      dlqName: hmppsdomaineventtestqueuedlq
+      subscribeTopicId: hmppseventtopic
+      subscribeFilter: '{"eventType":[ "interventions.community-referral.created" ]}'
     hmppsdomaineventsqueue:
       queueName: hmppsdomainevent
       dlqName: hmppsdomaineventdlq
