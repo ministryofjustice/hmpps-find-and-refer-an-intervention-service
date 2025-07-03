@@ -33,6 +33,10 @@ class ReferralService(
   fun getReferralDetailsById(referralId: UUID): ReferralDetailsDto? = referralRepository.findReferralById(referralId)?.toDto()
 
   fun handleRequirementCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
+    val requirementMainType = hmppsDomainEvent.additionalInformation.getValue("requirementMainType")
+    if (hmppsDomainEvent.additionalInformation.getValue("requirementMainType") == null || requirementMainType != "Court - Accredited Programme") {
+      return logger.info("requirementMainType is not for creation of an Accredited Programme. requirementMainType: $requirementMainType and messageId: $messageId)")
+    }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
     val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("requirementSubType") as String
     val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["requirementID"] as String
@@ -68,6 +72,10 @@ class ReferralService(
   }
 
   fun handleLicenceConditionCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
+    val licconditionMainType = hmppsDomainEvent.additionalInformation.getValue("licconditionMainType")
+    if (hmppsDomainEvent.additionalInformation.getValue("licconditionMainType") == null || licconditionMainType != "License - Accredited Programme") {
+      return logger.info("licconditionMainType is not for creation of an Accredited Programme. licconditionMainType: $licconditionMainType and messageId: $messageId)")
+    }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
     val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType") as String
     val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["licconditionId"] as String
