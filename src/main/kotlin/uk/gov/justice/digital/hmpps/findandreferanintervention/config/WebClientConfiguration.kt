@@ -34,7 +34,6 @@ class WebClientConfiguration(
   private val findAndReferInterventionsClientRegistrationId = "find-and-refer-interventions-client"
 
   // HMPPS Auth health ping is required if your service calls HMPPS Auth to get a token to call other services
-  // TODO: Remove the health ping if no call outs to other services are made
   @Bean
   fun hmppsAuthHealthWebClient(builder: WebClient.Builder): WebClient = builder.healthWebClient(hmppsAuthBaseUri, healthTimeout)
 
