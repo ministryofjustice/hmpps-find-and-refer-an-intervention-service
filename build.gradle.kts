@@ -55,6 +55,9 @@ dependencies {
   implementation("org.hibernate:hibernate-core:7.0.4.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.1")
 
+  // monitoring
+  implementation("io.micrometer:micrometer-registry-prometheus")
+
   runtimeOnly("org.postgresql:postgresql:42.7.7")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
