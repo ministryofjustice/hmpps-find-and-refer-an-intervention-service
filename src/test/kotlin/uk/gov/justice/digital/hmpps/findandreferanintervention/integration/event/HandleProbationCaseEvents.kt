@@ -129,6 +129,31 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     verifyInterventionEventPublished()
   }
 
+  @Test
+  fun `when probation-case requirement created event but not 'Court - Accredited Programme, don't create referral`() {
+    sendDomainEvent(hmppsDomainEventsFactory.createRequirementCreatedEvent(requirementMainType = "Curfew"))
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+    assertThat(referralRepository.count()).isEqualTo(0)
+
+    val message = messageRepository.findAll().first()
+    assertThat(message.event.eventType).isEqualTo(REQUIREMENT_CREATED)
+    assertThat(message.referral).isNull()
+  }
+
+  @Test
+  fun `when probation-case licence condition created event but not 'Licence - Accredited Programme, don't create referral`() {
+    sendDomainEvent(hmppsDomainEventsFactory.createLicenceConditionCreatedEvent(licconditionMainType = "Not to seek to approach or communicate with victim/family member"))
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+
+    assertThat(referralRepository.count()).isEqualTo(0)
+
+    val message = messageRepository.findAll().first()
+    assertThat(message.event.eventType).isEqualTo(LICENCE_CONDITION_CREATED)
+    assertThat(message.referral).isNull()
+  }
+
   private fun verifyInterventionEventPublished() {
     await untilCallTo { interventionsQueue.countAllMessagesOnQueue() } matches { it == 1 }
     val eventBody = objectMapper.readValue<SqsMessage>(interventionsQueue.receiveMessageOnQueue().body())

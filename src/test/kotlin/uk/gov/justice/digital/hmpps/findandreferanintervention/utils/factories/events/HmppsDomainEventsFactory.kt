@@ -35,25 +35,36 @@ fun HmppsDomainEventsFactory.create(
   ),
 )
 
-fun HmppsDomainEventsFactory.createRequirementCreatedEvent() = this.create(
+fun HmppsDomainEventsFactory.createRequirementCreatedEvent(
+  requirementSubType: String? = "Breaking Free Online",
+  requirementMainType: String? = "Court - Accredited Programme",
+  requirementID: String? = "2500812305",
+  eventNumber: String? = "1",
+  restrictiveRequirement: String? = "false",
+) = this.create(
   eventType = "probation-case.requirement.created",
   additionalInformation = mapOf(
-    Pair("requirementSubType", "Breaking Free Online"),
-    Pair("requirementMainType", "Court - Accredited Programme"),
-    Pair("requirementID", "2500812305"),
-    Pair("eventNumber", "1"),
-    Pair("restrictiveRequirement", "false"),
+    Pair("requirementSubType", requirementSubType),
+    Pair("requirementMainType", requirementMainType),
+    Pair("requirementID", requirementID),
+    Pair("eventNumber", eventNumber),
+    Pair("restrictiveRequirement", restrictiveRequirement),
   ),
   occurredAt = ZonedDateTime.now(),
 )
 
-fun HmppsDomainEventsFactory.createLicenceConditionCreatedEvent() = this.create(
+fun HmppsDomainEventsFactory.createLicenceConditionCreatedEvent(
+  licconditionSubType: String? = "Horizon",
+  licconditionMainType: String? = "License - Accredited Programme",
+  licconditionId: String? = "2500782763",
+  eventNumber: String? = "1",
+) = this.create(
   eventType = "probation-case.licence-condition.created",
   additionalInformation = mapOf(
-    Pair("licconditionSubType", "Horizon"),
-    Pair("licconditionMainType", "License - Accredited Programme"),
-    Pair("licconditionId", "2500782763"),
-    Pair("eventNumber", "1"),
+    Pair("licconditionSubType", licconditionSubType),
+    Pair("licconditionMainType", licconditionMainType),
+    Pair("licconditionId", licconditionId),
+    Pair("eventNumber", eventNumber),
   ),
   occurredAt = ZonedDateTime.now(),
 )
