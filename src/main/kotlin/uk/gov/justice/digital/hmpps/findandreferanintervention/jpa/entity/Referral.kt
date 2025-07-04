@@ -9,6 +9,7 @@ import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.JdbcType
 import org.hibernate.dialect.PostgreSQLEnumJdbcType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDto
 import java.util.UUID
 
 @Entity
@@ -65,3 +66,14 @@ enum class SourcedFromReferenceType {
   LICENCE_CONDITION,
   REQUIREMENT,
 }
+
+fun Referral.toDto(): ReferralDto = ReferralDto(
+  id = this.id,
+  settingType = this.settingType,
+  interventionType = this.interventionType,
+  interventionName = this.interventionName,
+  personReference = this.personReference,
+  personReferenceType = this.personReferenceType,
+  sourcedFromReferenceType = this.sourcedFromReferenceType,
+  sourcedFromReference = this.sourcedFromReference,
+)
