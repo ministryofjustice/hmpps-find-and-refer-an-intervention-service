@@ -18,7 +18,3 @@ class HealthInfo(buildProperties: BuildProperties) : HealthIndicator {
 
   override fun health(): Health = Health.up().withDetail("version", version).build()
 }
-
-// TODO: Example ping health check calling out to other services
-// @Component("exampleApi")
-// class ExampleApiHealthPing(@Qualifier("exampleApiHealthWebClient") webClient: WebClient) : HealthPingCheck(webClient)

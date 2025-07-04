@@ -23,9 +23,6 @@ generic-service:
     FIND_AND_REFER_AND_DELIUS_BASEURL: "https://find-and-refer-and-delius-dev.hmpps.service.justice.gov.uk"
     API_BASEURL_FIND_AND_REFER: "https://find-and-refer-intervention-api-dev.hmpps.service.justice.gov.uk"
     SENTRY_ENVIRONMENT: dev
-    # Template kotlin calls out to itself to provide an example of a service call
-    # TODO: This should be replaced by a call to a different service, or removed
-    # EXAMPLE_API_URL: "https://template-kotlin-dev.hmpps.service.justice.gov.uk"
 
 # CloudPlatform AlertManager receiver to route prometheus alerts to slack
 # See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
