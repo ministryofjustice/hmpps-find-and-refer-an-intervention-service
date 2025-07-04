@@ -3,8 +3,6 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.OfficeDto
 import java.time.OffsetDateTime
@@ -17,10 +15,6 @@ class Office(
   @Id
   @Column(name = "id", nullable = false, unique = true)
   var id: UUID,
-
-  @OneToOne
-  @JoinColumn(name = "referral_id", referencedColumnName = "id", unique = true)
-  var referral: Referral,
 
   @Column(name = "office_name", nullable = false)
   var officeName: String,
@@ -40,7 +34,6 @@ class Office(
 
 fun Office.toDto(): OfficeDto = OfficeDto(
   id = this.id,
-  referral = this.referral.toDto(),
   officeName = this.officeName,
   contactEmail = this.contactEmail,
   createdAt = this.createdAt.toString(),

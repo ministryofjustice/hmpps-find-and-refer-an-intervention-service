@@ -15,4 +15,5 @@ data class ReferralDto(
   val personReferenceType: PersonReferenceType,
   val sourcedFromReferenceType: SourcedFromReferenceType,
   val sourcedFromReference: String,
+  val office: OfficeDto?,
 )
