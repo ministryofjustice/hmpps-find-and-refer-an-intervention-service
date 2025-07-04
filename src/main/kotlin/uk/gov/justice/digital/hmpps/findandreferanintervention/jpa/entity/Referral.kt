@@ -5,10 +5,13 @@ import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.JdbcType
 import org.hibernate.dialect.PostgreSQLEnumJdbcType
+import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDto
 import java.util.UUID
 
 @Entity
@@ -54,6 +57,10 @@ open class Referral(
   @NotNull
   @Column(name = "sourced_from_reference", length = Integer.MAX_VALUE)
   open var sourcedFromReference: String,
+
+  @ManyToOne
+  @JoinColumn(name = "office_id")
+  open var office: Office? = null,
 )
 
 enum class PersonReferenceType {
@@ -65,3 +72,15 @@ enum class SourcedFromReferenceType {
   LICENCE_CONDITION,
   REQUIREMENT,
 }
+
+fun Referral.toDto(): ReferralDto = ReferralDto(
+  id = this.id,
+  settingType = this.settingType,
+  interventionType = this.interventionType,
+  interventionName = this.interventionName,
+  personReference = this.personReference,
+  personReferenceType = this.personReferenceType,
+  sourcedFromReferenceType = this.sourcedFromReferenceType,
+  sourcedFromReference = this.sourcedFromReference,
+  office = this.office?.toDto(),
+)
