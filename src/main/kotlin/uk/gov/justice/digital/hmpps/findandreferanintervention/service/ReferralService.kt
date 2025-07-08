@@ -74,7 +74,7 @@ class ReferralService(
   fun handleLicenceConditionCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
     val licconditionMainType = hmppsDomainEvent.additionalInformation.getValue("licconditionMainType")
     // We have seen both spellings of Licence in the dev environment.
-    if (hmppsDomainEvent.additionalInformation.getValue("licconditionMainType") == null || licconditionMainType != "License - Accredited Programme" || licconditionMainType != "Licence - Accredited Programme") {
+    if (hmppsDomainEvent.additionalInformation.getValue("licconditionMainType") == null || (licconditionMainType != "License - Accredited Programme" && licconditionMainType != "Licence - Accredited Programme")) {
       return logger.info("licconditionMainType is not for creation of an Accredited Programme. licconditionMainType: $licconditionMainType and messageId: $messageId)")
     }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
