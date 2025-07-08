@@ -105,9 +105,8 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
 
   @Test
   fun `when duplicate referral created request for Requirement Created event don't create referral`() {
-    val duplicateEvent = hmppsDomainEventsFactory.createRequirementCreatedEvent()
-    sendDomainEvent(duplicateEvent)
-    sendDomainEvent(duplicateEvent)
+    sendDomainEvent(hmppsDomainEventsFactory.createRequirementCreatedEvent())
+    sendDomainEvent(hmppsDomainEventsFactory.createRequirementCreatedEvent())
     // Wait for message to be processed
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 
@@ -118,9 +117,8 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
 
   @Test
   fun `when duplicate referral created request for Licence Condition created event don't create referral`() {
-    val duplicateEvent = hmppsDomainEventsFactory.createLicenceConditionCreatedEvent()
-    sendDomainEvent(duplicateEvent)
-    sendDomainEvent(duplicateEvent)
+    sendDomainEvent(hmppsDomainEventsFactory.createLicenceConditionCreatedEvent())
+    sendDomainEvent(hmppsDomainEventsFactory.createLicenceConditionCreatedEvent())
     // Wait for message to be processed
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 
