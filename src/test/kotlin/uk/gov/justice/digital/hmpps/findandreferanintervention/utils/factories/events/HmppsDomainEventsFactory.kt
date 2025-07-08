@@ -55,7 +55,7 @@ fun HmppsDomainEventsFactory.createRequirementCreatedEvent(
 
 fun HmppsDomainEventsFactory.createLicenceConditionCreatedEvent(
   licconditionSubType: String? = "Horizon",
-  licconditionMainType: String? = "License - Accredited Programme",
+  licconditionMainType: String? = "Licence - Accredited Programme",
   licconditionId: String? = "2500782763",
   eventNumber: String? = "1",
 ) = this.create(

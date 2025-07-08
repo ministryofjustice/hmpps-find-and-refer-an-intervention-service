@@ -73,7 +73,8 @@ class ReferralService(
 
   fun handleLicenceConditionCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
     val licconditionMainType = hmppsDomainEvent.additionalInformation.getValue("licconditionMainType")
-    if (hmppsDomainEvent.additionalInformation.getValue("licconditionMainType") == null || licconditionMainType != "License - Accredited Programme") {
+    // We have seen both spellings of Licence in the dev environment.
+    if (hmppsDomainEvent.additionalInformation.getValue("licconditionMainType") == null || licconditionMainType != "License - Accredited Programme" || licconditionMainType != "Licence - Accredited Programme") {
       return logger.info("licconditionMainType is not for creation of an Accredited Programme. licconditionMainType: $licconditionMainType and messageId: $messageId)")
     }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
@@ -85,7 +86,7 @@ class ReferralService(
       sourcedFromReference,
     )
     if (existingReferral != null) {
-      return logger.info("Duplicate request to create referral from license-condition.created event for Person reference: $personReference, Intervention Name: $interventionName and Reference Id: $sourcedFromReference")
+      return logger.info("Duplicate request to create referral from licence-condition.created event for Person reference: $personReference, Intervention Name: $interventionName and Reference Id: $sourcedFromReference")
     }
     logger.info("Saving licence-condition.created event to db with licconditionId: ${hmppsDomainEvent.additionalInformation["licconditionId"]}")
     val newReferral = referralRepository.save(
