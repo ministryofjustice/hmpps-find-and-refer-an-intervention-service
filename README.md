@@ -284,6 +284,11 @@ hmpps-find-and-refer-an-intervention-ui        0/0     0            0           
 
 By checking for the `0` in the `READY` column.
 
+## Connecting Postman to Test Environments
+
+There is a guide on how to configure your postman client to be able to call endpoints in the Test environments (
+Dev) [here](https://dsdmoj.atlassian.net/wiki/spaces/IC/pages/5784142235/Connecting+Postman+to+test+environments).
+
 ## Troubleshooting
 
 For any issues please reach out to the Find and Refer Interventions team in
