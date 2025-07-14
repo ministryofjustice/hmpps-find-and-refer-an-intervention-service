@@ -52,8 +52,8 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:7.0.5.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.2")
+  implementation("org.hibernate:hibernate-core:7.0.6.Final")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.3")
 
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
