@@ -153,7 +153,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
   }
 
   private fun verifyInterventionEventPublished() {
-    await untilCallTo { interventionsQueue.countAllMessagesOnQueue() } matches { it == 1 }
+    await withPollDelay ofSeconds(1) untilCallTo { interventionsQueue.countAllMessagesOnQueue() } matches { it == 1 }
     val eventBody = objectMapper.readValue<SqsMessage>(interventionsQueue.receiveMessageOnQueue().body())
     assertThat(eventBody.eventType).isEqualTo("interventions.community-referral.created")
   }
