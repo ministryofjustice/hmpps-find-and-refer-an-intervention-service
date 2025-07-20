@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  hmpps: ministryofjustice/hmpps@10
+  hmpps: ministryofjustice/hmpps@11.2.0
   mem: circleci/rememborb@0.0.2
 parameters:
   releases-slack-channel:
@@ -42,7 +42,9 @@ workflows:
     jobs:
       - hmpps/database_schema_report:
           schema: "public"
-          initialise_database: "./gradlew check"
+          jdk_tag: "21.0"
+          postgres_tag: "16.1"
+          localstack_tag: "3"
           filters:
             branches:
               only:
