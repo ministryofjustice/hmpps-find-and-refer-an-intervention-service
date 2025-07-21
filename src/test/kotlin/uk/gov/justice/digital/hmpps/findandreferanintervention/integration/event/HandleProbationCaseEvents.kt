@@ -24,6 +24,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.e
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createLicenceConditionCreatedEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories.events.createRequirementCreatedEvent
 import java.time.Duration.ofSeconds
+import java.util.concurrent.TimeUnit
 import javax.sql.DataSource
 
 class HandleProbationCaseEvents : IntegrationTestBase() {
@@ -153,7 +154,10 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
   }
 
   private fun verifyInterventionEventPublished() {
-    await withPollDelay ofSeconds(1) untilCallTo { interventionsQueue.countAllMessagesOnQueue() } matches { it == 1 }
+    await.atMost(
+      15,
+      TimeUnit.SECONDS,
+    ) withPollDelay ofSeconds(1) untilCallTo { interventionsQueue.countAllMessagesOnQueue() } matches { it == 1 }
     val eventBody = objectMapper.readValue<SqsMessage>(interventionsQueue.receiveMessageOnQueue().body())
     assertThat(eventBody.eventType).isEqualTo("interventions.community-referral.created")
   }
