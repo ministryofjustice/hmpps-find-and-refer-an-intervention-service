@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.3.2"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.3.4"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.2.0"
   kotlin("plugin.spring") version "2.2.0"
 }
@@ -11,7 +11,7 @@ configurations {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.9")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.4.11")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
@@ -39,20 +39,20 @@ dependencies {
   }
 
   // SQN/SNS
-  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.4.8")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.4.10")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.3")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.3")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.3")
-  implementation("org.springframework.security:spring-security-crypto:6.5.1")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.26")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.4")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.4")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.4")
+  implementation("org.springframework.security:spring-security-crypto:6.5.2")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.26.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:7.0.6.Final")
+  implementation("org.hibernate:hibernate-core:7.0.8.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.3")
 
   // monitoring
@@ -76,7 +76,7 @@ dependencies {
   testImplementation("org.testcontainers:postgresql:1.21.3")
   testImplementation("org.testcontainers:localstack:1.21.3")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.9")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.4.11")
   testImplementation("org.wiremock:wiremock-standalone:3.13.1")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.31") {
     exclude(group = "io.swagger.core.v3")
