@@ -45,7 +45,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.4")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.4")
   implementation("org.springframework.security:spring-security-crypto:6.5.2")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.26.1")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.27")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
   // database
