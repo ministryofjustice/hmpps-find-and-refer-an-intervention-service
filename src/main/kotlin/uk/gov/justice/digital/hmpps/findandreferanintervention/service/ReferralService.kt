@@ -1,9 +1,11 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 
+import com.microsoft.applicationinsights.TelemetryClient
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import uk.gov.justice.digital.hmpps.findandreferanintervention.config.logToAppInsights
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDetailsDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.DomainEventPublisher
@@ -25,6 +27,7 @@ class ReferralService(
   private val referralRepository: ReferralRepository,
   private val messageRepository: MessageRepository,
   private val domainEventPublisher: DomainEventPublisher,
+  private val telemetryClient: TelemetryClient,
   @Value($$"${api.baseurl.find-and-refer}") private val findAndReferBaseUrl: String,
 ) {
 
@@ -33,6 +36,14 @@ class ReferralService(
   fun getReferralDetailsById(referralId: UUID): ReferralDetailsDto? = referralRepository.findReferralById(referralId)?.toDto()
 
   fun handleRequirementCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
+    telemetryClient.logToAppInsights(
+      "Probation.case-requirement.created event received",
+      mapOf(
+        "eventType" to hmppsDomainEvent.eventType,
+        "requirementID" to hmppsDomainEvent.additionalInformation["requirementID"] as String,
+        "crn" to hmppsDomainEvent.personReference.findCrn()!!,
+      ),
+    )
     val requirementMainType = hmppsDomainEvent.additionalInformation.getValue("requirementMainType")
     if (hmppsDomainEvent.additionalInformation.getValue("requirementMainType") == null || requirementMainType != "Court - Accredited Programme") {
       return logger.info("requirementMainType is not for creation of an Accredited Programme. requirementMainType: $requirementMainType and messageId: $messageId)")
@@ -72,6 +83,14 @@ class ReferralService(
   }
 
   fun handleLicenceConditionCreatedEvent(hmppsDomainEvent: HmppsDomainEvent, messageId: UUID) {
+    telemetryClient.logToAppInsights(
+      "Probation.case-requirement.created event received",
+      mapOf(
+        "eventType" to hmppsDomainEvent.eventType,
+        "licconditionId" to hmppsDomainEvent.additionalInformation["licconditionId"] as String,
+        "crn" to hmppsDomainEvent.personReference.findCrn()!!,
+      ),
+    )
     val licconditionMainType = hmppsDomainEvent.additionalInformation.getValue("licconditionMainType")
     // We have seen both spellings of Licence in the dev environment.
     if (hmppsDomainEvent.additionalInformation.getValue("licconditionMainType") == null || (licconditionMainType != "License - Accredited Programme" && licconditionMainType != "Licence - Accredited Programme")) {

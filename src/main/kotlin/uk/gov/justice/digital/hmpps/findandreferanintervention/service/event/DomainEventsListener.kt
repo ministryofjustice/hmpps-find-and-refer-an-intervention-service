@@ -17,7 +17,6 @@ class DomainEventsListener(
   private val objectMapper: ObjectMapper,
   private val referralService: ReferralService,
   private val messageRepository: MessageRepository,
-
 ) {
   private val logger = LoggerFactory.getLogger(this::class.java)
 
