@@ -41,6 +41,7 @@ class ReferralService(
       mapOf(
         "eventType" to hmppsDomainEvent.eventType,
         "requirementID" to hmppsDomainEvent.additionalInformation["requirementID"] as String,
+        "crn" to hmppsDomainEvent.personReference.findCrn()!!,
       ),
     )
     val requirementMainType = hmppsDomainEvent.additionalInformation.getValue("requirementMainType")
@@ -87,6 +88,7 @@ class ReferralService(
       mapOf(
         "eventType" to hmppsDomainEvent.eventType,
         "licconditionId" to hmppsDomainEvent.additionalInformation["licconditionId"] as String,
+        "crn" to hmppsDomainEvent.personReference.findCrn()!!,
       ),
     )
     val licconditionMainType = hmppsDomainEvent.additionalInformation.getValue("licconditionMainType")
