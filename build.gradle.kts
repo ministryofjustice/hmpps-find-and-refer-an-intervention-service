@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.17.0")
-  implementation("io.sentry:sentry-logback:8.17.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.18.0")
+  implementation("io.sentry:sentry-logback:8.18.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.1")
 
@@ -63,7 +63,7 @@ dependencies {
 
   // json and csv
   implementation("com.github.java-json-tools:json-patch:1.13")
-  implementation("org.apache.commons:commons-csv:1.14.0")
+  implementation("org.apache.commons:commons-csv:1.14.1")
 
   testImplementation("au.com.dius.pact.provider:junit5spring:4.6.17")
   testImplementation("com.squareup.okhttp3:okhttp:5.1.0")
