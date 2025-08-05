@@ -16,6 +16,7 @@ data class ReferralDetailsDto(
   val setting: SettingType,
   val sourcedFromReference: String,
   val sourcedFromReferenceType: SourcedFromReferenceType,
+  val eventNumber: Int,
 )
 
 fun Referral.toDto(): ReferralDetailsDto = ReferralDetailsDto(
@@ -27,4 +28,5 @@ fun Referral.toDto(): ReferralDetailsDto = ReferralDetailsDto(
   setting = this.settingType,
   sourcedFromReference = this.sourcedFromReference,
   sourcedFromReferenceType = this.sourcedFromReferenceType,
+  eventNumber = this.eventNumber,
 )

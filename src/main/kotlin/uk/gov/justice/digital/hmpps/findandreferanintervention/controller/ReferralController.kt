@@ -14,8 +14,8 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDetai
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.ReferralService
 import java.util.UUID
 
-@RestController
 @PreAuthorize("hasRole('ROLE_ACCREDITED_PROGRAMMES_MANAGE_AND_DELIVER_API__ACPMAD_UI_WR')")
+@RestController
 class ReferralController(
   private val referralService: ReferralService,
   private val telemetryClient: TelemetryClient,

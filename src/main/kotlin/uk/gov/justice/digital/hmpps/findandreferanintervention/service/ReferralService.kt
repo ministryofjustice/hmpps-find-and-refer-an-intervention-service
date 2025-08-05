@@ -40,7 +40,7 @@ class ReferralService(
       "Probation.case-requirement.created event received",
       mapOf(
         "eventType" to hmppsDomainEvent.eventType,
-        "requirementID" to hmppsDomainEvent.additionalInformation["requirementID"] as String,
+        "requirementID" to hmppsDomainEvent.additionalInformation["requirementID"].toString(),
         "crn" to hmppsDomainEvent.personReference.findCrn()!!,
       ),
     )
@@ -68,11 +68,12 @@ class ReferralService(
           id = UUID.randomUUID(),
           settingType = SettingType.COMMUNITY,
           interventionType = InterventionType.ACP,
-          interventionName = hmppsDomainEvent.additionalInformation.getValue("requirementSubType") as String,
+          interventionName = hmppsDomainEvent.additionalInformation.getValue("requirementSubType").toString(),
           personReferenceType = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().first,
           personReference = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!,
           sourcedFromReferenceType = SourcedFromReferenceType.REQUIREMENT,
           sourcedFromReference = sourcedFromReference,
+          eventNumber = hmppsDomainEvent.additionalInformation.getValue("eventNumber").toString().toInt(),
         ),
       )
     val message = messageRepository.getReferenceById(messageId)
@@ -87,7 +88,7 @@ class ReferralService(
       "Probation.case-requirement.created event received",
       mapOf(
         "eventType" to hmppsDomainEvent.eventType,
-        "licconditionId" to hmppsDomainEvent.additionalInformation["licconditionId"] as String,
+        "licconditionId" to hmppsDomainEvent.additionalInformation["licconditionId"].toString(),
         "crn" to hmppsDomainEvent.personReference.findCrn()!!,
       ),
     )
@@ -97,8 +98,8 @@ class ReferralService(
       return logger.info("licconditionMainType is not for creation of an Accredited Programme. licconditionMainType: $licconditionMainType and messageId: $messageId)")
     }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
-    val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType") as String
-    val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["licconditionId"] as String
+    val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType").toString()
+    val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["licconditionId"].toString()
     val existingReferral = referralRepository.findByPersonReferenceAndInterventionNameAndSourcedFromReference(
       personReference,
       interventionName,
@@ -113,11 +114,12 @@ class ReferralService(
         id = UUID.randomUUID(),
         settingType = SettingType.COMMUNITY,
         interventionType = InterventionType.ACP,
-        interventionName = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType") as String,
+        interventionName = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType").toString(),
         personReferenceType = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().first,
         personReference = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!,
         sourcedFromReferenceType = SourcedFromReferenceType.LICENCE_CONDITION,
-        sourcedFromReference = hmppsDomainEvent.additionalInformation["licconditionId"] as String,
+        sourcedFromReference = hmppsDomainEvent.additionalInformation["licconditionId"].toString(),
+        eventNumber = hmppsDomainEvent.additionalInformation.getValue("eventNumber").toString().toInt(),
       ),
     )
     val message = messageRepository.getReferenceById(messageId)

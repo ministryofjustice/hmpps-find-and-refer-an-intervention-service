@@ -19,6 +19,7 @@ fun ReferralFactory.create(
   personReferenceType: PersonReferenceType = PersonReferenceType.CRN,
   sourcedFromReferenceType: SourcedFromReferenceType = SourcedFromReferenceType.REQUIREMENT,
   sourcedFromReference: String = "EXAMPLE_REFERENCE",
+  eventNumber: Int = 1,
 ): Referral = save(
   Referral(
     id = id,
@@ -29,5 +30,6 @@ fun ReferralFactory.create(
     personReferenceType = personReferenceType,
     sourcedFromReferenceType = sourcedFromReferenceType,
     sourcedFromReference = sourcedFromReference,
+    eventNumber = eventNumber,
   ),
 )
