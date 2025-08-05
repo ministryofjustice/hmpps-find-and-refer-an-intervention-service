@@ -54,6 +54,10 @@ open class Referral(
   @NotNull
   @Column(name = "sourced_from_reference", length = Integer.MAX_VALUE)
   open var sourcedFromReference: String,
+
+  @NotNull
+  @Column(name = "event_number", length = Integer.MAX_VALUE)
+  open var eventNumber: Int,
 )
 
 enum class PersonReferenceType {
