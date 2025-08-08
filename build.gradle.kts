@@ -52,7 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:7.0.9.Final")
+  implementation("org.hibernate:hibernate-core:7.1.0.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.10.3")
 
   // monitoring
