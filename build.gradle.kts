@@ -44,7 +44,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.4")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.4")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.4")
-  implementation("org.springframework.security:spring-security-crypto:6.5.2")
+  implementation("org.springframework.security:spring-security-crypto:6.5.3")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.27.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
@@ -78,7 +78,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.5.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.1")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.31") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.32") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
