@@ -16,19 +16,19 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.0") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.19.1")
-  implementation("io.sentry:sentry-logback:8.19.1")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.20.0")
+  implementation("io.sentry:sentry-logback:8.20.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.1")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.0") // needed for OffsetDateTime for AppInsights
 
   // openapi
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12")
   implementation("javax.xml.bind:jaxb-api:2.3.1")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:5.2.1-RELEASE")
@@ -41,11 +41,11 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.4.10")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.4")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.4")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.4")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.5")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.5")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.5")
   implementation("org.springframework.security:spring-security-crypto:6.5.3")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.27.1")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.28")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
   // database
@@ -78,7 +78,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.5.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.1")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.32") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.33") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
