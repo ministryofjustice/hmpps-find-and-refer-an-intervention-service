@@ -38,6 +38,22 @@ fun <T> makeRequestAndExpectJsonResponse(
   .expectBody(responseType)
   .isEqualTo(expectedResponse)
 
+fun makeRequestAndExpectJsonPathResponse(
+  testClient: WebTestClient,
+  httpMethod: HttpMethod,
+  uri: (UriBuilder) -> URI,
+  requestCustomizer: WebTestClient.RequestHeadersSpec<*>.() -> Unit,
+  fieldName: String,
+  expectedValue: String,
+): WebTestClient.BodyContentSpec = testClient.method(httpMethod)
+  .uri(uri)
+  .apply(requestCustomizer)
+  .exchange()
+  .expectStatus()
+  .isOk
+  .expectBody()
+  .jsonPath(fieldName).isEqualTo(expectedValue)
+
 fun makeRequestAndExpectStatus(
   testClient: WebTestClient,
   httpMethod: HttpMethod,
