@@ -12,6 +12,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.ReferralDetai
 import uk.gov.justice.digital.hmpps.findandreferanintervention.dto.toDto
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.ReferralRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeErrorResponse
+import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectJsonPathResponse
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectJsonResponse
 import uk.gov.justice.digital.hmpps.findandreferanintervention.utils.makeRequestAndExpectStatus
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
@@ -60,6 +61,18 @@ class GetReferralDetailsTest : IntegrationTestBase() {
       responseType = ReferralDetailsDto::class.java,
       expectedResponse = referralDetailsDto,
     )
+
+    @Test
+    fun `getReferral details for a Licence Condition stringifies the value appropriately`() {
+      makeRequestAndExpectJsonPathResponse(
+        testClient = webTestClient,
+        httpMethod = HttpMethod.GET,
+        uri = { it.path("/referral/$referralId").build() },
+        requestCustomizer = { headers(setAuthorisation(roles = listOf("ROLE_ACCREDITED_PROGRAMMES_MANAGE_AND_DELIVER_API__ACPMAD_UI_WR"))) },
+        fieldName = "sourcedFromReferenceType",
+        expectedValue = "LICENCE_CONDITION",
+      )
+    }
   }
 
   @Test
@@ -75,6 +88,20 @@ class GetReferralDetailsTest : IntegrationTestBase() {
       expectedStatus = HttpStatus.OK,
       responseType = ReferralDetailsDto::class.java,
       expectedResponse = referralDetailsDto,
+    )
+  }
+
+  @Test
+  fun `getReferral details for a Requirement stringifies the value appropriately`() {
+    val referralId = UUID.fromString("a410c4bd-027a-436a-a3f4-4fa22039e314")
+
+    makeRequestAndExpectJsonPathResponse(
+      testClient = webTestClient,
+      httpMethod = HttpMethod.GET,
+      uri = { it.path("/referral/$referralId").build() },
+      requestCustomizer = { headers(setAuthorisation(roles = listOf("ROLE_ACCREDITED_PROGRAMMES_MANAGE_AND_DELIVER_API__ACPMAD_UI_WR"))) },
+      fieldName = "sourcedFromReferenceType",
+      expectedValue = "REQUIREMENT",
     )
   }
 
