@@ -44,7 +44,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.5")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.5")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.5")
-  implementation("org.springframework.security:spring-security-crypto:6.5.3")
+  implementation("org.springframework.security:spring-security-crypto:6.5.4")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.28")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
 
@@ -52,7 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.3.232")
-  implementation("org.hibernate:hibernate-core:7.1.0.Final")
+  implementation("org.hibernate:hibernate-core:7.1.1.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.11.0")
 
   // monitoring
@@ -78,7 +78,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.6.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.1")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.33") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.34") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
