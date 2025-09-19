@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.0.1"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.0.2"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.2.20"
   kotlin("plugin.spring") version "2.2.20"
 }
@@ -11,7 +11,7 @@ configurations {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.6.0")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.7.0")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
@@ -39,11 +39,11 @@ dependencies {
   }
 
   // SQN/SNS
-  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.4.10")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.4.11")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.5")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.5")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.5")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.6")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.6")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.6")
   implementation("org.springframework.security:spring-security-crypto:6.5.5")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.28")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5")
@@ -58,7 +58,7 @@ dependencies {
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.7")
+  runtimeOnly("org.postgresql:postgresql:42.7.8")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
   // json and csv
@@ -76,7 +76,7 @@ dependencies {
   testImplementation("org.testcontainers:postgresql:1.21.3")
   testImplementation("org.testcontainers:localstack:1.21.3")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.6.0")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.7.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.1")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.34") {
     exclude(group = "io.swagger.core.v3")
