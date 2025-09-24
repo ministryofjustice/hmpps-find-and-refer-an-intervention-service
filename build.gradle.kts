@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.1.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.1.1"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.2.20"
   kotlin("plugin.spring") version "2.2.20"
 }
@@ -51,7 +51,7 @@ dependencies {
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
-  implementation("com.h2database:h2:2.3.232")
+  implementation("com.h2database:h2:2.4.240")
   implementation("org.hibernate:hibernate-core:7.1.1.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.11.0")
 
