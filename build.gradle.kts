@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.1.3"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.2.20"
-  kotlin("plugin.spring") version "2.2.20"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.1.4"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.2.21"
+  kotlin("plugin.spring") version "2.2.21"
 }
 
 configurations {
@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.23.0")
-  implementation("io.sentry:sentry-logback:8.23.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.24.0")
+  implementation("io.sentry:sentry-logback:8.24.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:8.1")
 
@@ -39,11 +39,11 @@ dependencies {
   }
 
   // SQN/SNS
-  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.5.0")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.0")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.6")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.6")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.6")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.7")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.7")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.7")
   implementation("org.springframework.security:spring-security-crypto:6.5.6")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.30")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5.1")
