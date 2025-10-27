@@ -23,7 +23,7 @@ dependencies {
   implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.23.0")
   implementation("io.sentry:sentry-logback:8.23.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-  implementation("net.logstash.logback:logstash-logback-encoder:8.1")
+  implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
   runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.0") // needed for OffsetDateTime for AppInsights
 
