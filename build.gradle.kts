@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.25.0")
-  implementation("io.sentry:sentry-logback:8.25.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.26.0")
+  implementation("io.sentry:sentry-logback:8.26.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -65,7 +65,7 @@ dependencies {
   implementation("com.github.java-json-tools:json-patch:1.13")
   implementation("org.apache.commons:commons-csv:1.14.1")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.17")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.18")
   testImplementation("com.squareup.okhttp3:okhttp:5.3.0")
   testImplementation("com.squareup.okhttp3:mockwebserver:5.3.0")
   testImplementation("org.mockito:mockito-inline:5.2.0")
@@ -77,7 +77,7 @@ dependencies {
   testImplementation("org.testcontainers:localstack:1.21.3")
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.1")
-  testImplementation("org.wiremock:wiremock-standalone:3.13.1")
+  testImplementation("org.wiremock:wiremock-standalone:3.13.2")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.35") {
     exclude(group = "io.swagger.core.v3")
   }
