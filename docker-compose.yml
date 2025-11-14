@@ -41,7 +41,7 @@ services:
     healthcheck:
       test: pg_isready -d auth-db
   wiremock:
-    image: wiremock/wiremock:3.13.1
+    image: wiremock/wiremock:3.13.2
     networks:
       - hmpps
     restart: always
