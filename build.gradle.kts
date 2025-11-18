@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.25.0")
-  implementation("io.sentry:sentry-logback:8.25.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.26.0")
+  implementation("io.sentry:sentry-logback:8.26.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -44,7 +44,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.7")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.7")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.7")
-  implementation("org.springframework.security:spring-security-crypto:6.5.6")
+  implementation("org.springframework.security:spring-security-crypto:6.5.7")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.30.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5.1")
 
@@ -52,7 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.1.7.Final")
+  implementation("org.hibernate:hibernate-core:7.1.8.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.12.0")
 
   // monitoring
@@ -65,9 +65,9 @@ dependencies {
   implementation("com.github.java-json-tools:json-patch:1.13")
   implementation("org.apache.commons:commons-csv:1.14.1")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.17")
-  testImplementation("com.squareup.okhttp3:okhttp:5.3.0")
-  testImplementation("com.squareup.okhttp3:mockwebserver:5.3.0")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.18")
+  testImplementation("com.squareup.okhttp3:okhttp:5.3.1")
+  testImplementation("com.squareup.okhttp3:mockwebserver:5.3.1")
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("org.springframework.batch:spring-batch-test")
   testImplementation("org.springframework.security:spring-security-test")
@@ -77,7 +77,7 @@ dependencies {
   testImplementation("org.testcontainers:localstack:1.21.3")
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.1")
-  testImplementation("org.wiremock:wiremock-standalone:3.13.1")
+  testImplementation("org.wiremock:wiremock-standalone:3.13.2")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.35") {
     exclude(group = "io.swagger.core.v3")
   }
