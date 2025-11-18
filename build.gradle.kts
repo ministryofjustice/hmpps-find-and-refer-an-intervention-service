@@ -44,7 +44,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.7")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.7")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.7")
-  implementation("org.springframework.security:spring-security-crypto:6.5.7")
+  implementation("org.springframework.security:spring-security-crypto:7.0.0")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.30.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5.1")
 
