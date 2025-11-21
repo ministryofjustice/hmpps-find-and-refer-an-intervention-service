@@ -41,9 +41,9 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.1")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.7")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.7")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.7")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.8")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.8")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.8")
   implementation("org.springframework.security:spring-security-crypto:7.0.0")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.30.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5.1")
@@ -52,7 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.1.8.Final")
+  implementation("org.hibernate:hibernate-core:7.1.9.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.12.0")
 
   // monitoring
