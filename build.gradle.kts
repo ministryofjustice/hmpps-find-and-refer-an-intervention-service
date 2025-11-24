@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.26.0")
-  implementation("io.sentry:sentry-logback:8.26.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.27.0")
+  implementation("io.sentry:sentry-logback:8.27.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -52,7 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.1.9.Final")
+  implementation("org.hibernate:hibernate-core:7.1.10.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.12.0")
 
   // monitoring
