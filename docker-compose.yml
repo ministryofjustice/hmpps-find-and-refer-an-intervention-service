@@ -11,7 +11,7 @@ services:
       - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
 
   hmpps-auth:
-    image: quay.io/hmpps/hmpps-auth:latest
+    image: ghcr.io/ministryofjustice/hmpps-auth:latest
     networks:
       - hmpps
     depends_on:
