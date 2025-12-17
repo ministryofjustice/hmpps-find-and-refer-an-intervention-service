@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.2.0"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.2.21"
-  kotlin("plugin.spring") version "2.2.21"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.0"
+  kotlin("plugin.spring") version "2.3.0"
 }
 
 configurations {
@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.28.0")
-  implementation("io.sentry:sentry-logback:8.28.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.29.0")
+  implementation("io.sentry:sentry-logback:8.29.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -44,7 +44,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.8")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.8")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.8")
-  implementation("org.springframework.security:spring-security-crypto:7.0.0")
+  implementation("org.springframework.security:spring-security-crypto:7.0.2")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.30.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.5.1")
 
@@ -52,8 +52,8 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.1.11.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.13.2")
+  implementation("org.hibernate:hibernate-core:7.2.0.Final")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.14.1")
 
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
@@ -65,7 +65,7 @@ dependencies {
   implementation("com.github.java-json-tools:json-patch:1.13")
   implementation("org.apache.commons:commons-csv:1.14.1")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.18")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.19")
   testImplementation("com.squareup.okhttp3:okhttp:5.3.2")
   testImplementation("com.squareup.okhttp3:mockwebserver:5.3.2")
   testImplementation("org.mockito:mockito-inline:5.2.0")
@@ -73,8 +73,8 @@ dependencies {
   testImplementation("org.springframework.security:spring-security-test")
 
   // Test containers
-  testImplementation("org.testcontainers:postgresql:1.21.3")
-  testImplementation("org.testcontainers:localstack:1.21.3")
+  testImplementation("org.testcontainers:postgresql:1.21.4")
+  testImplementation("org.testcontainers:localstack:1.21.4")
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.2")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
