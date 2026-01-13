@@ -30,7 +30,6 @@ dependencies {
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
-  implementation("javax.xml.bind:jaxb-api:2.3.1")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:6.0.0-RELEASE")
   implementation("org.json:json") {
@@ -42,9 +41,9 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:6.0.0")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.9")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.9")
-  implementation("org.springframework.security:spring-security-crypto:7.0.2")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+  implementation("org.springframework.security:spring-security-crypto")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.31")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6")
 
@@ -52,11 +51,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.2.0.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.14.1")
-
-  // monitoring
-  implementation("io.micrometer:micrometer-registry-prometheus")
+//  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.14.1")
 
   runtimeOnly("org.postgresql:postgresql:42.7.8")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
