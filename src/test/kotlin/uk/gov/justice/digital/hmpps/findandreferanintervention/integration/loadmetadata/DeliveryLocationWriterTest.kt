@@ -7,8 +7,8 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.springframework.batch.core.repository.JobRepository
-import org.springframework.batch.item.Chunk
-import org.springframework.batch.item.ItemWriter
+import org.springframework.batch.infrastructure.item.Chunk
+import org.springframework.batch.infrastructure.item.ItemWriter
 import org.springframework.transaction.PlatformTransactionManager
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchDeliveryLocation
@@ -17,7 +17,8 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Delive
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
-import java.util.*
+import java.util.Optional
+import java.util.UUID
 
 class DeliveryLocationWriterTest {
 
@@ -48,7 +49,9 @@ class DeliveryLocationWriterTest {
       status = "",
     )
 
-    `when`(deliveryLocationRepository.findByPduRefIdAndInterventionIdAndProviderName(any(), any(), any())).thenReturn(null)
+    `when`(deliveryLocationRepository.findByPduRefIdAndInterventionIdAndProviderName(any(), any(), any())).thenReturn(
+      null,
+    )
     `when`(interventionCatalogueRepository.findById(any())).thenReturn(Optional.of(mock()))
     `when`(pduRefRepository.findById(any())).thenReturn(Optional.of(mock()))
 

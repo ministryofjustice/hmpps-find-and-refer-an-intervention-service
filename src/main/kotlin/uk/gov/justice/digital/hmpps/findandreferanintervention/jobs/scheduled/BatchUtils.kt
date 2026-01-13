@@ -1,15 +1,15 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled
 
 import org.apache.commons.csv.CSVFormat
-import org.springframework.batch.core.JobParameters
-import org.springframework.batch.core.JobParametersBuilder
-import org.springframework.batch.core.JobParametersIncrementer
-import org.springframework.batch.item.file.FlatFileHeaderCallback
-import org.springframework.batch.item.file.FlatFileItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor
-import org.springframework.batch.item.file.transform.ExtractorLineAggregator
-import org.springframework.batch.item.file.transform.RecursiveCollectionLineAggregator
+import org.springframework.batch.core.job.parameters.JobParameters
+import org.springframework.batch.core.job.parameters.JobParametersBuilder
+import org.springframework.batch.core.job.parameters.JobParametersIncrementer
+import org.springframework.batch.infrastructure.item.file.FlatFileHeaderCallback
+import org.springframework.batch.infrastructure.item.file.FlatFileItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemWriterBuilder
+import org.springframework.batch.infrastructure.item.file.transform.BeanWrapperFieldExtractor
+import org.springframework.batch.infrastructure.item.file.transform.ExtractorLineAggregator
+import org.springframework.batch.infrastructure.item.file.transform.RecursiveCollectionLineAggregator
 import org.springframework.core.io.WritableResource
 import org.springframework.stereotype.Component
 import java.io.Writer
@@ -23,6 +23,7 @@ import kotlin.io.path.pathString
 
 @Component
 class BatchUtils {
+
   private val zoneOffset = ZoneOffset.UTC
 
   fun parseLocalDateToDate(date: LocalDate): Date {
@@ -36,7 +37,7 @@ class BatchUtils {
     return date.toInstant().atOffset(zoneOffset)
   }
 
-  private fun <T> csvFileWriterBase(
+  private fun <T : Any> csvFileWriterBase(
     name: String,
     resource: WritableResource,
     headers: List<String>,
@@ -45,7 +46,7 @@ class BatchUtils {
     .resource(resource)
     .headerCallback(HeaderWriter(headers.joinToString(",")))
 
-  fun <T> csvFileWriter(
+  fun <T : Any> csvFileWriter(
     name: String,
     resource: WritableResource,
     headers: List<String>,
@@ -54,7 +55,7 @@ class BatchUtils {
     .lineAggregator(CsvLineAggregator(fields))
     .build()
 
-  fun <T> recursiveCollectionCsvFileWriter(
+  fun <T : Any> recursiveCollectionCsvFileWriter(
     name: String,
     resource: WritableResource,
     headers: List<String>,
@@ -64,7 +65,8 @@ class BatchUtils {
       RecursiveCollectionLineAggregator<T>().apply {
         setDelegate(CsvLineAggregator(fields))
       },
-    ).build()
+    )
+    .build()
 }
 
 class HeaderWriter(private val header: String) : FlatFileHeaderCallback {
@@ -77,13 +79,13 @@ class TimestampIncrementer : JobParametersIncrementer {
   override fun getNext(inputParams: JobParameters?): JobParameters {
     val params = inputParams ?: JobParameters()
 
-    if (params.parameters["timestamp"] != null) {
-      return params
+    return if (params.getParameter("timestamp") != null) {
+      params
+    } else {
+      JobParametersBuilder(params)
+        .addLong("timestamp", Instant.now().epochSecond)
+        .toJobParameters()
     }
-
-    return JobParametersBuilder(params)
-      .addLong("timestamp", Instant.now().epochSecond)
-      .toJobParameters()
   }
 }
 
@@ -91,32 +93,34 @@ class OutputPathIncrementer : JobParametersIncrementer {
   override fun getNext(inputParams: JobParameters?): JobParameters {
     val params = inputParams ?: JobParameters()
 
-    if (params.parameters["outputPath"] != null) {
-      return params
+    return if (params.getParameter("outputPath") != null) {
+      params
+    } else {
+      JobParametersBuilder(params)
+        .addString("outputPath", createTempDirectory().pathString)
+        .toJobParameters()
     }
-
-    return JobParametersBuilder(params)
-      .addString("outputPath", createTempDirectory().pathString)
-      .toJobParameters()
   }
 }
 
-class CsvLineAggregator<T>(fieldsToExtract: List<String>) : ExtractorLineAggregator<T>() {
+class CsvLineAggregator<T : Any>(
+  fieldsToExtract: List<String>,
+) : ExtractorLineAggregator<T>() {
+
+  private val csvFormat: CSVFormat = CSVFormat.DEFAULT.builder()
+    .setRecordSeparator("").get()
+
   init {
     setFieldExtractor(
       BeanWrapperFieldExtractor<T>().apply {
         setNames(fieldsToExtract.toTypedArray())
-        afterPropertiesSet()
       },
     )
   }
 
-  private val csvPrinter: CSVFormat = CSVFormat.DEFAULT.builder()
-    .setRecordSeparator("").get() // the underlying aggregator adds line separators for us
-
   override fun doAggregate(fields: Array<out Any>): String {
     val out = StringBuilder()
-    csvPrinter.printRecord(out, *fields)
+    csvFormat.printRecord(out, *fields)
     return out.toString()
   }
 }

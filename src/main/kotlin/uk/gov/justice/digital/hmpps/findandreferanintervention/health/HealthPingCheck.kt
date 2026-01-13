@@ -1,8 +1,8 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.health
 
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.boot.actuate.health.Health
-import org.springframework.boot.actuate.health.HealthIndicator
+import org.springframework.boot.health.contributor.Health
+import org.springframework.boot.health.contributor.HealthIndicator
 import org.springframework.boot.info.BuildProperties
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -14,7 +14,7 @@ class HmppsAuthHealthPing(@Qualifier("hmppsAuthHealthWebClient") webClient: WebC
 
 @Component
 class HealthInfo(buildProperties: BuildProperties) : HealthIndicator {
-  private val version: String = buildProperties.version
+  private val version: String = buildProperties.version!!
 
   override fun health(): Health = Health.up().withDetail("version", version).build()
 }

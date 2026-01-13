@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata
 
 import mu.KLogging
-import org.springframework.batch.core.Job
-import org.springframework.batch.core.Step
+import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.step.Step
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.batch.item.ItemReader
-import org.springframework.batch.item.ItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
+import org.springframework.batch.infrastructure.item.ItemReader
+import org.springframework.batch.infrastructure.item.ItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
@@ -22,7 +22,7 @@ import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Delive
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.PduRefRepository
-import java.util.*
+import java.util.UUID
 
 data class BatchDeliveryLocation(
   val id: String,
@@ -42,6 +42,7 @@ class LoadDeliveryLocationJobConfiguration(
   private val pduRefRepository: PduRefRepository,
   private val transactionManager: PlatformTransactionManager,
   private val onStartupJobLauncherFactory: OnStartupJobLauncherFactory,
+
 ) {
   companion object : KLogging()
 
@@ -63,12 +64,12 @@ class LoadDeliveryLocationJobConfiguration(
     .names("id", "intervention_id", "provider_name", "pdu_ref_id", "contact", "status")
     .fieldSetMapper { fieldSet ->
       BatchDeliveryLocation(
-        id = fieldSet.readString("id"),
-        interventionId = fieldSet.readString("intervention_id"),
-        providerName = fieldSet.readString("provider_name"),
-        pduRef = fieldSet.readString("pdu_ref_id"),
-        contact = fieldSet.readString("contact"),
-        status = fieldSet.readString("status"),
+        id = fieldSet.readString("id")!!,
+        interventionId = fieldSet.readString("intervention_id")!!,
+        providerName = fieldSet.readString("provider_name")!!,
+        pduRef = fieldSet.readString("pdu_ref_id")!!,
+        contact = fieldSet.readString("contact")!!,
+        status = fieldSet.readString("status")!!,
       )
     }
     .build()
@@ -78,7 +79,11 @@ class LoadDeliveryLocationJobConfiguration(
     items.forEach { item ->
       if (item.status == "D") {
         logger.info { "Deleting DeliveryLocation with ID: ${item.interventionId}" }
-        deliveryLocationRepository.deleteByPduRefIdAndInterventionIdAndProviderName(item.pduRef, UUID.fromString(item.interventionId), item.providerName)
+        deliveryLocationRepository.deleteByPduRefIdAndInterventionIdAndProviderName(
+          item.pduRef,
+          UUID.fromString(item.interventionId),
+          item.providerName,
+        )
       } else {
         mapToDeliveryLocationEntity(item)?.let {
           deliveryLocationRepository.save(it)
@@ -89,9 +94,10 @@ class LoadDeliveryLocationJobConfiguration(
 
   @Bean
   fun deliveryLocationStep(): Step = StepBuilder("deliveryLocationStep", jobRepository)
-    .chunk<BatchDeliveryLocation, BatchDeliveryLocation>(10, transactionManager)
+    .chunk<BatchDeliveryLocation, BatchDeliveryLocation>(10)
     .reader(deliveryLocationReader())
     .writer(deliveryLocationWriter())
+    .transactionManager(transactionManager)
     .build()
 
   private fun mapToDeliveryLocationEntity(

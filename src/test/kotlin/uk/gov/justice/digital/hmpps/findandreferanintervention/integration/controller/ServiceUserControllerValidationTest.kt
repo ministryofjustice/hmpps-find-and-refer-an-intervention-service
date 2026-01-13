@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.context.annotation.Import
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.jwt.Jwt
@@ -37,7 +37,10 @@ class ServiceUserControllerValidationTest(@Autowired private val mockMvc: MockMv
       .header("alg", "none")
       .claim("user_name", "testuser")
       .build()
-    val jwtAuth = JwtAuthenticationToken(jwt, Collections.singletonList(SimpleGrantedAuthority("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"))) // Add appropriate roles
+    val jwtAuth = JwtAuthenticationToken(
+      jwt,
+      Collections.singletonList(SimpleGrantedAuthority("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")),
+    ) // Add appropriate roles
 
     whenever(serviceUserService.checkIfAuthenticatedDeliusUserHasAccessToServiceUser(any(), any())).thenReturn(true)
 
@@ -55,7 +58,10 @@ class ServiceUserControllerValidationTest(@Autowired private val mockMvc: MockMv
       .header("alg", "none")
       .claim("user_name", "testuser")
       .build()
-    val jwtAuth = JwtAuthenticationToken(jwt, Collections.singletonList(SimpleGrantedAuthority("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR"))) // Add appropriate roles
+    val jwtAuth = JwtAuthenticationToken(
+      jwt,
+      Collections.singletonList(SimpleGrantedAuthority("ROLE_FIND_AND_REFER_AN_INTERVENTION_API__FAR_UI__WR")),
+    ) // Add appropriate roles
 
     whenever(serviceUserService.checkIfAuthenticatedDeliusUserHasAccessToServiceUser(any(), any())).thenReturn(false)
 

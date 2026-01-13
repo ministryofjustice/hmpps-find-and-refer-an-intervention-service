@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
 import org.springframework.batch.core.repository.JobRepository
-import org.springframework.batch.item.file.FlatFileItemReader
+import org.springframework.batch.infrastructure.item.file.FlatFileItemReader
 import org.springframework.batch.test.MetaDataInstanceFactory
 import org.springframework.transaction.PlatformTransactionManager
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
@@ -28,7 +28,6 @@ class InterventionCatalogueToCourserMapReaderTest {
     interventionCatalogueRepository,
     interventionCatalogueToCourseMapRepository,
     courseRepository,
-    transactionManager,
     onStartupJobLauncherFactory,
   ).interventionCatalogueToCourseMapReader() as FlatFileItemReader<BatchInterventionCatalogueToCourseMap>
 

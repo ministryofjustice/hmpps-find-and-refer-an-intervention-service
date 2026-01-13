@@ -1,20 +1,19 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata
 
 import mu.KLogging
-import org.springframework.batch.core.Job
-import org.springframework.batch.core.Step
+import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.step.Step
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.batch.item.ItemReader
-import org.springframework.batch.item.ItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
+import org.springframework.batch.infrastructure.item.ItemReader
+import org.springframework.batch.infrastructure.item.ItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
-import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
@@ -37,7 +36,6 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
   private val interventionCatalogueRepository: InterventionCatalogueRepository,
   private val interventionCatalogueToCourseMapRepository: InterventionCatalogueToCourseMapRepository,
   private val courseRepository: CourseRepository,
-  private val transactionManager: PlatformTransactionManager,
   private val onStartupJobLauncherFactory: OnStartupJobLauncherFactory,
 ) {
   companion object : KLogging()
@@ -60,9 +58,9 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
     .names("intervention_catalogue_id", "course_id", "status")
     .fieldSetMapper { fieldSet ->
       BatchInterventionCatalogueToCourseMap(
-        interventionCatalogueId = fieldSet.readString("intervention_catalogue_id"),
-        courseId = fieldSet.readString("course_id"),
-        status = fieldSet.readString("status"),
+        interventionCatalogueId = fieldSet.readString("intervention_catalogue_id")!!,
+        courseId = fieldSet.readString("course_id")!!,
+        status = fieldSet.readString("status")!!,
       )
     }
     .build()
@@ -97,11 +95,12 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
       logger.info("InterventionCatalogueToCourseMap already exists for intervention catalogue ID: ${batchMap.interventionCatalogueId} and course ID: ${batchMap.courseId}")
       return null
     }
-    val interventionCatalogue = interventionCatalogueRepository.findById(UUID.fromString(batchMap.interventionCatalogueId))
-      .orElseGet {
-        logger.error("InterventionCatalogue not found for ID: ${batchMap.interventionCatalogueId}")
-        null
-      } ?: return null
+    val interventionCatalogue =
+      interventionCatalogueRepository.findById(UUID.fromString(batchMap.interventionCatalogueId))
+        .orElseGet {
+          logger.error("InterventionCatalogue not found for ID: ${batchMap.interventionCatalogueId}")
+          null
+        } ?: return null
 
     val course = courseRepository.findById(UUID.fromString(batchMap.courseId))
       .orElseGet {
@@ -117,7 +116,7 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
 
   @Bean
   fun interventionCatalogueToCourseMapStep(): Step = StepBuilder("interventionCatalogueToCourseMapStep", jobRepository)
-    .chunk<BatchInterventionCatalogueToCourseMap, BatchInterventionCatalogueToCourseMap>(10, transactionManager)
+    .chunk<BatchInterventionCatalogueToCourseMap, BatchInterventionCatalogueToCourseMap>(10)
     .reader(interventionCatalogueToCourseMapReader())
     .writer(interventionCatalogueToCourseMapWriter())
     .build()

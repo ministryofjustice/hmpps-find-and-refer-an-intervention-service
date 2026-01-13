@@ -16,7 +16,7 @@ interface InterventionCatalogueRepository :
   fun findInterventionCatalogueById(id: UUID): InterventionCatalogue?
 
   override fun findAll(
-    specification: Specification<InterventionCatalogue>?,
+    specification: Specification<InterventionCatalogue>,
     pageable: Pageable,
   ): Page<InterventionCatalogue>
 }
