@@ -7,21 +7,20 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.springframework.batch.core.repository.JobRepository
-import org.springframework.batch.item.Chunk
-import org.springframework.transaction.PlatformTransactionManager
+import org.springframework.batch.infrastructure.item.Chunk
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchInterventionCatalogueToCourseMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.LoadInterventionCatalogueToCourseMapJobConfiguration
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CourseRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueToCourseMapRepository
-import java.util.*
+import java.util.Optional
+import java.util.UUID
 
 class InterventionCatalogueToCourseMapWriterTest {
 
   private val interventionCatalogueRepository = mock<InterventionCatalogueRepository>()
   private val jobRepository = mock<JobRepository>()
-  private val transactionManager = mock<PlatformTransactionManager>()
   private val interventionCatalogueToCourseMapRepository = mock<InterventionCatalogueToCourseMapRepository>()
   private val courseRepository = mock<CourseRepository>()
   private val onStartupJobLauncherFactory = mock<OnStartupJobLauncherFactory>()
@@ -31,7 +30,6 @@ class InterventionCatalogueToCourseMapWriterTest {
     interventionCatalogueRepository,
     interventionCatalogueToCourseMapRepository,
     courseRepository,
-    transactionManager,
     onStartupJobLauncherFactory,
   ).interventionCatalogueToCourseMapWriter()
 
@@ -43,7 +41,12 @@ class InterventionCatalogueToCourseMapWriterTest {
       status = "",
     )
 
-    `when`(interventionCatalogueToCourseMapRepository.findByInterventionCatalogueIdAndCourseId(any(), any())).thenReturn(null)
+    `when`(
+      interventionCatalogueToCourseMapRepository.findByInterventionCatalogueIdAndCourseId(
+        any(),
+        any(),
+      ),
+    ).thenReturn(null)
     `when`(interventionCatalogueRepository.findById(any())).thenReturn(Optional.of(mock()))
     `when`(courseRepository.findById(any())).thenReturn(Optional.of(mock()))
 
@@ -61,6 +64,9 @@ class InterventionCatalogueToCourseMapWriterTest {
     )
     writer.write(Chunk(listOf(batchInterventionCatalogueMap)))
 
-    verify(interventionCatalogueToCourseMapRepository, times(1)).deleteByInterventionCatalogueIdAndCourseId(any(), any())
+    verify(interventionCatalogueToCourseMapRepository, times(1)).deleteByInterventionCatalogueIdAndCourseId(
+      any(),
+      any(),
+    )
   }
 }

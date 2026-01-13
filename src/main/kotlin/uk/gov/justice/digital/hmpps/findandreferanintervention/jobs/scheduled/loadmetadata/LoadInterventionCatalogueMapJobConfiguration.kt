@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata
 
 import mu.KLogging
-import org.springframework.batch.core.Job
-import org.springframework.batch.core.Step
+import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.step.Step
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.batch.item.ItemReader
-import org.springframework.batch.item.ItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
+import org.springframework.batch.infrastructure.item.ItemReader
+import org.springframework.batch.infrastructure.item.ItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
@@ -60,9 +60,9 @@ class LoadInterventionCatalogueMapJobConfiguration(
     .names("intervention_id", "intervention_catalogue_id", "status")
     .fieldSetMapper { fieldSet ->
       BatchInterventionCatalogueMap(
-        interventionId = fieldSet.readString("intervention_id"),
-        interventionCatalogueId = fieldSet.readString("intervention_catalogue_id"),
-        status = fieldSet.readString("status"),
+        interventionId = fieldSet.readString("intervention_id")!!,
+        interventionCatalogueId = fieldSet.readString("intervention_catalogue_id")!!,
+        status = fieldSet.readString("status")!!,
       )
     }
     .build()
@@ -87,7 +87,7 @@ class LoadInterventionCatalogueMapJobConfiguration(
 
   @Bean
   fun interventionCatalogueMapStep(): Step = StepBuilder("interventionCatalogueMapStep", jobRepository)
-    .chunk<BatchInterventionCatalogueMap, BatchInterventionCatalogueMap>(10, transactionManager)
+    .chunk<BatchInterventionCatalogueMap, BatchInterventionCatalogueMap>(10)
     .reader(interventionCatalogueMapReader())
     .writer(interventionCatalogueMapWriter())
     .build()
@@ -103,11 +103,12 @@ class LoadInterventionCatalogueMapJobConfiguration(
       logger.info("InterventionCatalogueMap already exists for intervention ID: ${batchMap.interventionId} and intervention catalogue ID: ${batchMap.interventionCatalogueId}")
       return null
     }
-    val interventionCatalogue = interventionCatalogueRepository.findById(UUID.fromString(batchMap.interventionCatalogueId))
-      .orElseGet {
-        logger.error("InterventionCatalogue not found for ID: ${batchMap.interventionCatalogueId}")
-        null
-      } ?: return null
+    val interventionCatalogue =
+      interventionCatalogueRepository.findById(UUID.fromString(batchMap.interventionCatalogueId))
+        .orElseGet {
+          logger.error("InterventionCatalogue not found for ID: ${batchMap.interventionCatalogueId}")
+          null
+        } ?: return null
 
     val intervention = interventionRepository.findById(UUID.fromString(batchMap.interventionId))
       .orElseGet {

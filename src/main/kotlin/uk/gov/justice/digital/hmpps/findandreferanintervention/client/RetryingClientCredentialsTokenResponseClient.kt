@@ -26,6 +26,7 @@ import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.RestClientException
+import org.springframework.web.client.body
 
 @ConfigurationProperties(prefix = "spring.security.oauth2.client.provider.hmpps-auth.token-request")
 data class TokenRequestConfig(
@@ -57,22 +58,24 @@ class RetryingClientCredentialsTokenResponseClient(
       // optional: logic after retrying ends
     }
 
-    override fun <T, E : Throwable> onError(context: RetryContext, callback: RetryCallback<T, E>, throwable: Throwable) {
+    override fun <T, E : Throwable> onError(
+      context: RetryContext,
+      callback: RetryCallback<T, E>,
+      throwable: Throwable,
+    ) {
       logger.info("Token request failed; retrying", throwable)
     }
   }
 
   val factory = HttpComponentsClientHttpRequestFactory().apply {
-    setConnectTimeout(config.connectTimeoutMs.toInt())
+    setConnectionRequestTimeout(config.connectTimeoutMs.toInt())
     setReadTimeout(config.readTimeoutMs.toInt())
   }
 
   private val restClient: RestClient = RestClient.builder()
     .requestFactory(factory)
-    .messageConverters {
-      it.add(FormHttpMessageConverter())
-      it.add(OAuth2AccessTokenResponseHttpMessageConverter())
-    }
+    .configureMessageConverters { FormHttpMessageConverter() }
+    .configureMessageConverters { OAuth2AccessTokenResponseHttpMessageConverter() }
     .build()
 
   override fun getTokenResponse(request: OAuth2ClientCredentialsGrantRequest): OAuth2AccessTokenResponse {
@@ -103,7 +106,7 @@ class RetryingClientCredentialsTokenResponseClient(
             .headers { it.addAll(headers) }
             .body(formData)
             .retrieve()
-            .body(TokenResponseDTO::class.java)
+            .body<TokenResponseDTO>()!!
 
           val tokenResponse = OAuth2AccessTokenResponse.withToken(dto.access_token)
             .tokenType(OAuth2AccessToken.TokenType.BEARER)

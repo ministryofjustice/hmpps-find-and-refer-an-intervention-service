@@ -19,14 +19,14 @@ fun makeRequest(
   .apply(requestCustomizer)
   .exchange()
 
-fun <T> makeRequestAndExpectJsonResponse(
+fun <T : Any> makeRequestAndExpectJsonResponse(
   testClient: WebTestClient,
   httpMethod: HttpMethod,
   uri: (UriBuilder) -> URI,
   requestCustomizer: WebTestClient.RequestHeadersSpec<*>.() -> Unit,
   expectedStatus: HttpStatus,
   responseType: Class<T>,
-  expectedResponse: T & Any,
+  expectedResponse: T,
 ): WebTestClient.BodySpec<*, *> = testClient.method(httpMethod)
   .uri(uri)
   .apply(requestCustomizer)

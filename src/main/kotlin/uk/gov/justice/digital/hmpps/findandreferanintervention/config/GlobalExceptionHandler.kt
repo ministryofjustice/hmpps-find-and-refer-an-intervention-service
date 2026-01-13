@@ -148,14 +148,18 @@ class GlobalExceptionHandler {
 
   @ExceptionHandler(WebClientResponseException::class)
   fun handleOtherWebClientErrors(ex: WebClientResponseException): ResponseEntity<ErrorResponse> = ResponseEntity.status(ex.statusCode).body(
-    ErrorResponse(status = HttpStatus.valueOf(ex.statusCode.value()), userMessage = ex.localizedMessage, developerMessage = ex.message),
+    ErrorResponse(
+      status = HttpStatus.valueOf(ex.statusCode.value()),
+      userMessage = ex.localizedMessage,
+      developerMessage = ex.message,
+    ),
   ).also {
     Sentry.captureException(ex)
     log.error("External service threw an error: {}", ex.message)
   }
 
   @ExceptionHandler(Throwable::class)
-  fun handleException(e: Throwable): ResponseEntity<ErrorResponse?>? = ResponseEntity
+  fun handleException(e: Throwable): ResponseEntity<ErrorResponse> = ResponseEntity
     .status(INTERNAL_SERVER_ERROR)
     .body(
       ErrorResponse(
