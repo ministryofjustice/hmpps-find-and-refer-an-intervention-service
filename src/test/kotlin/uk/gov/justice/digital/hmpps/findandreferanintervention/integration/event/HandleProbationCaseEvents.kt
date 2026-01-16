@@ -75,7 +75,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
     assertThat(referralRepository.count()).isEqualTo(1)
     val referral = referralRepository.findAll().first()
-    assertThat(referral.interventionName).isEqualTo("Breaking Free Online")
+    assertThat(referral.interventionName).isEqualTo("Building Choices")
     assertThat(referral.sourcedFromReference).isEqualTo("2500812305")
     assertThat(referral.sourcedFromReferenceType).isEqualTo(SourcedFromReferenceType.REQUIREMENT)
 
@@ -94,7 +94,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
 
     assertThat(referralRepository.count()).isEqualTo(1)
     val referral = referralRepository.findAll().first()
-    assertThat(referral.interventionName).isEqualTo("Horizon")
+    assertThat(referral.interventionName).isEqualTo("Building Choices")
     assertThat(referral.sourcedFromReference).isEqualTo("2500782763")
     assertThat(referral.sourcedFromReferenceType).isEqualTo(SourcedFromReferenceType.LICENCE_CONDITION)
 
@@ -143,6 +143,32 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
   @Test
   fun `when probation-case licence condition created event but not 'Licence - Accredited Programme, don't create referral`() {
     sendDomainEvent(hmppsDomainEventsFactory.createLicenceConditionCreatedEvent(licconditionMainType = "Not to seek to approach or communicate with victim/family member"))
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+
+    assertThat(referralRepository.count()).isEqualTo(0)
+
+    val message = messageRepository.findAll().first()
+    assertThat(message.event.eventType).isEqualTo(LICENCE_CONDITION_CREATED)
+    assertThat(message.referral).isNull()
+  }
+
+  @Test
+  fun `when probation-case requirement created event but not 'Building Choices, don't create referral`() {
+    sendDomainEvent(hmppsDomainEventsFactory.createRequirementCreatedEvent(requirementSubType = "WRONG SUB TYPE"))
+    // Wait for message to be processed
+    await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
+
+    assertThat(referralRepository.count()).isEqualTo(0)
+
+    val message = messageRepository.findAll().first()
+    assertThat(message.event.eventType).isEqualTo(REQUIREMENT_CREATED)
+    assertThat(message.referral).isNull()
+  }
+
+  @Test
+  fun `when probation-case licence condition created event but not 'Building Choices, don't create referral`() {
+    sendDomainEvent(hmppsDomainEventsFactory.createLicenceConditionCreatedEvent(licconditionSubType = "WRONG SUB TYPE"))
     // Wait for message to be processed
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 

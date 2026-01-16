@@ -50,6 +50,9 @@ class ReferralService(
     }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
     val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("requirementSubType") as String
+    if (interventionName != "Building Choices") {
+      return logger.info("requirement is not for Building Choices. interventionName: $interventionName")
+    }
     val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["requirementID"] as String
     val existingReferral = referralRepository.findByPersonReferenceAndInterventionNameAndSourcedFromReference(
       personReference,
@@ -99,6 +102,9 @@ class ReferralService(
     }
     val personReference: String = hmppsDomainEvent.personReference.getPersonReferenceTypeAndValue().second!!
     val interventionName: String = hmppsDomainEvent.additionalInformation.getValue("licconditionSubType").toString()
+    if (interventionName != "Building Choices") {
+      return logger.info("licence condition is not for Building Choices. interventionName: $interventionName")
+    }
     val sourcedFromReference: String = hmppsDomainEvent.additionalInformation["licconditionId"].toString()
     val existingReferral = referralRepository.findByPersonReferenceAndInterventionNameAndSourcedFromReference(
       personReference,
