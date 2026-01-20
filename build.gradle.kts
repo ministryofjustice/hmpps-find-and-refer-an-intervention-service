@@ -16,16 +16,16 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.1") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.29.0")
-  implementation("io.sentry:sentry-logback:8.29.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.30.0")
+  implementation("io.sentry:sentry-logback:8.30.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.1") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0") // needed for OffsetDateTime for AppInsights
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.15")
@@ -52,13 +52,13 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.2.0.Final")
+  implementation("org.hibernate:hibernate-core:7.2.1.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.14.1")
 
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.8")
+  runtimeOnly("org.postgresql:postgresql:42.7.9")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
   // json and csv
