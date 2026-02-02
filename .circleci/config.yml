@@ -11,7 +11,7 @@ jobs:
   validate:
     executor:
       name: hmpps/java_localstack_postgres
-      jdk_tag: "21.0"
+      jdk_tag: "25.0"
       postgres_tag: "16.1"
       localstack_tag: "3"
 
@@ -42,7 +42,7 @@ workflows:
     jobs:
       - hmpps/database_schema_report:
           schema: "public"
-          jdk_tag: "21.0"
+          jdk_tag: "25.0"
           postgres_tag: "16.1"
           localstack_tag: "3"
           filters:
