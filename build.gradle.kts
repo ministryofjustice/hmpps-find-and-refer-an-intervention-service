@@ -39,7 +39,7 @@ dependencies {
   }
 
   // SQN/SNS
-  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:7.0.1")
   // security
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.10")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.10")
