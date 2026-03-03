@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.3.0"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.0"
-  kotlin("plugin.spring") version "2.3.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.4.0"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.10"
+  kotlin("plugin.spring") version "2.3.10"
 }
 
 configurations {
@@ -16,19 +16,19 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.1") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.31.0")
-  implementation("io.sentry:sentry-logback:8.31.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.33.0")
+  implementation("io.sentry:sentry-logback:8.33.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.1") // needed for OffsetDateTime for AppInsights
 
   // openapi
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.15")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.16")
   implementation("javax.xml.bind:jaxb-api:2.3.1")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:6.0.0-RELEASE")
@@ -41,31 +41,31 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.10")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.10")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.10")
-  implementation("org.springframework.security:spring-security-crypto:7.0.2")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.31.1")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.11")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.11")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.11")
+  implementation("org.springframework.security:spring-security-crypto:7.0.3")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.33")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.2.1.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.14.1")
+  implementation("org.hibernate:hibernate-core:7.2.6.Final")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.2")
 
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.9")
+  runtimeOnly("org.postgresql:postgresql:42.7.10")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
   // json and csv
   implementation("com.github.java-json-tools:json-patch:1.13")
   implementation("org.apache.commons:commons-csv:1.14.1")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.19")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.20")
   testImplementation("com.squareup.okhttp3:okhttp:5.3.2")
   testImplementation("com.squareup.okhttp3:mockwebserver:5.3.2")
   testImplementation("org.mockito:mockito-inline:5.2.0")
@@ -78,7 +78,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.2")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.37") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.38") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
