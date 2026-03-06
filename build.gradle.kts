@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.33.0")
-  implementation("io.sentry:sentry-logback:8.33.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.34.1")
+  implementation("io.sentry:sentry-logback:8.34.1")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -45,7 +45,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.11")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.11")
   implementation("org.springframework.security:spring-security-crypto:7.0.3")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.33")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.34")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6")
 
   // database
