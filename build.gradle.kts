@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.4.0"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.10"
-  kotlin("plugin.spring") version "2.3.10"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.5.0"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.20"
+  kotlin("plugin.spring") version "2.3.20"
 }
 
 configurations {
@@ -20,8 +20,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.33.0")
-  implementation("io.sentry:sentry-logback:8.33.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.35.0")
+  implementation("io.sentry:sentry-logback:8.35.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -44,15 +44,15 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.11")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.11")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.11")
-  implementation("org.springframework.security:spring-security-crypto:7.0.3")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.33")
+  implementation("org.springframework.security:spring-security-crypto:7.0.4")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.34")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.2.6.Final")
+  implementation("org.hibernate:hibernate-core:7.3.0.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.2")
 
   // monitoring
@@ -78,7 +78,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.2")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.38") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.39") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
