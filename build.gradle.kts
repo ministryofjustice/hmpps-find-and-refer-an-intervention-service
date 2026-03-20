@@ -16,16 +16,16 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.1") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.35.0")
-  implementation("io.sentry:sentry-logback:8.35.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.36.0")
+  implementation("io.sentry:sentry-logback:8.36.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.1") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2") // needed for OffsetDateTime for AppInsights
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.16")
@@ -41,9 +41,9 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.11")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.11")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.11")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.12")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.12")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.12")
   implementation("org.springframework.security:spring-security-crypto:7.0.4")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.34")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6")
