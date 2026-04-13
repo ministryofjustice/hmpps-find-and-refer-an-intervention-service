@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.5.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.6.0"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.3.20"
   kotlin("plugin.spring") version "2.3.20"
 }
@@ -20,15 +20,15 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.36.0")
-  implementation("io.sentry:sentry-logback:8.36.0")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.38.0")
+  implementation("io.sentry:sentry-logback:8.38.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
   runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2") // needed for OffsetDateTime for AppInsights
 
   // openapi
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.16")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17")
   implementation("javax.xml.bind:jaxb-api:2.3.1")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:6.0.0-RELEASE")
@@ -41,18 +41,18 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.12")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.12")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.12")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.13")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.13")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.13")
   implementation("org.springframework.security:spring-security-crypto:7.0.4")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.35")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.37")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.3.0.Final")
+  implementation("org.hibernate:hibernate-core:7.3.1.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.2")
 
   // monitoring
