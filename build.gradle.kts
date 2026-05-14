@@ -41,9 +41,9 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.13")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.13")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.13")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:4.0.6")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:4.0.6")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:4.0.6")
   implementation("org.springframework.security:spring-security-crypto:7.0.5")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.37")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6.1")
