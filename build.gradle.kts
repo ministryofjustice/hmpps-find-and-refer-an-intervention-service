@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.6.0"
-  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.20"
-  kotlin("plugin.spring") version "2.3.20"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.7.1"
+  id("org.jetbrains.kotlin.plugin.jpa") version "2.3.21"
+  kotlin("plugin.spring") version "2.3.21"
 }
 
 configurations {
@@ -16,16 +16,16 @@ dependencies {
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
-  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2") // also needed runtime for AppInsights
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.3") // also needed runtime for AppInsights
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.39.1")
-  implementation("io.sentry:sentry-logback:8.39.1")
+  implementation("io.sentry:sentry-spring-boot-starter-jakarta:8.41.0")
+  implementation("io.sentry:sentry-logback:8.41.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
-  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2") // needed for OffsetDateTime for AppInsights
+  runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.3") // needed for OffsetDateTime for AppInsights
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17")
@@ -41,31 +41,31 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.13")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.13")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.13")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.14")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.14")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.14")
   implementation("org.springframework.security:spring-security-crypto:7.0.5")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.37")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.37.1")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6.1")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.3.2.Final")
+  implementation("org.hibernate:hibernate-core:7.3.5.Final")
   implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.2")
 
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.10")
+  runtimeOnly("org.postgresql:postgresql:42.7.11")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
   // json and csv
   implementation("com.github.java-json-tools:json-patch:1.13")
   implementation("org.apache.commons:commons-csv:1.14.1")
 
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.7.0")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.7.1")
   testImplementation("com.squareup.okhttp3:okhttp:5.3.2")
   testImplementation("com.squareup.okhttp3:mockwebserver:5.3.2")
   testImplementation("org.mockito:mockito-inline:5.2.0")
@@ -78,7 +78,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.2")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.40") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.42") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
