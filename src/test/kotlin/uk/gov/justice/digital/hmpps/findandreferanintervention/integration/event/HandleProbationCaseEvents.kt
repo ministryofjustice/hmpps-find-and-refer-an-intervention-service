@@ -112,7 +112,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 
     assertThat(referralRepository.count()).isEqualTo(1)
-    assertThat(messageRepository.count()).isEqualTo(2)
+    assertThat(messageRepository.count()).isEqualTo(1)
     verifyInterventionEventPublished()
   }
 
@@ -124,7 +124,7 @@ class HandleProbationCaseEvents : IntegrationTestBase() {
     await withPollDelay ofSeconds(1) untilCallTo { hmppsDomainEventsQueue.countAllMessagesOnQueue() } matches { it == 0 }
 
     assertThat(referralRepository.count()).isEqualTo(1)
-    assertThat(messageRepository.count()).isEqualTo(2)
+    assertThat(messageRepository.count()).isEqualTo(1)
     verifyInterventionEventPublished()
   }
 

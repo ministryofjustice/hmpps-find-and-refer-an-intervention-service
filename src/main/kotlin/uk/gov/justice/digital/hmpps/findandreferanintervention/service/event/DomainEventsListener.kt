@@ -4,13 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.awspring.cloud.sqs.annotation.SqsListener
 import org.slf4j.LoggerFactory
-import org.springframework.data.repository.findByIdOrNull
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.Message
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.MessageRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.service.ReferralService
-import java.util.UUID
 
 @Service
 class DomainEventsListener(
@@ -29,23 +28,23 @@ class DomainEventsListener(
   }
 
   private fun handleHmppsDomainEvent(sqsMessage: SqsMessage) {
-    val message = messageRepository.findByIdOrNull(sqsMessage.messageId)
-    if (message == null) {
-      logger.info("Inserting Event with Id: ${sqsMessage.messageId}")
-      val messageId: UUID = messageRepository.save(
+    val message = try {
+      messageRepository.save(
         Message(
           id = sqsMessage.messageId,
           referral = null,
           event = sqsMessage,
         ),
-      ).id
-      val hmppsDomainEvent: HmppsDomainEvent = objectMapper.readValue(sqsMessage.message)
-      when (sqsMessage.eventType) {
-        REQUIREMENT_CREATED -> referralService.handleRequirementCreatedEvent(hmppsDomainEvent, messageId)
-        LICENCE_CONDITION_CREATED -> referralService.handleLicenceConditionCreatedEvent(hmppsDomainEvent, messageId)
-      }
-    } else {
-      return logger.info("Event with Id: ${sqsMessage.messageId} already exists. Skipping insert.")
+      )
+    } catch (e: DataIntegrityViolationException) {
+      logger.info("Event with Id: ${sqsMessage.messageId} already exists. Skipping.")
+      return
+    }
+
+    val hmppsDomainEvent: HmppsDomainEvent = objectMapper.readValue(sqsMessage.message)
+    when (sqsMessage.eventType) {
+      REQUIREMENT_CREATED -> referralService.handleRequirementCreatedEvent(hmppsDomainEvent, message.id)
+      LICENCE_CONDITION_CREATED -> referralService.handleLicenceConditionCreatedEvent(hmppsDomainEvent, message.id)
     }
   }
 
