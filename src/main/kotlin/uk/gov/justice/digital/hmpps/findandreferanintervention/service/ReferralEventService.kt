@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.service
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.DomainEventPublisher
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.PersonReference
@@ -11,6 +12,7 @@ import java.time.ZonedDateTime
 import java.util.UUID
 
 @Service
+@Transactional(readOnly = true)
 class ReferralEventService(
   private val referralRepository: ReferralRepository,
   private val domainEventPublisher: DomainEventPublisher,
@@ -33,7 +35,7 @@ class ReferralEventService(
         listOf(PersonReference.Identifier(referral.personReferenceType.name, referral.personReference)),
       ),
     )
-    logger.info("Publishing intervention.community-referral.created event for referralId: $referralId")
+    logger.info("Publishing interventions.community-referral.created event for referralId: $referralId")
     domainEventPublisher.publish(hmppsDomainEvent)
   }
 }

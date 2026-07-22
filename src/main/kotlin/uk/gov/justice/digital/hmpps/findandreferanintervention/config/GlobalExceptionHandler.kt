@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.config
 
 import io.sentry.Sentry
+import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.ValidationException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.AccessDeniedException
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -23,7 +26,7 @@ import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 @RestControllerAdvice
 class GlobalExceptionHandler {
   @ExceptionHandler(ValidationException::class)
-  fun handleValidationException(e: ValidationException): ResponseEntity<ErrorResponse> = ResponseEntity.status(BAD_REQUEST)
+  fun handleValidationException(e: ValidationException, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(BAD_REQUEST)
     .body(
       ErrorResponse(
         status = BAD_REQUEST,
@@ -32,12 +35,12 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      Sentry.captureException(e)
+      captureToSentry(e, request)
       log.info("Validation exception: {}", e.message)
     }
 
   @ExceptionHandler(NoResourceFoundException::class)
-  fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
+  fun handleNoResourceFoundException(e: NoResourceFoundException, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
     .body(
       ErrorResponse(
         status = NOT_FOUND,
@@ -46,12 +49,12 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      Sentry.captureException(e)
+      captureToSentry(e, request)
       log.info("No resource found exception: {}", e.message)
     }
 
   @ExceptionHandler(AccessDeniedException::class)
-  fun handleAccessDeniedException(e: AccessDeniedException): ResponseEntity<ErrorResponse> = ResponseEntity.status(FORBIDDEN)
+  fun handleAccessDeniedException(e: AccessDeniedException, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(FORBIDDEN)
     .body(
       ErrorResponse(
         status = FORBIDDEN,
@@ -60,12 +63,12 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      Sentry.captureException(e)
-      log.error("Forbidden (403) returned: {}", e.message)
+      captureToSentry(e, request)
+      log.error("Forbidden (403) returned: {} caller: {} path: {}", e.message, callingClientId(), request.requestURI)
     }
 
   @ExceptionHandler(Exception::class)
-  fun handleException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
+  fun handleException(e: Exception, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(INTERNAL_SERVER_ERROR)
     .body(
       ErrorResponse(
         status = INTERNAL_SERVER_ERROR,
@@ -74,13 +77,13 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      Sentry.captureException(e)
-      log.error("Unexpected exception", e)
+      captureToSentry(e, request)
+      log.error("Unexpected exception on {} {}", request.method, request.requestURI, e)
     }
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)
   @ResponseStatus(BAD_REQUEST)
-  fun handleEnumMismatchException(e: MethodArgumentTypeMismatchException): ResponseEntity<ErrorResponse> = ResponseEntity.status(BAD_REQUEST)
+  fun handleEnumMismatchException(e: MethodArgumentTypeMismatchException, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(BAD_REQUEST)
     .body(
       ErrorResponse(
         status = BAD_REQUEST,
@@ -89,22 +92,24 @@ class GlobalExceptionHandler {
       ),
     )
     .also {
-      Sentry.captureException(e)
+      captureToSentry(e, request)
       log.error("Enum Mismatch exception: {}", e.message)
     }
 
   @ExceptionHandler(ResponseStatusException::class)
-  @ResponseStatus(NOT_FOUND)
-  fun handleResponseException(e: ResponseStatusException): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
-    .body(
-      ErrorResponse(status = NOT_FOUND, userMessage = e.reason, developerMessage = e.message),
-    ).also {
-      Sentry.captureException(e)
-      log.error("Response Status exception: {}", e.message)
-    }
+  fun handleResponseException(e: ResponseStatusException, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
+    val status = HttpStatus.valueOf(e.statusCode.value())
+    return ResponseEntity.status(status)
+      .body(
+        ErrorResponse(status = status, userMessage = e.reason, developerMessage = e.message),
+      ).also {
+        captureToSentry(e, request)
+        log.error("Response Status exception: {} caller: {} path: {}", e.message, callingClientId(), request.requestURI)
+      }
+  }
 
   @ExceptionHandler(HandlerMethodValidationException::class)
-  fun handleConstraintViolationException(ex: HandlerMethodValidationException): ResponseEntity<ErrorResponse> {
+  fun handleConstraintViolationException(ex: HandlerMethodValidationException, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
     val violationMessages = ex.allErrors.joinToString("; ") { it.defaultMessage ?: "Validation error" }
 
     return ResponseEntity.status(BAD_REQUEST)
@@ -116,46 +121,46 @@ class GlobalExceptionHandler {
         ),
       )
       .also {
-        Sentry.captureException(ex)
+        captureToSentry(ex, request)
         log.info("Input request not matching the pattern: {}", violationMessages)
       }
   }
 
   @ExceptionHandler(WebClientResponseException.NotFound::class)
-  fun handleNotFound(ex: WebClientResponseException.NotFound): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
+  fun handleNotFound(ex: WebClientResponseException.NotFound, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(NOT_FOUND)
     .body(
       ErrorResponse(status = NOT_FOUND, userMessage = ex.message, developerMessage = ex.message),
     ).also {
-      Sentry.captureException(ex)
-      log.error("External service data not found: {}", ex.message)
+      captureToSentry(ex, request)
+      log.error("External service data not found calling {} {}: {} body: {}", ex.request?.method, ex.request?.uri, ex.message, ex.responseBodyAsString)
     }
 
   @ExceptionHandler(WebClientResponseException.Unauthorized::class)
-  fun handleUnauthorized(ex: WebClientResponseException.Unauthorized): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+  fun handleUnauthorized(ex: WebClientResponseException.Unauthorized, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
     ErrorResponse(status = HttpStatus.UNAUTHORIZED, userMessage = ex.message, developerMessage = ex.message),
   ).also {
-    Sentry.captureException(ex)
-    log.error("External service unauthorized: {}", ex.message)
+    captureToSentry(ex, request)
+    log.error("External service unauthorized calling {} {}: {}", ex.request?.method, ex.request?.uri, ex.message)
   }
 
   @ExceptionHandler(WebClientResponseException.InternalServerError::class)
-  fun handleServerError(ex: WebClientResponseException.InternalServerError): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+  fun handleServerError(ex: WebClientResponseException.InternalServerError, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
     ErrorResponse(status = HttpStatus.INTERNAL_SERVER_ERROR, userMessage = ex.message, developerMessage = ex.message),
   ).also {
-    Sentry.captureException(ex)
-    log.error("External service threw internal server error: {}", ex.message)
+    captureToSentry(ex, request)
+    log.error("External service threw internal server error calling {} {}: {} body: {}", ex.request?.method, ex.request?.uri, ex.message, ex.responseBodyAsString)
   }
 
   @ExceptionHandler(WebClientResponseException::class)
-  fun handleOtherWebClientErrors(ex: WebClientResponseException): ResponseEntity<ErrorResponse> = ResponseEntity.status(ex.statusCode).body(
+  fun handleOtherWebClientErrors(ex: WebClientResponseException, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity.status(ex.statusCode).body(
     ErrorResponse(status = HttpStatus.valueOf(ex.statusCode.value()), userMessage = ex.localizedMessage, developerMessage = ex.message),
   ).also {
-    Sentry.captureException(ex)
-    log.error("External service threw an error: {}", ex.message)
+    captureToSentry(ex, request)
+    log.error("External service threw an error calling {} {}: {} body: {}", ex.request?.method, ex.request?.uri, ex.message, ex.responseBodyAsString)
   }
 
   @ExceptionHandler(Throwable::class)
-  fun handleException(e: Throwable): ResponseEntity<ErrorResponse?>? = ResponseEntity
+  fun handleException(e: Throwable, request: HttpServletRequest): ResponseEntity<ErrorResponse?>? = ResponseEntity
     .status(INTERNAL_SERVER_ERROR)
     .body(
       ErrorResponse(
@@ -163,12 +168,28 @@ class GlobalExceptionHandler {
         userMessage = "Unexpected error: ${e.message}",
         developerMessage = e.message,
       ).also {
-        Sentry.captureException(e)
-        log.error("Unexpected error", e)
+        captureToSentry(e, request)
+        log.error("Unexpected error on {} {}", request.method, request.requestURI, e)
       },
     )
 
+  private fun captureToSentry(e: Throwable, request: HttpServletRequest) {
+    Sentry.withScope { scope ->
+      scope.setTag("http.method", request.method)
+      scope.setTag("http.path", request.requestURI)
+      callingClientId()?.let { scope.setTag("caller.client_id", it) }
+      resourceIdFromPath(request.requestURI)?.let { scope.setTag("resource.id", it) }
+      Sentry.captureException(e)
+    }
+  }
+
+  private fun callingClientId(): String? = (SecurityContextHolder.getContext().authentication as? JwtAuthenticationToken)
+    ?.token?.getClaimAsString("client_id")
+
+  private fun resourceIdFromPath(path: String): String? = UUID_PATTERN.find(path)?.value
+
   private companion object {
     private val log = LoggerFactory.getLogger(this::class.java)
+    private val UUID_PATTERN = Regex("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
   }
 }
