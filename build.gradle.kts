@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "9.6.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "11.0.2"
   id("org.jetbrains.kotlin.plugin.jpa") version "2.3.20"
   kotlin("plugin.spring") version "2.3.20"
 }
@@ -11,7 +11,7 @@ configurations {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.8.2")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.0")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
@@ -41,9 +41,9 @@ dependencies {
   // SQN/SNS
   implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:5.6.3")
   // security
-  implementation("org.springframework.boot:spring-boot-starter-webflux:3.5.13")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.5.13")
-  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.5.13")
+  implementation("org.springframework.boot:spring-boot-starter-webflux:4.1.0")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:4.1.0")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client:4.1.0")
   implementation("org.springframework.security:spring-security-crypto:7.0.5")
   implementation("com.nimbusds:oauth2-oidc-sdk:11.37")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6.1")
@@ -52,8 +52,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("org.hibernate:hibernate-core:7.3.2.Final")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.2")
+  implementation("io.hypersistence:hypersistence-utils-hibernate-73:3.15.4")
 
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
@@ -76,7 +75,7 @@ dependencies {
   testImplementation("org.testcontainers:postgresql:1.21.4")
   testImplementation("org.testcontainers:localstack:1.21.4")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:1.8.2")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:3.0.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.40") {
     exclude(group = "io.swagger.core.v3")

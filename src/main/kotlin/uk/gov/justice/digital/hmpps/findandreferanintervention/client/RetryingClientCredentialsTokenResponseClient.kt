@@ -1,6 +1,10 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.client
 
 import mu.KLogging
+import org.apache.hc.client5.http.config.ConnectionConfig
+import org.apache.hc.client5.http.impl.classic.HttpClients
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder
+import org.apache.hc.core5.util.Timeout
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.http.HttpHeaders
@@ -62,8 +66,19 @@ class RetryingClientCredentialsTokenResponseClient(
     }
   }
 
-  val factory = HttpComponentsClientHttpRequestFactory().apply {
-    setConnectTimeout(config.connectTimeoutMs.toInt())
+  val factory = HttpComponentsClientHttpRequestFactory(
+    HttpClients.custom()
+      .setConnectionManager(
+        PoolingHttpClientConnectionManagerBuilder.create()
+          .setDefaultConnectionConfig(
+            ConnectionConfig.custom()
+              .setConnectTimeout(Timeout.ofMilliseconds(config.connectTimeoutMs))
+              .build(),
+          )
+          .build(),
+      )
+      .build(),
+  ).apply {
     setReadTimeout(config.readTimeoutMs.toInt())
   }
 
@@ -104,6 +119,9 @@ class RetryingClientCredentialsTokenResponseClient(
             .body(formData)
             .retrieve()
             .body(TokenResponseDTO::class.java)
+            ?: throw OAuth2AuthorizationException(
+              OAuth2Error("invalid_token_response", "No token response received", null),
+            )
 
           val tokenResponse = OAuth2AccessTokenResponse.withToken(dto.access_token)
             .tokenType(OAuth2AccessToken.TokenType.BEARER)

@@ -1,15 +1,15 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled
 
 import org.apache.commons.csv.CSVFormat
-import org.springframework.batch.core.JobParameters
-import org.springframework.batch.core.JobParametersBuilder
-import org.springframework.batch.core.JobParametersIncrementer
-import org.springframework.batch.item.file.FlatFileHeaderCallback
-import org.springframework.batch.item.file.FlatFileItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor
-import org.springframework.batch.item.file.transform.ExtractorLineAggregator
-import org.springframework.batch.item.file.transform.RecursiveCollectionLineAggregator
+import org.springframework.batch.core.job.parameters.JobParameters
+import org.springframework.batch.core.job.parameters.JobParametersBuilder
+import org.springframework.batch.core.job.parameters.JobParametersIncrementer
+import org.springframework.batch.infrastructure.item.file.FlatFileHeaderCallback
+import org.springframework.batch.infrastructure.item.file.FlatFileItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemWriterBuilder
+import org.springframework.batch.infrastructure.item.file.transform.BeanWrapperFieldExtractor
+import org.springframework.batch.infrastructure.item.file.transform.ExtractorLineAggregator
+import org.springframework.batch.infrastructure.item.file.transform.RecursiveCollectionLineAggregator
 import org.springframework.core.io.WritableResource
 import org.springframework.stereotype.Component
 import java.io.Writer
@@ -36,7 +36,7 @@ class BatchUtils {
     return date.toInstant().atOffset(zoneOffset)
   }
 
-  private fun <T> csvFileWriterBase(
+  private fun <T : Any> csvFileWriterBase(
     name: String,
     resource: WritableResource,
     headers: List<String>,
@@ -45,7 +45,7 @@ class BatchUtils {
     .resource(resource)
     .headerCallback(HeaderWriter(headers.joinToString(",")))
 
-  fun <T> csvFileWriter(
+  fun <T : Any> csvFileWriter(
     name: String,
     resource: WritableResource,
     headers: List<String>,
@@ -54,7 +54,7 @@ class BatchUtils {
     .lineAggregator(CsvLineAggregator(fields))
     .build()
 
-  fun <T> recursiveCollectionCsvFileWriter(
+  fun <T : Any> recursiveCollectionCsvFileWriter(
     name: String,
     resource: WritableResource,
     headers: List<String>,
@@ -77,7 +77,7 @@ class TimestampIncrementer : JobParametersIncrementer {
   override fun getNext(inputParams: JobParameters?): JobParameters {
     val params = inputParams ?: JobParameters()
 
-    if (params.parameters["timestamp"] != null) {
+    if (params.getParameter("timestamp") != null) {
       return params
     }
 
@@ -91,7 +91,7 @@ class OutputPathIncrementer : JobParametersIncrementer {
   override fun getNext(inputParams: JobParameters?): JobParameters {
     val params = inputParams ?: JobParameters()
 
-    if (params.parameters["outputPath"] != null) {
+    if (params.getParameter("outputPath") != null) {
       return params
     }
 
@@ -101,14 +101,9 @@ class OutputPathIncrementer : JobParametersIncrementer {
   }
 }
 
-class CsvLineAggregator<T>(fieldsToExtract: List<String>) : ExtractorLineAggregator<T>() {
+class CsvLineAggregator<T : Any>(fieldsToExtract: List<String>) : ExtractorLineAggregator<T>() {
   init {
-    setFieldExtractor(
-      BeanWrapperFieldExtractor<T>().apply {
-        setNames(fieldsToExtract.toTypedArray())
-        afterPropertiesSet()
-      },
-    )
+    setFieldExtractor(BeanWrapperFieldExtractor(*fieldsToExtract.toTypedArray()))
   }
 
   private val csvPrinter: CSVFormat = CSVFormat.DEFAULT.builder()

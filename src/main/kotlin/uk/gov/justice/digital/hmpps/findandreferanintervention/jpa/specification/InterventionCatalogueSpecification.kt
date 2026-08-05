@@ -17,7 +17,7 @@ fun getInterventionCatalogueSpecification(
   allowsMales: Boolean? = null,
   allowsFemales: Boolean? = null,
   programmeName: String? = null,
-): Specification<InterventionCatalogue> = Specification<InterventionCatalogue> { root: Root<InterventionCatalogue?>, query: CriteriaQuery<*>?, criteriaBuilder: CriteriaBuilder ->
+): Specification<InterventionCatalogue> = Specification<InterventionCatalogue> { root: Root<InterventionCatalogue>, query: CriteriaQuery<*>, criteriaBuilder: CriteriaBuilder ->
   val predicates: MutableList<Predicate> = mutableListOf()
 
   allowsMales?.let {
@@ -59,6 +59,6 @@ fun getInterventionCatalogueSpecification(
       ),
     )
   }
-  query?.distinct(true)
+  query.distinct(true)
   criteriaBuilder.and(*predicates.toTypedArray())
 }
