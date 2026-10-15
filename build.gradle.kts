@@ -13,7 +13,7 @@ configurations {
 dependencies {
   implementation(enforcedPlatform("io.netty:netty-bom:4.1.137.Final"))
 
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.8.2")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.3")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
   // batch processing
