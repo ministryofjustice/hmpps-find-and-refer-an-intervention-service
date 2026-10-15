@@ -11,6 +11,8 @@ configurations {
 }
 
 dependencies {
+  implementation(enforcedPlatform("io.netty:netty-bom:4.1.137.Final"))
+
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:1.8.2")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
