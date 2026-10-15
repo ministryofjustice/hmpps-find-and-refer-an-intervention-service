@@ -8,16 +8,6 @@ plugins {
 
 configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
-
-  configurations.all {
-    resolutionStrategy {
-      eachDependency {
-        if (requested.group == "io.netty") {
-          useVersion("4.1.137.Final")
-        }
-      }
-    }
-  }
 }
 
 dependencies {
