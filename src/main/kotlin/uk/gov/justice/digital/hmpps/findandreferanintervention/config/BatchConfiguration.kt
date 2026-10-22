@@ -1,10 +1,10 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.config
 
-import org.springframework.batch.core.explore.JobExplorer
-import org.springframework.batch.core.explore.support.JobExplorerFactoryBean
 import org.springframework.batch.core.launch.JobLauncher
 import org.springframework.batch.core.launch.support.TaskExecutorJobLauncher
 import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.repository.explore.JobExplorer
+import org.springframework.batch.core.repository.explore.support.JdbcJobExplorerFactoryBean
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -40,10 +40,10 @@ class BatchConfiguration(
     @Qualifier("mainDataSource") dataSource: DataSource,
     @Qualifier("transactionManager") batchTransactionManager: PlatformTransactionManager,
   ): JobExplorer {
-    val factory = JobExplorerFactoryBean()
+    val factory = JdbcJobExplorerFactoryBean()
     factory.setDataSource(dataSource)
     factory.transactionManager = batchTransactionManager
     factory.afterPropertiesSet()
-    return factory.getObject()
+    return requireNotNull(factory.getObject())
   }
 }
