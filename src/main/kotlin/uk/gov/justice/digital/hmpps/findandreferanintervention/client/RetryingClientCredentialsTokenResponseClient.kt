@@ -1,6 +1,9 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.client
 
 import mu.KLogging
+import org.apache.hc.client5.http.config.ConnectionConfig
+import org.apache.hc.client5.http.impl.classic.HttpClients
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.http.HttpHeaders
@@ -27,7 +30,7 @@ import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.RestClientException
 
-@ConfigurationProperties(prefix = "spring.security.oauth2.client.provider.hmpps-auth.token-request")
+@ConfigurationProperties(prefix = "hmpps-auth.token-request")
 data class TokenRequestConfig(
   val connectTimeoutMs: Long,
   val readTimeoutMs: Long,
@@ -62,16 +65,24 @@ class RetryingClientCredentialsTokenResponseClient(
     }
   }
 
-  val factory = HttpComponentsClientHttpRequestFactory().apply {
-    setConnectTimeout(config.connectTimeoutMs.toInt())
+  val connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
+    .setDefaultConnectionConfig(
+      ConnectionConfig.custom()
+        .setConnectTimeout(config.connectTimeoutMs, java.util.concurrent.TimeUnit.MILLISECONDS)
+        .build(),
+    )
+    .build()
+
+  val factory = HttpComponentsClientHttpRequestFactory(HttpClients.custom().setConnectionManager(connectionManager).build()).apply {
     setReadTimeout(config.readTimeoutMs.toInt())
   }
 
   private val restClient: RestClient = RestClient.builder()
     .requestFactory(factory)
-    .messageConverters {
-      it.add(FormHttpMessageConverter())
-      it.add(OAuth2AccessTokenResponseHttpMessageConverter())
+    .configureMessageConverters {
+      it.registerDefaults()
+        .addCustomConverter(FormHttpMessageConverter())
+        .addCustomConverter(OAuth2AccessTokenResponseHttpMessageConverter())
     }
     .build()
 
@@ -104,15 +115,16 @@ class RetryingClientCredentialsTokenResponseClient(
             .body(formData)
             .retrieve()
             .body(TokenResponseDTO::class.java)
+            ?: throw OAuth2AuthorizationException(
+              OAuth2Error("invalid_token_response", "No token response received", null),
+            )
 
           val tokenResponse = OAuth2AccessTokenResponse.withToken(dto.access_token)
             .tokenType(OAuth2AccessToken.TokenType.BEARER)
             .expiresIn(dto.expires_in)
             .scopes(dto.scope?.split(" ")?.toSet() ?: emptySet())
             .build()
-          tokenResponse ?: throw OAuth2AuthorizationException(
-            OAuth2Error("invalid_token_response", "No token response received", null),
-          )
+          tokenResponse
         } catch (ex: RestClientException) {
           throw OAuth2AuthorizationException(
             OAuth2Error("invalid_token_response", "Failed to retrieve token: ${ex.message}", null),
