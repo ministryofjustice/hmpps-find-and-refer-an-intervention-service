@@ -30,7 +30,7 @@ import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.RestClientException
 
-@ConfigurationProperties(prefix = "spring.security.oauth2.client.provider.hmpps-auth.token-request")
+@ConfigurationProperties(prefix = "hmpps-auth.token-request")
 data class TokenRequestConfig(
   val connectTimeoutMs: Long,
   val readTimeoutMs: Long,

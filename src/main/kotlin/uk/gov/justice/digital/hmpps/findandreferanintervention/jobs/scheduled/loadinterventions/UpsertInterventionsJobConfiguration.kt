@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadinterventions
 
 import mu.KLogging
-import org.springframework.batch.core.configuration.JobRegistry
 import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.job.parameters.JobParametersBuilder
@@ -35,13 +34,14 @@ class UpsertInterventionsJobConfiguration(
   @Bean
   @Profile("local")
   fun jobLauncherCommandlineRunner(
-    jobRegistry: JobRegistry,
+    @Qualifier("upsertInterventionsJob") upsertInterventionsJob: Job,
+    @Qualifier("loadDeliveryLocationJob") loadDeliveryLocationJob: Job,
+    @Qualifier("loadInterventionCatalogueMapJob") loadInterventionCatalogueMapJob: Job,
+    @Qualifier("loadInterventionCatalogueToCourseMapJob") loadInterventionCatalogueToCourseMapJob: Job,
   ): CommandLineRunner = CommandLineRunner { args ->
     try {
-      val jobNames = listOf("upsertInterventionsJob", "loadDeliveryLocationJob", "loadInterventionCatalogueMapJob", "loadInterventionCatalogueToCourseMapJob")
-      jobNames.forEach { jobName ->
-        val job = requireNotNull(jobRegistry.getJob(jobName)) { "Job '$jobName' was not found in the registry" }
-        logger.info("Running job: $jobName")
+      listOf(upsertInterventionsJob, loadDeliveryLocationJob, loadInterventionCatalogueMapJob, loadInterventionCatalogueToCourseMapJob).forEach { job ->
+        logger.info("Running job: ${job.name}")
         onStartupJobLauncherFactory.startJob(
           job,
           JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters(),

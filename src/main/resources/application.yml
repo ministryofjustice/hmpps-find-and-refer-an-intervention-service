@@ -33,11 +33,6 @@ spring:
         provider:
           hmpps-auth:
             token-uri: ${hmpps-auth.baseurl}/oauth/token
-            token-request:
-              connect-timeout-ms: 500
-              read-timeout-ms: 500
-              retries: 3
-              retry-delay-ms: 500
         registration:
           find-and-refer-interventions-client:
             client-id: hmpps-find-and-refer-an-intervention-api-1
@@ -59,6 +54,13 @@ spring:
       pool-size: 4 # run up to 4 jobs at a time...
       queue-size: 10000 # unless the number of queued jobs exceeds this number
     table-prefix: public.BATCH_
+
+hmpps-auth:
+  token-request:
+    connect-timeout-ms: 500
+    read-timeout-ms: 500
+    retries: 3
+    retry-delay-ms: 500
 
 server:
   port: 8080

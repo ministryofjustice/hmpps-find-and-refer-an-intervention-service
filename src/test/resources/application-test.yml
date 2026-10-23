@@ -7,6 +7,11 @@ management.endpoint:
 
 hmpps-auth:
   baseurl: "http://localhost:8093/auth"
+  token-request:
+    connect-timeout-ms: 500
+    read-timeout-ms: 500
+    retries: 3
+    retry-delay-ms: 500
 
 find-and-refer-and-delius:
   locations:
@@ -31,11 +36,6 @@ spring:
         provider:
           hmpps-auth:
             token-uri: ${hmpps-auth.baseurl}/oauth/token
-            token-request:
-              connect-timeout-ms: 500
-              read-timeout-ms: 500
-              retries: 3
-              retry-delay-ms: 500
         registration:
           find-and-refer-interventions-client:
             provider: hmpps-auth
