@@ -17,7 +17,6 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogueMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueMapRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
@@ -47,7 +46,6 @@ class LoadInterventionCatalogueMapJobConfiguration(
 
   @Bean
   fun loadInterventionCatalogueMapJob(): Job = JobBuilder("loadInterventionCatalogueMapJob", jobRepository)
-    .incrementer(TimestampIncrementer())
     .start(interventionCatalogueMapStep())
     .build()
 
@@ -87,9 +85,10 @@ class LoadInterventionCatalogueMapJobConfiguration(
 
   @Bean
   fun interventionCatalogueMapStep(): Step = StepBuilder("interventionCatalogueMapStep", jobRepository)
-    .chunk<BatchInterventionCatalogueMap, BatchInterventionCatalogueMap>(10, transactionManager)
+    .chunk<BatchInterventionCatalogueMap, BatchInterventionCatalogueMap>(10)
     .reader(interventionCatalogueMapReader())
     .writer(interventionCatalogueMapWriter())
+    .transactionManager(transactionManager)
     .build()
 
   private fun mapToInterventionCatalogueMapEntity(

@@ -17,7 +17,6 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogueToCourseMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CourseRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
@@ -47,7 +46,6 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
 
   @Bean
   fun loadInterventionCatalogueToCourseMapJob(): Job = JobBuilder("loadInterventionCatalogueToCourseMapJob", jobRepository)
-    .incrementer(TimestampIncrementer())
     .start(interventionCatalogueToCourseMapStep())
     .build()
 
@@ -117,8 +115,9 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
 
   @Bean
   fun interventionCatalogueToCourseMapStep(): Step = StepBuilder("interventionCatalogueToCourseMapStep", jobRepository)
-    .chunk<BatchInterventionCatalogueToCourseMap, BatchInterventionCatalogueToCourseMap>(10, transactionManager)
+    .chunk<BatchInterventionCatalogueToCourseMap, BatchInterventionCatalogueToCourseMap>(10)
     .reader(interventionCatalogueToCourseMapReader())
     .writer(interventionCatalogueToCourseMapWriter())
+    .transactionManager(transactionManager)
     .build()
 }

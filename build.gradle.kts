@@ -15,6 +15,7 @@ dependencies {
 
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.3")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
+  implementation("org.springframework.boot:spring-boot-starter-webclient")
 
   // batch processing
   implementation("org.springframework.boot:spring-boot-starter-batch")
@@ -30,7 +31,7 @@ dependencies {
   runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2") // needed for OffsetDateTime for AppInsights
 
   // openapi
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:6.0.0-RELEASE")
   implementation("org.json:json") {
@@ -53,13 +54,12 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("com.h2database:h2:2.4.240")
-  implementation("io.hypersistence:hypersistence-utils-hibernate-70:3.15.3")
-
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
 
   runtimeOnly("org.postgresql:postgresql:42.7.10")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
+  implementation("org.springframework.boot:spring-boot-starter-flyway")
 
   // json and csv
   implementation("com.github.java-json-tools:json-patch:1.13")

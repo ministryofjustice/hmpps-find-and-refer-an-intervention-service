@@ -4,7 +4,9 @@ import mu.KLogging
 import net.logstash.logback.argument.StructuredArguments
 import org.springframework.batch.core.converter.DefaultJobParametersConverter
 import org.springframework.batch.core.job.Job
-import org.springframework.batch.core.launch.JobLauncher
+import org.springframework.batch.core.job.JobExecution
+import org.springframework.batch.core.job.parameters.JobParameters
+import org.springframework.batch.core.launch.JobOperator
 import org.springframework.batch.core.launch.support.SimpleJvmExitCodeMapper
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
@@ -14,29 +16,25 @@ import kotlin.system.exitProcess
 
 @Component
 class OnStartupJobLauncherFactory(
-  private val jobLauncher: JobLauncher,
+  private val jobOperator: JobOperator,
 ) {
   companion object : KLogging()
 
   private val exitCodeMapper = SimpleJvmExitCodeMapper()
   private val jobParametersConverter = DefaultJobParametersConverter()
+  private val timestampIncrementer = TimestampIncrementer()
 
-  fun makeBatchLauncher(job: Job): ApplicationRunner = makeLauncher(job.name, buildEntryPoint(job, jobLauncher))
-  private fun buildEntryPoint(job: Job, jobLauncher: JobLauncher): (args: ApplicationArguments) -> Int {
-    val entryPoint = fun(args: ApplicationArguments): Int {
-      val rawParams = jobParametersConverter.getJobParameters(
-        StringUtils.splitArrayElementsIntoProperties(args.nonOptionArgs.toTypedArray(), "=") ?: java.util.Properties(),
-      )
+  fun makeBatchLauncher(job: Job): ApplicationRunner = makeLauncher(job.name) { args ->
+    val jobParameters = jobParametersConverter.getJobParameters(
+      StringUtils.splitArrayElementsIntoProperties(args.nonOptionArgs.toTypedArray(), "=") ?: java.util.Properties(),
+    )
+    val execution = startJob(job, jobParameters)
+    exitCodeMapper.intValue(execution.exitStatus.exitCode)
+  }
 
-      val nextParams = job.jobParametersIncrementer?.let {
-        it.getNext(rawParams)
-      } ?: rawParams
-
-      val execution = jobLauncher.run(job, nextParams)
-      return exitCodeMapper.intValue(execution.exitStatus.exitCode)
-    }
-
-    return entryPoint
+  fun startJob(job: Job, jobParameters: JobParameters): JobExecution {
+    val nextParameters = timestampIncrementer.getNext(jobParameters)
+    return jobOperator.start(job, nextParameters)
   }
 
   fun makeLauncher(jobName: String, entryPoint: (args: ApplicationArguments) -> Int): ApplicationRunner = ApplicationRunner { args ->

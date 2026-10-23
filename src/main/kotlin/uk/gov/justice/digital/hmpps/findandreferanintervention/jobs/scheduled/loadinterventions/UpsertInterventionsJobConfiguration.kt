@@ -6,7 +6,6 @@ import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.job.parameters.JobParametersBuilder
 import org.springframework.batch.core.launch.JobExecutionAlreadyRunningException
-import org.springframework.batch.core.launch.JobLauncher
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.Step
 import org.springframework.batch.core.step.builder.StepBuilder
@@ -20,7 +19,6 @@ import org.springframework.context.annotation.Profile
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 
 @Configuration
@@ -36,13 +34,18 @@ class UpsertInterventionsJobConfiguration(
 
   @Bean
   @Profile("local")
-  fun jobLauncherCommandlineRunner(jobLauncher: JobLauncher, jobRegistry: JobRegistry): CommandLineRunner = CommandLineRunner { args ->
+  fun jobLauncherCommandlineRunner(
+    jobRegistry: JobRegistry,
+  ): CommandLineRunner = CommandLineRunner { args ->
     try {
       val jobNames = listOf("upsertInterventionsJob", "loadDeliveryLocationJob", "loadInterventionCatalogueMapJob", "loadInterventionCatalogueToCourseMapJob")
       jobNames.forEach { jobName ->
-        val job = jobRegistry.getJob(jobName)
+        val job = requireNotNull(jobRegistry.getJob(jobName)) { "Job '$jobName' was not found in the registry" }
         logger.info("Running job: $jobName")
-        jobLauncher.run(job, JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters())
+        onStartupJobLauncherFactory.startJob(
+          job,
+          JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters(),
+        )
       }
     } catch (e: JobExecutionAlreadyRunningException) {
       logger.error("Job already running, skipping execution", e)
@@ -58,7 +61,6 @@ class UpsertInterventionsJobConfiguration(
     logger.info("starting to instantiate Job...")
 
     val job: Job = JobBuilder("upsertInterventionsJob", jobRepository)
-      .incrementer(TimestampIncrementer())
       .start(upsertInterventionsStep)
       .build()
 
@@ -77,7 +79,7 @@ class UpsertInterventionsJobConfiguration(
     platformTransactionManager: PlatformTransactionManager,
   ): Step = StepBuilder("upsertInterventionsStep", jobRepository)
     .allowStartIfComplete(true)
-    .chunk<InterventionCatalogueDefinition, InterventionCatalogue>(10, platformTransactionManager)
+    .chunk<InterventionCatalogueDefinition, InterventionCatalogue>(10)
     .reader(reader)
     .processor(processor)
     .writer {}

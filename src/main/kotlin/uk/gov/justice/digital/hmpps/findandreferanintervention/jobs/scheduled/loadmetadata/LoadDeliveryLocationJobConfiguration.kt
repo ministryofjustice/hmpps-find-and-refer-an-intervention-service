@@ -17,7 +17,6 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DeliveryLocationRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
@@ -50,7 +49,6 @@ class LoadDeliveryLocationJobConfiguration(
 
   @Bean
   fun loadDeliveryLocationJob(): Job = JobBuilder("loadDeliveryLocationJob", jobRepository)
-    .incrementer(TimestampIncrementer())
     .start(deliveryLocationStep())
     .build()
 
@@ -89,9 +87,10 @@ class LoadDeliveryLocationJobConfiguration(
 
   @Bean
   fun deliveryLocationStep(): Step = StepBuilder("deliveryLocationStep", jobRepository)
-    .chunk<BatchDeliveryLocation, BatchDeliveryLocation>(10, transactionManager)
+    .chunk<BatchDeliveryLocation, BatchDeliveryLocation>(10)
     .reader(deliveryLocationReader())
     .writer(deliveryLocationWriter())
+    .transactionManager(transactionManager)
     .build()
 
   private fun mapToDeliveryLocationEntity(

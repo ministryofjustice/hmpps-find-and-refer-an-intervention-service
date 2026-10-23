@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration
+import org.springframework.boot.security.autoconfigure.web.servlet.ServletWebSecurityAutoConfiguration
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.context.annotation.Import
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -25,6 +27,7 @@ import java.util.Collections
 @WebMvcTest(ServiceUserController::class)
 @ActiveProfiles("test")
 @Import(TelemetryClientConfig::class)
+@ImportAutoConfiguration(ServletWebSecurityAutoConfiguration::class)
 class ServiceUserControllerValidationTest(@Autowired private val mockMvc: MockMvc) {
 
   @MockitoBean
