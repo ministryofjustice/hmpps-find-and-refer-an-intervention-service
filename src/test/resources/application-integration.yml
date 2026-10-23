@@ -47,7 +47,7 @@ spring:
           find-and-refer-interventions-client:
             provider: hmpps-auth
             authorization-grant-type: client_credentials
-            scope: read,write
+            scope: [read, write]
             client-id: interventions
             client-secret: clientsecret
 

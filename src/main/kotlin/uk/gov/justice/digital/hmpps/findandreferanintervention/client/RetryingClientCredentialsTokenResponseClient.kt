@@ -79,9 +79,10 @@ class RetryingClientCredentialsTokenResponseClient(
 
   private val restClient: RestClient = RestClient.builder()
     .requestFactory(factory)
-    .messageConverters {
-      it.add(FormHttpMessageConverter())
-      it.add(OAuth2AccessTokenResponseHttpMessageConverter())
+    .configureMessageConverters {
+      it.registerDefaults()
+        .addCustomConverter(FormHttpMessageConverter())
+        .addCustomConverter(OAuth2AccessTokenResponseHttpMessageConverter())
     }
     .build()
 
