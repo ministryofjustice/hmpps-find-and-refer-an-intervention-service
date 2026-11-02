@@ -12,7 +12,7 @@ jobs:
     executor:
       name: hmpps/java_localstack_postgres
       jdk_tag: "25.0"
-      postgres_tag: "16.1"
+      postgres_tag: "18"
       localstack_tag: "3"
 
     steps:
@@ -43,7 +43,7 @@ workflows:
       - hmpps/database_schema_report:
           schema: "public"
           jdk_tag: "25.0"
-          postgres_tag: "16.1"
+          postgres_tag: "18"
           localstack_tag: "3"
           filters:
             branches:
