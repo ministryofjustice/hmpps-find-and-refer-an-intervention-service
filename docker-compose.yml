@@ -53,7 +53,7 @@ services:
       --verbose
 
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack:3.8.1
     container_name: localstack-sqs
     ports:
       - "4566:4566"

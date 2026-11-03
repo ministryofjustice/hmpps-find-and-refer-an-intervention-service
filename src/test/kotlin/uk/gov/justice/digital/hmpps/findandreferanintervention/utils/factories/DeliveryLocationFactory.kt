@@ -1,6 +1,6 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.utils.factories
 
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
+import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.DeliveryLocation
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.PduRef

@@ -19,8 +19,9 @@ spring:
 
   jackson:
     date-format: "yyyy-MM-dd HH:mm:ss"
-    serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
+    datatype:
+      datetime:
+        WRITE_DATES_AS_TIMESTAMPS: false
 
   security:
     oauth2:
@@ -32,17 +33,13 @@ spring:
         provider:
           hmpps-auth:
             token-uri: ${hmpps-auth.baseurl}/oauth/token
-            token-request:
-              connect-timeout-ms: 500
-              read-timeout-ms: 500
-              retries: 3
-              retry-delay-ms: 500
         registration:
           find-and-refer-interventions-client:
             client-id: hmpps-find-and-refer-an-intervention-api-1
             client-secret: clientsecret
             provider: hmpps-auth
             authorization-grant-type: client_credentials
+            scope: [read, write]
 
   datasource:
     url: jdbc:postgresql://${postgres.uri:localhost:5432}/${postgres.db:postgres}?currentSchema=${database.schema.name:public}&user=${postgres.username:root}&password=${postgres.password:dev}&stringtype=unspecified
@@ -58,6 +55,13 @@ spring:
       pool-size: 4 # run up to 4 jobs at a time...
       queue-size: 10000 # unless the number of queued jobs exceeds this number
     table-prefix: public.BATCH_
+
+hmpps-auth:
+  token-request:
+    connect-timeout-ms: 500
+    read-timeout-ms: 500
+    retries: 3
+    retry-delay-ms: 500
 
 server:
   port: 8080

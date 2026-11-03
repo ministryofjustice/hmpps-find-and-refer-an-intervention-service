@@ -160,7 +160,7 @@ class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(Throwable::class)
-  fun handleException(e: Throwable, request: HttpServletRequest): ResponseEntity<ErrorResponse?>? = ResponseEntity
+  fun handleException(e: Throwable, request: HttpServletRequest): ResponseEntity<ErrorResponse> = ResponseEntity
     .status(INTERNAL_SERVER_ERROR)
     .body(
       ErrorResponse(

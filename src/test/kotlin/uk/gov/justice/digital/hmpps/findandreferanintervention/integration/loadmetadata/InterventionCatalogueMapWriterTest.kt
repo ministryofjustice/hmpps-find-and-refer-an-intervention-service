@@ -7,7 +7,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.springframework.batch.core.repository.JobRepository
-import org.springframework.batch.item.Chunk
+import org.springframework.batch.infrastructure.item.Chunk
 import org.springframework.transaction.PlatformTransactionManager
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata.BatchInterventionCatalogueMap

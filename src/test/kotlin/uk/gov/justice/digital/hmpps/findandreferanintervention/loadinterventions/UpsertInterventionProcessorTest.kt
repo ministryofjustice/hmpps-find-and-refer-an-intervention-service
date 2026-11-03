@@ -103,38 +103,38 @@ internal class UpsertInterventionProcessorTest {
 
   @BeforeEach
   fun setup() {
-    whenever(interventionCatalogueRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
-    whenever(criminogenicNeedRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeed>())
-    whenever(criminogenicNeedRefRepository.findByName(any())).thenReturn(
+    whenever(interventionCatalogueRepository.save(any<InterventionCatalogue>())).thenAnswer(AdditionalAnswers.returnsFirstArg<InterventionCatalogue>())
+    whenever(criminogenicNeedRepository.saveAll(anyList<CriminogenicNeed>())).thenAnswer(AdditionalAnswers.returnsFirstArg<List<CriminogenicNeed>>())
+    whenever(criminogenicNeedRefRepository.findByName(any<String>())).thenReturn(
       CriminogenicNeedRef(
         id = UUID.randomUUID(),
         name = "Default Need Type",
       ),
     )
-    whenever(criminogenicNeedRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
+    whenever(criminogenicNeedRefRepository.save(any<CriminogenicNeedRef>())).thenAnswer(AdditionalAnswers.returnsFirstArg<CriminogenicNeedRef>())
     val defaultNpsRegion = NpsRegion(UUID.randomUUID().toString(), "Default NPS Region", pccRegions = mutableSetOf())
     val defaultPccRegion =
       PccRegion(UUID.randomUUID().toString(), "Default PCC Region", defaultNpsRegion, mutableSetOf())
     val defaultPduRef1 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
     val defaultPduRef2 = PduRef(UUID.randomUUID().toString(), "Default PDU Ref", defaultPccRegion, mutableSetOf())
-    whenever(pduRefRepository.findByName(any())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
-    whenever(deliveryMethodRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
-    whenever(deliveryMethodSettingRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethodSetting>())
-    whenever(eligibleOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<EligibleOffence>())
-    whenever(enablingInterventionRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
-    whenever(excludedOffenceRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<ExcludedOffence>())
-    whenever(offenceTypeRefRepository.findByName(any())).thenReturn(
+    whenever(pduRefRepository.findByName(any<String>())).thenReturn(defaultPduRef1).thenReturn(defaultPduRef2).thenReturn(null)
+    whenever(deliveryMethodRepository.save(any<DeliveryMethod>())).thenAnswer(AdditionalAnswers.returnsFirstArg<DeliveryMethod>())
+    whenever(deliveryMethodSettingRepository.saveAll(anyList<DeliveryMethodSetting>())).thenAnswer(AdditionalAnswers.returnsFirstArg<List<DeliveryMethodSetting>>())
+    whenever(eligibleOffenceRepository.saveAll(anyList<EligibleOffence>())).thenAnswer(AdditionalAnswers.returnsFirstArg<List<EligibleOffence>>())
+    whenever(enablingInterventionRepository.save(any<EnablingIntervention>())).thenAnswer(AdditionalAnswers.returnsFirstArg<EnablingIntervention>())
+    whenever(excludedOffenceRepository.saveAll(anyList<ExcludedOffence>())).thenAnswer(AdditionalAnswers.returnsFirstArg<List<ExcludedOffence>>())
+    whenever(offenceTypeRefRepository.findByName(any<String>())).thenReturn(
       OffenceTypeRef(
         id = UUID.randomUUID(),
         name = "Default Offence Type",
       ),
     )
-    whenever(offenceTypeRefRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<OffenceTypeRef>())
-    whenever(exclusionRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<Exclusion>())
-    whenever(personalEligibilityRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<PersonalEligibility>())
-    whenever(possibleOutcomeRepository.saveAll(anyList())).thenAnswer(AdditionalAnswers.returnsFirstArg<PossibleOutcome>())
-    whenever(riskConsiderationRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<RiskConsideration>())
-    whenever(specialEducationalNeedRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg<SpecialEducationalNeed>())
+    whenever(offenceTypeRefRepository.save(any<OffenceTypeRef>())).thenAnswer(AdditionalAnswers.returnsFirstArg<OffenceTypeRef>())
+    whenever(exclusionRepository.save(any<Exclusion>())).thenAnswer(AdditionalAnswers.returnsFirstArg<Exclusion>())
+    whenever(personalEligibilityRepository.save(any<PersonalEligibility>())).thenAnswer(AdditionalAnswers.returnsFirstArg<PersonalEligibility>())
+    whenever(possibleOutcomeRepository.saveAll(anyList<PossibleOutcome>())).thenAnswer(AdditionalAnswers.returnsFirstArg<List<PossibleOutcome>>())
+    whenever(riskConsiderationRepository.save(any<RiskConsideration>())).thenAnswer(AdditionalAnswers.returnsFirstArg<RiskConsideration>())
+    whenever(specialEducationalNeedRepository.save(any<SpecialEducationalNeed>())).thenAnswer(AdditionalAnswers.returnsFirstArg<SpecialEducationalNeed>())
   }
 
   @Test
