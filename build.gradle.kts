@@ -13,7 +13,7 @@ configurations {
 dependencies {
   implementation(enforcedPlatform("io.netty:netty-bom:4.2.20.Final"))
 
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.3")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.1.0")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-webclient")
 
@@ -23,8 +23,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-4-starter:8.62.0")
-  implementation("io.sentry:sentry-logback:8.62.0")
+  implementation("io.sentry:sentry-spring-boot-4-starter:8.63.0")
+  implementation("io.sentry:sentry-logback:8.63.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -47,7 +47,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
   implementation("org.springframework.security:spring-security-crypto")
-  implementation("com.nimbusds:oauth2-oidc-sdk:11.38.2")
+  implementation("com.nimbusds:oauth2-oidc-sdk:11.39")
   implementation("org.apache.httpcomponents.client5:httpclient5:5.6.5")
 
   // database
@@ -80,7 +80,7 @@ dependencies {
   testImplementation("org.testcontainers:postgresql:1.21.4")
   testImplementation("org.testcontainers:localstack:1.21.4")
 
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:3.0.3")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:3.1.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.48") {
     exclude(group = "io.swagger.core.v3")
