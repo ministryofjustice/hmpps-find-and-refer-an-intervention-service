@@ -14,7 +14,7 @@ generic-service:
     contains_live_data: true
 
   image:
-    repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service
+    repository: ghcr.io/ministryofjustice/hmpps-find-and-refer-an-intervention-service
     tag: latest
     port: 8080
 
