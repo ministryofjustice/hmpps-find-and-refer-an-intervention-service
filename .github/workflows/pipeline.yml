@@ -56,19 +56,15 @@ jobs:
       id-token: write
       attestations: write
     if: github.ref == 'refs/heads/main'
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build_ecr.yml@v2 # WORKFLOW_VERSION
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2 # WORKFLOW_VERSION
     needs:
       - gradle_verify
     with:
+      docker_registry: 'ghcr.io'
+      registry_org: 'ministryofjustice'
       additional_docker_tag: ${{ inputs.additional_docker_tag }}
-      push: ${{ inputs.push || inputs.push == null }}
-      docker_multiplatform: true
-      download_build_artifacts: true
-      generate_sbom: true
-      attach_sbom_to_registry: true
-      sign_image: true
-    secrets:
-      ECR_ROLE_TO_ASSUME: ${{ secrets.ECR_ROLE_TO_ASSUME}}
+      push: ${{ inputs.push || true }}
+      docker_multiplatform: false
   deploy_dev:
     name: Deploy to the dev environment
     if: github.ref == 'refs/heads/main'
