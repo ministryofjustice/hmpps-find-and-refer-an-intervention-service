@@ -3,9 +3,13 @@ package uk.gov.justice.digital.hmpps.findandreferanintervention.integration.jpa.
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
+import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.PostgresContainer
+import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.PostgresContainer.setPostgresProperties
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.DummyRepository
 
 @DataJpaTest
@@ -25,5 +29,15 @@ class DummyRepositoryTest @Autowired constructor(
   fun `whenFindById doesn't exist then return nothing`() {
     val dummy = dummyRepository.findByDummyId(50)
     assertThat(dummy).isNull()
+  }
+
+  companion object {
+    private val postgresContainer = PostgresContainer.instance
+
+    @JvmStatic
+    @DynamicPropertySource
+    fun properties(registry: DynamicPropertyRegistry) {
+      postgresContainer?.also { setPostgresProperties(it, registry) }
+    }
   }
 }

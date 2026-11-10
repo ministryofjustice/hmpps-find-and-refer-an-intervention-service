@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.http.HttpHeaders
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
@@ -19,6 +20,8 @@ import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest
 import uk.gov.justice.digital.hmpps.findandreferanintervention.event.HmppsDomainEvent
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.LocalStackContainer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.LocalStackContainer.setLocalStackProperties
+import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.PostgresContainer
+import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.PostgresContainer.setPostgresProperties
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.wiremock.HmppsAuthApiExtension
 import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.wiremock.HmppsAuthApiExtension.Companion.hmppsAuth
 import uk.gov.justice.hmpps.sqs.HmppsQueue
@@ -31,6 +34,7 @@ import uk.gov.justice.hmpps.test.kotlin.auth.JwtAuthorisationHelper
 
 @ExtendWith(HmppsAuthApiExtension::class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@AutoConfigureWebTestClient
 @ActiveProfiles("integration")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @EnableTransactionManagement
@@ -99,6 +103,7 @@ abstract class IntegrationTestBase {
 
   companion object {
     private val localStackContainer = LocalStackContainer.instance
+    private val postgresContainer = PostgresContainer.instance
 
     @JvmStatic
     @DynamicPropertySource
@@ -106,6 +111,7 @@ abstract class IntegrationTestBase {
       System.setProperty("aws.region", "eu-west-2")
 
       localStackContainer?.also { setLocalStackProperties(it, registry) }
+      postgresContainer?.also { setPostgresProperties(it, registry) }
     }
   }
 }

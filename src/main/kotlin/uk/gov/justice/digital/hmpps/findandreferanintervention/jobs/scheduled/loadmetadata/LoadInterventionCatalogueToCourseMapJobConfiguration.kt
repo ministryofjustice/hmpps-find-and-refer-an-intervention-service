@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata
 
 import mu.KLogging
-import org.springframework.batch.core.Job
-import org.springframework.batch.core.Step
+import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.step.Step
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.batch.item.ItemReader
-import org.springframework.batch.item.ItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
+import org.springframework.batch.infrastructure.item.ItemReader
+import org.springframework.batch.infrastructure.item.ItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
@@ -17,7 +17,6 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogueToCourseMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.CourseRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
@@ -47,7 +46,6 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
 
   @Bean
   fun loadInterventionCatalogueToCourseMapJob(): Job = JobBuilder("loadInterventionCatalogueToCourseMapJob", jobRepository)
-    .incrementer(TimestampIncrementer())
     .start(interventionCatalogueToCourseMapStep())
     .build()
 
@@ -60,9 +58,9 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
     .names("intervention_catalogue_id", "course_id", "status")
     .fieldSetMapper { fieldSet ->
       BatchInterventionCatalogueToCourseMap(
-        interventionCatalogueId = fieldSet.readString("intervention_catalogue_id"),
-        courseId = fieldSet.readString("course_id"),
-        status = fieldSet.readString("status"),
+        interventionCatalogueId = requireNotNull(fieldSet.readString("intervention_catalogue_id")),
+        courseId = requireNotNull(fieldSet.readString("course_id")),
+        status = requireNotNull(fieldSet.readString("status")),
       )
     }
     .build()
@@ -117,8 +115,9 @@ class LoadInterventionCatalogueToCourseMapJobConfiguration(
 
   @Bean
   fun interventionCatalogueToCourseMapStep(): Step = StepBuilder("interventionCatalogueToCourseMapStep", jobRepository)
-    .chunk<BatchInterventionCatalogueToCourseMap, BatchInterventionCatalogueToCourseMap>(10, transactionManager)
+    .chunk<BatchInterventionCatalogueToCourseMap, BatchInterventionCatalogueToCourseMap>(10)
     .reader(interventionCatalogueToCourseMapReader())
     .writer(interventionCatalogueToCourseMapWriter())
+    .transactionManager(transactionManager)
     .build()
 }

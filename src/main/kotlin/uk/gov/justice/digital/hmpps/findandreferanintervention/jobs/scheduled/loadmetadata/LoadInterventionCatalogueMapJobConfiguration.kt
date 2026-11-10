@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.loadmetadata
 
 import mu.KLogging
-import org.springframework.batch.core.Job
-import org.springframework.batch.core.Step
+import org.springframework.batch.core.job.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.step.Step
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.batch.item.ItemReader
-import org.springframework.batch.item.ItemWriter
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
+import org.springframework.batch.infrastructure.item.ItemReader
+import org.springframework.batch.infrastructure.item.ItemWriter
+import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
@@ -17,7 +17,6 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.OnStartupJobLauncherFactory
-import uk.gov.justice.digital.hmpps.findandreferanintervention.jobs.scheduled.TimestampIncrementer
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogueMap
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueMapRepository
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.repository.InterventionCatalogueRepository
@@ -47,7 +46,6 @@ class LoadInterventionCatalogueMapJobConfiguration(
 
   @Bean
   fun loadInterventionCatalogueMapJob(): Job = JobBuilder("loadInterventionCatalogueMapJob", jobRepository)
-    .incrementer(TimestampIncrementer())
     .start(interventionCatalogueMapStep())
     .build()
 
@@ -60,9 +58,9 @@ class LoadInterventionCatalogueMapJobConfiguration(
     .names("intervention_id", "intervention_catalogue_id", "status")
     .fieldSetMapper { fieldSet ->
       BatchInterventionCatalogueMap(
-        interventionId = fieldSet.readString("intervention_id"),
-        interventionCatalogueId = fieldSet.readString("intervention_catalogue_id"),
-        status = fieldSet.readString("status"),
+        interventionId = requireNotNull(fieldSet.readString("intervention_id")),
+        interventionCatalogueId = requireNotNull(fieldSet.readString("intervention_catalogue_id")),
+        status = requireNotNull(fieldSet.readString("status")),
       )
     }
     .build()
@@ -87,9 +85,10 @@ class LoadInterventionCatalogueMapJobConfiguration(
 
   @Bean
   fun interventionCatalogueMapStep(): Step = StepBuilder("interventionCatalogueMapStep", jobRepository)
-    .chunk<BatchInterventionCatalogueMap, BatchInterventionCatalogueMap>(10, transactionManager)
+    .chunk<BatchInterventionCatalogueMap, BatchInterventionCatalogueMap>(10)
     .reader(interventionCatalogueMapReader())
     .writer(interventionCatalogueMapWriter())
+    .transactionManager(transactionManager)
     .build()
 
   private fun mapToInterventionCatalogueMapEntity(

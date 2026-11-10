@@ -14,7 +14,7 @@ generic-service:
     contains_live_data: true
 
   image:
-    repository: quay.io/hmpps/hmpps-find-and-refer-an-intervention-service
+    repository: ghcr.io/ministryofjustice/hmpps-find-and-refer-an-intervention-service
     tag: latest
     port: 8080
 
@@ -24,3 +24,4 @@ generic-service:
     FIND_AND_REFER_AND_DELIUS_BASEURL: "https://find-and-refer-and-delius-preprod.hmpps.service.justice.gov.uk"
     API_BASEURL_FIND_AND_REFER: "https://find-and-refer-intervention-api-preprod.hmpps.service.justice.gov.uk"
     SENTRY_ENVIRONMENT: preprod
+

@@ -7,14 +7,18 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase
 import org.springframework.core.io.ResourceLoader
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.jdbc.datasource.init.ScriptUtils
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
+import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.PostgresContainer
+import uk.gov.justice.digital.hmpps.findandreferanintervention.integration.container.PostgresContainer.setPostgresProperties
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionCatalogue
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.InterventionType
 import uk.gov.justice.digital.hmpps.findandreferanintervention.jpa.entity.SettingType
@@ -265,6 +269,16 @@ class InterventionCatalogueFilterRepositoryTest {
     interventionCatalogue.content.forEach {
       val actualProperties = it::class.memberProperties.map { member -> member.name }.toSet()
       assertThat(actualProperties).isEqualTo(expectedProperties)
+    }
+  }
+
+  companion object {
+    private val postgresContainer = PostgresContainer.instance
+
+    @JvmStatic
+    @DynamicPropertySource
+    fun properties(registry: DynamicPropertyRegistry) {
+      postgresContainer?.also { setPostgresProperties(it, registry) }
     }
   }
 }
