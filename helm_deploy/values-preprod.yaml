@@ -25,7 +25,3 @@ generic-service:
     API_BASEURL_FIND_AND_REFER: "https://find-and-refer-intervention-api-preprod.hmpps.service.justice.gov.uk"
     SENTRY_ENVIRONMENT: preprod
 
-# CloudPlatform AlertManager receiver to route prometheus alerts to slack
-# See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
-generic-prometheus-alerts:
-  alertSeverity: hmpps_alerts_nonprod
