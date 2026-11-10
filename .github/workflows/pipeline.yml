@@ -50,6 +50,11 @@ jobs:
       - app_version
   build:
     name: Build docker image from hmpps-github-actions
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
     if: github.ref == 'refs/heads/main'
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2 # WORKFLOW_VERSION
     needs:
