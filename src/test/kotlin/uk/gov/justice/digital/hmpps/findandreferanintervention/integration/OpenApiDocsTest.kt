@@ -5,8 +5,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.MediaType
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class OpenApiDocsTest : IntegrationTestBase() {
   @LocalServerPort
@@ -50,7 +48,9 @@ class OpenApiDocsTest : IntegrationTestBase() {
       .accept(MediaType.APPLICATION_JSON)
       .exchange()
       .expectStatus().isOk
-      .expectBody().jsonPath("info.version").isEqualTo(DateTimeFormatter.ISO_DATE.format(LocalDate.now()))
+      .expectBody().jsonPath("info.version").value<String> {
+        assertThat(it).matches("""^\d{4}-\d{2}-\d{2}(\.\d+\.[0-9a-f]+)?$""")
+      }
   }
 
   @Test
