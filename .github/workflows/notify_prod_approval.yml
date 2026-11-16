@@ -52,10 +52,13 @@ jobs:
         run: |
           GITHUB_USERNAME="${{ steps.pr-info.outputs.pr_author }}"
           echo "Mapping GitHub user: $GITHUB_USERNAME"
-          
-          SLACK_USER_ID=$(echo '${{ inputs.gh_to_slack_mapping }}' \
-            | jq -r 'fromjson' \
-            | jq -r --arg user "$GITHUB_USERNAME" '.[$user] // "unknown"')
+
+          MAPPING_JSON=$(echo '${{ inputs.gh_to_slack_mapping }}' | jq -ce 'fromjson') || {
+            echo "GH_TO_SLACK_MAPPING is not valid JSON"
+            exit 1
+          }
+
+          SLACK_USER_ID=$(echo "$MAPPING_JSON" | jq -r --arg user "$GITHUB_USERNAME" '.[$user] // "unknown"')
 
           echo "slack_user_id=$SLACK_USER_ID" >> $GITHUB_OUTPUT
       - name: Generate the Approval link
@@ -68,9 +71,20 @@ jobs:
           echo "approval_link=$APPROVAL_LINK" >> $GITHUB_OUTPUT
       - name: Send Slack notification
         run: |
+          if [[ -z "${{ secrets.slack_webhook_url }}" ]]; then
+            echo "SLACK_WEBHOOK_URL secret is empty"
+            exit 1
+          fi
+
+          if [[ "${{ steps.slack-mapping.outputs.slack_user_id }}" == "unknown" ]]; then
+            USER_MENTION="${{ github.actor }}"
+          else
+            USER_MENTION="<@${{ steps.slack-mapping.outputs.slack_user_id }}>"
+          fi
+
           PAYLOAD=$(jq -n \
             --arg link "${{ steps.approval-link.outputs.approval_link }}" \
-            --arg slack_user "${{ steps.slack-mapping.outputs.slack_user_id }}" \
+            --arg mention "$USER_MENTION" \
             --arg pr_name "${{ steps.pr-info.outputs.pr_title }}" \
             --arg pr_number "${{ steps.pr-info.outputs.pr_number }}" \
             --arg github_user "${{ github.actor }}" \
@@ -78,28 +92,41 @@ jobs:
             --arg environment "${{ inputs.environment }}" \
             --arg timestamp "$(date -u +"%Y-%m-%d %H:%M:%S UTC")" \
             '{
-              repository: $repo,
-              environment: $environment,
-              pr_number: $pr_number,
-              human_readable_pr_name: $pr_name,
-              timestamp: $timestamp,
-              link_to_approval_step: $link,
-              developer_to_tag_slack_user_id: $slack_user,
-              github_username: $github_user
+              text: ("Prod deployment approval required for " + $repo + " (" + $environment + ")."),
+              blocks: [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ("*Prod deployment approval required*\nRepository: `" + $repo + "`\nEnvironment: `" + $environment + "`\nPR #" + $pr_number + " - " + $pr_name + "\nRequested by: " + $github_user + "\nApprover: " + $mention + "\nTime: " + $timestamp)
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Open approval run"
+                      },
+                      "url": $link
+                    }
+                  ]
+                }
+              ]
             }'
           )
 
           echo "Slack payload: $PAYLOAD"
 
-          curl -X POST \
+          if curl -X POST \
             -H "Content-Type: application/json" \
             -d "$PAYLOAD" \
             "${{ secrets.slack_webhook_url }}" \
             --fail \
             --show-error \
-            --silent
-
-          if [[ $? -eq 0 ]]; then
+            --silent; then
             echo "Slack notification sent successfully"
           else
             echo "Failed to send Slack notification"
