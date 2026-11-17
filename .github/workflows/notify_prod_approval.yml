@@ -53,7 +53,7 @@ jobs:
           GITHUB_USERNAME="${{ steps.pr-info.outputs.pr_author }}"
           echo "Mapping GitHub user: $GITHUB_USERNAME"
 
-          MAPPING_JSON=$(echo '${{ inputs.gh_to_slack_mapping }}' | jq -ce 'fromjson') || {
+          MAPPING_JSON=$(echo '${{ inputs.gh_to_slack_mapping }}' | jq -ce '.') || {
             echo "GH_TO_SLACK_MAPPING is not valid JSON"
             exit 1
           }
