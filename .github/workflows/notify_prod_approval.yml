@@ -76,45 +76,26 @@ jobs:
             exit 1
           fi
 
-          if [[ "${{ steps.slack-mapping.outputs.slack_user_id }}" == "unknown" ]]; then
-            USER_MENTION="${{ github.actor }}"
-          else
-            USER_MENTION="<@${{ steps.slack-mapping.outputs.slack_user_id }}>"
-          fi
+          CHANGELOG=$(git log -1 --pretty=%B "${{ github.sha }}")
 
           PAYLOAD=$(jq -n \
-            --arg link "${{ steps.approval-link.outputs.approval_link }}" \
-            --arg mention "$USER_MENTION" \
-            --arg pr_name "${{ steps.pr-info.outputs.pr_title }}" \
-            --arg pr_number "${{ steps.pr-info.outputs.pr_number }}" \
+            --arg slack_user_id "${{ steps.slack-mapping.outputs.slack_user_id }}" \
+            --arg changelog "$CHANGELOG" \
             --arg github_user "${{ github.actor }}" \
+            --arg pr_name "${{ steps.pr-info.outputs.pr_title }}" \
+            --arg link "${{ steps.approval-link.outputs.approval_link }}" \
             --arg repo "${{ github.repository }}" \
-            --arg environment "${{ inputs.environment }}" \
             --arg timestamp "$(date -u +"%Y-%m-%d %H:%M:%S UTC")" \
+            --arg pr_number "${{ steps.pr-info.outputs.pr_number }}" \
             '{
-              text: ("Prod deployment approval required for " + $repo + " (" + $environment + ")."),
-              blocks: [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": ("*Prod deployment approval required*\nRepository: `" + $repo + "`\nEnvironment: `" + $environment + "`\nPR #" + $pr_number + " - " + $pr_name + "\nRequested by: " + $github_user + "\nApprover: " + $mention + "\nTime: " + $timestamp)
-                  }
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "Open approval run"
-                      },
-                      "url": $link
-                    }
-                  ]
-                }
-              ]
+              developer_to_tag_slack_user_id: $slack_user_id,
+              deployment_changelog: $changelog,
+              github_username: $github_user,
+              human_readable_pr_name: $pr_name,
+              link_to_approval_step: $link,
+              repository: $repo,
+              timestamp: $timestamp,
+              pr_number: $pr_number
             }'
           )
 
