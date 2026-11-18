@@ -11,7 +11,7 @@ configurations {
 }
 
 dependencies {
-  implementation(enforcedPlatform("io.netty:netty-bom:4.2.20.Final"))
+  implementation(enforcedPlatform("io.netty:netty-bom:4.2.21.Final"))
 
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.1.0")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -23,8 +23,8 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-4-starter:8.64.0")
-  implementation("io.sentry:sentry-logback:8.64.0")
+  implementation("io.sentry:sentry-spring-boot-4-starter:8.65.0")
+  implementation("io.sentry:sentry-logback:8.65.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
@@ -41,7 +41,7 @@ dependencies {
   }
 
   // SQN/SNS
-  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:7.5.0-beta-2")
+  implementation("uk.gov.justice.service.hmpps:hmpps-sqs-spring-boot-starter:7.6.0")
   // security
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
@@ -82,7 +82,7 @@ dependencies {
 
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:3.1.0")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.48") {
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.49") {
     exclude(group = "io.swagger.core.v3")
   }
   testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
