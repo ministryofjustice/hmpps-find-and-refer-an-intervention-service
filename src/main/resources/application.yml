@@ -63,6 +63,11 @@ hmpps-auth:
     retries: 3
     retry-delay-ms: 500
 
+springdoc:
+  swagger-ui:
+    # Keep in sync with the Swagger UI WebJar in build.gradle.kts.
+    version: 5.35.0
+
 server:
   port: 8080
   servlet:
