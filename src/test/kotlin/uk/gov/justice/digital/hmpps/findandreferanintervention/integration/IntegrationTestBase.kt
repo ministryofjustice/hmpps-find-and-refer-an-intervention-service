@@ -110,6 +110,7 @@ abstract class IntegrationTestBase {
     fun properties(registry: DynamicPropertyRegistry) {
       System.setProperty("aws.region", "eu-west-2")
 
+      registry.add("hmpps-auth.baseurl") { "${hmppsAuth.baseUrl()}/auth" }
       localStackContainer?.also { setLocalStackProperties(it, registry) }
       postgresContainer?.also { setPostgresProperties(it, registry) }
     }

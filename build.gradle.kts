@@ -32,6 +32,8 @@ dependencies {
 
   // openapi
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0")
+  // Swagger UI 5.35.0 bundles DOMPurify 3.4.17, patched for CVE-2026-116802 and CVE-2026-116803.
+  implementation("org.webjars:swagger-ui:5.35.0")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:6.2.1-RELEASE")
   implementation("org.json:json") {
