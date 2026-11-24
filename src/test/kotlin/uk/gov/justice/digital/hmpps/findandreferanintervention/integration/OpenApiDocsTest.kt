@@ -20,6 +20,19 @@ class OpenApiDocsTest : IntegrationTestBase() {
   }
 
   @Test
+  fun `swagger ui javascript bundle contains patched DOMPurify`() {
+    webTestClient.mutate()
+      .codecs { it.defaultCodecs().maxInMemorySize(4 * 1024 * 1024) }
+      .build()
+      .get()
+      .uri("/swagger-ui/swagger-ui-bundle.js")
+      .exchange()
+      .expectStatus().isOk
+      .expectBody(String::class.java)
+      .value { bundle -> assertThat(bundle).contains("DOMPurify.version=\"3.4.17\"") }
+  }
+
+  @Test
   fun `open api docs redirect to correct page`() {
     webTestClient.get()
       .uri("/swagger-ui.html")

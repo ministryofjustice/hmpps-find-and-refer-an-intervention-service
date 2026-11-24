@@ -5,9 +5,9 @@ import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.get
 import com.github.tomakehurst.wiremock.client.WireMock.post
 import com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import com.github.tomakehurst.wiremock.http.HttpHeader
 import com.github.tomakehurst.wiremock.http.HttpHeaders
-import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -16,7 +16,6 @@ import java.time.ZoneOffset
 
 class HmppsAuthApiExtension :
   BeforeAllCallback,
-  AfterAllCallback,
   BeforeEachCallback {
   companion object {
     @JvmField
@@ -24,23 +23,20 @@ class HmppsAuthApiExtension :
   }
 
   override fun beforeAll(context: ExtensionContext) {
-    hmppsAuth.start()
+    // Cached Spring contexts need the same port across test classes.
+    context.root.getStore(ExtensionContext.Namespace.create(HmppsAuthApiExtension::class.java))
+      .computeIfAbsent("hmppsAuth", {
+        hmppsAuth.start()
+        AutoCloseable { hmppsAuth.stop() }
+      }, AutoCloseable::class.java)
   }
 
   override fun beforeEach(context: ExtensionContext) {
     hmppsAuth.resetRequests()
   }
-
-  override fun afterAll(context: ExtensionContext) {
-    hmppsAuth.stop()
-  }
 }
 
-class HmppsAuthMockServer : WireMockServer(WIREMOCK_PORT) {
-  companion object {
-    private const val WIREMOCK_PORT = 8093
-  }
-
+class HmppsAuthMockServer : WireMockServer(options().dynamicPort()) {
   fun stubGrantToken() {
     stubFor(
       post(urlEqualTo("/auth/oauth/token"))

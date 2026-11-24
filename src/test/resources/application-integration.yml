@@ -14,7 +14,6 @@ management.endpoint:
   info.cache.time-to-live: 0
 
 hmpps-auth:
-  baseurl: "http://localhost:8093/auth"
   token-request:
     connect-timeout-ms: 500
     read-timeout-ms: 500
