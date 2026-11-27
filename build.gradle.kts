@@ -23,17 +23,17 @@ dependencies {
 
   // monitoring and logging
   implementation("io.micrometer:micrometer-registry-prometheus")
-  implementation("io.sentry:sentry-spring-boot-4-starter:8.65.0")
-  implementation("io.sentry:sentry-logback:8.65.0")
+  implementation("io.sentry:sentry-spring-boot-4-starter:8.66.0")
+  implementation("io.sentry:sentry-logback:8.66.0")
   implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
   implementation("net.logstash.logback:logstash-logback-encoder:9.0")
 
   runtimeOnly("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.23.0") // needed for OffsetDateTime for AppInsights
 
   // openapi
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.1")
   // Swagger UI 5.35.0 bundles DOMPurify 3.4.17, patched for CVE-2026-116802 and CVE-2026-116803.
-  implementation("org.webjars:swagger-ui:5.35.0")
+  implementation("org.webjars:swagger-ui:5.36.0")
   // notifications
   implementation("uk.gov.service.notify:notifications-java-client:6.2.1-RELEASE")
   implementation("org.json:json") {
@@ -59,7 +59,7 @@ dependencies {
   // monitoring
   implementation("io.micrometer:micrometer-registry-prometheus")
 
-  runtimeOnly("org.postgresql:postgresql:42.7.14")
+  runtimeOnly("org.postgresql:postgresql:42.7.15")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
   implementation("org.springframework.boot:spring-boot-starter-flyway")
 
@@ -87,7 +87,7 @@ dependencies {
   testImplementation("io.swagger.parser.v3:swagger-parser:2.1.49") {
     exclude(group = "io.swagger.core.v3")
   }
-  testImplementation("org.awaitility:awaitility-kotlin:4.3.0")
+  testImplementation("org.awaitility:awaitility-kotlin:4.4.0")
 }
 
 kotlin {
